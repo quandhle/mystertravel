@@ -24,7 +24,7 @@ $row = mysqli_fetch_assoc($update_result);
 print_r($row['city']);
 
 $output['success'] = true;
-$output['ended'] = [
+$output['data'] = [
     'city' => $row['city'],
     'country' => $row['country'],
     'arrival' => $row['arrival'],

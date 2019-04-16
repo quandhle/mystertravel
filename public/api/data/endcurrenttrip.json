@@ -1,11 +1,9 @@
 {
     "success": true,
-    "data":[
-        {
-            "city": "Naples",
-            "country": "Italy",
-            "arrival": "2019-04-16 00:00:00",
-            "departure": "2019-04-20 00:00:00"
-        }
-    ]
+    "data":  {
+        "city": "Naples",
+        "country": "Italy",
+        "arrival": "2019-04-16 00:00:00",
+        "departure": "2019-04-20 00:00:00"
+    }
 }
