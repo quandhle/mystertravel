@@ -1,0 +1,108 @@
+@font-face {
+    font-family: quest;
+    src: url(../fonts/quest.ttf);
+}
+
+body {
+    margin: 0;
+    padding-bottom: 75px;
+
+    .app {
+        background-color: #000;
+        color: #FFF;
+        font-family: quest;
+        font-size: 30px;
+        padding: 50px;
+
+        .logo {
+            height: 220px;
+            filter: drop-shadow(2px 2px 0px #FFF);
+        }
+
+        h1 {
+            color: #61DAFB;
+            letter-spacing: 5px;
+            margin: 0.16em;
+            text-shadow: 2px 2px 0 #FFF;
+        }
+    }
+
+    h1 {
+        font-size: 5em;
+    }
+
+    .api-test {
+
+        ol > li > ol {
+            list-style: lower-alpha;
+        }
+
+        .api-status {
+            &.failed {
+                color: red;
+            }
+            &.testing {
+                color: #d9dd00;
+            }
+            &.success {
+                color: green;
+            }
+        }
+        
+        .btn {
+            background-color: #61DAFB;
+            border: none;
+            box-shadow: 2px 2px 3px rgba(0, 0, 0, .35);
+            color: #fff;
+            cursor: pointer;
+            font-size: 28px;
+            font-weight: bold;
+            padding: 15px;
+        }
+
+        .help-container {
+            margin: 0 auto;
+            width: 80%;
+
+            .help {
+                font-size: 18px;
+                margin: 0 auto;
+                width: 80%;
+
+                code {
+                    color: #8b0000;
+                    background-color: #fff6f6;
+                }
+
+                pre {
+                    background-color: #f1f1f1;
+                    font-family: monospace;
+                    font-size: 18px;
+                    margin: 8px 15px;
+                    padding: 6px 20px;
+
+                    &.error {
+                        color: red;
+                    }
+                }
+            }
+        }
+    }
+
+    .center {
+        text-align: center;
+    }
+}
+
+.rotate {
+    animation: spin 10s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
