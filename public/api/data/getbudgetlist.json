@@ -1,0 +1,17 @@
+{
+    "success": true,
+    "data": [
+        {
+            "category": "flight",
+            "price": 100000
+        },
+        {
+            "category": "food",
+            "price": 10000
+        },
+        {
+            "category": "hotel",
+            "price": 200000
+        }
+    ]
+}
