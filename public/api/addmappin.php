@@ -2,8 +2,6 @@
 
 require_once('config.php');
 
-print('Hello, World!');
-
 $query = "INSERT INTO `pins`
     SET
         `trips_id` = 1,
