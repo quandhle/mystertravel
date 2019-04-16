@@ -32,6 +32,11 @@ body {
     }
 
     .api-test {
+
+        ol > li > ol {
+            list-style: lower-alpha;
+        }
+
         .api-status {
             &.failed {
                 color: red;
@@ -75,6 +80,10 @@ body {
                     font-size: 18px;
                     margin: 8px 15px;
                     padding: 6px 20px;
+
+                    &.error {
+                        color: red;
+                    }
                 }
             }
         }
