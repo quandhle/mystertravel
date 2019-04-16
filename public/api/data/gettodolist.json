@@ -1,0 +1,20 @@
+{
+    "success": true,
+    "data":[
+        {
+            "task": "Get some strawberry sorbet ice cream.",
+            "date": "2019-04-25 00:00:00",
+            "status": 0
+        },
+        {
+            "task": "Visit Pompeii museum.",
+            "date": "2019-04-25 00:00:00",
+            "status": 0
+        },
+        {
+            "task": "Visit Salerno",
+            "date": "2019-04-25 00:00:00",
+            "status": 1
+        }
+    ]
+}
