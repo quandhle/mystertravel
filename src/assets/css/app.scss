@@ -43,29 +43,45 @@ body {
                 color: green;
             }
         }
+        
+        .btn {
+            background-color: #61DAFB;
+            border: none;
+            box-shadow: 2px 2px 3px rgba(0, 0, 0, .35);
+            color: #fff;
+            cursor: pointer;
+            font-size: 28px;
+            font-weight: bold;
+            padding: 15px;
+        }
+
+        .help-container {
+            margin: 0 auto;
+            width: 80%;
+
+            .help {
+                font-size: 18px;
+                margin: 0 auto;
+                width: 80%;
+
+                code {
+                    color: #8b0000;
+                    background-color: #fff6f6;
+                }
+
+                pre {
+                    background-color: #f1f1f1;
+                    font-family: monospace;
+                    font-size: 18px;
+                    margin: 8px 15px;
+                    padding: 6px 20px;
+                }
+            }
+        }
     }
 
     .center {
         text-align: center;
-    }
-
-    .help-container {
-        margin: 0 auto;
-        width: 80%;
-
-        .help {
-            font-size: 18px;
-            margin: 0 auto;
-            width: 80%;
-
-            pre {
-                background-color: #f1f1f1;
-                font-family: monospace;
-                font-size: 18px;
-                margin: 8px 15px;
-                padding: 6px 20px;
-            }
-        }
     }
 }
 

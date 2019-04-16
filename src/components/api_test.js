@@ -19,9 +19,7 @@ class ApiTest extends Component {
     }
 
     componentDidMount(){
-        setTimeout(() => {
-            this.testApi();
-        }, 0);
+        this.testApi();
     }
 
     resetAndRunTest = () => {
@@ -48,24 +46,28 @@ class ApiTest extends Component {
                 throw error;
             }
 
-            console.log('Test Resp:', data);
+            if (data.success && data.key === 'this is here to make sure you called the correct file'){
+                this.setState({
+                    apiStatus: true,
+                    help: null,
+                    message: data.message
+                });
+            } else {
+                const error = new Error('Your Apache is working but the root directory is not correct');
 
-            this.setState({
-                apiStatus: true,
-                help: null,
-                message: data.message
-            });
+                error.response = { status: 404 };
+
+                throw error;
+            }
+
+            
         } catch(error){
             const { message, response: { status } } = error;
-
-            console.log('Test Error Status:', status);
-            console.log('Test Error Message:', message);
             let userMessage = '';
             let help = null;
 
             switch(status){
                 case 305:
-                    console.log('Need proxy setup');
                     userMessage = message;
                     help = (
                         <div className="help">
@@ -74,7 +76,7 @@ class ApiTest extends Component {
                                 <pre>{proxyExample}</pre>
                                 </li>
                                 <li>If you do not see the proxy config in the <code>package.json</code> file then add it
-                                <ul>
+                                    <ul>
                                         <li><strong>NOTE:</strong> Your port number may be different, set the port number to whatever port YOUR Apache server is running on</li>
                                     </ul>
                                 </li>
@@ -91,10 +93,18 @@ class ApiTest extends Component {
                     );
                     break;
                 case 404:
-                    console.log('Apache server running, but root directory is wrong');
+                    userMessage = 'Unable to find the correct file: "/api/test.php". This means your apache is running and on the correct port but the document root is not correct'
+                    help = (
+                        <div className="help">
+                            <ol>
+                                <li>Your document root is not correct. In your Apache config, change the document root to the <code>public</code> folder of this project</li>
+                                <li>Depending on what you are using for your Apache server will determine how you change the document root. If you are unable to figure it out, reach out to an instructor</li>
+                                <li>If the above steps didn't fix your problem, reach out to an instructor</li>
+                            </ol>
+                        </div>
+                    );
                     break;
                 case 504:
-                    console.log('Proxy setup, no server running or running on wrong port');
                     userMessage = 'Unable to communicate with Apache server, either Apache is not running or your proxy settings are incorrect. See below steps for more detailed help.';
                     help = (
                         <div className="help">
@@ -110,18 +120,17 @@ class ApiTest extends Component {
                                             <div>Here is what the proxy object looks like:</div>
                                             <pre>{proxyExample}</pre>
                                         </li>
-                                        <li>The port number that you see in the <code>package.json</code> file proxy settings ("target": "http://localhost:<mark>8000</mark>") must be the same as the port your Apache server is running on
-                                            <li>If your port numbers do not match do ONE of the following:
-                                                <ol>
-                                                    <li>Change the port your Apache server is running on to match the port number in the <code>package.json</code> proxy config</li>
-                                                    <li>If you don't want to or can't change your Apache port then change the port number in the <code>package.json</code> proxy config. If you change the <code>package.json</code> file you must restart the Node Dev Server:
-                                                        <ol>
-                                                            <li>In your terminal press <code>ctrl + c</code> on the keyboard to stop the server</li>
-                                                            <li>Then run the command to start the server again: <code>npm start</code></li>
-                                                        </ol>
-                                                    </li>
-                                                </ol>
-                                            </li>
+                                        <li>The port number that you see in the <code>package.json</code> file proxy settings ("target": "http://localhost:<mark>8000</mark>") must be the same as the port your Apache server is running on</li>
+                                        <li>If your port numbers do not match do ONE of the following:
+                                            <ol>
+                                                <li>Change the port your Apache server is running on to match the port number in the <code>package.json</code> proxy config</li>
+                                                <li>If you don't want to or can't change your Apache port then change the port number in the <code>package.json</code> proxy config. If you change the <code>package.json</code> file you must restart the Node Dev Server:
+                                                    <ol>
+                                                        <li>In your terminal press <code>ctrl + c</code> on the keyboard to stop the server</li>
+                                                        <li>Then run the command to start the server again: <code>npm start</code></li>
+                                                    </ol>
+                                                </li>
+                                            </ol>
                                         </li>
                                     </ul>
                                 </li>
@@ -131,7 +140,15 @@ class ApiTest extends Component {
                     );
                     break;
                 default:
-                    console.log('!!========== Unknown error !!==========');
+                    userMessage = 'An unknown error ocurred when trying to call your Apache server'
+                    help = (
+                        <div className="he">
+                            <ol>
+                                <li>An unknown error ocurred</li>
+                                <li>Reach out to an instructor for help</li>
+                            </ol>
+                        </div>
+                    );
             }
 
             this.setState({
