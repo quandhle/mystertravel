@@ -11,16 +11,16 @@
         width: 50%;
     }
 
-    .about-us{
-        .about-image{
-            img{
+    .about-us {
+        .about-image {
+            img {
                 width: 100%;
 
             }
         }
-    .aboutPerson:nth-child(even) {
-        right: 0;
+
+        .aboutPerson:nth-child(even) {
+            right: 0;
+        }
     }
-
-
 }
