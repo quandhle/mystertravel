@@ -8,8 +8,6 @@ $query = "SELECT * FROM `current_todo` WHERE trips_id = 1";
 
 $result = mysqli_query($conn, $query);
 
-$data = [];
-
 while ($row = mysqli_fetch_assoc($result)) {
     $data[] = [
         'task' => $row['task'],

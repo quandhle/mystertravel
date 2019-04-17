@@ -6,6 +6,14 @@ $query = "SELECT * FROM `budget` WHERE `trips_id` = 1";
 
 $result = mysqli_query($conn, $query);
 
-$output['budget'] = $result;
+while ($row = mysqli_fetch_assoc($result)) {
+    $data[] = [
+        'category' => $row['category'],
+        'price' => $row['price'],
+    ];
+};
 
-print_r(json_output($output));
+$output['success'] = true;
+$output['budget'] = $data;
+
+print(json_encode($output));
