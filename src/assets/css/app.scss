@@ -3,3 +3,40 @@ html, body{
     margin: 0;
     padding: 0;
 }
+
+.home-page {
+    position: relative;
+
+    .title-holder {
+        .title-blurb {
+            text-align: center;
+            width: 80%;
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    img {
+        height: calc(100vh - 68px);
+    }
+
+    .home-page-btn {
+        width: 100%;
+        position: absolute;
+        bottom: 5%;
+        left: 50%;
+        transform: translateX(-50%);
+
+
+        button {
+            position: fixed;
+            left: 50%;
+            bottom: 10%;
+            transform: translateX(-50%);
+        }
+    }
+
+
+}
