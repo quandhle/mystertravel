@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 17, 2019 at 07:52 PM
+-- Generation Time: Apr 17, 2019 at 10:53 PM
 -- Server version: 5.7.25
 -- PHP Version: 7.3.1
 
@@ -28,7 +28,7 @@ CREATE TABLE `about_us` (
   `linkedin` varchar(15) NOT NULL,
   `portfolio` varchar(15) NOT NULL,
   `github` varchar(20) NOT NULL,
-  `image` varchar(50) NOT NULL,
+  `image` varchar(85) NOT NULL,
   `developer_story` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -37,10 +37,10 @@ CREATE TABLE `about_us` (
 --
 
 INSERT INTO `about_us` (`id`, `last_name`, `first_name`, `email`, `linkedin`, `portfolio`, `github`, `image`, `developer_story`) VALUES
-(1, 'Lai', 'Jennifer', 'iclai.work@gmail.com', 'jen-icl', 'jen-icl.com', 'jen-icl', '', ''),
-(2, 'Chao', 'Kylie', '', '', '', 'kylieclin', '', ''),
-(3, 'Le', 'Quan', 'quandhle@gmail.com', 'quandhle', 'quandhle.com', 'quandhle', '', ''),
-(4, 'Poon', 'Westley', '', '', '', 'westleypoon', '', '');
+(1, 'Lai', 'Jennifer', 'iclai.work@gmail.com', 'jen-icl', 'jen-icl.com', 'jen-icl', 'https://s3-us-west-1.amazonaws.com/myster-travel-images/about-us/laijen', ''),
+(2, 'Chao', 'Kylie', '', '', '', 'kylieclin', 'https://s3-us-west-1.amazonaws.com/myster-travel-images/about-us/chaokylie', ''),
+(3, 'Le', 'Quan', 'quandhle@gmail.com', 'quandhle', 'quandhle.com', 'quandhle', 'https://s3-us-west-1.amazonaws.com/myster-travel-images/about-us/lequan', ''),
+(4, 'Poon', 'Westley', '', '', '', 'WestleyPoon', 'https://s3-us-west-1.amazonaws.com/myster-travel-images/about-us/lequan', '');
 
 -- --------------------------------------------------------
 
@@ -82,7 +82,16 @@ CREATE TABLE `budget` (
 INSERT INTO `budget` (`id`, `trips_id`, `category`, `price`, `added`) VALUES
 (1, 1, 'flight', 129500, '2019-04-16 14:58:18'),
 (2, 1, 'food', 77600, '2019-04-16 14:58:18'),
-(3, 1, 'hotel', 92300, '2019-04-16 14:58:18');
+(3, 1, 'hotel', 92300, '2019-04-16 14:58:18'),
+(4, 8, 'sometext here', 32424, '2019-04-17 14:57:53'),
+(5, 8, 'sometext here', 32424, '2019-04-17 14:58:20'),
+(6, 8, 'sometext here', 32424, '2019-04-17 14:58:49'),
+(7, 8, 'sometext here', 32424, '2019-04-17 15:00:58'),
+(8, 8, 'sometext here', 32424, '2019-04-17 15:01:04'),
+(9, 8, 'sometext here', 32424, '2019-04-17 15:02:10'),
+(10, 8, 'sometext here', 32424, '2019-04-17 15:05:02'),
+(11, 8, 'sometext here', 32424, '2019-04-17 15:05:16'),
+(12, 8, 'sometext here', 32424, '2019-04-17 15:07:28');
 
 -- --------------------------------------------------------
 
@@ -453,7 +462,21 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `last_name`, `first_name`, `email`, `password`) VALUES
-(1, 'Le', 'Quan', 'quandhle@gmail.com', 'password');
+(1, 'Le', 'Quan', 'quandhle@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_connections`
+--
+
+CREATE TABLE `user_connections` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `users_id` mediumint(9) NOT NULL,
+  `created` datetime NOT NULL,
+  `ip_address` varchar(20) NOT NULL,
+  `token` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
@@ -514,6 +537,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user_connections`
+--
+ALTER TABLE `user_connections`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -533,7 +562,7 @@ ALTER TABLE `api_keys`
 -- AUTO_INCREMENT for table `budget`
 --
 ALTER TABLE `budget`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -570,3 +599,9 @@ ALTER TABLE `trips`
 --
 ALTER TABLE `users`
   MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `user_connections`
+--
+ALTER TABLE `user_connections`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
