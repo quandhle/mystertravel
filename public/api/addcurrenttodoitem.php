@@ -2,33 +2,42 @@
 
 require_once('config.php');
 
-// $trips_id = $_GET['trips_id'];
-// $task = $_GET['task'];
+$json_input = file_get_contents("php://input");
+$input = json_decode($json_input, true);
 
-// if (empty($trips_id)) {
-//     throw new Exception('Please provide trips id.');
-// };
+$trips_id = intval($input['trips_id']);
+$task = $input['task'];
 
-// if (empty($task)) {
-//     throw new Exception('Please enter task.');
-// };
+if (empty($trips_id)) {
+    throw new Exception('Please provide trips_id (int) with your request');
+}
 
-$add_query = "INSERT INTO `current_todo`
+if (empty($task)) {
+    throw new Exception('Please enter task (str) with your request');
+}
+
+$query = "INSERT INTO `current_todo`
     SET
-        `trips_id` = 1,
-        `task` = 'Finish this endpoint',
+        `trips_id` = $trips_id,
+        `task` = ?,
         `date` = NOW(),
         `status` = 0
 ";
 
-$result = mysqli_query($conn, $add_query);
+$statement = mysqli_prepare($conn, $query);
+mysqli_stmt_bind_param($statement, 's', $task);
+$result = mysqli_stmt_execute($statement);
 
 if (!$result) {
     throw new Exception(mysqli_error($conn));
 };
 
-if (!$result) {
-    throw new Exception('Please provide trip ID.');
-};
+if(mysqli_affected_rows($conn) !== 1){
+    throw new Exception('Unable to add todo entry');
+}
 
-// require_once('getcurrenttodo.php');
+$output['success'] = true;
+
+print(json_encode($output));
+
+?>

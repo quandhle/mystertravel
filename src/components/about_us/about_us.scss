@@ -1,27 +1,12 @@
 .about-container {
+    width: 100%;
 
-    display: flex;
-    flex-wrap: wrap;
-
-    .personImage {
-        width: 500px;
+    .person-img {
+        width: 100%;
+        border-radius: 50%;
     }
 
-    .aboutPerson {
+    .about-person {
         width: 50%;
     }
-
-    .about-us{
-        .about-image{
-            img{
-                width: 100%;
-
-            }
-        }
-    .aboutPerson:nth-child(even) {
-        right: 0;
-    }
-
-
-}
 }
