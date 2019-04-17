@@ -3,15 +3,15 @@
     "data": [
         {
             "category": "flight",
-            "price": 100000
+            "price": 129500
         },
         {
             "category": "food",
-            "price": 10000
+            "price": 77600
         },
         {
             "category": "hotel",
-            "price": 200000
+            "price": 92300
         }
     ]
 }

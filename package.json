@@ -5,7 +5,7 @@
   "main": "index.js",
   "proxy": {
     "/api/*": {
-      "target": "http://localhost:8000"
+      "target": "http://localhost:8888"
     }
   },
   "scripts": {
@@ -20,7 +20,9 @@
     "url": "https://github.com/Learning-Fuze/react_starter.git"
   },
   "dependencies": {
+    "aws-sdk": "^2.438.0",
     "axios": "^0.18.0",
+    "google-maps-react": "^2.0.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './map.scss';
 
-
 class Map extends Component{
     constructor(props){
         super(props)

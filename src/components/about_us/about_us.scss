@@ -1,6 +1,14 @@
-.about-container{
-    .about-header{
+.about-container {
 
+    display: flex;
+    flex-wrap: wrap;
+
+    .personImage {
+        width: 500px;
+    }
+
+    .aboutPerson {
+        width: 50%;
     }
 
     .about-us{
@@ -10,6 +18,8 @@
 
             }
         }
+    .aboutPerson:nth-child(even) {
+        right: 0;
     }
 
 
