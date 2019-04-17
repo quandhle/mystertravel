@@ -10,7 +10,7 @@ class Nav extends Component{
                 <a href="/" className="navbar-brand">MysterTravel</a>
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        <a href="#" className="nav-link">Menu</a>
+                        <a href="#" className="nav-link"><i className="fas fa-bars"></i></a>
                     </li>
                 </ul>
             </nav>
