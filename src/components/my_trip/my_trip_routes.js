@@ -4,7 +4,7 @@ import {Route, Switch} from 'react-router-dom';
 import MyTrip from './';
 import Budget from './budget';
 import Diary from './diary';
-import Summary from './end_trip';
+import Summary from './summary';
 import NotFound from './../404';
 
 export default props => {
