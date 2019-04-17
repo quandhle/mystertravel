@@ -15,6 +15,7 @@ if(mysqli_num_rows($result) === 0){
 };
 
 $data = [];
+
 while($row = mysqli_fetch_assoc($result)){
     $data[] = [
         'country_name' => $row['list_name'],
