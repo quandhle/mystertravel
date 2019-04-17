@@ -12,22 +12,6 @@ $add_query = "INSERT INTO `budget`
 
 mysqli_query($conn, $add_query);
 
-require_once('getbudgetlist.php');
+$output['success'] = true;
 
-// $query = "SELECT * FROM `budget` WHERE `trips_id` = 1";
-
-// $result = mysqli_query($conn, $query);
-
-// $data = [];
-
-// while ($row = mysqli_fetch_assoc($result)) {
-//     $data[] = [
-//         'category' => $row['category'],
-//         'price' => $row['price'],
-//     ];
-// };
-
-// $output['success'] = true;
-// $output['budget'] = $data;
-
-// print(json_encode($output));
+print(json_encode($output));
