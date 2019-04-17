@@ -2,36 +2,47 @@
 
 require_once('config.php');
 
-// $trips_id = $_GET['trips_id'];
-// $category = $_GET['category'];
-// $price = $_GET['price'];
+$json_input = file_get_contents("php://input");
+$input = json_decode($json_input, true);
 
-// if (empty($trips_id)) {
-//     throw new Exception('Invalid trip id.');
-// }
+$trips_id = intval($input['trips_id']);
+$category = $input['category'];
+$price = $input['price'];
 
-// if (empty($category)) {
-//     throw new Exception('Please provide category.');
-// };
+if (empty($trips_id)) {
+    throw new Exception('Please provide trips_id (int) with your request');
+}
 
-// if (empty($price)) {;
-//     throw new Exception('Please enter price.');
-// }
+if (empty($category)) {
+    throw new Exception('Please enter category (str) with your request');
+}
 
-$add_query = "INSERT INTO `budget`
+if (empty($price)) {
+    throw new Exception('Please enter price (int) with your request');
+}
+
+$query = "INSERT INTO `budget`
     SET
-        `trips_id` = 1,
-        `category` = 'phpmyadmin budget',
-        `price` = 50000,
+        `trips_id` = $trips_id,
+        `category` = ?,
+        `price` = ?,
         `added` = NOW()
 ";
 
-$result = mysqli_query($conn, $add_query);
+$statement = mysqli_prepare($conn, $query);
+mysqli_stmt_bind_param($statement, 'sd', $category, $price);
+$result = mysqli_stmt_execute($statement);
 
-if (!$result) {
+if(!$result) {
     throw new Exception(mysqli_error($conn));
-};
+}
+
+if(mysqli_affected_rows($conn) !== 1){
+    throw new Exception('Unable to add budget entry');
+}
 
 $output['success'] = true;
 
 print(json_encode($output));
+
+?>
