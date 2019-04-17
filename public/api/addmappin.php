@@ -8,14 +8,14 @@ $input = json_decode($json_input, true);
 $trips_id = intval($input['trips_id']);
 $latitude = floatval($input['latitude']);
 $longitude = floatval($input['longitude']);
-$description = addslashes($input['description']);
+$description = $input['description'];
 
 if(empty($trips_id)){
     throw new Exception('Must provide trips_id (int) with your request');
 }
 
 if(empty($description)){
-    throw new Exception('Must provide trip description (str) with your request');
+    throw new Exception('Must enter pin description (str) with your request');
 }
 
 if(empty($latitude) || empty($longitude)){
@@ -27,11 +27,13 @@ $query = "INSERT INTO `pins`
         `trips_id` = $trips_id,
         `latitude` = $latitude,
         `longitude` = $longitude,
-        `description` = '$description',
+        `description` = ?,
         `added` = NOW()
 ";
 
-$result = mysqli_query($conn, $query);
+$statement = mysqli_prepare($conn, $query);
+mysqli_stmt_bind_param($statement, 's', $description);
+$result = mysqli_stmt_execute($statement);
 
 if(!$result){
     throw new Exception(mysqli_error($conn));
