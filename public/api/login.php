@@ -68,4 +68,9 @@ if (!$connect_result) {
 
 if (mysqli_affected_rows($conn) !== 1) {
     throw new Exception('Cannot log in: connection not saved.');
+<<<<<<< HEAD
 };
+=======
+};
+
+>>>>>>> 81d2e6f1a909b36702791d6aced67998f3e664d8
