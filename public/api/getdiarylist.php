@@ -1,10 +1,11 @@
 <?php
 require_once('config.php');
 
-//need trips_id(int)
-//intval($_GET['trips_id'])
+$trips_id = intval($_GET['trips_id']);
 
-$trips_id = 1;
+if(empty($trips_id)){
+    throw new Exception('Must provide trips_id (int) with your request');
+}
 
 $query = "SELECT `entry`, `date` FROM `diary` WHERE `trips_id` = $trips_id";
 
