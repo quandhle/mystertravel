@@ -13,7 +13,7 @@ if(empty($trips_id)){
 }
 
 if(empty($entry)){
-    throw new Exception('Please provide a diary entry (str) with your request');
+    throw new Exception('Please enter a diary entry (str) with your request');
 }
 
 $query = "INSERT INTO `diary` SET

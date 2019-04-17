@@ -15,7 +15,7 @@ if(empty($trips_id)){
 }
 
 if(empty($description)){
-    throw new Exception('Must provide trip description (str) with your request');
+    throw new Exception('Must enter pin description (str) with your request');
 }
 
 if(empty($latitude) || empty($longitude)){
