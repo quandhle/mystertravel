@@ -8,14 +8,16 @@ class Map extends Component{
 
         this.state = {
             lat: 41.8719,
-            lng: 12.5674
+            lng: 12.5674,
+            api: 'need to get api'
         }
+
     }
     componentDidMount(){
         this.createMap();
     }
     createMap = ()=>{
-        loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyCz5y10D2RANKFguerczz92ZroUQcdLcMI&callback=initMap');
+        loadScript(`https://maps.googleapis.com/maps/api/js?key=${this.state.api}&callback=initMap`);
         window.initMap = this.initMap;
     }
     initMap= ()=> {
