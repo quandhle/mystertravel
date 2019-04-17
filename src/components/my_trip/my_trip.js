@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 
 class MyTrip extends Component{
@@ -6,13 +7,13 @@ class MyTrip extends Component{
         return(
             <div className="my-trip">
                 <div className="budget-link">
-                    <button className="budget-link-btn">Budget</button>                
+                    <button className="budget-link-btn">Budget</button>
                 </div>
                 <div className="diary-link">
-                    <button className="diary-link-btn">Diary</button>                
+                    <button className="diary-link-btn">Diary</button>
                 </div>
                 <div className="end-trip-link">
-                    <button className="end-trip-link-btn">End Trip</button>                
+                    <button className="end-trip-link-btn">End Trip</button>
                 </div>
             </div>
         )
