@@ -33,11 +33,11 @@ $query = "SELECT
 
 $statement = mysqli_prepare($conn, $query);
 
-// print_r($statement);
-
 mysqli_stmt_bind_param($statement, 'ss', $email, $hashedPassword);
 
-$result = mysqli_stmt_execute($statement);
+$query_result = mysqli_stmt_execute($statement);
+
+$result = mysqli_stmt_get_result($statement);
 
 if (!$result) {
     throw new Exception('Invalid email or password.');
@@ -54,8 +54,8 @@ $token = sha1($token);
 $connect_query = "INSERT INTO
         `users_connections`
     SET
-        `token` = `$token`,
-        `users_id` = {$data[`id`]},
+        `token` = '$token',
+        `user_id` = {$data['id']},
         `created` = NOW(),
         `ip_address` = '{$_SERVER['REMOTE_ADDR']}'
 ";
@@ -68,9 +68,10 @@ if (!$connect_result) {
 
 if (mysqli_affected_rows($conn) !== 1) {
     throw new Exception('Cannot log in: connection not saved.');
-<<<<<<< HEAD
-};
-=======
 };
 
->>>>>>> 81d2e6f1a909b36702791d6aced67998f3e664d8
+$output['success'] = true;
+$output['username'] = $data['last_name'];
+$output['token'] = $token;
+
+print(json_encode($output));
