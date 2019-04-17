@@ -4,16 +4,43 @@ import SideNav from './sidenav';
 import './nav.scss';
 
 class Nav extends Component{
+    constructor(props){
+        super(props)
+
+        this.state ={
+            sideNav: false
+        }
+    }
+    toggleSideNav= ()=> {
+        const {sideNav} = this.state;
+        if(sideNav){
+            this.setState({
+                sideNav: false
+            })
+        } else {
+            this.setState({
+                sideNav:true
+            })
+        }
+    }
     render(){
         return(
-            <nav className="navbar bg-light">
-                <a href="/" className="navbar-brand">MysterTravel</a>
-                <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <a href="#" className="nav-link"><i className="fas fa-bars"></i></a>
-                    </li>
-                </ul>
-            </nav>
+            <div className="nav-box">
+                <nav className="navbar bg-light">
+                    <div className="navbar-header">
+    
+                        <div className="nav-menu" onClick={this.toggleSideNav}>
+                            <a href="#" className="nav-link"><i className="fas fa-bars"></i></a>
+                        </div>
+                        <div className="nav-title">
+                            <h2>MysterTravel</h2>
+                        </div>
+                    
+                    </div>
+                </nav>
+                <SideNav open={this.state.sideNav} toggle={this.toggleSideNav}/>
+            </div>
+
         );
     }
 }
