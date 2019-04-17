@@ -1,13 +1,23 @@
-import React from 'react';
-import {Router, Switch} from 'react-router-dom';
+import React, {Component} from 'react';
+import coconut from './../assets/images/coconut.png';
 
-export default props =>{
-    return(
-        <div className="home-page">
-            <h1>Home page is here</h1>
-            <div className="home-page-btn row mx-auto">
-                <button className="home-start-btn">Start Btn here</button>
+export default class extends Component {
+    goToTrip = () => {
+        this.props.history.push(`/mytrip`);
+    }
+
+    render() {
+        return (
+            <div className="home-page">
+                <div className="title-holder">
+                    <h4 className='title-blurb'>Travelling? Log your adventure and keep track of where you've been!</h4>
+                </div>
+                <img src={coconut} alt=""/>
+
+                <div className="home-page-btn">
+                    <button onClick={this.goToTrip} className="home-start-btn btn btn-primary">Start / View trip</button>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
