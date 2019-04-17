@@ -12,7 +12,9 @@ export default class extends Component {
                 <div className="title-holder">
                     <h4 className='title-blurb'>Travelling? Log your adventure and keep track of where you've been!</h4>
                 </div>
-                <img src={coconut} alt=""/>
+                <div className="img-wrap">
+                    <img src={coconut} alt=""/>
+                </div>
 
                 <div className="home-page-btn">
                     <button onClick={this.goToTrip} className="home-start-btn btn btn-primary">Start / View trip</button>
