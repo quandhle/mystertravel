@@ -6,6 +6,14 @@ $query = "SELECT * FROM `about_us`";
 
 $result = mysqli_query($conn, $query);
 
+if (!$result) {
+    throw new Exception(mysqli_error($conn));
+};
+
+if (!$result) {
+    throw new Exception('About Us information not provided.');
+};
+
 $data = [];
 
 while ($row = mysqli_fetch_assoc($result)) {

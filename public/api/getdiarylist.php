@@ -1,4 +1,5 @@
 <?php
+
 require_once('config.php');
 
 $trips_id = intval($_GET['trips_id']);
@@ -16,13 +17,15 @@ if(!$result){
 }
 
 if(mysqli_num_rows($result) === 0){
-    throw new Exception('No entry retrieved');
+    throw new Exception('No entry retrieved.');
 }
 
 $data = [];
+
 while($row = mysqli_fetch_assoc($result)){
     $entry = $row['entry'];
     $date = date("m/d/Y H:i:s", strtotime($row['date']));
+
     $data[] = [
         'entry' => $entry,
         'date' => $date

@@ -2,7 +2,11 @@
 
 require_once('config.php');
 
-// $trips_id = $_GET['trips_id'];
+// $id = $_GET['id'];
+
+if (empty($id)) {
+    throw new Exception('Please provide trip id.');
+};
 
 $query = "UPDATE `trips`
     SET
@@ -12,12 +16,28 @@ $query = "UPDATE `trips`
 
 $result = mysqli_query($conn, $query);
 
+if (!$result) {
+    throw new Exception(mysqli_error($conn));
+};
+
+if (!$result) {
+    throw new Exception('Invalid ID.');
+};
+
 $select_query = "SELECT * 
     FROM `trips`
     WHERE `id` = 1
 ";
 
 $update_result = mysqli_query($conn, $select_query);
+
+if (!$update_result) {
+    throw new Exception(mysqli_error($conn));
+};
+
+if (!$update_result) {
+    throw new Exception('Invalid ID.');
+};
 
 $row = mysqli_fetch_assoc($update_result);
 

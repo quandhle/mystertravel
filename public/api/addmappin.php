@@ -13,9 +13,11 @@ $description = addslashes($input['description']);
 if(empty($trips_id)){
     throw new Exception('Must provide trips_id (int) with your request');
 }
+
 if(empty($description)){
     throw new Exception('Must provide trip description (str) with your request');
 }
+
 if(empty($latitude) || empty($longitude)){
     throw new Exception('Must provide location (float) with your request');
 }
