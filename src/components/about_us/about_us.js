@@ -1,26 +1,48 @@
-import React from 'react';
+import React, {Component} from 'react';
+import axios from 'axios';
+import './about_us.scss';
 
-export default props=>{
-    return(
-        <div className="about-container">
-        
-            <div className="about-header">
-                <h1>About us</h1>
-            </div>
+class AboutUs extends Component {
+    state = {
+        data: []
+    };
 
-            {/* about us content */}
-            <div className="about-us row">
-                <div className="about-image col-xs-4">
-                    <img src="" alt="about kylie"/>
+    componentDidMount() {
+        this.getData();
+    }
+
+    getData() {
+        axios.get('/api/getaboutus.php').then((resp)=> {
+            this.setState({
+                data: resp.data.data
+            });
+        })
+    }
+    
+    render() {
+        const aboutUs = this.state.data.map((person) => {
+            const {last_name, first_name, linkedin, email, portfolio, github, image, developer_story} = person;
+
+            console.log(person);
+
+            return (
+                <div key={first_name} className="aboutPerson">
+                    <p>{first_name} {last_name}</p>
+                    <p>Email: {email}</p>
+                    <p>Linkedin: <a href={`linkedin.com/${linkedin}`}>{linkedin}</a></p>
+                    <p>Portfolio: {portfolio}</p>
+                    <p>Github: <a href={`github.com/${github}`}>{github}</a></p>
+                    <img src={`${image}`} alt={`${first_name}`} className="personImage"/>
+                    <p>{developer_story}</p>
+                    <div><img src="" alt=""/></div>
                 </div>
-                <div className="about-content col-xs-8">
-                    <div className="about-name row">Kylie</div>
-                    <div className="about-descrip row">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, nam?
-                    </div>
-                </div>
-            </div>
+            )
+        });
 
-        </div>
-    )
+        return (
+            <div className="about-container">{aboutUs}</div>
+        )
+    }
 }
+
+export default AboutUs;
