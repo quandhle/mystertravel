@@ -4,9 +4,11 @@ import {Link} from 'react-router-dom';
 
 class SideNav extends Component{
     render(){
-        if(this.props.open){
+        const {open, toggle} =this.props
+
+        if(open){
             return(
-            <div className="side-nav-box">
+            <div className="side-nav-box" onClick={toggle}>
                 <div className="side-nav">
                     <div className="side-nav-title">Side Nav</div>
                     <ul className="side-nav-links">

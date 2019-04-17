@@ -27,14 +27,18 @@ class Nav extends Component{
         return(
             <div className="nav-box">
                 <nav className="navbar bg-light">
-                    <ul className="navbar-nav">
-                        <li className="nav-item" onClick={this.toggleSideNav}>
+                    <div className="navbar-header">
+    
+                        <div className="nav-menu" onClick={this.toggleSideNav}>
                             <a href="#" className="nav-link"><i className="fas fa-bars"></i></a>
-                        </li>
-                    </ul>
-                    <div className="navbar-header"><a href="/">MysterTravel</a></div>
+                        </div>
+                        <div className="nav-title">
+                            <h2>MysterTravel</h2>
+                        </div>
+                    
+                    </div>
                 </nav>
-                <SideNav open={this.state.sideNav}/>
+                <SideNav open={this.state.sideNav} toggle={this.toggleSideNav}/>
             </div>
 
         );
