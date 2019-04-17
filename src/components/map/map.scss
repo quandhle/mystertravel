@@ -1,12 +1,12 @@
-.mappage {
-  .fakeMap {
-    height: calc(100vh - 56px);
-    width: 100vw;
-  }
-  .btn {
+.map {
+  height:90vh;
+  
+
+}  
+
+.btn {
     position: fixed;
     bottom: 5%;
     left: 50%;
     transform: translateX(-50%);
-  }
 }
