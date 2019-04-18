@@ -52,7 +52,7 @@ class Map extends Component{
 
 
                 </div>
-                <button className='btn btn-danger btn-lg'>Add Pin</button>
+                <button className='btn map-btn btn-danger btn-lg'>Add Pin</button>
             </main>
 
         );
