@@ -7,8 +7,8 @@ class MyTrip extends Component{
         this.props.history.push(`/mytrip/budget`);
     }
 
-    goToDiary = () => {
-        this.props.history.push(`/mytrip/diary`);
+    goToNotes = () => {
+        this.props.history.push(`/mytrip/notes`);
     }
 
     goToMap = () => {
@@ -25,8 +25,8 @@ class MyTrip extends Component{
                 <div className="budget-link">
                     <button className="budget-link-btn btn" onClick={this.goToBudget}>Budget</button>
                 </div>
-                <div className="diary-link">
-                    <button className="diary-link-btn btn" onClick={this.goToDiary}>Diary</button>
+                <div className="notes-link">
+                    <button className="notes-link-btn btn" onClick={this.goToNotes}>Notes</button>
                 </div>
                 <div className="map-link">
                     <button className="map-link-btn btn" onClick={this.goToMap}>View Map</button>

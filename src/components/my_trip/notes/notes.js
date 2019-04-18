@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import DiaryForm from './diary_form';
-import './diary.scss';
+import NotesForm from './notes_form';
+import './notes.scss';
 
-class Diary extends Component{
+class Notes extends Component{
     constructor(props){
-        super(props)
+        super(props);
 
         this.state = {
             showInput: false
-        }
+        };
 
         this.toggleInput = this.toggleInput.bind(this);
     }
@@ -31,20 +31,20 @@ class Diary extends Component{
     }
     render(){
         return(
-            <div className="diary-page">
-                <div className="diary-input-toggle" onClick={this.toggleInput}>
-                    Add Diary<i className="fas fa-plus"></i>
+            <div className="notes-page">
+                <div className="notes-input-toggle" onClick={this.toggleInput}>
+                    Add Note<i className="fas fa-plus"></i>
                 </div>
-                <DiaryForm diary={this.handleInput} show={this.state.showInput}/>
+                <NotesForm notes={this.handleInput} show={this.state.showInput}/>
 
-                <div className="diary-box">
-                    <div className="diary">
-                        <div className="diary-item">
+                <div className="notes-box">
+                    <div className="notes">
+                        <div className="notes-item">
                             <p>
                               Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia modi, nihil animi quae sequi commodi    sed  quibusdam, laborum error eveniet nam distinctio? Explicabo amet vel rerum, laudantium obcaecati eius  quam.  
                             </p>
                         </div>
-                        <div className="diary-item">
+                        <div className="notes-item">
                             <p>
                               Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia modi, nihil animi quae sequi commodi    sed  quibusdam, laborum error eveniet nam distinctio? Explicabo amet vel rerum, laudantium obcaecati eius  quam.  
                             </p>
@@ -58,4 +58,4 @@ class Diary extends Component{
     }
 }
 
-export default Diary;
+export default Notes;
