@@ -21,5 +21,5 @@ const NotesInput = props =>{
 
 
 export default reduxForm({
-    form: 'budget-form'
+    form: 'notes-form'
 })(NotesInput);
