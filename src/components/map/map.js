@@ -9,12 +9,15 @@ class Map extends Component{
         this.state = {
             lat: 41.8719,
             lng: 12.5674,
-            api: ''
+            api: '',
+            pins: []
         }
 
     }
+
     componentDidMount(){
         this.getAccessToMap();
+        this.getPins();
     }
 
     async getAccessToMap(){
@@ -29,35 +32,52 @@ class Map extends Component{
         }
     }
 
-    createMap = ()=>{
+    getPins() {
+        const resp = axios.get('/api/getmappin.php').then((resp) => {
+            this.setState({
+                pins: resp.data.data
+            })
+
+            console.log(resp.data.data)
+        })
+    }
+
+    createMap = () => {
         loadScript(`https://maps.googleapis.com/maps/api/js?key=${this.state.api}&callback=initMap`);
         window.initMap = this.initMap;
     }
-    initMap= ()=> {
+
+    initMap = ()=> {
         const map = new window.google.maps.Map(document.getElementById('map'), {
           center: {lat: this.state.lat, lng: this.state.lng},
           zoom: 8
         });
 
+        const allMarkers = this.state.pins.map((item) => {
+            const position = {
+                lat: parseFloat(item.lat),
+                lng: parseFloat(item.lng)
+            };
+
+            const marker = new window.google.maps.Marker({position: position, map: map})
+        })
+
         const position = {lat: 41.8, lng: 12.5}
         const marker = new window.google.maps.Marker({position: position, map: map});
     }
-    getLocation(){
 
+    getLocation(){
     }
-    render(){
+
+    render() {
         return (
             <main>
                 <div id="map" className='map'>
-
-
                 </div>
                 <button className='btn map-btn btn-danger btn-lg'>Add Pin</button>
             </main>
-
         );
     }
-
 }
 
 
