@@ -10,7 +10,7 @@ if (!$result) {
     throw new Exception(mysqli_error($conn));
 };
 
-if (!$result) {
+if (mysqli_num_rows($result) === 0) {
     throw new Exception('About Us information not provided.');
 };
 
@@ -33,3 +33,5 @@ $output['success'] = true;
 $output['data'] = $data;
 
 print(json_encode($output));
+
+?>
