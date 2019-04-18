@@ -35,8 +35,7 @@ html, body{
         left: 50%;
         transform: translateX(-50%);
 
-
-        button {
+        > button {
             position: fixed;
             left: 50%;
             bottom: 10%;
