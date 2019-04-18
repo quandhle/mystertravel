@@ -25,22 +25,12 @@
             height: 50px;
             display: inline-block;
             margin: 5px;
+            font-size: 3em;
+            color: #2b616d;
 
-            }
-
-            .facebook{
-                background-image: url("../../../assets/images/facebook.png");
-                background-size: cover;
-            }
-            
-            .twitter{
-                background-image: url("../../../assets/images/twitter.png");
-                background-size: cover; 
-            }
-            
-            .gmail{
-                background-image: url("../../../assets/images/gmail.png");
-                background-size: cover; 
+                &:hover{
+                    color: #417681;
+                }
             }
         }
     }

@@ -16,9 +16,9 @@ class EndTrip extends Component{
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident omnis aperiam quas ex suscipiteius eveniet molestias reiciendis debitis fuga, magni, dolorum tenetur autem voluptas. Pariaturexplicabo consectetur dignissimos eius.</p>
                     </div>
                     <div className="share-btns col-12">
-                        <div className="facebook"></div>
-                        <div className="twitter"></div>
-                        <div className="gmail"></div>
+                        <div className="facebook"><i className="fab fa-facebook-square"></i></div>
+                        <div className="twitter"><i className="fab fa-twitter-square"></i></div>
+                        <div className="gmail"><i className="fas fa-envelope-square"></i></div>
                     </div>
                 </div>
             </div>
