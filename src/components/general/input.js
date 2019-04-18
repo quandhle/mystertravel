@@ -1,11 +1,10 @@
 import React from 'react';
-
+import './general.scss';
 export default props =>{
-    const {id, name, type = "text", label, col="col-12", input, meta:{error, touched}} = props
+    const {id, name, classes = "", type = "text", label, col="col-12", input, meta:{error, touched}} = props
     return (
-        <div className={`forms ${col}`}>
-            <label htmlFor={id}>{label}</label>
-            <input type={type} id={id} {...input} name={name}/>   
+        <div className={`input-box ${classes} ${col}`}>
+            <input type={type} id={id} {...input} name={name} placeholder={label} />   
         </div>
     )
 }
