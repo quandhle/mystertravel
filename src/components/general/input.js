@@ -1,5 +1,6 @@
 import React from 'react';
 import './general.scss';
+
 export default props =>{
     const {id, name, classes = "", type = "text", label, col="col-12", input, meta:{error, touched}} = props
     return (
