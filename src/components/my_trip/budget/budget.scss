@@ -7,13 +7,13 @@
         text-align: center;
 
     }
-    
+
     .budget-input{
         background-color: #b2dbd5;
         width: 100%;
         padding: 15px;
         box-sizing: border-box;
-        
+
         &:hover{
             background-color: #c4e4df;
         }
@@ -26,7 +26,7 @@
         }
 
     }
-    
+
     .add-budget{
         margin: 5px;
         position: relative;
@@ -52,10 +52,8 @@
             }
             .budget-item{
                 padding: 15px;
-                width: 80%;
+                width: 70%;
             }
         }
-    } 
+    }
 }
-
-
