@@ -3,21 +3,17 @@
 
     .diary-input-toggle{
         font-size: 1.2em;
-        background-color: rgb(236, 222, 143);
+        background-color: #f7d5c7;
         width: 100%;
         text-align: center;
     }
     
     .diary-input{
-        background-color: rgb(195, 218, 105);
+        background-color: #b2dbd5;
         width: 100%;
         padding: 15px;
         box-sizing: border-box;
         
-
-        &:first-child{
-            background-color: rgb(177, 197, 97);
-        }
 
         input{
             width: 100%;
@@ -32,6 +28,9 @@
         margin: 5px;
         position: relative;
         left: 80%;
+        background-color: #f7d5c7;
+        border: none;
+        color:#2b616d;
     }
 
     .diary-box{
