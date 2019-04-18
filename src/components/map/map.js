@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 import './map.scss';
 
 class Map extends Component{
@@ -8,13 +9,26 @@ class Map extends Component{
         this.state = {
             lat: 41.8719,
             lng: 12.5674,
-            api: 'need to get api'
+            api: ''
         }
 
     }
     componentDidMount(){
-        this.createMap();
+        this.getAccessToMap();
     }
+
+    async getAccessToMap(){
+        const resp = await axios.get('/api/getapikey.php?api=google');
+        if(resp.data.success){
+            this.setState({
+                api: resp.data.data['api_key']
+            });
+            this.createMap();
+        } else {
+            console.error(resp.data.error);
+        }
+    }
+
     createMap = ()=>{
         loadScript(`https://maps.googleapis.com/maps/api/js?key=${this.state.api}&callback=initMap`);
         window.initMap = this.initMap;
@@ -36,7 +50,7 @@ class Map extends Component{
             <main>
                 <div id="map" className='map'>
 
-                    
+
                 </div>
                 <button className='btn btn-danger btn-lg'>Add Pin</button>
             </main>
