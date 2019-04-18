@@ -27,6 +27,10 @@ class Home extends Component {
             })
         }
     }
+    createSearch = ()=>{
+        loadScript(`https://maps.googleapis.com/maps/api/js?key=${"AIzaSyCz5y10D2RANKFguerczz92ZroUQcdLcMI"}&libraries=places`);
+        
+    }
 
     searchCountry = (value)=>{
         console.log(value)
@@ -56,6 +60,15 @@ class Home extends Component {
         )
     }
 }
+
+function loadScript(url){
+    const index = window.document.getElementsByTagName("script")[0];
+    const script = window.document.createElement("script");
+    script.src = url;
+    script.type = "text/javascript";
+    index.parentNode.insertBefore(script, index);
+}
+
 
 export default reduxForm({
     form: 'start-new-trip'
