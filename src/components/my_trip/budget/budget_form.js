@@ -2,10 +2,10 @@ import React from 'react';
 import {reduxForm, Field} from 'redux-form';
 import Input from '../../general/input';
 
-const BudgetForm = props =>{
+const BudgetForm = props => {
     const {show, budget, handleSubmit} = props;
 
-    if(show){
+    if (show) {
         return(
             <form onSubmit={handleSubmit(budget)}>
                     <Field id="item" name="item" label="Item" component={Input} classes="budget-input" />
@@ -16,9 +16,7 @@ const BudgetForm = props =>{
     } else {
         return null;
     }
-
 }
-
 
 export default reduxForm({
     form: 'budget-form'

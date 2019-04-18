@@ -12,9 +12,11 @@ class Budget extends Component{
 
         this.toggleInput = this.toggleInput.bind(this);
     }
+
     handleInput(value){
         console.log(value)
     }
+
     toggleInput(){
         const {showInput} = this.state;
 
@@ -27,8 +29,8 @@ class Budget extends Component{
                 showInput: true
             })
         }
-
     }
+
     render(){
         return(
             <div className="budget-page">
