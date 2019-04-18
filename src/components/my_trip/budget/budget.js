@@ -7,7 +7,7 @@ class Budget extends Component{
         super(props)
 
         this.state = {
-            showInput: true
+            showInput: false
         }
 
         this.toggleInput = this.toggleInput.bind(this);

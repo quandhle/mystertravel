@@ -2,26 +2,26 @@
 
     .budget-input-toggle{
         font-size: 1.2em;
-        background-color: rgb(236, 222, 143);
+        background-color: #f7d5c7;
         width: 100%;
         text-align: center;
+
     }
     
     .budget-input{
-        background-color: rgb(195, 218, 105);
+        background-color: #b2dbd5;
         width: 100%;
         padding: 15px;
         box-sizing: border-box;
         
-
-        &:first-child{
-            background-color: rgb(177, 197, 97);
+        &:hover{
+            background-color: #c4e4df;
         }
 
         input{
             width: 100%;
             outline: none;
-            border: none;
+            border: 1px solid transparent;
             background-color: inherit;
         }
 
@@ -31,13 +31,17 @@
         margin: 5px;
         position: relative;
         left: 80%;
+        background-color: #f7d5c7;
+        border: none;
+        color:#2b616d;
     }
 
     .budget-box{
-        background-color:  rgb(195, 218, 105);
+        color: white;
+        background-color:  #2b616d;
 
-        .budget:nth-child(odd){
-            background-color: rgb(177, 197, 97);
+        .budget:nth-child(even){
+            background-color: #3b717e;
         }
 
         .budget{

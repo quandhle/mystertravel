@@ -28,7 +28,7 @@ class Nav extends Component{
     render(){
         return(
             <div className="nav-box">
-                <nav className="navbar bg-light">
+                <nav className="navbar">
     
                     <div className="nav-menu" onClick={this.toggleSideNav}>
                         <a href="#" className="nav-link">
