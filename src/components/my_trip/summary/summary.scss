@@ -1,0 +1,47 @@
+.endtrip-page{
+    .total-spend{
+        width: 100%;
+        text-align: center;
+        p{
+            font-size: 1.2em;
+            margin: 15px;
+            font-weight: bold;
+        }
+    }
+    .last-entry{
+        .entry-content{
+            img{
+                width:100%;
+            }
+        }
+
+        .share-btns{
+
+
+            &>*{
+            position: relative;
+            left: 25%;
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+            margin: 5px;
+
+            }
+
+            .facebook{
+                background-image: url("../../../assets/images/facebook.png");
+                background-size: cover;
+            }
+            
+            .twitter{
+                background-image: url("../../../assets/images/twitter.png");
+                background-size: cover; 
+            }
+            
+            .gmail{
+                background-image: url("../../../assets/images/gmail.png");
+                background-size: cover; 
+            }
+        }
+    }
+}
