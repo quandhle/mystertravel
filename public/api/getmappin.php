@@ -16,8 +16,8 @@ if (!$result) {
     throw new Exception(mysqli_error($conn));
 };
 
-if (!$result) {
-    throw new Exception('Please provide trip id.');
+if (mysqli_num_rows($result) === 0) {
+    throw new Exception('Unable to retrieve map pins');
 };
 
 $output['success'] = true;
