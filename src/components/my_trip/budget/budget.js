@@ -7,7 +7,7 @@ class Budget extends Component{
         super(props)
 
         this.state = {
-            showInput: false
+            showInput: true
         }
 
         this.toggleInput = this.toggleInput.bind(this);
@@ -32,12 +32,19 @@ class Budget extends Component{
     render(){
         return(
             <div className="budget-page">
-                <div className="budges-container">
-                    <div className="budget-input-toggle" onClick={this.toggleInput}>
-                    Add Budget Item<i className="fas fa-plus"></i>
+                <div className="budget-input-toggle" onClick={this.toggleInput}>
+                Add Budget Item <i className="fas fa-plus"></i>
+                </div>
+                <BudgetForm budget={this.handleInput} show={this.state.showInput}/>
+
+                <div className="budget-box">
+                    <div className="budget">
+                        <div className="budget-item">Plane Ticket</div>
+                        <div className="budget-amount">$ 500</div>
                     </div>
-                    <div className="budget-input">
-                        <BudgetForm budget={this.handleInput} show={this.state.showInput}/>
+                    <div className="budget">
+                        <div className="budget-item">Hotel</div>
+                        <div className="budget-amount">$ 550</div>
                     </div>
                 </div>
             </div>

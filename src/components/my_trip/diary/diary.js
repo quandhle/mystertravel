@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import DiaryForm from './diary_form';
+import './diary.scss';
 
 class Diary extends Component{
     constructor(props){
@@ -31,15 +32,27 @@ class Diary extends Component{
     render(){
         return(
             <div className="diary-page">
-                <div className="diarys-container">
-                    <div className="diary-input-toggle" onClick={this.toggleInput}>
-                        Add Diary<i className="fas fa-plus"></i>
-                    </div>
-                    <DiaryForm diary={this.handleInput} show={this.state.showInput}/>
-                    <div className="hardcode-diary">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quas alias eum modi odio quod sequi, minus voluptatibus consectetur dolor ipsam pariatur voluptatum aut dolorem totam! Doloremque aliquam molestias iure.Aliquam aperiam, eligendi facilis hic quibusdam deleniti culpa modi? Laborum autem tenetur officia possimus sequi animi illum, corrupti asperiores at eveniet est nesciunt saepe, repudiandae placeat ullam enim earum iste!
-                    </div>
+                <div className="diary-input-toggle" onClick={this.toggleInput}>
+                    Add Diary<i className="fas fa-plus"></i>
                 </div>
+                <DiaryForm diary={this.handleInput} show={this.state.showInput}/>
+
+                <div className="diary-box">
+                    <div className="diary">
+                        <div className="diary-item">
+                            <p>
+                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia modi, nihil animi quae sequi commodi    sed  quibusdam, laborum error eveniet nam distinctio? Explicabo amet vel rerum, laudantium obcaecati eius  quam.  
+                            </p>
+                        </div>
+                        <div className="diary-item">
+                            <p>
+                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia modi, nihil animi quae sequi commodi    sed  quibusdam, laborum error eveniet nam distinctio? Explicabo amet vel rerum, laudantium obcaecati eius  quam.  
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         )
     }

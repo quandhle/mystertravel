@@ -8,11 +8,9 @@ const BudgetForm = props =>{
     if(show){
         return(
             <form onSubmit={handleSubmit(budget)}>
-                <div className="row">
-                    <Field id="item" name="item" label="Item" component={Input}/>
-                    <Field id="amount" name="amount" label="Amount" component={Input}/>
-                </div>
-                <button>Add</button>
+                    <Field id="item" name="item" label="Item" component={Input} classes="budget-input" />
+                    <Field id="amount" name="amount" label="Amount" component={Input} classes="budget-input"/>
+                <button className="btn btn-danger add-budget">Add</button>
             </form>
         )
     } else {

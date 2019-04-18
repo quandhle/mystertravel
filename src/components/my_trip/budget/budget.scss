@@ -1,3 +1,57 @@
-.budget-input-toggle{
-    font-size: 1.5rem
+.budget-page{
+
+    .budget-input-toggle{
+        font-size: 1.2em;
+        background-color: rgb(236, 222, 143);
+        width: 100%;
+        text-align: center;
+    }
+    
+    .budget-input{
+        background-color: rgb(195, 218, 105);
+        width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+        
+
+        &:first-child{
+            background-color: rgb(177, 197, 97);
+        }
+
+        input{
+            width: 100%;
+            outline: none;
+            border: none;
+            background-color: inherit;
+        }
+
+    }
+    
+    .add-budget{
+        margin: 5px;
+        position: relative;
+        left: 80%;
+    }
+
+    .budget-box{
+        background-color:  rgb(195, 218, 105);
+
+        .budget:nth-child(odd){
+            background-color: rgb(177, 197, 97);
+        }
+
+        .budget{
+            font-size: 1.2em;
+
+            .budget-item, .budget-amount{
+                display: inline-block
+            }
+            .budget-item{
+                padding: 15px;
+                width: 80%;
+            }
+        }
+    } 
 }
+
+
