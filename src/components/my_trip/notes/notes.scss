@@ -1,14 +1,14 @@
 
-.diary-page{
+.notes-page{
 
-    .diary-input-toggle{
+    .notes-input-toggle{
         font-size: 1.2em;
         background-color: #f7d5c7;
         width: 100%;
         text-align: center;
     }
     
-    .diary-input{
+    .notes-input{
         background-color: #b2dbd5;
         width: 100%;
         padding: 15px;
@@ -24,7 +24,7 @@
 
     }
     
-    .add-diary{
+    .add-notes{
         margin: 5px;
         position: relative;
         left: 80%;
@@ -33,12 +33,12 @@
         color:#2b616d;
     }
 
-    .diary-box{
+    .notes-box{
        
 
-        .diary{
+        .notes{
             font-size: 1.2em;
-            .diary-img{
+            .notes-img{
                 width: 100%;
                 
                 img{
@@ -46,7 +46,7 @@
 
                 }
             }
-            .diary-item{
+            .notes-item{
                 padding: 15px;
                 width: 100%;
                 background-image: url("https://media.allure.com/photos/5bf1b1502ab5072a91e1853a/3:2/w_3432,h_2288,c_limit/   travel%20editor%20favorite%20products.jpg");
