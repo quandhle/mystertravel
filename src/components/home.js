@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 import {reduxForm, Field} from 'redux-form';
 import Modal from './general/modal';
 import Input from './general/input';
@@ -10,7 +11,8 @@ class Home extends Component {
         super(props)
 
         this.state ={
-            modal: false
+            modal: false,
+            api: ''
         }
 
         this.autoComplete;
@@ -30,10 +32,20 @@ class Home extends Component {
         }
     }
     componentDidMount(){
-
+        this.getAccessToMap()
+    }
+    async getAccessToMap(){
+        const resp = await axios.get('/api/getapikey.php?api=google');
+        if(resp.data.success){
+            this.setState({
+                api: resp.data.data['api_key']
+            });
+        } else {
+            console.error(resp.data.error);
+        }
     }
     createSearch = ()=>{
-        loadScript(`https://maps.googleapis.com/maps/api/js?key=${"AIzaSyCz5y10D2RANKFguerczz92ZroUQcdLcMI"}&libraries=places&callback=initAutocomplete`);
+        loadScript(`https://maps.googleapis.com/maps/api/js?key=${this.state.api}&libraries=places&callback=initAutocomplete`);
         window.initAutocomplete = this.initAutocomplete;
     }
     initAutocomplete = ()=>{
