@@ -1,18 +1,28 @@
 .nav-box{
-    color:#2b616d;
+    color:#FFFFFF;
+    background-color: #a4d8d0;
     height: 10vh;
 
     .navbar{
         width: 100%;
         height:100%;
-        font-size: 1.5rem;
+        font-size: 1.5em;
         font-weight: 700;
-        -webkit-box-shadow: 0px 11px 20px -14px rgba(179,179,179,1);
-        -moz-box-shadow: 0px 11px 20px -14px rgba(179,179,179,1);
-        box-shadow: 0px 11px 20px -14px rgba(179,179,179,1);
+        -webkit-box-shadow: 0px 11px 20px -14px rgba(179,179,179,0.5);
+        -moz-box-shadow: 0px 11px 20px -14px rgba(179,179,179,0.5);
+        box-shadow: 0px 11px 20px -14px rgba(179,179,179,0.5);
 
         .nav-menu, .nav-title{
             display: inline-block;
+
+            a{
+                color:#FFFFFF;
+
+                &:hover{
+                    position: relative;
+                    right: 5px;
+                }
+            }
         }
         .nav-title{
             position: absolute;
@@ -24,44 +34,40 @@
 }
 
 .side-nav-box{
-    display: block;
+    display:block;
     background-color: rgba(255, 255, 255, 0.7);
-    height: 100vh;
-    width: 100%;
-    position: absolute;
+    height: 100%;
+    width: 0;
+    position: fixed;
     top: 0%;
     z-index: 999;
-    transition: all 0.3s;
-
 
     .side-nav{
-        background-color: #f5bca6;
+        position: absolute;
+        padding-top: 10vh;
+        top: 0;
+        background-color: #a4d8d0;
         -webkit-box-shadow: 21px 0px 25px -21px rgba(179,179,179,1);
         -moz-box-shadow: 21px 0px 25px -21px rgba(179,179,179,1);
         box-shadow: 21px 0px 25px -21px rgba(179,179,179,1);
         height:100%;
         width:70%;
-
-        .side-nav-title{
-            text-align: center;
-            height: 50px;
-            line-height: 2;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
+        overflow-x: hidden;
+        transition: 0.5s;
 
         .side-nav-links{
+
             list-style: none;
             padding: 0;
 
             li{
-                background-color: #f7d5c7;
+                background-color: #2b616d;
                 height: 50px;
                 text-align: center;
                 margin: 5px 0;
 
                 &:hover{
-                    background-color: #f5ccba; 
+                    background-color: #376b77; 
                 }
             }
 

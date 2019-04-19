@@ -9,7 +9,9 @@ class Budget extends Component{
         super(props)
 
         this.state = {
-            showInput: false,
+            showInput: {
+                height: 0
+            },
             budget: [],
             trips_id: 1
         }
@@ -53,15 +55,19 @@ class Budget extends Component{
     }
 
     toggleInput() {
-        const {showInput} = this.state;
+        const {height} = this.state.showInput;
 
-        if(showInput){
+        if(!height){
             this.setState({
-                showInput: false
+                showInput: {
+                    height: '230px'
+                }
             })
         } else {
             this.setState({
-                showInput: true
+                showInput: {
+                    height: 0
+                }
             })
         }
 
@@ -85,14 +91,17 @@ class Budget extends Component{
     }
 
     render() {
-        const {budget} = this.state;
+        const {budget, showInput} = this.state;
         const budgetList = budget.map((budgetItem, index) => {
             return(
                 <div key={index} className="budget">
-                    <div className="budget-item">{formatEntries(budgetItem.description)}</div>
-                    <div className="budget-item">{formatEntries(budgetItem.category)}</div>
-                    <div className="budget-amount">{formatMoney(budgetItem.price)}</div>
-                    <button className="budget-delete" onClick={() => { this.deleteItem(budgetItem) }}><i className="fas fa-poo"></i></button>
+                        <div className="budget-descrip">{formatEntries(budgetItem.description)}</div>
+                        <div className="budget-amount">{formatMoney(budgetItem.price)}</div>
+                        <div className="budget-item">{formatEntries(budgetItem.category)}</div>
+                        <div className="budget-delete">
+                            <button className="btn" onClick={() => { this.deleteItem(budgetItem) }}><i className="far fa-trash-alt"></i></button>
+                        </div>
+
                 </div>
             );
         });
@@ -100,11 +109,9 @@ class Budget extends Component{
         return(
             <div className="budget-page">
                 <div className="budget-input-toggle" onClick={this.toggleInput}>
-                Add Budget Item <i className="fas fa-plus"></i>
+                Add Budget Item <i className="fas fa-angle-double-down"></i>
                 </div>
-
-                <BudgetForm budget={this.handleInput} show={this.state.showInput}/>
-
+                <BudgetForm budget={this.handleInput} style={showInput}/>
                 <div className="budget-box">
                     {budgetList}
                 </div>
