@@ -10,34 +10,46 @@ class Budget extends Component{
 
         this.state = {
             showInput: false,
-            budget: []
+            budget: [],
+            trips_id: 1
         }
 
         this.toggleInput = this.toggleInput.bind(this);
         this.handleInput = this.handleInput.bind(this);
     }
 
-    handleInput(value) {
-        const {description, price, category} = value;
-
-        const resp = axios.post('/api/addbudgetitem.php', {
-            trips_id: 1,
+    async handleInput(value) {
+        let {description, price, category} = value;
+        const {trips_id} = this.state;
+        const resp = await axios.post('/api/addbudgetitem.php', {
+            trips_id,
             description: description,
-            price: parseInt(price),
+            price: parseInt(price * 100),
             category: category
-        }).then((resp) => {
-            console.log(resp.data);
-        })
+        });
+        if(resp.data.success){
+            description = '';
+            price = '';
+            category = '';
+            this.getBudgetList();
+        } else {
+            console.error('Unable to add entry');
+        }
     }
 
-    deleteItem(budgetItem) {
-        const resp = axios.put('/api/deletebudgetitem.php', {
-            trips_id: 1,
+    async deleteItem(budgetItem) {
+        const {trips_id} = this.state;
+        const resp = await axios.put('/api/deletebudgetitem.php', {
+            trips_id,
+            description: budgetItem.description,
             category: budgetItem.category,
             price: budgetItem.price
-        }).then((resp) => {
-            console.log(resp.data)
-        })
+        });
+        if(resp.data.success){
+            this.getBudgetList();
+        } else {
+            console.error('Unable to delete entry');
+        }
     }
 
     toggleInput() {
@@ -57,7 +69,8 @@ class Budget extends Component{
     }
 
     async getBudgetList() {
-        const resp = await axios.get(`/api/getbudgetlist.php?trips_id=${1}`);
+        const {trips_id} = this.state;
+        const resp = await axios.get(`/api/getbudgetlist.php?trips_id=${trips_id}`);
         if (resp.data.success) {
             this.setState({
                 budget: resp.data.budget
@@ -76,9 +89,10 @@ class Budget extends Component{
         const budgetList = budget.map((budgetItem, index) => {
             return(
                 <div key={index} className="budget">
+                    <div className="budget-item">{formatEntries(budgetItem.description)}</div>
                     <div className="budget-item">{formatEntries(budgetItem.category)}</div>
                     <div className="budget-amount">{formatMoney(budgetItem.price)}</div>
-                    <button className="budget-delete" onClick={() => {this.deleteItem(budgetItem)}}>-</button>
+                    <button className="budget-delete" onClick={() => { this.deleteItem(budgetItem) }}><i className="fas fa-poo"></i></button>
                 </div>
             );
         });

@@ -8,9 +8,13 @@ if (empty($trips_id)) {
     throw new Exception('Please provide trip ID.');
 }
 
-$query = "SELECT * FROM `budget` WHERE `trips_id` = $trips_id";
+$query = "SELECT * FROM `budget` WHERE `trips_id` = ?";
 
-$result = mysqli_query($conn, $query);
+$statement = mysqli_prepare($conn, $query);
+mysqli_stmt_bind_param($statement, 'd', $trips_id);
+mysqli_stmt_execute($statement);
+
+$result = mysqli_stmt_get_result($statement);
 
 if (!$result) {
     throw new Exception(mysqli_error($conn));
@@ -22,6 +26,7 @@ if (mysqli_num_rows($result) === 0) {
 
 while ($row = mysqli_fetch_assoc($result)) {
     $data[] = [
+        'description' => $row['description'],
         'category' => $row['category'],
         'price' => $row['price'],
     ];
