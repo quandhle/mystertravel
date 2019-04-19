@@ -5,7 +5,7 @@ require_once('config.php');
 $json_input = file_get_contents("php://input");
 $input = json_decode($json_input, true);
 
-$trips_id = intval($input['trips_id']);
+$trips_id = $input['trips_id'];
 $description = $input['description'];
 $category = $input['category'];
 $price = $input['price'];
@@ -23,7 +23,7 @@ if (empty($price)) {
 }
 
 $query = "INSERT INTO `budget` SET
-    `trips_id` = $trips_id,
+    `trips_id` = ?,
     `description` = ?,
     `category` = ?,
     `price` = ?,
@@ -31,7 +31,7 @@ $query = "INSERT INTO `budget` SET
 ";
 
 $statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($statement, 'ssd', $description, $category, $price);
+mysqli_stmt_bind_param($statement, 'dssd', $trips_id, $description, $category, $price);
 $result = mysqli_stmt_execute($statement);
 
 if (!$result) {

@@ -10,7 +10,8 @@ class Notes extends Component{
 
         this.state = {
             showInput: false,
-            note: []
+            note: [],
+            trips_id: 1
         };
 
         this.toggleInput = this.toggleInput.bind(this);
@@ -34,7 +35,8 @@ class Notes extends Component{
     }
 
     async getNoteList(){
-        const resp = await axios.get(`/api/getnotelist.php?trips_id=${1}`);
+        const {trips_id} = this.state;
+        const resp = await axios.get(`/api/getnotelist.php?trips_id=${trips_id}`);
         if(resp.data.success){
             this.setState({
                 note: resp.data.data
