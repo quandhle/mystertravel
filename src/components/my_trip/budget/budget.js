@@ -50,7 +50,6 @@ class Budget extends Component{
 
     render(){
         const {budget} = this.state;
-        console.log(budget)
         const budgetList = budget.map((budgetItem, index) => {
             return(
                 <div key={index} className="budget">

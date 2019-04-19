@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 import NotesForm from './notes_form';
 import './notes.scss';
+import {formatDate} from '../../../helper';
 
 class Notes extends Component{
     constructor(props){
         super(props);
 
         this.state = {
-            showInput: false
+            showInput: false,
+            note: []
         };
 
         this.toggleInput = this.toggleInput.bind(this);
@@ -29,7 +32,33 @@ class Notes extends Component{
         }
 
     }
+
+    async getNoteList(){
+        const resp = await axios.get(`/api/getnotelist.php?trips_id=${1}`);
+        if(resp.data.success){
+            this.setState({
+                note: resp.data.data
+            });
+        } else {
+            console.error(resp.data.error)
+        }
+    }
+
+    componentDidMount(){
+        this.getNoteList();
+    }
+
     render(){
+        const {note} = this.state;
+        const noteList = note.map((note, index)=>{
+            return(
+                <div key={index} className="notes-item">
+                    <p>{formatDate(note.date)}</p>
+                    <p>{note.entry}</p>
+                </div>
+            );
+        });
+
         return(
             <div className="notes-page">
                 <div className="notes-input-toggle" onClick={this.toggleInput}>
@@ -39,18 +68,8 @@ class Notes extends Component{
 
                 <div className="notes-box">
                     <div className="notes">
-                        <div className="notes-item">
-                            <p>
-                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia modi, nihil animi quae sequi commodi    sed  quibusdam, laborum error eveniet nam distinctio? Explicabo amet vel rerum, laudantium obcaecati eius  quam.  
-                            </p>
-                        </div>
-                        <div className="notes-item">
-                            <p>
-                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia modi, nihil animi quae sequi commodi    sed  quibusdam, laborum error eveniet nam distinctio? Explicabo amet vel rerum, laudantium obcaecati eius  quam.  
-                            </p>
-                        </div>
+                        {noteList}
                     </div>
-
                 </div>
 
             </div>
