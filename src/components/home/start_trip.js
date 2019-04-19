@@ -7,17 +7,14 @@ import Input from '../general/input';
 
 class StartTrip extends Component {
     constructor(props){
-        super(props)
+        super(props);
 
         this.state ={
             api: ''
         }
-
-        this.autoComplete;
     }
 
     openModal= () =>{
-        
         if(!this.state.modal){
             this.setState({
                 modal: true
@@ -29,10 +26,11 @@ class StartTrip extends Component {
             this.props.history.push('/map');
         }
     }
+
     componentDidMount(){
         this.getAccessToMap()
-        
     }
+
     async getAccessToMap(){
         const resp = await axios.get('/api/getapikey.php?api=google');
         if(resp.data.success){
@@ -45,10 +43,12 @@ class StartTrip extends Component {
         }
 
     }
+
     createSearch = ()=>{
         loadScript(`https://maps.googleapis.com/maps/api/js?key=${this.state.api}&libraries=places&callback=initAutocomplete`);
         window.initAutocomplete = this.initAutocomplete;
     }
+
     initAutocomplete = ()=>{
         const input = document.getElementById("places");
         this.autoComplete = new window.google.maps.places.Autocomplete(input, {
@@ -56,19 +56,21 @@ class StartTrip extends Component {
         this.autoComplete.setFields(['address_component']);
         this.autoComplete.addListener('place_changed', this.searchCountry);
     }
+
     searchCountry = ()=>{
         const place = this.autoComplete.getPlace();
         console.log('Place:', place);
         this.props.change("places", place['address_components'][0]['long_name'])
     }
+
     render() {
         const {handleSubmit, modal, close} = this.props
-        console.log(this.props)
+        console.log(this.props);
         return (
                 <Modal open={modal} childrenStyle="home-modal">
-                    <div className="homepage-modal-header">Where are you going? </div>
+                    <div className="homepage-modal-header">Give your trip a name!</div>
                     <form onSubmit={handleSubmit(this.searchCountry)}>
-                         <Field id="tripname" name="tripname" label="Name you trip" component={Input} classes="start-input"/>
+                         <Field id="tripname" name="tripname" label="Trip name" component={Input} classes="start-input"/>
                          <Field id="places" name="places" label="Enter Places" component={Input} classes="start-input"/>
                     </form> 
                     <button onClick={close} className="btn start-trip-btn">GO</button>
