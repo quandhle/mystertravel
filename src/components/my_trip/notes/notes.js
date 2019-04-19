@@ -14,9 +14,20 @@ class Notes extends Component{
         };
 
         this.toggleInput = this.toggleInput.bind(this);
+        this.handleInput = this.handleInput.bind(this);
     }
-    handleInput(value){
-        console.log(value)
+    async handleInput(value){
+        const resp = await axios.post('/api/addnoteitem.php',{
+            trips_id: 1,
+            entry: value.notes
+        });
+
+        if(resp.data.success){
+            value.notes = ''
+            this.getNoteList()
+        } else {
+            console.log('Cant not add')
+        }
     }
     toggleInput(){
         const {showInput} = this.state;
@@ -50,7 +61,7 @@ class Notes extends Component{
 
     render(){
         const {note} = this.state;
-        const noteList = note.map((note, index)=>{
+        const noteList = note.reverse().map((note, index)=>{
             return(
                 <div key={index} className="notes-item">
                     <p>{formatDate(note.date)}</p>
