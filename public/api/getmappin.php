@@ -2,23 +2,23 @@
 
 require_once('config.php');
 
-// $trips_id = $_GET['trips_id'];
+$trips_id = intval($_GET['trips_id']);
 
-// if (empty($trips_id)) {
-//     throw new Exception('Please provide trip id.');
-// };
+if (empty($trips_id)) {
+    throw new Exception('Please provide trips_id (int) with your request');
+}
 
-$query = "SELECT * FROM `pins` WHERE `trips_id` = 1";
+$query = "SELECT * FROM `pins` WHERE `trips_id` = $trips_id";
 
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
     throw new Exception(mysqli_error($conn));
-};
+}
 
 if (mysqli_num_rows($result) === 0) {
     throw new Exception('Unable to retrieve map pins');
-};
+}
 
 $data = [];
 
@@ -35,4 +35,4 @@ $output['data'] = $data;
 
 print(json_encode($output));
 
-// return all rows of map pins with lat, lng, description, added
+?>

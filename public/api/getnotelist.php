@@ -5,10 +5,10 @@ require_once('config.php');
 $trips_id = intval($_GET['trips_id']);
 
 if(empty($trips_id)){
-    throw new Exception('Must provide trips_id (int) with your request');
+    throw new Exception('Please provide trips_id (int) with your request');
 }
 
-$query = "SELECT `entry`, `date` FROM `notes` WHERE `trips_id` = $trips_id";
+$query = "SELECT * FROM `notes` WHERE `trips_id` = $trips_id";
 
 $result = mysqli_query($conn, $query);
 
@@ -23,11 +23,9 @@ if(mysqli_num_rows($result) === 0){
 $data = [];
 
 while($row = mysqli_fetch_assoc($result)){
-    $entry = $row['entry'];
-    $date = date("m/d/Y H:i:s", strtotime($row['date']));
-
+    $date = date("m/d/Y H:i:s", strtotime($row['entry_date']));
     $data[] = [
-        'entry' => $entry,
+        'entry' => $row['entry'],
         'date' => $date
     ];
 }

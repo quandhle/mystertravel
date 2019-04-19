@@ -11,19 +11,19 @@ $category = $input['category'];
 $price = $input['price'];
 
 if (empty($trips_id)) {
-    throw new Exception('Please provide trips id.');
+    throw new Exception('Please provide trips_id (int) with your request');
 }
 
 if (empty($description)) {
-    throw new Exception('Please provide description.');
+    throw new Exception('Please enter description (str) with your request');
 }
 
 if (empty($category)) {
-    throw new Exception('Please provide cateogry.');
+    throw new Exception('Please select category (str) with your request');
 }
 
 if (empty($price)) {
-    throw new Exception('Please provide price.');
+    throw new Exception('Please enter price (int) with your request');
 }
 
 $query = "DELETE

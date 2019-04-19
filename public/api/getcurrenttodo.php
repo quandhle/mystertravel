@@ -2,28 +2,30 @@
 
 require_once('config.php');
 
-// $trips_id = $_GET['trips_id'];
+$trips_id = $_GET['trips_id'];
 
 if (empty($trips_id)) {
     throw new Exception('Please provide trip ID.');
 };
 
-$query = "SELECT * FROM `current_todo` WHERE trips_id = 1";
+$query = "SELECT * FROM `current_todo` WHERE `trips_id` = $trips_id";
 
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
     throw new Exception(mysqli_error($conn));
-};
+}
 
-if (!$result) {
-    throw new Exception('Please provide trip ID.');
-};
+if (mysqli_num_rows($result) === 0) {
+    throw new Exception('Unable to retrive todo items');
+}
+
+$data = [];
 
 while ($row = mysqli_fetch_assoc($result)) {
     $data[] = [
         'task' => $row['task'],
-        'date' => $row['date'],
+        'date' => $row['task_date'],
         'status' => $row['status']
     ];
 }

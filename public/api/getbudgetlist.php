@@ -5,7 +5,7 @@ require_once('config.php');
 $trips_id = $_GET['trips_id'];
 
 if (empty($trips_id)) {
-    throw new Exception('Please provide trip ID.');
+    throw new Exception('Please provide trips_id (int) with your request');
 }
 
 $query = "SELECT * FROM `budget` WHERE `trips_id` = ?";
