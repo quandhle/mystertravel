@@ -5,7 +5,7 @@ import './budget.scss';
 import {formatMoney, formatEntries} from '../../../helper';
 
 class Budget extends Component{
-    constructor(props){
+    constructor(props) {
         super(props)
 
         this.state = {
@@ -14,11 +14,23 @@ class Budget extends Component{
         }
 
         this.toggleInput = this.toggleInput.bind(this);
+        this.handleInput = this.handleInput.bind(this);
     }
-    handleInput(value){
-        console.log(value)
+
+    handleInput(value) {
+        const {description, price, category} = value;
+
+        const resp = axios.post('/api/addbudgetitem.php', {
+            trips_id: 1,
+            description: description,
+            price: parseInt(price),
+            category: category
+        }).then((resp) => {
+            console.log(resp.data);
+        })
     }
-    toggleInput(){
+
+    toggleInput() {
         const {showInput} = this.state;
 
         if(showInput){
@@ -31,11 +43,12 @@ class Budget extends Component{
             })
         }
 
+        // need way to render and update budget list
     }
 
-    async getBudgetList(){
+    async getBudgetList() {
         const resp = await axios.get(`/api/getbudgetlist.php?trips_id=${1}`);
-        if(resp.data.success){
+        if (resp.data.success) {
             this.setState({
                 budget: resp.data.budget
             });
@@ -44,11 +57,15 @@ class Budget extends Component{
         }
     }
 
+    deleteItem(budgetList) {
+        console.log('delete button clicked', budgetList)
+    }
+
     componentDidMount(){
         this.getBudgetList();
     }
 
-    render(){
+    render() {
         const {budget} = this.state;
         console.log(budget)
         const budgetList = budget.map((budgetItem, index) => {
@@ -56,6 +73,7 @@ class Budget extends Component{
                 <div key={index} className="budget">
                     <div className="budget-item">{formatEntries(budgetItem.category)}</div>
                     <div className="budget-amount">{formatMoney(budgetItem.price)}</div>
+                    <button className="budget-delete" onClick={this.deleteItem}>-</button>
                 </div>
             );
         });
@@ -65,6 +83,7 @@ class Budget extends Component{
                 <div className="budget-input-toggle" onClick={this.toggleInput}>
                 Add Budget Item <i className="fas fa-plus"></i>
                 </div>
+
                 <BudgetForm budget={this.handleInput} show={this.state.showInput}/>
 
                 <div className="budget-box">
