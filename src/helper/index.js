@@ -1,6 +1,6 @@
 //helper functions goes here
 export function formatMoney(pennies){
-    pennies = parseFloat(pennies);
+    pennies = parseInt(pennies);
     if(isNaN(pennies)){
         return '-';
     }
@@ -15,4 +15,22 @@ export function formatEntries(text){
         return firstChar + text.slice(1);
     }
     return text;
+}
+
+export function formatDate(datetime){
+    let date = datetime.split(' ')[0];
+    let day = new Date(date);
+    day = day.getDay();
+    const dayOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    day = dayOfWeek[day];
+    date = date.split('/');
+    let month = parseInt(date[0]);
+    const monthName = ['',
+        'Jan', 'Feb', 'Mar',
+        'Apr', 'May', 'Jun',
+        'Jul', 'Aug', 'Sep',
+        'Oct', 'Nov', 'Dec'
+    ];
+    month = monthName[month];
+    return `${day} ${month} ${date[1]}, ${date[2]}`;
 }
