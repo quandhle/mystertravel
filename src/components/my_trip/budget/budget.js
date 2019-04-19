@@ -108,8 +108,7 @@ class Budget extends Component{
 
         return(
             <div className="budget-page">
-                <div className="budget-input-toggle" onClick={this.toggleInput}>
-                Add Budget Item <i className="fas fa-angle-double-down"></i>
+                <div className="budget-input-toggle" onClick={this.toggleInput}>Add Budget Item <i className="fas fa-angle-double-down"></i>
                 </div>
                 <BudgetForm budget={this.handleInput} style={showInput}/>
                 <div className="budget-box">
