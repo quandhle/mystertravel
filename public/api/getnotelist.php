@@ -8,7 +8,7 @@ if(empty($trips_id)){
     throw new Exception('Must provide trips_id (int) with your request');
 }
 
-$query = "SELECT `entry`, `date` FROM `diary` WHERE `trips_id` = $trips_id";
+$query = "SELECT `entry`, `date` FROM `notes` WHERE `trips_id` = $trips_id";
 
 $result = mysqli_query($conn, $query);
 

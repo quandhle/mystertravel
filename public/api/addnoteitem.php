@@ -16,7 +16,7 @@ if(empty($entry)){
     throw new Exception('Please enter a diary entry (str) with your request');
 }
 
-$query = "INSERT INTO `diary` SET
+$query = "INSERT INTO `notes` SET
     `trips_id` = $trips_id,
     `date` = NOW(),
     `entry` = ?
