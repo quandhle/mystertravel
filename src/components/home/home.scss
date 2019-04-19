@@ -1,7 +1,66 @@
 .home-page {
-    .pretrip {
-        height: 50vh;
-        width: 100%;
-        background: hotpink;
+    position: relative;
+
+    .title-holder {
+        .title-blurb {
+            text-align: center;
+            width: 80%;
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     }
+    
+    .img-wrap {
+        height: 90vh;
+        width: 100vw;
+        overflow: hidden;
+        
+        img {
+            height: 100%;
+        }
+    }
+
+    .home-page-btn {
+        width: 100%;
+        position: absolute;
+        bottom: 5%;
+        left: 50%;
+        transform: translateX(-50%);
+
+        > button {
+            position: fixed;
+            left: 50%;
+            bottom: 10%;
+            transform: translateX(-50%);
+        }
+    }
+
+    .home-modal{
+        background-color: #2b616d;
+        text-align: center;
+        font-size: 1.5em;
+
+
+        .home-modal-header{
+
+        }
+
+        .start-input{
+            margin: 10px;
+            width: 100%;
+
+            border: none;
+
+
+        }
+
+        .start-trip-btn{
+            background-color: #f7d5c7;
+        }
+    }
+
+
+
 }
