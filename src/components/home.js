@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 import {reduxForm, Field} from 'redux-form';
 import Modal from './general/modal';
 import Input from './general/input';
@@ -10,8 +11,11 @@ class Home extends Component {
         super(props)
 
         this.state ={
-            modal: true
+            modal: false,
+            api: ''
         }
+
+        this.autoComplete;
     }
     goToTrip = () => {
         this.props.history.push(`/mytrip`);
@@ -27,9 +31,34 @@ class Home extends Component {
             })
         }
     }
-
+    componentDidMount(){
+        this.getAccessToMap()
+    }
+    async getAccessToMap(){
+        const resp = await axios.get('/api/getapikey.php?api=google');
+        if(resp.data.success){
+            this.setState({
+                api: resp.data.data['api_key']
+            });
+        } else {
+            console.error(resp.data.error);
+        }
+    }
+    createSearch = ()=>{
+        loadScript(`https://maps.googleapis.com/maps/api/js?key=${this.state.api}&libraries=places&callback=initAutocomplete`);
+        window.initAutocomplete = this.initAutocomplete;
+    }
+    initAutocomplete = ()=>{
+        const input = document.getElementById("places");
+        this.autoComplete = new window.google.maps.places.Autocomplete(input, {
+            types: ['(regions)']});
+        this.autoComplete.setFields(['address_component']);
+        this.autoComplete.addListener('place_changed', this.searchCountry);
+    }
     searchCountry = (value)=>{
-        console.log(value)
+        var place = this.autoComplete.getPlace();
+        console.log(place['address_components'][0]['long_name'])
+
     }
     render() {
         const {handleSubmit} = this.props
@@ -42,20 +71,29 @@ class Home extends Component {
                     <img src={coconut} alt=""/>
                 </div>
                 <div className="home-page-btn">
-                    <button onClick={this.openModal} className="home-start-btn btn btn-primary">Start / View trip</button>
+                    <button onClick={()=>{this.openModal(); this.createSearch()}} className="home-start-btn btn btn-primary">Start / View trip</button>
                 </div>
 
                 <Modal open={this.state.modal} childrenStyle="home-modal">
                     <div className="homepage-modal-header">Where are you going? </div>
-                    <form onSubmit={handleSubmit(this.searchCountry)}>
+                    <form onSubmit={this.searchCountry}>
                          <Field id="places" name="places" label="Enter Places" component={Input}/>
-                    </form>
-                   
+                    </form> 
                 </Modal>
             </div>
         )
     }
 }
+
+function loadScript(url){
+    const index = window.document.getElementsByTagName("script")[0];
+    const script = window.document.createElement("script");
+    script.src = url;
+    script.async = true;
+    script.defer = true;
+    index.parentNode.insertBefore(script, index);
+}
+
 
 export default reduxForm({
     form: 'start-new-trip'
