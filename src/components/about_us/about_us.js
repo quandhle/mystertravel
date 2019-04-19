@@ -22,9 +22,6 @@ class AboutUs extends Component {
     render() {
         const aboutUs = this.state.data.map((person) => {
             const {last_name, first_name, linkedin, email, portfolio, github, image, developer_story} = person;
-
-            console.log(person);
-
             return (
                 <div key={first_name} className="about-person row">
                     <div className="about-img col-6">
