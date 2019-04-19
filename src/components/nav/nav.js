@@ -8,19 +8,29 @@ class Nav extends Component{
         super(props);
 
         this.state ={
-            sideNav: false
+            sideNav: {
+                body:{width: 0},
+                background:{width: 0} 
+            }
         }
     }
 
     toggleSideNav= ()=> {
-        const {sideNav} = this.state;
-        if(sideNav){
+ 
+        const {body} = this.state.sideNav;
+        if(body.width === 0){
             this.setState({
-                sideNav: false
+                sideNav: {
+                    body:{width: '70%'},
+                    background:{width: '100%'} 
+                }
             })
         } else {
             this.setState({
-                sideNav:true
+                sideNav:{
+                    body:{width: 0},
+                    background:{width: 0} 
+                }
             })
         }
     }
@@ -38,10 +48,8 @@ class Nav extends Component{
                     <div className="nav-title">
                         <h2>MysterTravel</h2>
                     </div>
-
-
                 </nav>
-                <SideNav open={this.state.sideNav} toggle={this.toggleSideNav}/>
+                <SideNav style={this.state.sideNav} toggle={this.toggleSideNav}/>
             </div>
 
         );

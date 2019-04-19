@@ -2,10 +2,18 @@
 
     .budget-input-toggle{
         font-size: 1.2em;
-        background-color: #f7d5c7;
+        background-color: #fa8d62;
         width: 100%;
-        text-align: center;
+        height: 50px;
+        text-align: right;
+        color: white;
+        padding-right: 15px;
 
+    }
+    .budget-input-form{
+        height: 0;
+        transition: 0.5s;
+        overflow-y: hidden;
     }
 
     .budget-input{
@@ -31,9 +39,9 @@
         margin: 5px;
         position: relative;
         left: 80%;
-        background-color: #f7d5c7;
+        background-color: #fa8d62;
         border: none;
-        color:#2b616d;
+        color:white;
     }
 
     .budget-box{
@@ -46,14 +54,40 @@
 
         .budget{
             font-size: 1.2em;
+            box-sizing: border-box;
+            padding: 0 15px;
 
-            .budget-item, .budget-amount{
-                display: inline-block
+            .budget-descrip, .budget-amount, .budget-item, .budget-delete{
+                display: inline-block;
+            }
+
+            .budget-descrip{
+                font-weight: 500;
+                width: 75%;
+            }
+
+            .budget-amount{
+                width: 25%;
+                text-align: right;
             }
             .budget-item{
-                padding: 15px;
-                width: 70%;
+                color: #b2dbd5;
+                width:90%;
             }
+
+            .budget-delete{
+                width: 10%;
+                .btn{
+                    color: #b2dbd5;
+                    transition: 0.2s;
+
+                    &:hover{
+                       transform: rotate(180deg); 
+                    }
+                }
+                  
+            }
+
         }
     }
 }
