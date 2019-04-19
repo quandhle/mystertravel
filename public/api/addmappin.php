@@ -11,28 +11,29 @@ $longitude = floatval($input['longitude']);
 $description = $input['description'];
 
 if(empty($trips_id)){
-    throw new Exception('Must provide trips_id (int) with your request');
+    throw new Exception('Please provide trips_id (int) with your request');
 }
 
 if(empty($description)){
-    throw new Exception('Must enter pin description (str) with your request');
+    throw new Exception('Please enter map pin description (str) with your request');
 }
 
 if(empty($latitude) || empty($longitude)){
-    throw new Exception('Must provide location (float) with your request');
+    throw new Exception('Please provide location (float) with your request');
 }
 
 $query = "INSERT INTO `pins`
     SET
-        `trips_id` = $trips_id,
-        `latitude` = $latitude,
-        `longitude` = $longitude,
+        `trips_id` = ?,
+        `latitude` = ?,
+        `longitude` = ?,
         `description` = ?,
         `added` = NOW()
 ";
 
+
 $statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($statement, 's', $description);
+mysqli_stmt_bind_param($statement, 'ddds', $trips_id, $latitude, $longitude, $description);
 $result = mysqli_stmt_execute($statement);
 
 if(!$result){

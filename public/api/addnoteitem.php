@@ -17,13 +17,13 @@ if(empty($entry)){
 }
 
 $query = "INSERT INTO `notes` SET
-    `trips_id` = $trips_id,
-    `date` = NOW(),
+    `trips_id` = ?,
+    `entry_date` = NOW(),
     `entry` = ?
 ";
 
 $statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($statement, 's', $entry);
+mysqli_stmt_bind_param($statement, 'ds', $trips_id, $entry);
 $result = mysqli_stmt_execute($statement);
 
 if(!$result){

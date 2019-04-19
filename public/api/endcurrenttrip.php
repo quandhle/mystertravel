@@ -2,53 +2,53 @@
 
 require_once('config.php');
 
-// $id = $_GET['id'];
+$trips_id = intval($_GET['trips_id']);
 
-if (empty($id)) {
-    throw new Exception('Please provide trip id.');
+if (empty($trips_id)) {
+    throw new Exception('Please provide trips_id (int) with your request');
 };
 
 $query = "UPDATE `trips`
     SET
-        `departure` = NOW()
-    WHERE `id` = 1
+        `end` = NOW()
+    WHERE `id` = $trips_id
 ";
 
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
     throw new Exception(mysqli_error($conn));
-};
+}
 
-if (!$result) {
-    throw new Exception('Invalid ID.');
-};
+if (mysqli_affected_rows($conn) !== 1) {
+    throw new Exception('Unable to end trip');
+}
 
-$select_query = "SELECT * 
+$select_query = "SELECT *
     FROM `trips`
-    WHERE `id` = 1
+    WHERE `id` = $trips_id
 ";
 
 $update_result = mysqli_query($conn, $select_query);
 
 if (!$update_result) {
     throw new Exception(mysqli_error($conn));
-};
+}
 
-if (!$update_result) {
-    throw new Exception('Invalid ID.');
-};
+if (mysqli_num_rows($update_result) !== 1) {
+    throw new Exception('Unable to retrieve trip details');
+}
 
 $row = mysqli_fetch_assoc($update_result);
 
-print_r($row['city']);
-
 $output['success'] = true;
 $output['data'] = [
-    'city' => $row['city'],
-    'country' => $row['country'],
-    'arrival' => $row['arrival'],
-    'departure' => $row['departure']
+    'trips_name' => $row['trips_name'],
+    'region' => $row['region'],
+    'start' => $row['start'],
+    'end' => $row['end']
 ];
 
 print(json_encode($output));
+
+?>

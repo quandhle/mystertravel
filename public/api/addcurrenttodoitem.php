@@ -18,14 +18,14 @@ if (empty($task)) {
 
 $query = "INSERT INTO `current_todo`
     SET
-        `trips_id` = $trips_id,
+        `trips_id` = ?,
         `task` = ?,
-        `date` = NOW(),
+        `task_date` = NOW(),
         `status` = 0
 ";
 
 $statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($statement, 's', $task);
+mysqli_stmt_bind_param($statement, 'ds', $trips_id, $task);
 $result = mysqli_stmt_execute($statement);
 
 if (!$result) {
