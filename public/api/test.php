@@ -6,4 +6,7 @@ $output = [
     'success' => true,
 ];
 
+session_start();
+print_r($_SESSION);
+
 print(json_encode($output));

@@ -1,23 +1,38 @@
 <?php
+
 require_once("config.php");
+
+if (!empty($_SESSION['user_data'])){
+    $token = $_SESSION['user_data']['token'];
+    $users_id = $_SESSION['user_data']['id'];
+} else {
+    $token = session_id();
+
+    require_once("loginguest.php");
+
+    $_SESSION['user_data'] = [
+        'id' => $users_id,
+        'user' => 'guest',
+        'token' => $token
+    ];
+}
 
 $json_input = file_get_contents("php://input");
 $input = json_decode($json_input, true);
 
-$users_id = 1;
-//intval($input['users_id']);
-$trip_name = $input['name'];
-$country = $input['country'];
+$trips_name = $input['trips_name'];
+$region = $input['region'];
+
 
 $query = "INSERT INTO `trips` SET
-    `users_id` = $users_id,
-    `name` = ?,
-    `country` = ?,
-    `arrival` = NOW()
+    `users_id` = ?,
+    `trips_name` = ?,
+    `region` = ?,
+    `start` = NOW()
 ";
 
 $statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($statement, 'ss', $trip_name, $country);
+mysqli_stmt_bind_param($statement, 'dss', $users_id, $trips_name, $region);
 $result = mysqli_stmt_execute($statement);
 
 if(!$result){
@@ -25,10 +40,12 @@ if(!$result){
 }
 
 if(mysqli_affected_rows($conn) !== 1){
-    throw new Exception('Unable to create trip');
+    throw new Exception('Unable to create new trip');
 }
 
 $trips_id = mysqli_insert_id($conn);
+
+$_SESSION['user_data']['trips_id'] = $trips_id;
 
 $output['success'] = true;
 $output['trips_id'] = $trips_id;
