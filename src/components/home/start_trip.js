@@ -44,7 +44,7 @@ class StartTrip extends Component {
 
     }
 
-    createSearch = ()=>{
+    createSearch = () => {
         loadScript(`https://maps.googleapis.com/maps/api/js?key=${this.state.api}&libraries=places&callback=initAutocomplete`);
         window.initAutocomplete = this.initAutocomplete;
     }
@@ -64,7 +64,7 @@ class StartTrip extends Component {
     }
 
     render() {
-        const {handleSubmit, modal, close} = this.props
+        const {handleSubmit, modal, close} = this.props;
         console.log(this.props);
         return (
                 <Modal open={modal} childrenStyle="home-modal">
