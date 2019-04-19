@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 19, 2019 at 05:02 PM
+-- Generation Time: Apr 19, 2019 at 11:11 PM
 -- Server version: 5.7.25
 -- PHP Version: 7.3.1
 
@@ -73,7 +73,7 @@ CREATE TABLE `budget` (
   `description` varchar(100) NOT NULL,
   `category` varchar(20) NOT NULL,
   `price` mediumint(5) UNSIGNED NOT NULL,
-  `added` datetime DEFAULT NULL
+  `added` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -357,15 +357,15 @@ CREATE TABLE `current_todo` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `trips_id` int(10) UNSIGNED NOT NULL,
   `task` varchar(100) NOT NULL,
-  `date` datetime NOT NULL,
-  `status` tinyint(1) UNSIGNED NOT NULL
+  `task_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `current_todo`
 --
 
-INSERT INTO `current_todo` (`id`, `trips_id`, `task`, `date`, `status`) VALUES
+INSERT INTO `current_todo` (`id`, `trips_id`, `task`, `task_date`, `status`) VALUES
 (1, 1, 'Get some strawberry sorbet ice cream.', '2019-04-25 00:00:00', 0),
 (2, 1, 'Visit Pompeii museum.', '2019-04-18 00:00:00', 0),
 (3, 1, 'Visit Salerno', '2019-04-18 00:00:00', 1);
@@ -380,16 +380,16 @@ CREATE TABLE `notes` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `trips_id` int(11) NOT NULL,
   `entry` text NOT NULL,
-  `date` datetime NOT NULL
+  `entry_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `notes`
 --
 
-INSERT INTO `notes` (`id`, `trips_id`, `entry`, `date`) VALUES
-(1, 1, 'I went to Naples, Italy. Stayed in Ercolano. Had lots of ice cream and croissants.', '2019-04-24 00:00:00'),
-(2, 1, 'In Naples, all their plazas are preceded by Palazzo. Naples is right next to the beach and has a trash problem.', '2019-04-25 00:00:00');
+INSERT INTO `notes` (`id`, `trips_id`, `entry`, `entry_date`) VALUES
+(1, 1, 'I went to Naples, Italy. Stayed in Ercolano. Had lots of ice cream and croissants.', '2019-04-15 00:00:00'),
+(2, 1, 'In Naples, all their plazas are preceded by Palazzo. Naples is right next to the beach and has a trash problem.', '2019-04-16 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -403,7 +403,7 @@ CREATE TABLE `pins` (
   `latitude` float NOT NULL,
   `longitude` float NOT NULL,
   `description` text NOT NULL,
-  `added` datetime NOT NULL
+  `added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -422,19 +422,18 @@ INSERT INTO `pins` (`id`, `trips_id`, `latitude`, `longitude`, `description`, `a
 CREATE TABLE `trips` (
   `id` int(10) UNSIGNED NOT NULL,
   `users_id` mediumint(8) UNSIGNED NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `city` varchar(25) DEFAULT NULL,
-  `country` varchar(25) NOT NULL,
-  `arrival` datetime NOT NULL,
-  `departure` datetime DEFAULT NULL
+  `trips_name` varchar(250) NOT NULL,
+  `region` varchar(100) NOT NULL,
+  `start` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `end` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `trips`
 --
 
-INSERT INTO `trips` (`id`, `users_id`, `name`, `city`, `country`, `arrival`, `departure`) VALUES
-(1, 1, 'Naples Apr 2019', 'Naples', 'Italy', '2019-04-16 00:00:00', NULL);
+INSERT INTO `trips` (`id`, `users_id`, `trips_name`, `region`, `start`, `end`) VALUES
+(1, 1, 'Naples Apr 2019', 'Italy', '2019-04-16 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -444,18 +443,18 @@ INSERT INTO `trips` (`id`, `users_id`, `name`, `city`, `country`, `arrival`, `de
 
 CREATE TABLE `users` (
   `id` mediumint(8) UNSIGNED NOT NULL,
-  `last_name` varchar(20) NOT NULL,
-  `first_name` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL
+  `full_name` varchar(100) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `password` varchar(50) DEFAULT NULL,
+  `is_guest` tinyint(1) UNSIGNED NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `last_name`, `first_name`, `email`, `password`) VALUES
-(1, 'Le', 'Quan', 'quandhle@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8');
+INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `is_guest`) VALUES
+(1, 'Quan Le', 'quandhle@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0);
 
 -- --------------------------------------------------------
 
@@ -465,8 +464,8 @@ INSERT INTO `users` (`id`, `last_name`, `first_name`, `email`, `password`) VALUE
 
 CREATE TABLE `user_connections` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `users_id` mediumint(9) NOT NULL,
-  `created` datetime NOT NULL,
+  `users_id` mediumint(9) DEFAULT NULL,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ip_address` varchar(20) NOT NULL,
   `token` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -597,4 +596,4 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_connections`
 --
 ALTER TABLE `user_connections`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
