@@ -3,6 +3,7 @@ import axios from 'axios';
 import {reduxForm, Field} from 'redux-form';
 import Modal from '../general/modal';
 import Input from '../general/input';
+import './home.scss';
 
 import coconut from '../../assets/images/coconut.png';
 
@@ -10,7 +11,7 @@ class Home extends Component {
     constructor(props){
         super(props)
 
-        this.state ={
+        this.state = {
             modal: false,
             api: ''
         }
@@ -20,8 +21,8 @@ class Home extends Component {
     goToTrip = () => {
         this.props.history.push(`/mytrip`);
     }
-    openModal= () =>{
-        
+
+    openModal = () =>{
         if(!this.state.modal){
             this.setState({
                 modal: true
@@ -74,6 +75,10 @@ class Home extends Component {
                 <div className="home-page-btn">
                     <button onClick={()=>{this.openModal(); this.createSearch()}} className="home-start-btn btn btn-primary">Start / View trip</button>
                 </div>
+                <div className="pretrip">
+                </div>
+                <div className="current"></div>
+                <div className="posttrip"></div>
 
                 <Modal open={this.state.modal} childrenStyle="home-modal">
                     <div className="homepage-modal-header">Where are you going? </div>
