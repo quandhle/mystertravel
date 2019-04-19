@@ -34,7 +34,7 @@ class AboutUs extends Component {
                         <p>{first_name} {last_name}</p>
                         <p>Email: {email}</p>
                         <p>Linkedin: <a href={`linkedin.com/${linkedin}`}>{linkedin}</a></p>
-                        <p>Portfolio: {portfolio}</p>
+                        <p>Portfolio: <a href={`${portfolio}`}>{portfolio}</a></p>
                         <p>Github: <a href={`github.com/${github}`}>{github}</a></p>
                         <p>{developer_story}</p>
                     </div>
