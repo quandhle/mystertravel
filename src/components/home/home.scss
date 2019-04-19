@@ -1,40 +1,35 @@
 .home-page {
-    position: relative;
+    height: 90vh;   
+    background-image: url('../../assets/images/coconut.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-size: cover;
+    background-position-x: 15%;
 
-    .title-holder {
-        .title-blurb {
-            text-align: center;
-            width: 80%;
-            position: absolute;
-            top: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+    .landing {
+        height: 100%;
     }
-    
-    .img-wrap {
-        height: 90vh;
-        width: 100vw;
-        overflow: hidden;
-        
-        img {
-            height: 100%;
-        }
+
+    .title-blurb1, .title-blurb2 {
+        width: 100%;
+        top: 20%;
+        color: white;
+        font-size: 3.5rem;
+        text-align: center;
+    }
+
+    .title-blurb1, .title-blurb2, .home-page-btn {
+        transform: translateX(-50%);
+        position: absolute;
+        left: 50%;
+    }
+
+    .title-blurb2 {
+        top: 27%;
     }
 
     .home-page-btn {
-        width: 100%;
-        position: absolute;
-        bottom: 5%;
-        left: 50%;
-        transform: translateX(-50%);
-
-        > button {
-            position: fixed;
-            left: 50%;
-            bottom: 10%;
-            transform: translateX(-50%);
-        }
+        top: 80%;
     }
 
     .home-modal{
@@ -42,18 +37,10 @@
         text-align: center;
         font-size: 1.5em;
 
-
-        .home-modal-header{
-
-        }
-
         .start-input{
             margin: 10px;
             width: 100%;
-
             border: none;
-
-
         }
 
         .start-trip-btn{
@@ -61,6 +48,27 @@
         }
     }
 
+    .preContainer {
+    }
 
+    .preTrip, .currentTrip, .postTrip {
+        position: absolute;
+        height: 50vh;
+        width: 100%;
+    }
 
+    .preTrip {
+        background: hotpink;
+        top: 100%;
+    }
+
+    .currentTrip {
+        background: limegreen;
+        top: 150%;
+    }
+
+    .postTrip {
+        background: lavender;
+        top: 200%;
+    }
 }
