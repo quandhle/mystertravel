@@ -32,13 +32,11 @@ class Map extends Component{
         }
     }
 
-    getPins() {
+    getPins = ()=> {
         const resp = axios.get('/api/getmappin.php').then((resp) => {
             this.setState({
                 pins: resp.data.data
             })
-
-            console.log(resp.data.data)
         })
     }
 
@@ -65,16 +63,24 @@ class Map extends Component{
         const position = {lat: 41.8, lng: 12.5}
         const marker = new window.google.maps.Marker({position: position, map: map});
     }
-
-    getLocation(){
+    getCurrentLocation= ()=>{
+        navigator.geolocation.getCurrentPosition(this.savePosition);
     }
-
+    savePosition = (pos) =>{
+        const crd = pos.coords;
+        console.log(crd.latitude, crd.longitude)
+        this.setState({
+            lat: crd.latitude,
+            lng: crd.longitude
+        })
+    }
     render() {
         return (
             <main>
                 <div id="map" className='map'>
                 </div>
-                <button className='btn map-btn btn-danger btn-lg'>Add Pin</button>
+                <button className='btn map-btn btn-danger btn-lg'><i className="fas fa-map-marker-alt"></i> Add Pin</button>
+                <button onClick={this.getCurrentLocation} className='btn geo-btn btn-lg'><i className="fas fa-compass"></i></button>    
             </main>
         );
     }

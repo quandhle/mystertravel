@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {reduxForm, Field} from 'redux-form';
-import Modal from './general/modal';
-import Input from './general/input';
+import Modal from '../general/modal';
+import Input from '../general/input';
 
-import coconut from './../assets/images/coconut.png';
+import coconut from '../../assets/images/coconut.png';
 
 class Home extends Component {
     constructor(props){
@@ -21,6 +21,7 @@ class Home extends Component {
         this.props.history.push(`/mytrip`);
     }
     openModal= () =>{
+        
         if(!this.state.modal){
             this.setState({
                 modal: true
@@ -29,6 +30,7 @@ class Home extends Component {
             this.setState({
                 modal: false
             })
+            this.props.history.push('/map');
         }
     }
     componentDidMount(){
@@ -55,10 +57,9 @@ class Home extends Component {
         this.autoComplete.setFields(['address_component']);
         this.autoComplete.addListener('place_changed', this.searchCountry);
     }
-    searchCountry = (value)=>{
-        var place = this.autoComplete.getPlace();
-        console.log(place['address_components'][0]['long_name'])
-
+    searchCountry = ()=>{
+        const place = this.autoComplete.getPlace();
+        this.props.change("places", place['address_components'][0]['long_name'])
     }
     render() {
         const {handleSubmit} = this.props
@@ -76,9 +77,10 @@ class Home extends Component {
 
                 <Modal open={this.state.modal} childrenStyle="home-modal">
                     <div className="homepage-modal-header">Where are you going? </div>
-                    <form onSubmit={this.searchCountry}>
+                    <form onSubmit={handleSubmit(this.searchCountry)}>
                          <Field id="places" name="places" label="Enter Places" component={Input}/>
                     </form> 
+                    <button onClick={this.openModal}>GO</button>
                 </Modal>
             </div>
         )
@@ -93,7 +95,6 @@ function loadScript(url){
     script.defer = true;
     index.parentNode.insertBefore(script, index);
 }
-
 
 export default reduxForm({
     form: 'start-new-trip'

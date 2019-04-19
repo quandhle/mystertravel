@@ -2,7 +2,6 @@ import React from 'react';
 import './general.scss';
 
 export default props =>{
-    console.log(props)
     const {open, children, childrenStyle} = props
 
     if(open){
