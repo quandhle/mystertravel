@@ -34,7 +34,7 @@ if(mysqli_affected_rows($conn) !== 1){
     throw new Exception('Unable to add diary entry');
 }
 
-$output['sucess'] = true;
+$output['success'] = true;
 
 print(json_encode($output));
 
