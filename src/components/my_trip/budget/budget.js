@@ -30,6 +30,16 @@ class Budget extends Component{
         })
     }
 
+    deleteItem(budgetItem) {
+        const resp = axios.put('/api/deletebudgetitem.php', {
+            trips_id: 1,
+            category: budgetItem.category,
+            price: budgetItem.price
+        }).then((resp) => {
+            console.log(resp.data)
+        })
+    }
+
     toggleInput() {
         const {showInput} = this.state;
 
@@ -57,10 +67,6 @@ class Budget extends Component{
         }
     }
 
-    deleteItem(budgetList) {
-        console.log('delete button clicked', budgetList)
-    }
-
     componentDidMount(){
         this.getBudgetList();
     }
@@ -72,7 +78,7 @@ class Budget extends Component{
                 <div key={index} className="budget">
                     <div className="budget-item">{formatEntries(budgetItem.category)}</div>
                     <div className="budget-amount">{formatMoney(budgetItem.price)}</div>
-                    <button className="budget-delete" onClick={this.deleteItem}>-</button>
+                    <button className="budget-delete" onClick={() => {this.deleteItem(budgetItem)}}>-</button>
                 </div>
             );
         });
