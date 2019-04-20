@@ -32,11 +32,12 @@ class StartTrip extends Component {
         const {handleSubmit, modal} = this.props
         return (
                 <Modal open={modal} childrenStyle="home-modal">
-                    <div className="homepage-modal-header">Where are you going? </div>
+                    <div className="homepage-modal-header">Give your trip a name!</div>
                     <form onSubmit={handleSubmit(this.nameTrip)}>
-                         <Field id="tripname" name="tripname" label="Name you trip" component={Input} classes="start-input"/>
+                         <Field id="tripname" name="tripname" label="" component={Input} classes="start-input" col=" "/>
+                         <button onClick={handleSubmit(this.nameTrip)} className="btn start-trip-btn"><i className="far fa-grin-wink"></i> Bon Voyage</button>
                     </form> 
-                    <button onClick={handleSubmit(this.nameTrip)} className="btn start-trip-btn">GO</button>
+
                 </Modal>
         )
     }
