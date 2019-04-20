@@ -4,11 +4,11 @@ import {Field, reduxForm} from 'redux-form';
 import Input from './../general/input';
 
 const SearchBar = props => {
-    const {handleSubmit, handleClear, search} = props;
+    const {handleClear} = props;
     return (
-        <form onSubmit={handleSubmit(search)} className="search-bar-form">
+        <form className="search-bar-form">
             <Field id="places" name="places" label="Enter a location" component={Input} classes="search-bar-field"/>
-            <button className='search-bar-clear-button'>
+            <button onClick={handleClear} className='btn search-bar-clear-button'>
                 <i className="fas fa-times-circle"/></button>
         </form>
     );
