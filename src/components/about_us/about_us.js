@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import './about_us.scss';
 import AboutContact from './about_contact';
 
