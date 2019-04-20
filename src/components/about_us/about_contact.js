@@ -18,10 +18,10 @@ export default props =>{
             <div className="story">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci dolore cumque, voluptatibus debitis quas repellat nihil laborum facilis sunt tempore expedita alias nobis eligendi iusto obcaecati error consequatur quia nemo.</div>
         </div>
         <div className="about-contact">
-            <a href={`mailto:${email}`}><i className="fas fa-envelope-square"></i></a>    
-            <a href={`https://www.linkedin.com/in/${linkedin}`}><i className="fab fa-linkedin"></i></a>
-            <a href={`https://www.${portfolio}`}><i className="fas fa-globe"></i></a>
-            <a href={`https://www.github.com/${git}`}><i className="fab fa-github-square"></i></a>   
+            <a href={`mailto:${email}`}><i className="fas fa-envelope-square" target="_blank"></i></a>    
+            <a href={`https://www.linkedin.com/in/${linkedin}`} target="_blank"><i className="fab fa-linkedin"></i></a>
+            <a href={`http://www.${portfolio}`} target="_blank"><i className="fas fa-globe"></i></a>
+            <a href={`https://www.github.com/${git}`} target="_blank"><i className="fab fa-github-square"></i></a>   
         </div>
         </Fragment>
     )
