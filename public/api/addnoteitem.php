@@ -34,7 +34,10 @@ if(mysqli_affected_rows($conn) !== 1){
     throw new Exception('Unable to add diary entry');
 }
 
+$note_id = mysqli_insert_id($conn);
+
 $output['success'] = true;
+$output['note_id'] = $note_id;
 
 print(json_encode($output));
 

@@ -6,24 +6,23 @@ $json_input = file_get_contents("php://input");
 $input = json_decode($json_input, true);
 
 $trips_id = $input['trips_id'];
-$entry = $input['entry'];
+$note_id = $input['note_id'];
 
 if(empty($trips_id)){
     throw new Exception('Please provide trips_id (int) with your request');
 }
 
-if(empty($entry)){
-    throw new Exception('Please provide entry (str) with your request');
+if(empty($note_id)){
+    throw new Exception('Please provide note_id (int) with your request');
 }
 
 $query = "DELETE FROM `notes`
     WHERE `trips_id` = ?,
-    AND `entry` = ?
-    LIMIT 1
+    AND `note_id` = ?
 ";
 
 $statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($statement, 'ds', $trips_id, $entry);
+mysqli_stmt_bind_param($statement, 'ds', $trips_id, $note_id);
 $result = mysqli_stmt_execute($statement);
 
 if(!$result){
@@ -31,7 +30,7 @@ if(!$result){
 }
 
 if(mysqli_affected_rows($conn) === 0){
-    throw new Exception('Unable to delete note entry');
+    throw new Exception('Unable to find and delete note entry');
 }
 
 $output['success'] = true;
