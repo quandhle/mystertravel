@@ -1,7 +1,17 @@
+.search-bar-holder {
+  .search-bar-form {
+    position: relative;
+
+    .search-bar-field {
+      input {
+        width: 100%;
+      }
+    }
+  }
+}
+
 .map {
   height:90vh;
-  
-
 }  
 
 .map-btn {
