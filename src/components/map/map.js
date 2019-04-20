@@ -129,19 +129,22 @@ class Map extends Component{
         });
     }
 
-    search(values) {
-        // console.log(values);
+    handleClear = event => {
+        event.preventDefault();
+        console.log('got');
+        this.props.dispatch(change("search-bar-form", `places`, ''));
+        document.getElementById("places").focus();
     }
 
     render() {
         return (
             <main>
                 <div className="search-bar-holder">
-                    <SearchBar search={this.search}/>
+                    <SearchBar handleClear={this.handleClear}/>
                 </div>
                 <div id="map" className='map'>
                 </div>
-                <button className='btn map-btn btn-danger btn-lg'>
+                <button className='btn map-btn btn-lg'>
                     <i className="fas fa-map-marker-alt"/>Add Pin</button>
                 <button onClick={this.getCurrentLocation} className='btn geo-btn btn-lg'>
                     <i className="fas fa-location-arrow"/></button>
