@@ -21,31 +21,28 @@ class Budget extends Component{
     }
 
     async handleInput(value) {
-        let {description, price, category} = value;
         const {trips_id} = this.state;
         const resp = await axios.post('/api/addbudgetitem.php', {
             trips_id,
-            description: description,
-            price: parseInt(price * 100),
-            category: category
+            description: value.description,
+            price: parseInt(value.price * 100),
+            category: value.category
         });
         if(resp.data.success){
-            description = '';
-            price = '';
-            category = '';
+            value.description = '';
+            value.price = '';
+            value.category = '';
             this.getBudgetList();
         } else {
             console.error('Unable to add entry');
         }
     }
 
-    async deleteItem(budgetItem) {
+    async deleteBudgetItem(budgetItem) {
         const {trips_id} = this.state;
         const resp = await axios.put('/api/deletebudgetitem.php', {
             trips_id,
-            description: budgetItem.description,
-            category: budgetItem.category,
-            price: budgetItem.price
+            budget_id: budgetItem.budget_id,
         });
         if(resp.data.success){
             this.getBudgetList();
@@ -92,14 +89,14 @@ class Budget extends Component{
 
     render() {
         const {budget, showInput} = this.state;
-        const budgetList = budget.map((budgetItem, index) => {
+        const budgetList = budget.map(budgetItem => {
             return(
-                <div key={index} className="budget">
+                <div key={budgetItem.budget_id} className="budget">
                         <div className="budget-descrip">{formatEntries(budgetItem.description)}</div>
                         <div className="budget-amount">{formatMoney(budgetItem.price)}</div>
                         <div className="budget-item">{formatEntries(budgetItem.category)}</div>
                         <div className="budget-delete">
-                            <button className="btn" onClick={() => { this.deleteItem(budgetItem) }}><i className="far fa-trash-alt"></i></button>
+                            <button className="btn" onClick={() => { this.deleteBudgetItem(budgetItem) }}><i className="far fa-trash-alt"></i></button>
                         </div>
 
                 </div>

@@ -28,6 +28,7 @@ $data = [];
 
 while ($row = mysqli_fetch_assoc($result)) {
     $data[] = [
+        'task_id' => $row['id'],
         'task' => $row['task'],
         'date' => $row['task_date'],
         'status' => $row['status']
