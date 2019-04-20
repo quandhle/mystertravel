@@ -1,10 +1,10 @@
 .home-page {
     height: 90vh;   
-    background-image: url('../../assets/images/coconut.png');
+    background-image: url('../../assets/images/homepage-background.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed; 
     background-size: cover;
-    background-position-x: 15%;
+
 
     .desktop-home-page{
         display: none;
@@ -20,6 +20,7 @@
         color: white;
         font-size: 3.5rem;
         text-align: center;
+        font-family: 'Dancing Script', cursive;
     }
 
     .title-blurb1, .title-blurb2, .home-page-btn {
@@ -34,25 +35,46 @@
 
     .home-page-btn {
         top: 80%;
+        background-color: rgba(164, 216, 208, 0.8);
+        border-radius: 5px;
+        .btn{
+            color: white;
+
+            &:hover{
+                background-color: rgba(164, 216, 208, 1);
+            }
+        }
     }
 
     .home-modal{
-        background-color: #2b616d;
+        background-color: #a4d8d0;
+        border-radius: 15px;
         text-align: center;
         font-size: 1.5em;
+        color: white;
+        -webkit-box-shadow: 0px 0px 34px -2px rgba(168,168,168,1);
+        -moz-box-shadow: 0px 0px 34px -2px rgba(168,168,168,1);
+        box-shadow: 0px 0px 34px -2px rgba(168,168,168,1);
 
         .start-input{
             margin: 10px;
-            width: 100%;
-            border: none;
+
+            &>input{
+              border: 1px solid transparent;
+              outline: none;
+              background-color: rgba(255, 236, 228, 0.5);
+            }
+            
         }
 
         .start-trip-btn{
-            background-color: #f7d5c7;
-        }
-    }
+            color: #295c69;
+            background-color: #fa8d62;
 
-    .preContainer {
+            &:hover{
+                background-color: #e26a3b;
+            }
+        }
     }
 
     .preTrip, .currentTrip, .postTrip {

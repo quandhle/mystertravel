@@ -31,7 +31,6 @@ class Home extends Component {
             this.props.history.push('/map');
         }
     }
-
     render() {
         return (
             <div className="home-page">
@@ -40,7 +39,7 @@ class Home extends Component {
                     <h4 className='title-blurb2'>Plan faster</h4>
 
                     <div className="home-page-btn">
-                        <button onClick={this.openModal} className="home-start-btn btn btn-primary">Start / View trip</button>
+                        <button onClick={this.openModal} className="home-start-btn btn">Start / View trip</button>
                     </div>
                 </div>
 
