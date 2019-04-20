@@ -12,7 +12,9 @@ $query = "SELECT * FROM `current_todo` WHERE `trips_id` = ?";
 
 $statement = mysqli_prepare($conn, $query);
 mysqli_stmt_bind_param($statement, 'd', $trips_id);
-$result = mysqli_stmt_execute($statement);
+mysqli_stmt_execute($statement);
+
+$result = mysqli_stmt_get_result($statement);
 
 if (!$result) {
     throw new Exception(mysqli_error($conn));

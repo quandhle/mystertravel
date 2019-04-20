@@ -40,13 +40,17 @@ $end_trip_query = "SELECT t.`trips_name`, t.`region`,
     WHERE t.`id` = ?
 ";
 
-$update_result = mysqli_query($conn, $select_query);
+$end_trip_statement = mysqli_prepare($conn, $end_trip_query);
+mysqli_stmt_bind_param($end_trip_statement, 'd', $trips_id);
+mysqli_stmt_execute($end_trip_statement);
 
-if (!$update_result) {
+$end_trip_result = mysqli_stmt_get_result($end_trip_statement);
+
+if (!$end_trip_result) {
     throw new Exception(mysqli_error($conn));
 }
 
-if (mysqli_num_rows($update_result) !== 1) {
+if (mysqli_num_rows($end_trip_result) !== 1) {
     throw new Exception('Unable to retrieve trip details');
 }
 
