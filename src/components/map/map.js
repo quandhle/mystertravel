@@ -83,21 +83,39 @@ class Map extends Component{
         const place = this.autoComplete.getPlace();
         console.log('Place:', place);
 
-        let address;
+        let address, location;
         if (place.address_components) {
             address = [
                 (place.address_components[0] && place.address_components[0].short_name || ''),
                 (place.address_components[1] && place.address_components[1].short_name || ''),
                 (place.address_components[2] && place.address_components[2].short_name || '')
             ].join(', ');
+            location = place.geometry.location;
+        } else {
+            const service = new google.maps.places.PlacesService(this.state.map);
+
+            const map = this.state.map;
+
+            service.findPlaceFromQuery({
+                    query: place.name,
+                    fields: ['geometry', 'name']
+                }, function(results, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    map.setCenter(results[0].geometry.location);
+                }
+            });
+
+            address = place.name;
+
         }
+        console.log('Address:', address);
 
         this.props.dispatch(change("search-bar-form", `places`, address));
 
-        this.state.map.setCenter(place.geometry.location);
+        this.state.map.setCenter(location);
         const marker = new google.maps.Marker({
             map: this.state.map,
-            position: place.geometry.location
+            position: location
         });
         this.setState({
             pins: [...this.state.pins, marker]
