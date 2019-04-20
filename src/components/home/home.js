@@ -30,7 +30,6 @@ class Home extends Component {
             this.props.history.push('/map');
         }
     }
-
     render() {
         return (
             <div className="home-page">
@@ -39,25 +38,17 @@ class Home extends Component {
                     <h4 className='title-blurb2'>Plan faster</h4>
 
                     <div className="home-page-btn">
-                        <button onClick={this.openModal} className="home-start-btn btn btn-primary">Start / View trip</button>
+                        <button onClick={this.openModal} className="home-start-btn btn">Start / View trip</button>
                     </div>
-                </section>
+                    </section>
 
-                <section className="section static preTrip">
-                    <PreTrip/>
-                </section>
-
-                <section className="section parallax currentTrip">
-                    <CurrentTrip/>
-                </section>
-
-                <section className="parallax postTrip">
-                    <PostTrip/>
-                </section>
-
-                <section className="parallax filler">
-                    Contact Info
-                </section>
+                {/* only display in desktop page */}
+                <div className="desktop-home-page">
+                        <PreTrip/>
+                        <CurrentTrip/>
+                        <PostTrip/>
+                </div>
+                
                 {this.state.modal && <StartTrip modal={this.state.modal} close={this.openModal}/>}
             </div>
         )

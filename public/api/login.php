@@ -33,11 +33,11 @@ $result = mysqli_stmt_get_result($statement);
 
 if (!$result) {
     throw new Exception(mysqli_error($conn));
-};
+}
 
 if (mysqli_num_rows($result) !== 1) {
     throw new Exception('Invalid email or password.');
-};
+}
 
 $data = mysqli_fetch_assoc($result);
 $token = $email . $data['id'] . microtime();

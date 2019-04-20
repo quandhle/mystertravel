@@ -44,7 +44,7 @@ class Nav extends Component{
                         </a>
                     </div>
                     <div className="nav-title">
-                        <p>Myster Travel</p>
+                        <h1>MysterTravel</h1>
                     </div>
                 </nav>
                 <SideNav style={this.state.sideNav} toggle={this.toggleSideNav}/>
