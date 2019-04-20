@@ -8,7 +8,11 @@ if(empty($trips_id)){
     throw new Exception('Please provide trips_id (int) with your request');
 }
 
-$query = "SELECT * FROM `notes` WHERE `trips_id` = ?";
+$query = "SELECT *
+    FROM `notes`
+    WHERE `trips_id` = ?
+    ORDER BY `entry_date` DESC
+";
 
 $statement = mysqli_prepare($conn, $query);
 mysqli_stmt_bind_param($statement, 'd', $trips_id);
@@ -29,13 +33,14 @@ $data = [];
 while($row = mysqli_fetch_assoc($result)){
     $date = date("m/d/Y H:i:s", strtotime($row['entry_date']));
     $data[] = [
+        'note_id' => $row['id'],
         'entry' => $row['entry'],
         'date' => $date
     ];
 }
 
 $output['success'] = true;
-$output['data'] = $data;
+$output['notes'] = $data;
 
 print(json_encode($output));
 ?>

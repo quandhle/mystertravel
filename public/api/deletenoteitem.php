@@ -17,12 +17,12 @@ if(empty($note_id)){
 }
 
 $query = "DELETE FROM `notes`
-    WHERE `trips_id` = ?,
-    AND `note_id` = ?
+    WHERE `trips_id` = ?
+    AND `id` = ?
 ";
 
 $statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($statement, 'ds', $trips_id, $note_id);
+mysqli_stmt_bind_param($statement, 'dd', $trips_id, $note_id);
 $result = mysqli_stmt_execute($statement);
 
 if(!$result){

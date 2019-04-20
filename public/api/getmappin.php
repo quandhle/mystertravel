@@ -28,6 +28,7 @@ $data = [];
 
 while ($row = mysqli_fetch_assoc($result)) {
     $data[] = [
+        'pin_id' => $row['id'],
         'lat' => $row['latitude'],
         'lng' => $row['longitude'],
         'description' => $row['description']

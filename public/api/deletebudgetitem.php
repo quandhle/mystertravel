@@ -16,10 +16,9 @@ if (empty($budget_id)) {
     throw new Exception('Please provide budget_id (int) with your request');
 }
 
-$query = "DELETE
-    FROM `budget`
+$query = "DELETE FROM `budget`
     WHERE `trips_id` = ?
-    AND `budget_id` = ?
+    AND `id` = ?
 ";
 
 $statement = mysqli_prepare($conn, $query);
