@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {connect} from 'react-redux';
 import NotesForm from './notes_form';
 import './notes.scss';
 import {formatDate} from '../../../helper';
@@ -61,17 +62,31 @@ class Notes extends Component{
             console.error(resp.data.error)
         }
     }
+    async deleteItem(note){
+        const {trips_id} = this.props.trips_id;
+        console.log( note)
+        const resp = await axios.put('/api/deletenoteitem.php',{
+            trips_id: trips_id,
+            entry: note
+        })
 
+        if(resp.data.success){
+            this.getNoteList();
+        } else {
+            console.error('Unable to delete entry');
+        }
+    }
     componentDidMount(){
         this.getNoteList();
     }
     render(){
         const {note, showInput} = this.state;
-        const noteList = note.map((note, index)=>{
+        const noteList = note.map((note, index)=>{ //need to change index to id
             return(
                 <div key={index} className="notes">
                     <p>{formatDate(note.date)}</p>
                     <p>{note.entry}</p>
+                    <button className="btn" onClick={() => { this.deleteItem(note)}}><i className="far fa-trash-alt"></i></button>
                 </div>
             );
         });
@@ -89,4 +104,10 @@ class Notes extends Component{
     }
 }
 
-export default Notes;
+function mapStateToProps(state){
+    return{
+        trips_id: state.trips_id
+    }
+}
+
+export default connect(mapStateToProps)(Notes);

@@ -30,7 +30,7 @@
         padding: 15px;
         box-sizing: border-box;
 
-        &:hover{
+        &:hover, &:active{
             background-color: #c4e4df;
         }
 
@@ -75,14 +75,25 @@
                 background-color: #3b717e;
             }
             
-            &:hover{
+            &:hover, &:active{
                 background-color: #1b515d;
             }
 
             p:first-child{
                 font-size: 0.8em;
                 text-align: right;
-            } 
+            }
+
+            .btn{
+                position: relative;
+                left: 90%;
+                color: #b2dbd5;
+                transition: 0.2s;
+
+                &:hover, &:active{
+                    transform: rotate(180deg); 
+                 }
+            }
         }
     } 
 }
