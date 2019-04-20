@@ -62,20 +62,20 @@ class Notes extends Component {
             console.error(resp.data.error)
         }
     }
-    async deleteItem(note) {
-        const { trips_id } = this.props.trips_id;
-        console.log(note)
-        const resp = await axios.put('/api/deletenoteitem.php', {
+    async deleteItem(note){
+        const {trips_id} = this.props.trips_id;
+        console.log( note)
+        const resp = await axios.put('/api/deletenoteitem.php',{
             trips_id: trips_id,
             entry: note
         })
-
         if (resp.data.success) {
             this.getNoteList();
         } else {
             console.error('Unable to delete entry');
         }
     }
+
     componentDidMount() {
         this.getNoteList();
     }
@@ -104,8 +104,9 @@ class Notes extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
+
+function mapStateToProps(state){
+    return{
         trips_id: state.trips_id
     }
 }

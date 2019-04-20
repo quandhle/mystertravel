@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {change} from 'redux-form';
 
 import './map.scss';
+import keys from './../../../api_keys';
 import SearchBar from './search_bar';
 
 class Map extends Component{
@@ -45,7 +46,7 @@ class Map extends Component{
     }
 
     createMap = () => {
-        loadScript(`https://maps.googleapis.com/maps/api/js?key=${this.state.api}&libraries=places&callback=initMap`);
+        loadScript(`https://maps.googleapis.com/maps/api/js?key=${keys.googleMaps}&libraries=places&callback=initMap`);
         window.initMap = this.initMap;
     }
 
@@ -129,22 +130,25 @@ class Map extends Component{
         });
     }
 
-    search(values) {
-        // console.log(values);
+    handleClear = event => {
+        event.preventDefault();
+        this.props.dispatch(change("search-bar-form", `places`, ''));
+        document.getElementById("places").focus();
     }
 
     render() {
         return (
             <main>
                 <div className="search-bar-holder">
-                    <SearchBar search={this.search}/>
+                    <SearchBar handleClear={this.handleClear}/>
                 </div>
-                <div id="map" className='map'>
-                </div>
-                <button className='btn map-btn btn-danger btn-lg'>
-                    <i className="fas fa-map-marker-alt"/>Add Pin</button>
+                <div id="map" className='map'/>
+                <button className='btn map-btn btn-lg'>
+                    <i className="fas fa-map-marker-alt"/>Add Pin
+                </button>
                 <button onClick={this.getCurrentLocation} className='btn geo-btn btn-lg'>
-                    <i className="fas fa-location-arrow"/></button>
+                    <i className="fas fa-location-arrow"/>
+                </button>
             </main>
         );
     }
@@ -156,8 +160,7 @@ function loadScript(url){
     script.src = url;
     script.async = true;
     script.defer = true;
-    index.parentNode.insertBefore(script, index); //keep script in the very begining
+    index.parentNode.insertBefore(script, index);
 }
-
 
 export default connect()(Map);
