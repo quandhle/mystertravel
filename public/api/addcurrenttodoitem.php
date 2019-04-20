@@ -36,7 +36,11 @@ if(mysqli_affected_rows($conn) !== 1){
     throw new Exception('Unable to add todo entry');
 }
 
+$todo_id = mysqli_insert_id($conn);
+
 $output['success'] = true;
+$output['todo_id'] = $todo_id;
+
 
 print(json_encode($output));
 
