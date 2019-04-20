@@ -11,7 +11,7 @@ class Map extends Component{
         super(props);
 
         this.state = {
-            lat: 41.8719,
+            lat: 41.8719,   // Rome
             lng: 12.5674,
             api: '',
             pins: [],
