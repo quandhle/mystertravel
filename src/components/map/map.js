@@ -57,8 +57,12 @@ class Map extends Component{
         this.autoComplete.addListener('place_changed', this.searchCountry);
 
         const map = new window.google.maps.Map(document.getElementById('map'), {
-          center: {lat: this.state.lat, lng: this.state.lng},
-          zoom: 8
+            mapTypeControl: false,
+            streetViewControl: false,
+            fullscreenControl: false,
+            center: {lat: this.state.lat, lng: this.state.lng},
+            zoom: 10,
+            minZoom: 2,
         });
 
         this.setState({
@@ -102,6 +106,7 @@ class Map extends Component{
                 }, function(results, status) {
                 if (status === google.maps.places.PlacesServiceStatus.OK) {
                     map.setCenter(results[0].geometry.location);
+                    map.setZoom(12);
                 }
             });
 
@@ -113,14 +118,7 @@ class Map extends Component{
         this.props.dispatch(change("search-bar-form", `places`, address));
 
         this.state.map.setCenter(location);
-        const marker = new google.maps.Marker({
-            map: this.state.map,
-            position: location
-        });
-        this.setState({
-            pins: [...this.state.pins, marker]
-        });
-        console.log(this.state.pins);
+        this.state.map.setZoom(12);
     }
 
     getCurrentLocation= () => {
