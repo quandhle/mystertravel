@@ -5,6 +5,14 @@
     background-attachment: fixed; 
     background-size: cover;
     background-position-x: 15%;
+    overflow-x: hidden;
+    overflow-y: scroll; 
+
+    section {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+    }
 
     .landing {
         height: 100%;
@@ -47,28 +55,34 @@
             background-color: #f7d5c7;
         }
     }
-
-    .preContainer {
+    
+    .parallax::after {
+        position: absolute;
+        background-size: 100%;
+        z-index: -1;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
     }
 
-    .preTrip, .currentTrip, .postTrip {
-        position: absolute;
-        height: 50vh;
-        width: 100%;
+    .static {
+        background-color: red;
     }
 
     .preTrip {
-        background: hotpink;
-        top: 100%;
+        background-color: hotpink;
     }
 
     .currentTrip {
-        background: limegreen;
-        top: 150%;
+        background-color: limegreen;
     }
 
     .postTrip {
-        background: lavender;
-        top: 200%;
+        background-color: lavender;
+    }
+
+    .filler {
+        background-color: transparent;
     }
 }

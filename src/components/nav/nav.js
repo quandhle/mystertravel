@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
-
 import SideNav from './sidenav';
 import './nav.scss';
 
 class Nav extends Component{
-    constructor(props){
+    constructor(props) {
         super(props);
 
-        this.state ={
+        this.state = {
             sideNav: {
                 body:{width: 0},
                 background:{width: 0} 
@@ -15,9 +14,9 @@ class Nav extends Component{
         }
     }
 
-    toggleSideNav= ()=> {
- 
+    toggleSideNav = () => {
         const {body} = this.state.sideNav;
+
         if(body.width === 0){
             this.setState({
                 sideNav: {
@@ -35,23 +34,21 @@ class Nav extends Component{
         }
     }
 
-    render(){
+    render() {
         return(
             <div className="nav-box">
                 <nav className="navbar">
-    
                     <div className="nav-menu" onClick={this.toggleSideNav}>
                         <a href="#" className="nav-link">
                             <i className="fas fa-bars"></i>
                         </a>
                     </div>
                     <div className="nav-title">
-                        <h1>Myster Travel</h1>
+                        <p>Myster Travel</p>
                     </div>
                 </nav>
                 <SideNav style={this.state.sideNav} toggle={this.toggleSideNav}/>
             </div>
-
         );
     }
 }

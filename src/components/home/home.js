@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import StartTrip from './start_trip';
-import coconut from '../../assets/images/coconut.png';
 import PreTrip from './preTrip';
 import CurrentTrip from './currentTrip';
 import PostTrip from './postTrip';
@@ -35,21 +34,30 @@ class Home extends Component {
     render() {
         return (
             <div className="home-page">
-                <div className="landing">
+                <section className="landing parallax ">
                     <h4 className='title-blurb1'>Travel smarter</h4>
                     <h4 className='title-blurb2'>Plan faster</h4>
 
                     <div className="home-page-btn">
                         <button onClick={this.openModal} className="home-start-btn btn btn-primary">Start / View trip</button>
                     </div>
+                </section>
 
-                    <div className="preContainer">
-                        <PreTrip/>
-                    </div>
-                </div>
+                <section className="section static preTrip">
+                    <PreTrip/>
+                </section>
 
-                <CurrentTrip/>
-                <PostTrip/>
+                <section className="section parallax currentTrip">
+                    <CurrentTrip/>
+                </section>
+
+                <section className="parallax postTrip">
+                    <PostTrip/>
+                </section>
+
+                <section className="parallax filler">
+                    Contact Info
+                </section>
                 {this.state.modal && <StartTrip modal={this.state.modal} close={this.openModal}/>}
             </div>
         )
