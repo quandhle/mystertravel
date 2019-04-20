@@ -15,15 +15,15 @@ if (empty($trips_id)) {
 }
 
 if (empty($description)) {
-    throw new Exception('Please enter description (str) with your request');
+    throw new Exception('Please provide description (str) with your request');
 }
 
 if (empty($category)) {
-    throw new Exception('Please select category (str) with your request');
+    throw new Exception('Please provide category (str) with your request');
 }
 
 if (empty($price)) {
-    throw new Exception('Please enter price (int) with your request');
+    throw new Exception('Please provide price (int) with your request');
 }
 
 $query = "DELETE
@@ -43,8 +43,8 @@ if (!$result) {
     throw new Exception(mysqli_error($conn));
 }
 
-if (mysqli_affected_rows($conn) !== 1) {
-    throw new Exception ('Zero or more than one budget item affected.');
+if (mysqli_affected_rows($conn) === 0) {
+    throw new Exception ('Unable to delete budget entry');
 }
 
 $output['success'] = true;

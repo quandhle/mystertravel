@@ -14,8 +14,12 @@ if (empty($trips_id)) {
     throw new Exception('Please provide trips_id (int) with your request');
 }
 
+if(empty($description)){
+    throw new Exception('Please enter description (str) with your request');
+}
+
 if (empty($category)) {
-    throw new Exception('Please enter category (str) with your request');
+    throw new Exception('Please select category (str) with your request');
 }
 
 if (empty($price)) {
