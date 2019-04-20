@@ -8,9 +8,11 @@ if (empty($trips_id)) {
     throw new Exception('Please provide trips_id (int) with your request');
 }
 
-$query = "SELECT * FROM `pins` WHERE `trips_id` = $trips_id";
+$query = "SELECT * FROM `pins` WHERE `trips_id` = ?";
 
-$result = mysqli_query($conn, $query);
+$statement = mysqli_prepare($conn, $query);
+mysqli_stmt_bind_param($statement, 'd', $trips_id);
+$result = mysqli_stmt_execute($statement);
 
 if (!$result) {
     throw new Exception(mysqli_error($conn));
@@ -28,7 +30,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         'lng' => $row['longitude'],
         'description' => $row['description']
     ];
-};
+}
 
 $output['success'] = true;
 $output['data'] = $data;

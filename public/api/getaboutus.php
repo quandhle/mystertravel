@@ -8,11 +8,11 @@ $result = mysqli_query($conn, $query);
 
 if (!$result) {
     throw new Exception(mysqli_error($conn));
-};
+}
 
 if (mysqli_num_rows($result) === 0) {
     throw new Exception('About Us information not provided.');
-};
+}
 
 $data = [];
 
@@ -27,7 +27,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         'image' => $row['image'],
         'developer_story' => $row['developer_story']
     ];
-};
+}
 
 $output['success'] = true;
 $output['data'] = $data;
