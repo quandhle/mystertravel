@@ -124,10 +124,11 @@ class Map extends Component{
     }
 
     getCurrentLocation= () => {
-        navigator.geolocation.getCurrentPosition(this.savePosition);
-        const crd = pos.coords;
-        this.setState({lat: crd.latitude, lng: crd.longitude});
-        this.state.map.setCenter({lat: this.state.lat, lng: this.state.lng});
+        navigator.geolocation.getCurrentPosition((pos) => {
+            const crd = pos.coords;
+            this.setState({lat: crd.latitude, lng: crd.longitude});
+            this.state.map.setCenter({lat: this.state.lat, lng: this.state.lng});
+        });
     }
 
     search(values) {
