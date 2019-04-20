@@ -9,12 +9,10 @@ import Input from '../general/input';
 
 class StartTrip extends Component {
     constructor(props){
-        super(props)
-
+        super(props);
         this.nameTrip = this.nameTrip.bind(this);
     }
     async nameTrip(value){
-
         const resp = await axios.post('/api/starttrip.php', {
             trips_name: value.tripname,
             region: 'usa'
@@ -27,9 +25,9 @@ class StartTrip extends Component {
         } else {
             console.error('can not start trip');
         }
-
         this.props.close();
     }
+
     render() {
         const {handleSubmit, modal} = this.props
         return (
