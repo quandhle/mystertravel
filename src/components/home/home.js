@@ -42,14 +42,15 @@ class Home extends Component {
                     <div className="home-page-btn">
                         <button onClick={this.openModal} className="home-start-btn btn btn-primary">Start / View trip</button>
                     </div>
-
-                    <div className="preContainer">
-                        <PreTrip/>
-                    </div>
                 </div>
 
-                <CurrentTrip/>
-                <PostTrip/>
+                {/* only display in desktop page */}
+                <div className="desktop-home-page">
+                        <PreTrip/>
+                        <CurrentTrip/>
+                        <PostTrip/>
+                </div>
+                
                 {this.state.modal && <StartTrip modal={this.state.modal} close={this.openModal}/>}
             </div>
         )

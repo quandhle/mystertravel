@@ -6,6 +6,10 @@
     background-size: cover;
     background-position-x: 15%;
 
+    .desktop-home-page{
+        display: none;
+    }
+
     .landing {
         height: 100%;
     }
@@ -71,4 +75,14 @@
         background: lavender;
         top: 200%;
     }
+}
+
+
+@media (min-width: 900px){
+    .home-page{
+        .desktop-home-page{
+            display: block;
+        }
+    }
+
 }
