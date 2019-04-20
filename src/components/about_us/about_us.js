@@ -1,47 +1,61 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import './about_us.scss';
+import AboutContact from './about_contact';
 
 class AboutUs extends Component {
-    state = {
-        data: []
-    };
+    constructor(props){
+        super(props)
 
-    componentDidMount() {
-        this.getData();
-    }
+        this.data =[
+        {
+            name:"Jennifer Lai",
+            email: "iclai.work@gmail.com",
+            linkedin:"jen-icl",
+            portfolio:"jen-icl.com",
+            git: "jen-icl",
+            image:"jen.jpg"
+        },
+        {
+            name:"Kylie Chao",
+            email: "kylieclin@gmail.com",
+            linkedin:"kyliechao",
+            portfolio:"kyliechao.com",
+            git: "kylieclin",
+            image:"kylie.jpg"
+        },
+        {
+            name:"Quanye West",
+            email: "quandhle@gmail.com",
+            linkedin:"quandhle",
+            portfolio:"quandhle.com",
+            git: "quandhle",
+            image:"quan.jpg"
+        },
+        {
+            name:"Westley Poon",
+            email: "westleypoon@gmail.com",
+            linkedin:"westley-poon",
+            portfolio:"westleypoon.com",
+            git: "WestleyPoon",
+            image:"west.jpg"
+        },
+        ]
 
-    getData() {
-        axios.get('/api/getaboutus.php').then((resp)=> {
-            this.setState({
-                data: resp.data.data
-            });
-        })
     }
-    
     render() {
-        const aboutUs = this.state.data.map((person) => {
-            const {last_name, first_name, linkedin, email, portfolio, github, image, developer_story} = person;
+        const aboutUs = this.data.map((person) => {
             return (
-                <div key={first_name} className="about-person row">
-                    <div className="about-img col-6">
-                        <img src={`${image}`} alt={`${first_name}`} className="person-img"/>
-                    </div>
-                    <div className="about-text col-6">
-                        <p>{first_name} {last_name}</p>
-                        <p>Email: {email}</p>
-                        <p>Linkedin: <a href={`linkedin.com/${linkedin}`}>{linkedin}</a></p>
-                        <p>Portfolio: <a href={`${portfolio}`}>{portfolio}</a></p>
-                        <p>Github: <a href={`github.com/${github}`}>{github}</a></p>
-                        <p>{developer_story}</p>
-                    </div>
-
+                <div key={person.name} className="about-person">
+                    <AboutContact person={person} />
                 </div>
             )
         });
 
         return (
-            <div className="about-container">{aboutUs}</div>
+            <div className="about-container">
+                {aboutUs}
+            </div>
         )
     }
 }
