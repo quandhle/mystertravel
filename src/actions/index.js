@@ -11,6 +11,6 @@ export function signIn(user){
 export function passTripId(id){
     return{
         type: types.GET_TRIP_ID,
-        tripId: id
+        trips_id: id
     }
 }

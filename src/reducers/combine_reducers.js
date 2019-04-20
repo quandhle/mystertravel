@@ -7,7 +7,7 @@ import navReducer from './nav_reducer';
 const rootReducer = combineReducers({
     form: formReducer,
     user: userReducer,
-    tripId: tripReducer,
+    trips_id: tripReducer,
     navHeader: navReducer
 });
 
