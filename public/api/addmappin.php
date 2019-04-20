@@ -44,7 +44,10 @@ if(mysqli_affected_rows($conn) !== 1){
     throw new Exception('Map pin was not added');
 }
 
+$pin_id = mysqli_insert_id($conn);
+
 $output['success'] = true;
+$output['pin_id'] = $pin_id;
 
 print(json_encode($output));
 
