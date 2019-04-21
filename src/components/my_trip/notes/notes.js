@@ -14,15 +14,16 @@ class Notes extends Component {
                 height: 0
             },
             note: [],
-            trips_id: 1
         }
 
         this.toggleInput = this.toggleInput.bind(this);
         this.handleInput = this.handleInput.bind(this);
     }
     async handleInput(value) {
+        const {trips_id} = this.props.trips_id;
+
         const resp = await axios.post('/api/addnoteitem.php', {
-            trips_id: this.props.trips_id.trips_id,
+            trips_id,
             entry: value.notes
         });
 
@@ -49,10 +50,9 @@ class Notes extends Component {
                 }
             })
         }
-
     }
     async getNoteList() {
-        const { trips_id } = this.state;
+        const { trips_id } = this.props.trips_id;
         const resp = await axios.get(`/api/getnotelist.php?trips_id=${trips_id}`);
         if (resp.data.success) {
             this.setState({
@@ -64,10 +64,9 @@ class Notes extends Component {
     }
     async deleteItem(note){
         const {trips_id} = this.props.trips_id;
-        console.log( note)
         const resp = await axios.put('/api/deletenoteitem.php',{
-            trips_id: trips_id,
-            entry: note
+            trips_id,
+            note_id: note.note_id
         })
         if (resp.data.success) {
             this.getNoteList();
@@ -75,7 +74,6 @@ class Notes extends Component {
             console.error('Unable to delete entry');
         }
     }
-
     componentDidMount() {
         this.getNoteList();
     }

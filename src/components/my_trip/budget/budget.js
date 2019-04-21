@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import BudgetForm from './budget_form';
 import './budget.scss';
 import {formatMoney, formatEntries} from '../../../helper';
@@ -21,7 +22,7 @@ class Budget extends Component{
     }
 
     async handleInput(value) {
-        const {trips_id} = this.state;
+        const {trips_id} = this.props.trips_id;
         const resp = await axios.post('/api/addbudgetitem.php', {
             trips_id,
             description: value.description,
@@ -39,7 +40,7 @@ class Budget extends Component{
     }
 
     async deleteBudgetItem(budgetItem) {
-        const {trips_id} = this.state;
+        const {trips_id} = this.props.trips_id;
         const resp = await axios.put('/api/deletebudgetitem.php', {
             trips_id,
             budget_id: budgetItem.budget_id,
@@ -50,10 +51,8 @@ class Budget extends Component{
             console.error('Unable to delete entry');
         }
     }
-
     toggleInput() {
         const {height} = this.state.showInput;
-
         if(!height){
             this.setState({
                 showInput: {
@@ -67,12 +66,9 @@ class Budget extends Component{
                 }
             })
         }
-
-        // need way to render and update budget list
     }
-
     async getBudgetList() {
-        const {trips_id} = this.state;
+        const {trips_id} = this.props.trips_id;
         const resp = await axios.get(`/api/getbudgetlist.php?trips_id=${trips_id}`);
         if (resp.data.success) {
             this.setState({
@@ -82,11 +78,9 @@ class Budget extends Component{
             console.error(resp.data.error);
         }
     }
-
     componentDidMount(){
         this.getBudgetList();
     }
-
     render() {
         const {budget, showInput} = this.state;
         const budgetList = budget.map(budgetItem => {
@@ -116,4 +110,11 @@ class Budget extends Component{
     }
 }
 
-export default Budget;
+function mapStateToProps(state){
+    return{
+        trips_id: state.trips_id
+    }
+}
+
+export default connect(mapStateToProps)(Budget);
+
