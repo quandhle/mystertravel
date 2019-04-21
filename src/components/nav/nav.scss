@@ -3,7 +3,6 @@
     background-color: #a4d8d0;
     height: 10vh;
 
-
     .navbar{
         width: 100%;
         height:100%;
@@ -15,28 +14,43 @@
         padding: 0;
 
         .nav-menu, .nav-title{
-            display: inline-block;
+            position: absolute;
+            height: 100%;
+            width: 20%;
 
-            a{
+            a {
                 color:#FFFFFF;
                 transition: 0.5s;
-                &:hover{
+                width: 100%;
+                height: 100%;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &:hover {
                     transform: rotate(90deg);
                 }
             }
         }
+
         .nav-title{
-            font-family: 'Dancing Script', cursive;
             position: absolute;
-            left: 50%;
-            top: 55%;
-            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 10%;
+
+            p {
+                position: absolute;
+                margin: 0;
+                transform: translate(-50%, -50%);
+                top: 50%;
+                left: 50%;
+            }
         }
     }
 }
 
-.side-nav-box{
-    display:block;
+.side-nav-box {
     background-color: rgba(255, 255, 255, 0.7);
     height: 100%;
     width: 0;
@@ -45,7 +59,7 @@
     z-index: 999;
     font-size: 1.5em;
 
-    .side-nav{
+    .side-nav {
         position: absolute;
         padding-top: 10vh;
         top: 0;
@@ -58,12 +72,10 @@
         overflow-x: hidden;
         transition: 0.5s;
 
-        .side-nav-links{
-
-            list-style: none;
+        .side-nav-links {
             padding: 0;
 
-            li{
+            li {
                 background-color: rgba(255, 255, 255, 0.5);
                 height: 50px;
                 text-align: center;
@@ -75,13 +87,12 @@
                     background-color: #1b515d;
                     color:white;
                 }
-            }
 
-            a{
-                color: #417970;
-                text-decoration: none;
+                a {
+                    color: #417970;
+                    text-decoration: none;
+                }
             }
         }
-
     }
 }
