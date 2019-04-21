@@ -14,6 +14,7 @@ class Guest extends Component {
         this.props.history.push(`/mytrip`);
     }
     openModal = () => {
+
         if(!this.state.modal){
             this.setState({
                 modal: true
