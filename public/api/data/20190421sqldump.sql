@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 19, 2019 at 11:11 PM
+-- Generation Time: Apr 21, 2019 at 08:53 PM
 -- Server version: 5.7.25
 -- PHP Version: 7.3.1
 
@@ -13,53 +13,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `myster_travel`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `about_us`
---
-
-CREATE TABLE `about_us` (
-  `id` smallint(5) UNSIGNED NOT NULL,
-  `last_name` varchar(10) NOT NULL,
-  `first_name` varchar(10) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `linkedin` varchar(30) NOT NULL,
-  `portfolio` varchar(30) NOT NULL,
-  `github` varchar(20) NOT NULL,
-  `image` varchar(85) NOT NULL,
-  `developer_story` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `about_us`
---
-
-INSERT INTO `about_us` (`id`, `last_name`, `first_name`, `email`, `linkedin`, `portfolio`, `github`, `image`, `developer_story`) VALUES
-(1, 'Lai', 'Jennifer', 'iclai.work@gmail.com', 'jen-icl', 'jen-icl.com', 'jen-icl', 'https://s3-us-west-1.amazonaws.com/myster-travel-images/about-us/laijen', ''),
-(2, 'Chao', 'Kylie', 'kylieclin@gmail.com', 'kyliechao', 'kyliechao.com', 'kylieclin', 'https://s3-us-west-1.amazonaws.com/myster-travel-images/about-us/chaokylie', ''),
-(3, 'Le', 'Quan', 'quandhle@gmail.com', 'quandhle', 'quandhle.com', 'quandhle', 'https://s3-us-west-1.amazonaws.com/myster-travel-images/about-us/lequan', ''),
-(4, 'Poon', 'Westley', 'westleypoon@gmail.com', 'westley-poon', 'westleypoon.com', 'WestleyPoon', 'https://s3-us-west-1.amazonaws.com/myster-travel-images/about-us/lequan', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `api_keys`
---
-
-CREATE TABLE `api_keys` (
-  `id` tinyint(3) UNSIGNED NOT NULL,
-  `api` varchar(20) NOT NULL,
-  `api_key` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `api_keys`
---
-
-INSERT INTO `api_keys` (`id`, `api`, `api_key`) VALUES
-(1, 'google', 'AIzaSyCz5y10D2RANKFguerczz92ZroUQcdLcMI');
 
 -- --------------------------------------------------------
 
@@ -82,7 +35,7 @@ CREATE TABLE `budget` (
 
 INSERT INTO `budget` (`id`, `trips_id`, `description`, `category`, `price`, `added`) VALUES
 (1, 1, 'Return trip LAX-NAP', 'flight', 129500, '2019-04-16 14:58:18'),
-(2, 1, 'Pizza', 'food', 77600, '2019-04-16 14:58:18'),
+(2, 1, 'Pizza', 'food', 77600, '2019-04-16 14:59:18'),
 (3, 1, 'Hotel', 'Accommodation', 92300, '2019-04-18 21:51:57'),
 (4, 1, 'Boots', 'Shopping', 14057, '2019-04-18 22:50:11');
 
@@ -378,7 +331,7 @@ INSERT INTO `current_todo` (`id`, `trips_id`, `task`, `task_date`, `status`) VAL
 
 CREATE TABLE `notes` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `trips_id` int(11) NOT NULL,
+  `trips_id` int(11) UNSIGNED NOT NULL,
   `entry` text NOT NULL,
   `entry_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -423,7 +376,7 @@ CREATE TABLE `trips` (
   `id` int(10) UNSIGNED NOT NULL,
   `users_id` mediumint(8) UNSIGNED NOT NULL,
   `trips_name` varchar(250) NOT NULL,
-  `region` varchar(100) NOT NULL,
+  `region` varchar(100) DEFAULT NULL,
   `start` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `end` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -433,7 +386,8 @@ CREATE TABLE `trips` (
 --
 
 INSERT INTO `trips` (`id`, `users_id`, `trips_name`, `region`, `start`, `end`) VALUES
-(1, 1, 'Naples Apr 2019', 'Italy', '2019-04-16 00:00:00', NULL);
+(1, 1, 'Naples Apr 2019', 'Italy', '2019-04-16 00:00:00', NULL),
+(2, 4, 't', NULL, '2019-04-21 13:42:59', NULL);
 
 -- --------------------------------------------------------
 
@@ -445,7 +399,7 @@ CREATE TABLE `users` (
   `id` mediumint(8) UNSIGNED NOT NULL,
   `full_name` varchar(100) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL,
+  `password` char(40) DEFAULT NULL,
   `is_guest` tinyint(1) UNSIGNED NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -454,7 +408,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `is_guest`) VALUES
-(1, 'Quan Le', 'quandhle@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0);
+(1, 'Quan Le', 'quandhle@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 0),
+(2, NULL, NULL, NULL, 1),
+(3, NULL, NULL, NULL, 1),
+(4, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -464,27 +421,24 @@ INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `is_guest`) VALUES
 
 CREATE TABLE `user_connections` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `users_id` mediumint(9) DEFAULT NULL,
+  `users_id` mediumint(9) NOT NULL,
   `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `ip_address` varchar(20) NOT NULL,
-  `token` varchar(50) NOT NULL
+  `ip_address` varchar(50) NOT NULL,
+  `token` char(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `user_connections`
+--
+
+INSERT INTO `user_connections` (`id`, `users_id`, `created`, `ip_address`, `token`) VALUES
+(1, 2, '2019-04-20 16:49:00', '127.0.0.1', 'vl5ms7lohpr67b8sj7q0kp53gk'),
+(2, 3, '2019-04-21 11:20:19', '127.0.0.1', 'vl5ms7lohpr67b8sj7q0kp53gk'),
+(3, 4, '2019-04-21 13:17:47', '127.0.0.1', 'vl5ms7lohpr67b8sj7q0kp53gk');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `about_us`
---
-ALTER TABLE `about_us`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `api_keys`
---
-ALTER TABLE `api_keys`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `budget`
@@ -539,18 +493,6 @@ ALTER TABLE `user_connections`
 --
 
 --
--- AUTO_INCREMENT for table `about_us`
---
-ALTER TABLE `about_us`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `api_keys`
---
-ALTER TABLE `api_keys`
-  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT for table `budget`
 --
 ALTER TABLE `budget`
@@ -584,16 +526,16 @@ ALTER TABLE `pins`
 -- AUTO_INCREMENT for table `trips`
 --
 ALTER TABLE `trips`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_connections`
 --
 ALTER TABLE `user_connections`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;

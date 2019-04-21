@@ -7,32 +7,24 @@ if (!empty($_SESSION['user_data'])){
     $users_id = $_SESSION['user_data']['id'];
 } else {
     $token = session_id();
-
     require_once("loginguest.php");
-
-    $_SESSION['user_data'] = [
-        'id' => $users_id,
-        'user' => 'guest',
-        'token' => $token
-    ];
+    $output['username'] = 'guest';
+    $output['token'] = $token;
 }
 
 $json_input = file_get_contents("php://input");
 $input = json_decode($json_input, true);
 
 $trips_name = $input['trips_name'];
-$region = $input['region'];
-
 
 $query = "INSERT INTO `trips` SET
     `users_id` = ?,
     `trips_name` = ?,
-    `region` = ?,
     `start` = NOW()
 ";
 
 $statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($statement, 'dss', $users_id, $trips_name, $region);
+mysqli_stmt_bind_param($statement, 'ds', $users_id, $trips_name);
 $result = mysqli_stmt_execute($statement);
 
 if(!$result){
