@@ -26,7 +26,7 @@ if (!$result) {
 
 if (mysqli_num_rows($result) === 0) {
     $output['success'] = true;
-    $output['budget'] = 'No budget items yet';
+    $output['budget'] = [];
     print(json_encode($output));
     exit();
 }
