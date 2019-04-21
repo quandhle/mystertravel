@@ -85,24 +85,25 @@
         }
     }
 
-    .static {
-        background-color: red;
+    .preTrip, .currentTrip, .postTrip {
+        position: absolute;
+        height: 50vh;
+        width: 100%;
     }
 
     .preTrip {
-        background-color: hotpink;
+        background: hotpink;
+        top: 100%;
     }
 
     .currentTrip {
-        background-color: limegreen;
+        background: limegreen;
+        top: 150%;
     }
 
     .postTrip {
-        background-color: lavender;
-    }
-
-    .filler {
-        background-color: transparent;
+        background: lavender;
+        top: 200%;
     }
 }
 
