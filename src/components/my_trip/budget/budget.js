@@ -16,19 +16,16 @@ class Budget extends Component{
             },
             budget: []
         }
-
         this.toggleInput = this.toggleInput.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.deleteBudgetItem = this.deleteBudgetItem.bind(this);
     }
-
     async handleInput(value) {
-        console.log(value, trips_id)
         const {trips_id} = this.props.trips_id;
         const resp = await axios.post('/api/addbudgetitem.php', {
             trips_id,
             description: value.description,
-            price: parseInt(value.price * 100),
+            price: parseFloat(value.price * 100),
             category: value.category
         });
         if(resp.data.success){
@@ -36,11 +33,11 @@ class Budget extends Component{
             value.price = '';
             value.category = '';
             this.getBudgetList();
+            this.toggleInput();
         } else {
             console.error('Unable to add entry');
         }
     }
-
     async deleteBudgetItem(budgetItem) {
         const {trips_id} = this.props.trips_id;
         const resp = await axios.put('/api/deletebudgetitem.php', {
@@ -53,32 +50,27 @@ class Budget extends Component{
             console.error('Unable to delete entry');
         }
     }
-    toggleInput() {
-        const {height} = this.state.showInput;
-        if(!height){
-            this.setState({
-                showInput: {
-                    height: '230px'
-                }
-            })
-        } else {
-            this.setState({
-                showInput: {
-                    height: 0
-                }
-            })
-        }
-    }
     async getBudgetList() {
         const {trips_id} = this.props.trips_id;
         const resp = await axios.get(`/api/getbudgetlist.php?trips_id=${trips_id}`);
         if (resp.data.success) {
-            console.log(resp.data)
             this.setState({
                 budget: resp.data.budget
             });
         } else {
             console.error(resp.data.error);
+        }
+    }
+    toggleInput(){
+        const {height} = this.state.showInput;
+        if(!height){
+            this.setState(
+                {showInput: {height: '230px'}}
+            )
+        } else {
+            this.setState(
+                {showInput: {height: 0}}
+            )
         }
     }
     componentDidMount(){
@@ -87,8 +79,6 @@ class Budget extends Component{
     render() {
         const {budget, showInput} = this.state;
         let budgetList = null;
-        console.log(budget)
-
         if(budget.length > 0){
             budgetList = budget.map(budgetItem => {
                 return <BudgetItem key={budgetItem.budget_id} budgetItem={budgetItem} deleteBudgetItem={this.deleteBudgetItem}/>
@@ -114,4 +104,3 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps)(Budget);
-

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import NotesForm from './notes_form';
+import NoteItem from './note_item';
 import './notes.scss';
-import { formatDate } from '../../../helper';
 
 class Notes extends Component {
     constructor(props) {
@@ -15,40 +15,22 @@ class Notes extends Component {
             },
             note: [],
         }
-
         this.toggleInput = this.toggleInput.bind(this);
         this.handleInput = this.handleInput.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
     }
     async handleInput(value) {
         const {trips_id} = this.props.trips_id;
-
         const resp = await axios.post('/api/addnoteitem.php', {
             trips_id,
             entry: value.notes
         });
-
         if (resp.data.success) {
             value.notes = ''
-            this.getNoteList()
+            this.getNoteList();
+            this.toggleInput();
         } else {
-            console.log('Cant not add')
-        }
-    }
-    toggleInput() {
-        const { height } = this.state.showInput;
-
-        if (!height) {
-            this.setState({
-                showInput: {
-                    height: '100px'
-                }
-            })
-        } else {
-            this.setState({
-                showInput: {
-                    height: 0
-                }
-            })
+            console.log('Can not add')
         }
     }
     async getNoteList() {
@@ -74,21 +56,31 @@ class Notes extends Component {
             console.error('Unable to delete entry');
         }
     }
+    toggleInput() {
+        const { height } = this.state.showInput;
+        if (!height) {
+            this.setState(
+                {showInput: {height: '100px'}}
+            )
+        } else {
+            this.setState(
+                {showInput: {height: 0}}
+            )
+        }
+    }
     componentDidMount() {
         this.getNoteList();
     }
     render() {
         const { note, showInput } = this.state;
-        const noteList = note.map(note => { //need to change index to id
-            return (
-                <div key={note.note_id} className="notes">
-                    <p>{formatDate(note.date)}</p>
-                    <p>{note.entry}</p>
-                    <button className="btn" onClick={() => { this.deleteItem(note) }}><i className="far fa-trash-alt"></i></button>
-                </div>
-            );
-        });
-
+        let noteList = null;
+        if(note.length > 0){
+            noteList = note.map(note => { //need to change index to id
+                return (
+                    <NoteItem key={note.note_id} note={note} deleteItem={this.deleteItem}/>
+                );
+            });
+        }
         return (
             <div className="notes-page">
                 <div className="notes-input-toggle" onClick={this.toggleInput}>Add Note <i className="fas fa-angle-double-down"></i>
@@ -101,7 +93,6 @@ class Notes extends Component {
         )
     }
 }
-
 
 function mapStateToProps(state){
     return{

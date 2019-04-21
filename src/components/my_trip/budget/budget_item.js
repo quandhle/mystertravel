@@ -3,7 +3,6 @@ import {formatMoney, formatEntries} from '../../../helper';
 
 export default props =>{
     const {budgetItem, deleteBudgetItem} = props;
-    console.log('here')
     return(
         <div key={budgetItem.budget_id} className="budget">
             <div className="budget-descrip">{formatEntries(budgetItem.description)}</div>

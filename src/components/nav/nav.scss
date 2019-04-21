@@ -67,17 +67,18 @@
                 background-color: rgba(255, 255, 255, 0.5);
                 height: 50px;
                 text-align: center;
-                margin: 5px 0;
+                margin: 10px 0;
                 transition: 0.5s;
                 line-height: 50px;
 
                 &:hover{
                     background-color: #1b515d;
+                    color:white;
                 }
             }
 
             a{
-                color: inherit;
+                color: #417970;
                 text-decoration: none;
             }
         }
