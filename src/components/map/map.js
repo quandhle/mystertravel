@@ -8,18 +8,12 @@ import keys from './../../../api_keys';
 import SearchBar from './search_bar';
 
 class Map extends Component{
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            lat: 41.8719,   // Rome
-            lng: 12.5674,
-            pins: [],
-            map: null 
-        };
-
-        this.addPin = this.addPin.bind(this);
-    }
+    state = {
+        lat: 41.8719,   // Rome
+        lng: 12.5674,
+        pins: [],
+        map: null
+    };
 
     componentDidMount() {
         // create and initialize the map
@@ -115,7 +109,6 @@ class Map extends Component{
     }
 
     async showPins() {
-        console.log('Showing pins.');
         // hard coded trips id, grab this from redux later
         const trips_id = 1;
 
@@ -175,21 +168,6 @@ class Map extends Component{
         document.getElementById("places").focus();
     }
 
-    addPin() {
-        const {lat, lng} = this. state;
-
-        const resp = axios.post('/api/addmappin.php', {
-            trips_id: 1,
-            latitude: parseFloat(lat),
-            longitude: parseFloat(lng),
-            description: 'This is a city.'
-        }).then((resp) => {
-            console.log('Response is: ', resp);
-        })
-
-        this.showPins();
-    }
-
     render() {
         return (
             <main>
@@ -197,7 +175,7 @@ class Map extends Component{
                     <SearchBar handleClear={this.handleClear}/>
                 </div>
                 <div id="map" className='map'/>
-                <button className='btn map-btn btn-lg' onClick={this.addPin}>
+                <button className='btn map-btn btn-lg'>
                     <i className="fas fa-map-marker-alt"/>Add Pin
                 </button>
                 <button onClick={this.getCurrentLocation} className='btn geo-btn btn-lg'>
