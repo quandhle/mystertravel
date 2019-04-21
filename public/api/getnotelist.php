@@ -25,10 +25,11 @@ if(!$result){
 }
 
 if(mysqli_num_rows($result) === 0){
-    throw new Exception('No entry retrieved.');
+    $output['success'] = true;
+    $output['notes'] = 'No note items yet';
+    print(json_encode($output));
+    exit();
 }
-
-$data = [];
 
 while($row = mysqli_fetch_assoc($result)){
     $date = date("m/d/Y H:i:s", strtotime($row['entry_date']));

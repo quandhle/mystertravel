@@ -28,8 +28,11 @@ if (!$end_trip_result) {
     throw new Exception(mysqli_error($conn));
 }
 
-if (mysqli_num_rows($end_trip_result) !== 1) {
-    throw new Exception('Unable to retrieve trip details');
+if (mysqli_num_rows($end_trip_result) === 0) {
+    $output['success'] = true;
+    $output['tasks'] = 'No summary yet';
+    print(json_encode($output));
+    exit();
 }
 
 $row = mysqli_fetch_assoc($update_result);

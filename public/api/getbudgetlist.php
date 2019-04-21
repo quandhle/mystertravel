@@ -25,7 +25,10 @@ if (!$result) {
 }
 
 if (mysqli_num_rows($result) === 0) {
-    throw new Exception('Unable to retrieve budget list');
+    $output['success'] = true;
+    $output['budget'] = 'No budget items yet';
+    print(json_encode($output));
+    exit();
 }
 
 while ($row = mysqli_fetch_assoc($result)) {
