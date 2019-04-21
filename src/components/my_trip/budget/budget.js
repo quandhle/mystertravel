@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import BudgetForm from './budget_form';
+import BudgetItem from './budget_item';
 import './budget.scss';
-import {formatMoney, formatEntries} from '../../../helper';
+
 
 class Budget extends Component{
     constructor(props) {
@@ -13,15 +14,16 @@ class Budget extends Component{
             showInput: {
                 height: 0
             },
-            budget: [],
-            trips_id: 1
+            budget: []
         }
 
         this.toggleInput = this.toggleInput.bind(this);
         this.handleInput = this.handleInput.bind(this);
+        this.deleteBudgetItem = this.deleteBudgetItem.bind(this);
     }
 
     async handleInput(value) {
+        console.log(value, trips_id)
         const {trips_id} = this.props.trips_id;
         const resp = await axios.post('/api/addbudgetitem.php', {
             trips_id,
@@ -71,6 +73,7 @@ class Budget extends Component{
         const {trips_id} = this.props.trips_id;
         const resp = await axios.get(`/api/getbudgetlist.php?trips_id=${trips_id}`);
         if (resp.data.success) {
+            console.log(resp.data)
             this.setState({
                 budget: resp.data.budget
             });
@@ -83,21 +86,15 @@ class Budget extends Component{
     }
     render() {
         const {budget, showInput} = this.state;
-        const budgetList = budget.map(budgetItem => {
-            return(
-                <div key={budgetItem.budget_id} className="budget">
-                        <div className="budget-descrip">{formatEntries(budgetItem.description)}</div>
-                        <div className="budget-amount">{formatMoney(budgetItem.price)}</div>
-                        <div className="budget-item">{formatEntries(budgetItem.category)}</div>
-                        <div className="budget-delete">
-                            <button className="btn" onClick={() => { this.deleteBudgetItem(budgetItem) }}><i className="far fa-trash-alt"></i></button>
-                        </div>
+        let budgetList = null;
+        console.log(budget)
 
-                </div>
-            );
-        });
-
-        return(
+        if(budget.length > 0){
+            budgetList = budget.map(budgetItem => {
+                return <BudgetItem key={budgetItem.budget_id} budgetItem={budgetItem} deleteBudgetItem={this.deleteBudgetItem}/>
+            });
+        }     
+       return(
             <div className="budget-page">
                 <div className="budget-input-toggle" onClick={this.toggleInput}>Add Budget Item <i className="fas fa-angle-double-down"></i>
                 </div>

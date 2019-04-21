@@ -26,7 +26,7 @@ if(!$result){
 
 if(mysqli_num_rows($result) === 0){
     $output['success'] = true;
-    $output['notes'] = 'No note items yet';
+    $output['notes'] = [];
     print(json_encode($output));
     exit();
 }
