@@ -3,9 +3,6 @@ import Guest from './guest';
 import './home.scss';
 
 class Home extends Component {
-    constructor(props){
-        super(props)
-    }
     toSignInPage= ()=>{
         this.props.history.push("/signin")
     }
@@ -13,7 +10,6 @@ class Home extends Component {
         // after sign in page finish
     }
     render() {
-        console.log(this.props)
         return (
             <div className="home-page">
                 <h4 className='title-blurb1'>Travel smarter</h4>

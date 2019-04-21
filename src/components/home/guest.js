@@ -13,8 +13,7 @@ class Guest extends Component {
     goToTrip = () => {
         this.props.history.push(`/mytrip`);
     }
-    openModal = () => {
-
+    toggleModal = () => {
         if(!this.state.modal){
             this.setState({
                 modal: true
@@ -23,16 +22,15 @@ class Guest extends Component {
             this.setState({
                 modal: false
             });
-            this.props.history.push('/map');
         }
     }
     render() {
         return (
             <Fragment>
                 <div className="home-page-btn">
-                    <button onClick={this.openModal} className="home-start-btn btn">Start As Guest</button>
+                    <button onClick={this.toggleModal} className="home-start-btn btn">Start As Guest</button>
                 </div>
-                {this.state.modal && <StartTrip modal={this.state.modal} close={this.openModal}/>}
+                {this.state.modal && <StartTrip modal={this.state.modal} close={this.toggleModal} history={this.props.history}/>}
             </Fragment>
         )
     }
