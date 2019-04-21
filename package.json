@@ -1,7 +1,7 @@
 {
-  "name": "php_react_starter",
+  "name": "myster_travel",
   "version": "1.0.0",
-  "description": "Starting setup for ReactJS ReduxJS project with PHP server",
+  "description": "Travel logging site with ReactJS and PHP",
   "main": "index.js",
   "proxy": {
     "/api/*": {
@@ -13,11 +13,11 @@
     "bundle": "webpack --config webpack.prod.js --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Scott Bowler",
+  "author": "Kylie Chao, Jennifer Lai, Quan Le, Westley Poon",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Learning-Fuze/react_starter.git"
+    "url": "https://https://github.com/Learning-Fuze/c219_travelagenda"
   },
   "dependencies": {
     "aws-sdk": "^2.438.0",
