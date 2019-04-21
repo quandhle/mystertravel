@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import NotesForm from './notes_form';
+import NoteItem from './note_item';
 import './notes.scss';
-import {formatDate} from '../../../helper';
 
-class Notes extends Component{
-    constructor(props){
+class Notes extends Component {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -13,74 +14,78 @@ class Notes extends Component{
                 height: 0
             },
             note: [],
-            trips_id: 1
         }
-
         this.toggleInput = this.toggleInput.bind(this);
         this.handleInput = this.handleInput.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
     }
-    async handleInput(value){
-        const resp = await axios.post('/api/addnoteitem.php',{
-            trips_id: 1,
+    async handleInput(value) {
+        const {trips_id} = this.props.trips_id;
+        const resp = await axios.post('/api/addnoteitem.php', {
+            trips_id,
             entry: value.notes
         });
-
-        if(resp.data.success){
+        if (resp.data.success) {
             value.notes = ''
-            this.getNoteList()
+            this.getNoteList();
+            this.toggleInput();
         } else {
-            console.log('Cant not add')
+            console.log('Can not add')
         }
     }
-    toggleInput(){
-        const {height} = this.state.showInput;
-
-        if(!height){
-            this.setState({
-                showInput: {
-                    height: '100px'
-                }
-            })
-        } else {
-            this.setState({
-                showInput: {
-                    height: 0
-                }
-            })
-        }
-
-    }
-    async getNoteList(){
-        const {trips_id} = this.state;
+    async getNoteList() {
+        const { trips_id } = this.props.trips_id;
         const resp = await axios.get(`/api/getnotelist.php?trips_id=${trips_id}`);
-        if(resp.data.success){
+        if (resp.data.success) {
             this.setState({
-                note: resp.data.data.reverse()
+                note: resp.data.notes
             });
         } else {
             console.error(resp.data.error)
         }
     }
-
-    componentDidMount(){
+    async deleteItem(note){
+        const {trips_id} = this.props.trips_id;
+        const resp = await axios.put('/api/deletenoteitem.php',{
+            trips_id,
+            note_id: note.note_id
+        })
+        if (resp.data.success) {
+            this.getNoteList();
+        } else {
+            console.error('Unable to delete entry');
+        }
+    }
+    toggleInput() {
+        const { height } = this.state.showInput;
+        if (!height) {
+            this.setState(
+                {showInput: {height: '100px'}}
+            )
+        } else {
+            this.setState(
+                {showInput: {height: 0}}
+            )
+        }
+    }
+    componentDidMount() {
         this.getNoteList();
     }
-    render(){
-        const {note, showInput} = this.state;
-        const noteList = note.map((note, index)=>{
-            return(
-                <div key={index} className="notes">
-                    <p>{formatDate(note.date)}</p>
-                    <p>{note.entry}</p>
-                </div>
-            );
-        });
-
-        return(
+    render() {
+        const { note, showInput } = this.state;
+        let noteList = null;
+        if(note.length > 0){
+            noteList = note.map(note => { //need to change index to id
+                return (
+                    <NoteItem key={note.note_id} note={note} deleteItem={this.deleteItem}/>
+                );
+            });
+        }
+        return (
             <div className="notes-page">
                 <div className="notes-input-toggle" onClick={this.toggleInput}>Add Note <i className="fas fa-angle-double-down"></i>
                 </div>
-                <NotesForm notes={this.handleInput} style={showInput}/>
+                <NotesForm notes={this.handleInput} style={showInput} />
                 <div className="notes-box">
                     {noteList}
                 </div>
@@ -89,4 +94,10 @@ class Notes extends Component{
     }
 }
 
-export default Notes;
+function mapStateToProps(state){
+    return{
+        trips_id: state.trips_id
+    }
+}
+
+export default connect(mapStateToProps)(Notes);

@@ -1,5 +1,4 @@
 .about-container {
-    width: 100%;
 
     .person-img {
         width: 100%;
@@ -7,6 +6,70 @@
     }
 
     .about-person {
-        width: 50%;
+        font-size: 1.2em;
+        margin: 5px;
+        // border-radius: 15px;
+
+        transition: 0.5s;
+        -webkit-box-shadow: 0px 0px 15px -5px rgba(213,224,223,1);
+        -moz-box-shadow: 0px 0px 15px -5px rgba(213,224,223,1);
+        box-shadow: 0px 0px 15px -5px rgba(213,224,223,1);
+
+        // &:nth-child(odd){
+        //     background-color:  #2b616d;
+        // }
+        
+        // &:nth-child(even){
+        //     background-color: #3b717e;
+        // }
+
+        // &:hover{
+        //     background-color: #1b515d;
+        // }
+        .about-top{
+            background-color:  #2b616d;
+            border-radius: 15px 15px 0 0;
+            padding: 10px 15px;
+
+            .about-img, .about-name{
+                display: inline-block;
+            }
+            .about-img{
+                width: 30%;
+            }
+            .about-name{
+                width:70%;
+                padding: 15px;
+                color: white;
+            }
+        }
+
+        .about-story{
+            background-color:  #2b616d;
+            height: 1.5em; 
+            overflow-y: hidden;
+            transition: height 1s;
+            color: rgb(253, 243, 243); 
+
+            &:hover{ //needto change to js
+                height: 200px;
+                transition: height 0.5s;
+            }
+        }
+
+        .about-contact{
+            background-color:  #2b616d;
+            border-radius: 0 0 15px 15px;
+            padding: 10px 15px;
+
+            text-align: right;
+            font-size: 2rem;
+            a{
+                color: white;
+                text-decoration: none;
+                padding: 5px;
+            }
+
+        }
     }
 }

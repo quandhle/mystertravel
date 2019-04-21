@@ -21,13 +21,15 @@ if (!$result) {
 }
 
 if (mysqli_num_rows($result) === 0) {
-    throw new Exception('Unable to retrive todo items');
+    $output['success'] = true;
+    $output['tasks'] = 'No task items yet';
+    print(json_encode($output));
+    exit();
 }
-
-$data = [];
 
 while ($row = mysqli_fetch_assoc($result)) {
     $data[] = [
+        'task_id' => $row['id'],
         'task' => $row['task'],
         'date' => $row['task_date'],
         'status' => $row['status']
@@ -38,3 +40,5 @@ $output['success'] = true;
 $output['tasks'] = $data;
 
 print(json_encode($output));
+
+?>

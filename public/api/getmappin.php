@@ -21,13 +21,15 @@ if (!$result) {
 }
 
 if (mysqli_num_rows($result) === 0) {
-    throw new Exception('Unable to retrieve map pins');
+    $output['success'] = true;
+    $output['data'] = 'No map pins yet';
+    print(json_encode($output));
+    exit();
 }
-
-$data = [];
 
 while ($row = mysqli_fetch_assoc($result)) {
     $data[] = [
+        'pin_id' => $row['id'],
         'lat' => $row['latitude'],
         'lng' => $row['longitude'],
         'description' => $row['description']

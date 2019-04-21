@@ -4,149 +4,205 @@ import {connect} from 'react-redux';
 import {change} from 'redux-form';
 
 import './map.scss';
+import keys from './../../../api_keys';
 import SearchBar from './search_bar';
 
 class Map extends Component{
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
-            lat: 41.8719,
+            lat: 41.8719,   // Rome
             lng: 12.5674,
-            api: '',
             pins: [],
-            map: null
-        }
+            map: null 
+        };
+
+        this.addPin = this.addPin.bind(this);
     }
 
-    componentDidMount(){
-        this.getAccessToMap();
-        this.getPins();
+    componentDidMount() {
+        // create and initialize the map
+        this.createMap();
     }
 
-    async getAccessToMap(){
-        const resp = await axios.get('/api/getapikey.php?api=google');
-        if(resp.data.success){
-            this.setState({
-                api: resp.data.data['api_key']
-            });
-            this.createMap();
-        } else {
-            console.error(resp.data.error);
-        }
-    }
-
-    getPins = ()=> {
-        const resp = axios.get('/api/getmappin.php').then((resp) => {
-            this.setState({
-                pins: resp.data.data
-            })
-        })
-    }
-
-    createMap = () => {
-        loadScript(`https://maps.googleapis.com/maps/api/js?key=${this.state.api}&libraries=places&callback=initMap`);
+    createMap() {
+        loadScript(`https://maps.googleapis.com/maps/api/js?key=${keys.googleMaps}&libraries=places&callback=initMap`);
         window.initMap = this.initMap;
     }
 
     initMap = () => {
-        const input = document.getElementById("places");
-        this.autoComplete = new window.google.maps.places.Autocomplete(input, {
-            types: ['(regions)']});
+        // the input element you want autocomplete on
+        const searchBarInput = document.getElementById("places");
+        this.autoComplete = new window.google.maps.places.Autocomplete(searchBarInput, {
+            types: ['(regions)']
+        });
         this.autoComplete.setFields(['address_component', 'geometry', 'name']);
+
+        // if autocomplete input changes, run the event handler
         this.autoComplete.addListener('place_changed', this.searchCountry);
 
+        // initialize the map
         const map = new window.google.maps.Map(document.getElementById('map'), {
-          center: {lat: this.state.lat, lng: this.state.lng},
-          zoom: 8
+            mapTypeControl: false,      // hide some of the control buttons
+            streetViewControl: false,
+            fullscreenControl: false,
+            center: {lat: this.state.lat, lng: this.state.lng},
+            zoom: 10,
+            minZoom: 2,
         });
 
-        this.setState({
-            map: map
-        });
+        // save the map in state and get/show pins
+        this.setState({map: map});
+        this.showPins();
+    }
 
-        // const allMarkers = this.state.pins.map((item) => {
-        //     const position = {
-        //         lat: parseFloat(item.lat),
-        //         lng: parseFloat(item.lng)
-        //     };
-        //
-        //     const marker = new window.google.maps.Marker({position: position, map: map})
-        // });
-        //
-        // const position = {lat: 41.8, lng: 12.5};
-        // const marker = new window.google.maps.Marker({position: position, map: map});
+    parseAddressComponents(address_components) {
+        if(address_components[address_components.length - 1].short_name === 'US') {
+            switch(address_components.length) {
+                case 3:
+                case 2:
+                    return `${address_components[address_components.length - 2].long_name}, United States`;
+                case 1:
+                    return 'United States';
+                default:
+                    return `${address_components[0].short_name}, ${address_components[address_components.length - 2].short_name}`;
+            }
+        } else {
+            return address_components.map((item) => {
+                return item.long_name;
+            }).join(', ');
+        }
     }
 
     searchCountry = () => {
-
+        // grab the input from the searchbar (either selected autocomplete entry or user key input)
         const place = this.autoComplete.getPlace();
-        console.log('Place:', place);
 
         let address, location;
+
         if (place.address_components) {
-            address = [
-                (place.address_components[0] && place.address_components[0].short_name || ''),
-                (place.address_components[1] && place.address_components[1].short_name || ''),
-                (place.address_components[2] && place.address_components[2].short_name || '')
-            ].join(', ');
+            // autocompleted Places will have a address_components and a geometry.location (coords)
+            address = this.parseAddressComponents(place.address_components);
             location = place.geometry.location;
+
+            // center the map on the result
+            this.state.map.setCenter(location);
+            this.state.map.setZoom(12);
+
         } else {
+            // user key input is put into Place.name
+            // use findPlaceFromQuery to find a suitable match
             const service = new google.maps.places.PlacesService(this.state.map);
-
-            const map = this.state.map;
-
             service.findPlaceFromQuery({
                     query: place.name,
                     fields: ['geometry', 'name']
-                }, function(results, status) {
+
+            }, (results, status) => {
                 if (status === google.maps.places.PlacesServiceStatus.OK) {
-                    map.setCenter(results[0].geometry.location);
+                    // center the map on the result
+                    this.state.map.setCenter(results[0].geometry.location);
+                    this.state.map.setZoom(12);
                 }
             });
 
             address = place.name;
-
         }
-        console.log('Address:', address);
 
+        // change the input field to have the new address result
         this.props.dispatch(change("search-bar-form", `places`, address));
-
-        this.state.map.setCenter(location);
-        const marker = new google.maps.Marker({
-            map: this.state.map,
-            position: location
-        });
-        this.setState({
-            pins: [...this.state.pins, marker]
-        });
-        console.log(this.state.pins);
+        console.log('Address:', address);
     }
 
-    getCurrentLocation= () => {
-        navigator.geolocation.getCurrentPosition((pos) => {
-            const crd = pos.coords;
-            this.setState({lat: crd.latitude, lng: crd.longitude});
-            this.state.map.setCenter({lat: this.state.lat, lng: this.state.lng});
+    async showPins() {
+        console.log('Showing pins.');
+        // hard coded trips id, grab this from redux later
+        const trips_id = 1;
+
+        // get the pin data from the server
+        const resp = await axios.get(`/api/getmappin.php?trips_id=${trips_id}`);
+        let pinData = null;
+        if(resp.data.success) {
+            pinData = resp.data.data;
+        }
+
+        // if there was data, turn the pin data into Marker objects
+        if(pinData) {
+            const pins = pinData.map((item) => {
+                const pin = new window.google.maps.Marker({
+                    position: {
+                        lat: item.lat,
+                        lng: item.lng
+                    },
+                    map: this.state.map
+                });
+
+                // display the markers
+                pin.setMap(this.state.map);
+                return pin;
+            });
+
+            // save all the Marker objects in state
+            this.setState({
+                pins: pins
+            });
+        }
+    }
+
+    getCurrentLocation = () => {
+        navigator.geolocation.getCurrentPosition(position => {
+            const {coords} = position;
+            const coordObject = {lat: coords.latitude, lng: coords.longitude};
+            this.setState(coordObject);
+            this.state.map.setCenter(coordObject);
+
+            const geocoder = new google.maps.Geocoder;
+            geocoder.geocode({'location': coordObject}, (results, status) => {
+                if (status === 'OK') {
+                    if (results[0]) {
+                        this.props.dispatch(change("search-bar-form", `places`,
+                            results.length > 3 ?
+                                results[results.length - 4].formatted_address : results[0].formatted_address));
+                    }
+                }
+            });
         });
     }
 
-    search(values) {
-        // console.log(values);
+    handleClear = event => {
+        event.preventDefault();
+        this.props.dispatch(change("search-bar-form", `places`, ''));
+        document.getElementById("places").focus();
+    }
+
+    addPin() {
+        const {lat, lng} = this. state;
+
+        const resp = axios.post('/api/addmappin.php', {
+            trips_id: 1,
+            latitude: parseFloat(lat),
+            longitude: parseFloat(lng),
+            description: 'This is a city.'
+        }).then((resp) => {
+            console.log('Response is: ', resp);
+        })
+
+        this.showPins();
     }
 
     render() {
         return (
             <main>
                 <div className="search-bar-holder">
-                    <SearchBar search={this.search}/>
+                    <SearchBar handleClear={this.handleClear}/>
                 </div>
-                <div id="map" className='map'>
-                </div>
-                <button className='btn map-btn btn-danger btn-lg'>
-                    <i className="fas fa-map-marker-alt"/>Add Pin</button>
+                <div id="map" className='map'/>
+                <button className='btn map-btn btn-lg' onClick={this.addPin}>
+                    <i className="fas fa-map-marker-alt"/>Add Pin
+                </button>
                 <button onClick={this.getCurrentLocation} className='btn geo-btn btn-lg'>
-                    <i className="fas fa-location-arrow"/></button>
+                    <i className="fas fa-location-arrow"/>
+                </button>
             </main>
         );
     }
@@ -158,8 +214,7 @@ function loadScript(url){
     script.src = url;
     script.async = true;
     script.defer = true;
-    index.parentNode.insertBefore(script, index); //keep script in the very begining
+    index.parentNode.insertBefore(script, index);
 }
-
 
 export default connect()(Map);

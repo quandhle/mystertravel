@@ -57,6 +57,7 @@
     position: fixed;
     top: 0%;
     z-index: 999;
+    font-size: 1.5em;
 
     .side-nav {
         position: absolute;
@@ -74,20 +75,21 @@
         .side-nav-links {
             padding: 0;
 
-            > * {
-                display: block;
-                background-color: #2b616d;
-                height: 25%;
+            li {
+                background-color: rgba(255, 255, 255, 0.5);
+                height: 50px;
                 text-align: center;
-                color: white;
-                margin: 5px 0;
+                margin: 10px 0;
+                transition: 0.5s;
+                line-height: 50px;
 
-                &:hover {
-                    background-color: #376b77;
+                &:hover{
+                    background-color: #1b515d;
+                    color:white;
                 }
 
                 a {
-                    color: inherit;
+                    color: #417970;
                     text-decoration: none;
                 }
             }

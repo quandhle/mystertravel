@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import BudgetForm from './budget_form';
+import BudgetItem from './budget_item';
 import './budget.scss';
-import {formatMoney, formatEntries} from '../../../helper';
+
 
 class Budget extends Component{
     constructor(props) {
@@ -12,40 +14,35 @@ class Budget extends Component{
             showInput: {
                 height: 0
             },
-            budget: [],
-            trips_id: 1
+            budget: []
         }
-
         this.toggleInput = this.toggleInput.bind(this);
         this.handleInput = this.handleInput.bind(this);
+        this.deleteBudgetItem = this.deleteBudgetItem.bind(this);
     }
-
     async handleInput(value) {
-        let {description, price, category} = value;
-        const {trips_id} = this.state;
+        const {trips_id} = this.props.trips_id;
         const resp = await axios.post('/api/addbudgetitem.php', {
             trips_id,
-            description: description,
-            price: parseInt(price * 100),
-            category: category
+            description: value.description,
+            price: parseFloat(value.price * 100),
+            category: value.category
         });
         if(resp.data.success){
-            description = '';
-            price = '';
-            category = '';
+            value.description = '';
+            value.price = '';
+            value.category = '';
             this.getBudgetList();
+            this.toggleInput();
         } else {
             console.error('Unable to add entry');
         }
     }
-
-    async deleteItem(budgetItem) {
-        const {trips_id} = this.state;
+    async deleteBudgetItem(budgetItem) {
+        const {trips_id} = this.props.trips_id;
         const resp = await axios.put('/api/deletebudgetitem.php', {
             trips_id,
-            description: budgetItem.description,
-            category: budgetItem.category,
-            price: budgetItem.price
+            budget_id: budgetItem.budget_id,
         });
         if(resp.data.success){
             this.getBudgetList();
@@ -53,29 +50,8 @@ class Budget extends Component{
             console.error('Unable to delete entry');
         }
     }
-
-    toggleInput() {
-        const {height} = this.state.showInput;
-
-        if(!height){
-            this.setState({
-                showInput: {
-                    height: '230px'
-                }
-            })
-        } else {
-            this.setState({
-                showInput: {
-                    height: 0
-                }
-            })
-        }
-
-        // need way to render and update budget list
-    }
-
     async getBudgetList() {
-        const {trips_id} = this.state;
+        const {trips_id} = this.props.trips_id;
         const resp = await axios.get(`/api/getbudgetlist.php?trips_id=${trips_id}`);
         if (resp.data.success) {
             this.setState({
@@ -85,28 +61,30 @@ class Budget extends Component{
             console.error(resp.data.error);
         }
     }
-
+    toggleInput(){
+        const {height} = this.state.showInput;
+        if(!height){
+            this.setState(
+                {showInput: {height: '230px'}}
+            )
+        } else {
+            this.setState(
+                {showInput: {height: 0}}
+            )
+        }
+    }
     componentDidMount(){
         this.getBudgetList();
     }
-
     render() {
         const {budget, showInput} = this.state;
-        const budgetList = budget.map((budgetItem, index) => {
-            return(
-                <div key={index} className="budget">
-                        <div className="budget-descrip">{formatEntries(budgetItem.description)}</div>
-                        <div className="budget-amount">{formatMoney(budgetItem.price)}</div>
-                        <div className="budget-item">{formatEntries(budgetItem.category)}</div>
-                        <div className="budget-delete">
-                            <button className="btn" onClick={() => { this.deleteItem(budgetItem) }}><i className="far fa-trash-alt"></i></button>
-                        </div>
-
-                </div>
-            );
-        });
-
-        return(
+        let budgetList = null;
+        if(budget.length > 0){
+            budgetList = budget.map(budgetItem => {
+                return <BudgetItem key={budgetItem.budget_id} budgetItem={budgetItem} deleteBudgetItem={this.deleteBudgetItem}/>
+            });
+        }     
+       return(
             <div className="budget-page">
                 <div className="budget-input-toggle" onClick={this.toggleInput}>Add Budget Item <i className="fas fa-angle-double-down"></i>
                 </div>
@@ -119,4 +97,10 @@ class Budget extends Component{
     }
 }
 
-export default Budget;
+function mapStateToProps(state){
+    return{
+        trips_id: state.trips_id
+    }
+}
+
+export default connect(mapStateToProps)(Budget);

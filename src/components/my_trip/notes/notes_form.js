@@ -13,7 +13,6 @@ const NotesInput = props =>{
         ) 
 }
 
-
 export default reduxForm({
     form: 'notes-form'
 })(NotesInput);

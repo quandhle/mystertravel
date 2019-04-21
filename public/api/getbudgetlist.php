@@ -8,7 +8,11 @@ if (empty($trips_id)) {
     throw new Exception('Please provide trips_id (int) with your request');
 }
 
-$query = "SELECT * FROM `budget` WHERE `trips_id` = ?";
+$query = "SELECT *
+    FROM `budget`
+    WHERE `trips_id` = ?
+    ORDER BY `added` DESC
+";
 
 $statement = mysqli_prepare($conn, $query);
 mysqli_stmt_bind_param($statement, 'd', $trips_id);
@@ -21,11 +25,15 @@ if (!$result) {
 }
 
 if (mysqli_num_rows($result) === 0) {
-    throw new Exception('Unable to retrieve budget list');
+    $output['success'] = true;
+    $output['budget'] = [];
+    print(json_encode($output));
+    exit();
 }
 
 while ($row = mysqli_fetch_assoc($result)) {
     $data[] = [
+        'budget_id' => $row['id'],
         'description' => $row['description'],
         'category' => $row['category'],
         'price' => $row['price'],

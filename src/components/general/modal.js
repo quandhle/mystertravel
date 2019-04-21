@@ -3,7 +3,6 @@ import './general.scss';
 
 export default props =>{
     const {open, children, childrenStyle} = props
-
     if(open){
         return(
             <div className="popup-container">

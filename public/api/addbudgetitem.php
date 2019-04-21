@@ -14,8 +14,12 @@ if (empty($trips_id)) {
     throw new Exception('Please provide trips_id (int) with your request');
 }
 
+if(empty($description)){
+    throw new Exception('Please enter description (str) with your request');
+}
+
 if (empty($category)) {
-    throw new Exception('Please enter category (str) with your request');
+    throw new Exception('Please select category (str) with your request');
 }
 
 if (empty($price)) {
@@ -42,7 +46,10 @@ if(mysqli_affected_rows($conn) !== 1){
     throw new Exception('Unable to add budget entry');
 }
 
+$budget_id = mysqli_insert_id($conn);
+
 $output['success'] = true;
+$output['budget_id'] = $budget_id;
 
 print(json_encode($output));
 

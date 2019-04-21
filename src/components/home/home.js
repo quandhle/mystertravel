@@ -1,55 +1,23 @@
 import React, {Component} from 'react';
-import StartTrip from './start_trip';
-import PreTrip from './preTrip';
-import CurrentTrip from './currentTrip';
-import PostTrip from './postTrip';
+import Guest from './guest';
 import './home.scss';
 
 class Home extends Component {
-    constructor(props){
-        super(props);
-
-        this.state = {
-            modal: false,
-        };
+    toSignInPage= ()=>{
+        this.props.history.push("/signin")
     }
-
-    goToTrip = () => {
-        this.props.history.push(`/mytrip`);
-    }
-
-    openModal = () => {
-        if(!this.state.modal){
-            this.setState({
-                modal: true
-            })
-        } else {
-            this.setState({
-                modal: false
-            });
-            this.props.history.push('/map');
-        }
+    checkSignIn(){
+        // after sign in page finish
     }
     render() {
         return (
             <div className="home-page">
-                <section className="landing parallax ">
-                    <h4 className='title-blurb1'>Travel smarter</h4>
-                    <h4 className='title-blurb2'>Plan faster</h4>
-
-                    <div className="home-page-btn">
-                        <button onClick={this.openModal} className="home-start-btn btn">Start / View trip</button>
-                    </div>
-                    </section>
-
-                {/* only display in desktop page */}
-                <div className="desktop-home-page">
-                        <PreTrip/>
-                        <CurrentTrip/>
-                        <PostTrip/>
+                <h4 className='title-blurb1'>Travel smarter</h4>
+                <h4 className='title-blurb2'>Plan faster</h4>
+                <Guest history={this.props.history}/>
+                <div className="home-page-btn">
+                    <button onClick={this.toSignInPage} className="home-start-btn btn">Sign In</button>
                 </div>
-                
-                {this.state.modal && <StartTrip modal={this.state.modal} close={this.openModal}/>}
             </div>
         )
     }
