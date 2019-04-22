@@ -1,9 +1,11 @@
 import types from './types';
 
 export function signIn(user){
+    console.log('user:',user);
     return{
         type: types.SIGN_IN,
-        username: user.username
+        username: user.username,
+        token: user.token
     }
 }
 

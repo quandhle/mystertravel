@@ -7,9 +7,9 @@ import Map from './map';
 import MyTripRoutes from './my_trip/my_trip_routes';
 import AboutUs from './about_us';
 import NotFound from './404';
+import Account from './account';
 
 import '../assets/css/app.scss';
-
 
 const App = () => (
     <div>
@@ -20,6 +20,7 @@ const App = () => (
                 <Route path='/map' component={Map}/>
                 <Route path='/mytrip' component={MyTripRoutes}/>
                 <Route path='/aboutus' component={AboutUs}/>
+                <Route path='/account' component={Account}/>
                 <Route component={NotFound}/>
             </Switch>
         </div>

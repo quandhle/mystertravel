@@ -6,7 +6,8 @@ export default props =>{
 
     return (
         <div className={`input-box ${classes} ${col}`}>
-            <input type={type} id={id} {...input} name={name} placeholder={label} autoComplete="off"/>   
+            <input type={type} id={id} {...input} name={name} placeholder={label} autoComplete="off"/>
+            <p className="error-input">{touched && error}</p>  
         </div>
     )
 }
