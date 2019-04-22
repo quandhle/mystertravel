@@ -135,10 +135,12 @@ class Map extends Component {
         this.props.dispatch(change("search-bar-form", `places`, address));
 
         this.setState({
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng(),
+            lat: location.lat(),
+            lng: location.lng(),
             name: place.name
         })
+
+        console.log(this.state);
     }
 
     async showPins() {
@@ -223,6 +225,7 @@ class Map extends Component {
             name: name
         }).then((resp) => {
             console.log('resp is: ', resp);
+
             const pin = new window.google.maps.Marker({
                 position: {
                     lat: lat,
@@ -230,6 +233,12 @@ class Map extends Component {
                 },
                 title: resp.data.name
             });
+
+            this.setState({
+                pin: [...this.state.pins, pin]
+            })
+
+            console.log(this.state);
         })
 
         this.showPins();
