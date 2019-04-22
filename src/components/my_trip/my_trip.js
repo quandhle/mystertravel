@@ -32,7 +32,7 @@ class MyTrip extends Component{
                     <button className="map-link-btn btn" onClick={this.goToMap}>View Map</button>
                 </div>
                 <div className="end-trip-link">
-                    <button className="end-trip-link-btn btn"  onClick={this.goToSummary}>End Trip</button>
+                    <button className="end-trip-link-btn btn"  onClick={this.goToSummary}>Trip Summary</button>
                 </div>
             </div>
         )

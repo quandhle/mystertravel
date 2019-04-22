@@ -1,37 +1,83 @@
 .endtrip-page{
+    .summary-trip-name{
+        width: 100%;
+        text-align: center;
+        p{
+            font-size: 1.8em;
+            margin: 10px;
+            font-weight: bold;
+        }
+    }
+
+    .summary-region{
+        width: 100%;
+        text-align: center;
+        p{
+            font-size: 1.0em;
+            font-weight: bold;
+            margin: 10px;
+            text-transform: capitalize;
+        }
+    }
+
     .total-spend{
         width: 100%;
         text-align: center;
         p{
             font-size: 1.2em;
-            margin: 15px;
             font-weight: bold;
+            margin: 0 0 16px 0;
         }
     }
     .last-entry{
         .entry-content{
             img{
-                width:100%;
+                width: 100%;
+            }
+            p {
+                margin: 10px 10px;
+                text-align: center;
             }
         }
 
         .share-btns{
+            display: flex;
+            justify-content: center;
+            align-content: flex-end;
 
-
-            &>*{
-            position: relative;
-            left: 25%;
-            width: 50px;
-            height: 50px;
-            display: inline-block;
-            margin: 5px;
-            font-size: 3em;
-            color: #2b616d;
-
-                &:hover{
-                    color: #417681;
-                }
+            &>* {
+                width: 50px;
+                height: 50px;
+                margin: 5px;
+                font-size: 3em;
+                color: #2b616d;
             }
+
+            &:hover{
+                color: #417681;
+            }
+        }
+    }
+
+    .summary-end-trip-link {
+        width: 100%;
+        margin: 28px;
+
+        button {
+            height: 60px;
+            width: 90%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fa8d62;
+            color: white;
+            border-radius: 15px;
+            transition: 0.5s;
+            font-size: 1.5em;
+        }
+
+        button:hover {
+            background-color: #ea7d52;
         }
     }
 }
