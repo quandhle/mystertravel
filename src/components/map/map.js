@@ -52,7 +52,21 @@ class Map extends Component{
     }
 
     parseAddressComponents(address_components) {
-        if(address_components[address_components.length - 1].short_name === 'US') {
+
+        if(address_components[address_components.length - 1].types[0] === 'postal_code') {
+            // if the last slot is a zip code
+            switch(address_components.length) {
+                case 4:
+                case 3:
+                    return `${address_components[address_components.length - 3].long_name}, United States`;
+                case 2:
+                    return 'United States';
+                default:
+                    return `${address_components[0].short_name}, ${address_components[address_components.length - 3].short_name}`;
+            }
+
+        } else if(address_components[address_components.length - 1].short_name === 'US') {
+            // if the location is in the US, try to do 'city', 'state', or 'state', 'United States'
             switch(address_components.length) {
                 case 3:
                 case 2:
@@ -62,7 +76,9 @@ class Map extends Component{
                 default:
                     return `${address_components[0].short_name}, ${address_components[address_components.length - 2].short_name}`;
             }
+
         } else {
+            // for non-US countries, append all available parts
             return address_components.map((item) => {
                 return item.long_name;
             }).join(', ');
@@ -149,6 +165,7 @@ class Map extends Component{
             this.setState(coordObject);
             this.state.map.setCenter(coordObject);
 
+            // get address
             const geocoder = new google.maps.Geocoder;
             geocoder.geocode({'location': coordObject}, (results, status) => {
                 if (status === 'OK') {
