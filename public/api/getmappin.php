@@ -32,7 +32,8 @@ while ($row = mysqli_fetch_assoc($result)) {
         'pin_id' => $row['id'],
         'lat' => $row['latitude'],
         'lng' => $row['longitude'],
-        'description' => $row['description']
+        'description' => $row['description'],
+        'name' => $row['name']
     ];
 }
 

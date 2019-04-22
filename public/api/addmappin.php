@@ -8,10 +8,15 @@ $input = json_decode($json_input, true);
 $trips_id = intval($input['trips_id']);
 $latitude = floatval($input['latitude']);
 $longitude = floatval($input['longitude']);
+$name = $input['name'];
 $description = $input['description'];
 
 if(empty($trips_id)){
     throw new Exception('Please provide trips_id (int) with your request');
+}
+
+if(empty($name)){
+    throw new Exception('Please provide a name with your request.');
 }
 
 if(empty($description)){
@@ -28,12 +33,13 @@ $query = "INSERT INTO `pins`
         `latitude` = ?,
         `longitude` = ?,
         `description` = ?,
+        `name` = ?,
         `added` = NOW()
 ";
 
 
 $statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($statement, 'ddds', $trips_id, $latitude, $longitude, $description);
+mysqli_stmt_bind_param($statement, 'dddss', $trips_id, $latitude, $longitude, $description, $name);
 $result = mysqli_stmt_execute($statement);
 
 if(!$result){
@@ -47,10 +53,14 @@ if(mysqli_affected_rows($conn) !== 1){
 $pin_id = mysqli_insert_id($conn);
 
 $output['success'] = true;
-$output['pin_id'] = $pin_id;
-$output['pinLocation'] = [
-    'lat' => $latitude,
-    'lng' => $longitude
+$output = [
+    'pin_id' => $pin_id,
+    'location' => [
+        'lat' => $latitude,
+        'lng' => $longitude
+    ],
+    'description' => $description,
+    'name' => $name
 ];
 
 print(json_encode($output));
