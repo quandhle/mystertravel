@@ -7,13 +7,19 @@ import './map.scss';
 import keys from './../../../api_keys';
 import SearchBar from './search_bar';
 
-class Map extends Component{
-    state = {
-        lat: 41.8719,   // Rome
-        lng: 12.5674,
-        pins: [],
-        map: null
-    };
+class Map extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            lat: 41.8719,   // Rome
+            lng: 12.5674,
+            pins: [],
+            map: null
+        }
+
+        this.addPin = this.addPin.bind(this);
+    }
 
     componentDidMount() {
         // if it isn't already loaded, load Google Maps API script, and then initialize the map
@@ -190,6 +196,21 @@ class Map extends Component{
         document.getElementById("places").focus();
     }
 
+    addPin() {
+        const {lat, lng} = this. state;
+
+        const resp = axios.post('/api/addmappin.php', {
+            trips_id: 1,
+            latitude: parseFloat(lat),
+            longitude: parseFloat(lng),
+            description: 'This is Irvine.'
+        }).then((resp) => {
+            console.log('Response is: ', resp);
+        })
+
+        this.showPins();
+    }
+
     render() {
         return (
             <main>
@@ -197,7 +218,7 @@ class Map extends Component{
                     <SearchBar handleClear={this.handleClear}/>
                 </div>
                 <div id="map" className='map'/>
-                <button className='btn map-btn btn-lg'>
+                <button className='btn map-btn btn-lg' onClick={this.addPin}>
                     <i className="fas fa-map-marker-alt"/>Add Pin
                 </button>
                 <button onClick={this.getCurrentLocation} className='btn geo-btn btn-lg'>
