@@ -16,8 +16,12 @@ class Map extends Component{
     };
 
     componentDidMount() {
-        // create and initialize the map
-        this.createMap();
+        // if it isn't already loaded, load Google Maps API script, and then initialize the map
+        if (!(window.google && window.google.maps)) {
+            this.createMap();
+        } else {
+            this.initMap();
+        }
     }
 
     createMap() {
