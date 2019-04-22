@@ -48,6 +48,10 @@ $pin_id = mysqli_insert_id($conn);
 
 $output['success'] = true;
 $output['pin_id'] = $pin_id;
+$output['pinLocation'] = [
+    'lat' => $latitude,
+    'lng' => $longitude
+];
 
 print(json_encode($output));
 
