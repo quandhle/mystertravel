@@ -1,36 +1,60 @@
 .endtrip-page{
+    .summary-trip-name{
+        width: 100%;
+        text-align: center;
+        p{
+            font-size: 1.8em;
+            margin: 10px;
+            font-weight: bold;
+        }
+    }
+
+    .summary-region{
+        width: 100%;
+        text-align: center;
+        p{
+            font-size: 1.0em;
+            font-weight: bold;
+            margin: 6px;
+            text-transform: capitalize;
+        }
+    }
+
     .total-spend{
         width: 100%;
         text-align: center;
         p{
             font-size: 1.2em;
-            margin: 15px;
             font-weight: bold;
+            margin: 0 0 16px 0;
         }
     }
     .last-entry{
         .entry-content{
             img{
-                width:100%;
+                width: 100%;
+            }
+            p {
+                margin: 10px 10px;
+                text-align: center;
             }
         }
 
         .share-btns{
+            display: flex;
+            justify-content: center;
+            align-content: flex-end;
 
+            &>* {
+                width: 50px;
+                height: 50px;
+                margin: 5px;
+                font-size: 3em;
+                color: #2b616d;
+            }
 
-            &>*{
-            position: relative;
-            left: 25%;
-            width: 50px;
-            height: 50px;
-            display: inline-block;
-            margin: 5px;
-            font-size: 3em;
-            color: #2b616d;
-
-                &:hover{
-                    color: #417681;
-                }
+            &:hover{
+                color: #417681;
             }
         }
     }
