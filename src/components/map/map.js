@@ -16,11 +16,17 @@ class Map extends Component{
     };
 
     componentDidMount() {
-        // create and initialize the map
-        this.createMap();
+        // if it isn't already loaded, load Google Maps API script, and then initialize the map
+        if (!(window.google && window.google.maps)) {
+            this.loadMapScript();
+        } else {
+            this.initMap();
+        }
     }
 
-    createMap() {
+    loadMapScript() {
+        // loads the Google Maps API script
+        // a callback function is given to the API, which is run when the script is ready to load the map
         loadScript(`https://maps.googleapis.com/maps/api/js?key=${keys.googleMaps}&libraries=places&callback=initMap`);
         window.initMap = this.initMap;
     }
