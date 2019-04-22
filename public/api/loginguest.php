@@ -15,6 +15,8 @@ if (mysqli_affected_rows($conn) !== 1) {
 }
 
 $users_id = mysqli_insert_id($conn);
+$token = session_id().$users_id.microtime();
+$token = sha1($token);
 
 $connect_query = "INSERT INTO
         `user_connections`
