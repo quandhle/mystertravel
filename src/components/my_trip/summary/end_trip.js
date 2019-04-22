@@ -59,6 +59,11 @@ class EndTrip extends Component{
                         <div className="gmail"><i className="fas fa-envelope-square"></i></div>
                     </div>
                 </div>
+                <div className="summary-end-trip-link">
+                    <button className="summary-end-trip-link-btn btn"  onClick={() => {
+                        console.log('end trip button clicked');
+                    }}>End Trip</button>
+                </div>
             </div>
         )
     }
