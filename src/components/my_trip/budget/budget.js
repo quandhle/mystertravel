@@ -65,7 +65,7 @@ class Budget extends Component{
         const {height} = this.state.showInput;
         if(!height){
             this.setState(
-                {showInput: {height: '230px'}}
+                {showInput: {height: '280px'}}
             )
         } else {
             this.setState(
