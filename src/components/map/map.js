@@ -15,6 +15,7 @@ class Map extends Component {
             lat: 41.8719,   // Rome
             lng: 12.5674,
             pins: [],
+            name: null,
             map: null
         }
 
@@ -135,7 +136,8 @@ class Map extends Component {
 
         this.setState({
             lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng()
+            lng: place.geometry.location.lng(),
+            name: place.name
         })
     }
 
@@ -163,6 +165,15 @@ class Map extends Component {
 
                 // display the markers
                 pin.setMap(this.state.map);
+
+                const infowindow = new google.maps.InfoWindow({
+                    content: this.state.name
+                })
+
+                pin.addListener('click', function() {
+                    infowindow.open(map, pin);
+                })
+                
                 return pin;
             });
 
@@ -201,22 +212,24 @@ class Map extends Component {
     }
 
     addPin() {
-        const {lat, lng} = this.state;
+        const {lat, lng, name} = this.state;
+
 
         const resp = axios.post('/api/addmappin.php', {
             trips_id: 1,
             latitude: parseFloat(lat),
             longitude: parseFloat(lng),
-            description: 'This is Irvine.'
+            description: 'This is Irvine.',
+            name: name
         }).then((resp) => {
+            console.log('resp is: ', resp);
             const pin = new window.google.maps.Marker({
                 position: {
                     lat: lat,
-                    lng: lng
-                }
+                    lng: lng,
+                },
+                title: resp.data.name
             });
-
-            this.showPins();
         })
 
         this.showPins();
@@ -229,9 +242,9 @@ class Map extends Component {
                     <SearchBar handleClear={this.handleClear}/>
                 </div>
                 <div id="map" className='map'/>
-                <button className='btn map-btn btn-lg' onClick={this.addPin}>
-                    <i className="fas fa-map-marker-alt"/>Add Pin
-                </button>
+                    <button className='btn map-btn btn-lg' onClick={this.addPin}>
+                        <i className="fas fa-map-marker-alt"/> Add Pin
+                    </button>
                 <button onClick={this.getCurrentLocation} className='btn geo-btn btn-lg'>
                     <i className="fas fa-location-arrow"/>
                 </button>
