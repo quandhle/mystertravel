@@ -63,15 +63,15 @@ class Map extends Component {
         this.showPins();
     }
 
-    parseAddressComponents(address_components) {
+    parseAddressComponents (address_components) {
 
         let zipCodeOffset = 0;
-        if(address_components[address_components.length - 1].types[0] === 'postal_code') {
+        if (address_components[address_components.length - 1].types[0] === 'postal_code') {
             // if the last slot is a zip code, we'll have to offset the cases below by 1 to skip over the zip code
             zipCodeOffset++;
         }
 
-        if(address_components[address_components.length - 1 - zipCodeOffset].short_name === 'US') {
+        if (address_components[address_components.length - 1 - zipCodeOffset].short_name === 'US') {
             // if the location is in the US:
             switch(address_components.length) {
 
@@ -111,7 +111,6 @@ class Map extends Component {
             // center the map on the result
             this.state.map.setCenter(location);
             this.state.map.setZoom(12);
-
         } else {
             // user key input is put into Place.name
             // use findPlaceFromQuery to find a suitable match
@@ -133,6 +132,11 @@ class Map extends Component {
 
         // change the input field to have the new address result
         this.props.dispatch(change("search-bar-form", `places`, address));
+
+        this.setState({
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng()
+        })
     }
 
     async showPins() {
@@ -147,7 +151,7 @@ class Map extends Component {
         }
 
         // if there was data, turn the pin data into Marker objects
-        if(pinData) {
+        if (pinData) {
             const pins = pinData.map((item) => {
                 const pin = new window.google.maps.Marker({
                     position: {
@@ -197,7 +201,7 @@ class Map extends Component {
     }
 
     addPin() {
-        const {lat, lng} = this. state;
+        const {lat, lng} = this.state;
 
         const resp = axios.post('/api/addmappin.php', {
             trips_id: 1,
@@ -205,7 +209,14 @@ class Map extends Component {
             longitude: parseFloat(lng),
             description: 'This is Irvine.'
         }).then((resp) => {
-            console.log('Response is: ', resp);
+            const pin = new window.google.maps.Marker({
+                position: {
+                    lat: lat,
+                    lng: lng
+                }
+            });
+
+            this.showPins();
         })
 
         this.showPins();
