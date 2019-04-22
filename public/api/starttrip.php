@@ -6,7 +6,6 @@ if (!empty($_SESSION['user_data'])){
     $token = $_SESSION['user_data']['token'];
     $users_id = $_SESSION['user_data']['id'];
 } else {
-    $token = session_id();
     require_once("loginguest.php");
     $output['username'] = 'guest';
     $output['token'] = $token;
