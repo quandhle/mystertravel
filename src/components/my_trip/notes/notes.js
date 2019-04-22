@@ -60,7 +60,7 @@ class Notes extends Component {
         const { height } = this.state.showInput;
         if (!height) {
             this.setState(
-                {showInput: {height: '100px'}}
+                {showInput: {height: '150px'}}
             )
         } else {
             this.setState(

@@ -9,7 +9,7 @@
         text-align: right;
         color: white;
         padding-right: 15px;
-
+        padding: 10px 15px;
         .fa-angle-double-down:hover{
             position: relative;
             top: 5px;
@@ -18,26 +18,31 @@
     }
     .budget-input-form{
         height: 0;
+        width: 96%;
         transition: 0.5s;
         overflow-y: hidden;
+        background-color: #b2dbd5;
+        border-radius: 15px;
+        margin: 10px;
+    }
+
+    .budget-input-form, .budget{
+        -webkit-box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
+        -moz-box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
+        box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
     }
 
     .budget-input{
-        background-color: #b2dbd5;
         width: 100%;
         padding: 15px;
         box-sizing: border-box;
-
-        &:hover, &:active{
-            background-color: #c4e4df;
-        }
 
         input{
             width: 100%;
             outline: none;
             border: 1px solid transparent;
             background-color: inherit;
-            border-bottom: 1px solid #aadbd4;
+            border-bottom: 1px solid #94c9c1;
         }
 
     }
@@ -45,7 +50,7 @@
     .add-budget{
         margin: 5px;
         position: relative;
-        left: 80%;
+        float: right;
         background-color: #fa8d62;
         border: none;
         color:white;
@@ -62,9 +67,8 @@
             margin: 5px;
             border-radius: 15px;
             transition: 0.5s;
-            -webkit-box-shadow: 0px 0px 15px -5px rgba(213,224,223,1);
-            -moz-box-shadow: 0px 0px 15px -5px rgba(213,224,223,1);
-            box-shadow: 0px 0px 15px -5px rgba(213,224,223,1);
+
+            word-wrap: break-word;
 
             &:nth-child(odd){
                 background-color: #2b616d;
