@@ -53,28 +53,28 @@ class Map extends Component{
 
     parseAddressComponents(address_components) {
 
+        let zipCodeOffset = 0;
         if(address_components[address_components.length - 1].types[0] === 'postal_code') {
-            // if the last slot is a zip code
-            switch(address_components.length) {
-                case 4:
-                case 3:
-                    return `${address_components[address_components.length - 3].long_name}, United States`;
-                case 2:
-                    return 'United States';
-                default:
-                    return `${address_components[0].short_name}, ${address_components[address_components.length - 3].short_name}`;
-            }
+            // if the last slot is a zip code, we'll have to offset the cases below by 1 to skip over the zip code
+            zipCodeOffset++;
+        }
 
-        } else if(address_components[address_components.length - 1].short_name === 'US') {
-            // if the location is in the US, try to do 'city', 'state', or 'state', 'United States'
+        if(address_components[address_components.length - 1 - zipCodeOffset].short_name === 'US') {
+            // if the location is in the US:
             switch(address_components.length) {
-                case 3:
-                case 2:
-                    return `${address_components[address_components.length - 2].long_name}, United States`;
-                case 1:
+
+                case 3 + zipCodeOffset:
+                case 2 + zipCodeOffset:
+                    // if only state and country are present, return 'state', US
+                    return `${address_components[address_components.length - 2 - zipCodeOffset].long_name}, United States`;
+
+                case 1 + zipCodeOffset:
+                    // if the search was just 'US'
                     return 'United States';
+
                 default:
-                    return `${address_components[0].short_name}, ${address_components[address_components.length - 2].short_name}`;
+                    // otherwise, return 'city, state'
+                    return `${address_components[0].short_name}, ${address_components[address_components.length - 2 - zipCodeOffset].short_name}`;
             }
 
         } else {
@@ -121,7 +121,6 @@ class Map extends Component{
 
         // change the input field to have the new address result
         this.props.dispatch(change("search-bar-form", `places`, address));
-        console.log('Address:', address);
     }
 
     async showPins() {
