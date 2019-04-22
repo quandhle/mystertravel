@@ -80,6 +80,8 @@ class Notes extends Component {
                     <NoteItem key={note.note_id} note={note} deleteItem={this.deleteItem}/>
                 );
             });
+        } else {
+            noteList = <div className="notes">Add notes to light your trip <i className="far fa-laugh-wink"></i> </div>
         }
         return (
             <div className="notes-page">

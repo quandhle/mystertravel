@@ -83,6 +83,8 @@ class Budget extends Component{
             budgetList = budget.map(budgetItem => {
                 return <BudgetItem key={budgetItem.budget_id} budgetItem={budgetItem} deleteBudgetItem={this.deleteBudgetItem}/>
             });
+        } else {
+            budgetList = <div className="budget">Add expenses to record your trip <i className="far fa-laugh-wink"></i> </div>
         }     
        return(
             <div className="budget-page">
