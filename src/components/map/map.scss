@@ -10,6 +10,9 @@ main {
       position: absolute;
       top: 20%;
 
+      p{
+        display: none;
+      }
       .search-bar-field {
         height: 100%;
         background-color: inherit;
