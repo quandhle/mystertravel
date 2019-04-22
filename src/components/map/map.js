@@ -58,17 +58,33 @@ class Map extends Component{
     }
 
     parseAddressComponents(address_components) {
-        if(address_components[address_components.length - 1].short_name === 'US') {
+
+        let zipCodeOffset = 0;
+        if(address_components[address_components.length - 1].types[0] === 'postal_code') {
+            // if the last slot is a zip code, we'll have to offset the cases below by 1 to skip over the zip code
+            zipCodeOffset++;
+        }
+
+        if(address_components[address_components.length - 1 - zipCodeOffset].short_name === 'US') {
+            // if the location is in the US:
             switch(address_components.length) {
-                case 3:
-                case 2:
-                    return `${address_components[address_components.length - 2].long_name}, United States`;
-                case 1:
+
+                case 3 + zipCodeOffset:
+                case 2 + zipCodeOffset:
+                    // if only state and country are present, return 'state', US
+                    return `${address_components[address_components.length - 2 - zipCodeOffset].long_name}, United States`;
+
+                case 1 + zipCodeOffset:
+                    // if the search was just 'US'
                     return 'United States';
+
                 default:
-                    return `${address_components[0].short_name}, ${address_components[address_components.length - 2].short_name}`;
+                    // otherwise, return 'city, state'
+                    return `${address_components[0].short_name}, ${address_components[address_components.length - 2 - zipCodeOffset].short_name}`;
             }
+
         } else {
+            // for non-US countries, append all available parts
             return address_components.map((item) => {
                 return item.long_name;
             }).join(', ');
@@ -111,7 +127,6 @@ class Map extends Component{
 
         // change the input field to have the new address result
         this.props.dispatch(change("search-bar-form", `places`, address));
-        console.log('Address:', address);
     }
 
     async showPins() {
@@ -155,6 +170,7 @@ class Map extends Component{
             this.setState(coordObject);
             this.state.map.setCenter(coordObject);
 
+            // get address
             const geocoder = new google.maps.Geocoder;
             geocoder.geocode({'location': coordObject}, (results, status) => {
                 if (status === 'OK') {
