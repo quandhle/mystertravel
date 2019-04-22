@@ -8,14 +8,18 @@ if (empty($trips_id)) {
     throw new Exception('Please provide trips_id (int) with your request');
 }
 
-$query = "SELECT *
+$query = "SELECT *,
+	(SELECT SUM(`price`)
+     FROM `budget`
+     WHERE `trips_id` = ?)
+    AS 'total_budget'
     FROM `budget`
     WHERE `trips_id` = ?
     ORDER BY `added` DESC
 ";
 
 $statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($statement, 'd', $trips_id);
+mysqli_stmt_bind_param($statement, 'dd', $trips_id, $trips_id);
 mysqli_stmt_execute($statement);
 
 $result = mysqli_stmt_get_result($statement);
@@ -38,6 +42,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         'category' => $row['category'],
         'price' => $row['price'],
     ];
+    $output['total_expense'] = (int)$row['total_budget'];
 }
 
 $output['success'] = true;
