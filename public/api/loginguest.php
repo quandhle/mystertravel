@@ -1,4 +1,5 @@
 <?php
+
 $guest_id_query = "INSERT INTO `users`
         SET `is_guest` = 1
 ";
@@ -33,5 +34,11 @@ if (!$connect_result) {
 if (mysqli_affected_rows($conn) !== 1) {
     throw new Exception('Cannot log in: connection not saved.');
 }
+
+$_SESSION['user_data'] = [
+    'id' => $users_id,
+    'user' => 'guest',
+    'token' => $token
+];
 
 ?>

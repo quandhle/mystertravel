@@ -22,7 +22,7 @@ if (!$result) {
 
 if (mysqli_num_rows($result) === 0) {
     $output['success'] = true;
-    $output['tasks'] = 'No task items yet';
+    $output['tasks'] = [];
     print(json_encode($output));
     exit();
 }

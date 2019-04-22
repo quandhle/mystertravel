@@ -22,7 +22,7 @@ if (!$result) {
 
 if (mysqli_num_rows($result) === 0) {
     $output['success'] = true;
-    $output['data'] = 'No map pins yet';
+    $output['data'] = [];
     print(json_encode($output));
     exit();
 }

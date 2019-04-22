@@ -30,7 +30,7 @@ if (!$end_trip_result) {
 
 if (mysqli_num_rows($end_trip_result) === 0) {
     $output['success'] = true;
-    $output['tasks'] = 'No summary yet';
+    $output['tasks'] = [];
     print(json_encode($output));
     exit();
 }
