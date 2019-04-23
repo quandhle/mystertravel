@@ -13,8 +13,7 @@ class EndTrip extends Component{
     state = {
         tripName: '',
         totalSpent: 0,
-        lastNote: '',
-        region: ''
+        lastNote: ''
     };
 
     componentDidMount() {
@@ -26,12 +25,11 @@ class EndTrip extends Component{
         const response = await axios.get(`/api/getendtripsummary.php?trips_id=${trips_id}`);
 
         if (response.data.success) {
-            const {trips_name, region, total_budget, last_entry} = response.data.data;
+            const {trips_name, total_budget, last_entry} = response.data.data;
             this.setState({
                 tripName: trips_name,
                 totalSpent: total_budget,
-                lastNote: last_entry,
-                region: region
+                lastNote: last_entry
             });
         }
     }
@@ -52,7 +50,7 @@ class EndTrip extends Component{
     }
 
     render(){
-        const {tripName, totalSpent, region, lastNote} = this.state;
+        const {tripName, totalSpent, lastNote} = this.state;
         const {trips_id} = this.props.trips_id;
 
         if (trips_id > 0) {
@@ -61,11 +59,6 @@ class EndTrip extends Component{
                     <div className="summary-trip-name">
                         <p>{`${tripName}`}</p>
                     </div>
-                    {region &&
-                        <div className="summary-region">
-                            <p>{`A trip to ${region}`}</p>
-                        </div>
-                    }
                     <div className="total-spend">
                         <p>{`Total spent in this trip: ${formatMoney(totalSpent)}`}</p>
                     </div>
