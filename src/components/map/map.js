@@ -40,9 +40,7 @@ class Map extends Component {
 
     initMap = () => {
         const searchBarInput = document.getElementById("places");
-        this.autoComplete = new window.google.maps.places.Autocomplete(searchBarInput, {
-            types: ['(regions)']
-        });
+        this.autoComplete = new window.google.maps.places.Autocomplete(searchBarInput);
         this.autoComplete.setFields(['address_component', 'geometry', 'name']);
 
         this.autoComplete.addListener('place_changed', this.searchCountry);
@@ -145,7 +143,7 @@ class Map extends Component {
                     map: this.state.map
                 });
 
-                const content = ('<h5 id="infoWindow">' + item.name + '</h5><p>' + item.description + '</p>');
+                const content = ('<h6 id="infoWindow">' + item.description + '</h6>');
 
                 const infowindow = new google.maps.InfoWindow({
                     content: content
