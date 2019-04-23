@@ -8,6 +8,7 @@ import MyTripRoutes from './my_trip/my_trip_routes';
 import AboutUs from './about_us';
 import NotFound from './404';
 import Account from './account';
+import Summary from './my_trip/summary';
 
 import '../assets/css/app.scss';
 
@@ -21,6 +22,7 @@ const App = () => (
                 <Route path='/mytrip' component={MyTripRoutes}/>
                 <Route path='/aboutus' component={AboutUs}/>
                 <Route path='/account' component={Account}/>
+                <Route path='/trip/:trips_id' component={Summary}/>
                 <Route component={NotFound}/>
             </Switch>
         </div>
