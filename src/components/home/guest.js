@@ -25,10 +25,16 @@ class Guest extends Component {
         }
     }
     render() {
+        const {signIn} = this.props;
+        let btnmessage = 'Start As Guest';
+        if(signIn){
+            btnmessage = 'Start A Trip'
+        }
+
         return (
             <Fragment>
                 <div className="home-page-btn">
-                    <button onClick={this.toggleModal} className="home-start-btn btn">Start As Guest</button>
+                    <button onClick={this.toggleModal} className="home-start-btn btn">{btnmessage}</button>
                 </div>
                 {this.state.modal && <StartTrip modal={this.state.modal} close={this.toggleModal} history={this.props.history}/>}
             </Fragment>
