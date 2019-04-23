@@ -33,7 +33,7 @@ $query = "INSERT INTO `pins`
         `latitude` = ?,
         `longitude` = ?,
         `description` = ?,
-        `name` = 'anything for name',
+        `name` = ?,
         `added` = NOW()
 ";
 

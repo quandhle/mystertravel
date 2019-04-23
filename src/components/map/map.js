@@ -139,8 +139,6 @@ class Map extends Component {
             lng: location.lng(),
             name: place.name
         })
-
-        console.log(this.state);
     }
 
     async showPins() {
@@ -178,10 +176,9 @@ class Map extends Component {
                 
                 return pin;
             });
-
             // save all the Marker objects in state
             this.setState({
-                pins: pins
+                pins: pins,
             });
         }
     }
@@ -216,7 +213,6 @@ class Map extends Component {
     addPin() {
         const {lat, lng, name} = this.state;
 
-
         const resp = axios.post('/api/addmappin.php', {
             trips_id: 1,
             latitude: parseFloat(lat),
@@ -224,8 +220,6 @@ class Map extends Component {
             description: 'This is Irvine.',
             name: name
         }).then((resp) => {
-            console.log('resp is: ', resp);
-
             const pin = new window.google.maps.Marker({
                 position: {
                     lat: lat,
@@ -234,11 +228,13 @@ class Map extends Component {
                 title: resp.data.name
             });
 
+            console.log('resp is: ', resp.data);
+
             this.setState({
                 pin: [...this.state.pins, pin]
             })
 
-            console.log(this.state);
+            console.log('state is: ', this.state);
         })
 
         this.showPins();
