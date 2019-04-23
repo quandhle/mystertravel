@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {signIn} from '../../../actions';
+import {signIn, passTripId} from '../../../actions';
 import SignInForm from './signin_form';
 import './sign_in.scss';
 
@@ -23,10 +23,11 @@ class SignIn extends Component{
         })
 
         const {signIn, history} = this.props;
-
-        if(resp.data.success){
+        const {success, trips_id} = resp.data
+        if(success){
             signIn(resp.data);
-            if(resp.data.trips_id){
+            if(trips_id){
+                this.props.passTripId(trips_id);
                 history.push('/map');
             } else {
                 history.push('/');
@@ -48,4 +49,4 @@ class SignIn extends Component{
     }
 }
 
-export default connect(null, {signIn})(SignIn);
+export default connect(null, {signIn, passTripId})(SignIn);
