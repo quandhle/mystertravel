@@ -231,7 +231,7 @@ class Map extends Component {
             console.log('resp is: ', resp.data);
 
             this.setState({
-                pin: [...this.state.pins, pin]
+                pins: [...this.state.pins, pin]
             })
 
             console.log('state is: ', this.state);
