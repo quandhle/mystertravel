@@ -4,7 +4,7 @@ require_once("config.php");
 
 if (!empty($_SESSION['user_data'])){
     $token = $_SESSION['user_data']['token'];
-    $users_id = $_SESSION['user_data']['id'];
+    $users_id = $_SESSION['user_data']['users_id'];
 } else {
     require_once("loginguest.php");
     $output['users_id'] = $users_id;
