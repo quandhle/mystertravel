@@ -9,6 +9,10 @@ class SignIn extends Component{
     constructor(props){
         super(props);
 
+        this.state = {
+            message: ''
+        }
+
         this.handleSignIn = this.handleSignIn.bind(this);
     }
     async handleSignIn (values){
@@ -19,9 +23,12 @@ class SignIn extends Component{
         })
 
         if(resp.data.success){
-           this.props.signIn(resp.data); 
+           this.props.signIn(resp.data);
+           this.history.push("/map");
         } else {
-            console.error("Unable to sign in")
+            this.setState({
+                message: resp.data.error
+            })
         }
 
     }
@@ -29,6 +36,7 @@ class SignIn extends Component{
         return(
             <div className="sign-in-page">
                 <SignInForm signIn={this.handleSignIn}/>
+                <div className="message">{this.state.message}</div>
             </div>
         )
     }
