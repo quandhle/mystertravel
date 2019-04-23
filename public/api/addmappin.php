@@ -15,9 +15,9 @@ if(empty($trips_id)){
     throw new Exception('Please provide trips_id (int) with your request');
 }
 
-if(empty($name)){
-    throw new Exception('Please provide a name with your request.');
-}
+// if(empty($name)){
+//     throw new Exception('Please provide a name with your request.');
+// }
 
 if(empty($description)){
     throw new Exception('Please enter map pin description (str) with your request');
@@ -33,7 +33,7 @@ $query = "INSERT INTO `pins`
         `latitude` = ?,
         `longitude` = ?,
         `description` = ?,
-        `name` = ?,
+        `name` = 'anything for name',
         `added` = NOW()
 ";
 
