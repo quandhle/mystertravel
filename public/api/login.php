@@ -40,7 +40,8 @@ if (mysqli_num_rows($result) !== 1) {
 }
 
 $data = mysqli_fetch_assoc($result);
-$token = $email . $data['id'] . microtime();
+$users_id = $data['id'];
+$token = $email . $users_id . microtime();
 $token = sha1($token);
 
 $connect_query = "INSERT INTO
@@ -65,13 +66,16 @@ if (mysqli_affected_rows($conn) !== 1) {
 }
 
 $_SESSION['user_data'] = [
-    'id' => $data['id'],
-    'user' => $data['full_name'],
+    'users_id' => $data['id'],
+    'username' => $data['full_name'],
     'token' => $token
 ];
 
+require_once('checkactivetrip.php');
+
 $output['success'] = true;
 $output['username'] = $data['full_name'];
+$output['users_id'] = $users_id;
 $output['token'] = $token;
 
 print(json_encode($output));

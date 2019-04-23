@@ -38,8 +38,8 @@ if (mysqli_affected_rows($conn) !== 1) {
 }
 
 $_SESSION['user_data'] = [
-    'id' => $users_id,
-    'user' => 'guest',
+    'users_id' => $users_id,
+    'username' => 'guest',
     'token' => $token
 ];
 
