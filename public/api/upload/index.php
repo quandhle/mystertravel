@@ -9,9 +9,7 @@ use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
 
 $bucket = 'myster-travel-images';
-$keyname = 'about-us/jen.jpg';
-
-
+$keyname = 'about-us/kylie.jpg';
 
 // try {
 //     $s3 = S3Client::factory(
@@ -46,12 +44,13 @@ try {
         'Key'    => $keyname
     ]);
     // Display the object in the browser.
-    header("Content-Type: {$result['ContentType']}");
-    echo $result['Body'];
+    $url = $s3 -> getObjectUrl($bucket, $keyname);
+    // header("Content-Type: {$result['ContentType']}");
+    // echo $result['Body'];
+    echo $url;
+    // print($url);
 } catch (S3Exception $e) {
     echo $e->getMessage() . PHP_EOL;
 }
 
 // $result = $s3 -> listObjects(array('Bucket' => $bucket));
-
-echo "Success = true.";
