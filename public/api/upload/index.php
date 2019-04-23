@@ -2,35 +2,56 @@
 
 require('../vendor/autoload.php');
 
-$AWS_ACCESS_KEY_ID = 'AKIAUND4NIQBQXYU4U6X';
-$AWS_SECRET_ACCESS_KEY = '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';
+$accessKey = 'AKIAUND4NIQBQXYU4U6X';
+$secret = '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';
 
 use Aws\S3\S3Client;
-
-use Aws\Exception\AwsException;
+use Aws\S3\Exception\S3Exception;
 
 $bucket = 'myster-travel-images';
-$key = 'about-us';
+$keyname = 'about-us/jen.jpg';
 
-$sharedConfig = [
-    'region' => 'us-west-1',
-    'version' => 'latest'
-];
 
-$s3Client = new S3Client($sharedConfig);
+
+// try {
+//     $s3 = S3Client::factory(
+//         array(
+//             'credentials' => array(
+//                 'key' => $accessKey,
+//                 'secret' => $secret
+//             ),
+//             'version' => 'latest',
+//             'region' => 'us-west-1'
+//         )
+//     );
+// } catch (S3Exception $e) {
+//     die("Error: " . $e -> getMessage());
+// };
+
+$s3 = S3Client::factory(
+    array(
+        'credentials' => array(
+            'key' => $accessKey,
+            'secret' => $secret
+        ),
+        'version' => 'latest',
+        'region' => 'us-west-1'
+    )
+);
 
 try {
-    $result = $s3Client -> getObject([
+    // Get the object.
+    $result = $s3->getObject([
         'Bucket' => $bucket,
-        'Key' => $key
+        'Key'    => $keyname
     ]);
-
+    // Display the object in the browser.
     header("Content-Type: {$result['ContentType']}");
     echo $result['Body'];
 } catch (S3Exception $e) {
-    echo $e -> getMessage() . PHP_EOL;
-};
+    echo $e->getMessage() . PHP_EOL;
+}
 
-print('hello');
+// $result = $s3 -> listObjects(array('Bucket' => $bucket));
 
-// print_r($result);
+echo "Success = true.";
