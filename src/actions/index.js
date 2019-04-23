@@ -11,6 +11,12 @@ export function signIn(user){
     }
 }
 
+export function signOut(){
+    return {
+        type:types.SIGN_OUT
+    }
+}
+
 
 export function passTripId(id){
     return{
