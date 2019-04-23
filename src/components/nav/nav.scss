@@ -43,7 +43,6 @@
 
     .side-nav{
         position: absolute;
-        padding-top: 10vh;
         top: 0;
         background-color: #a4d8d0;
         -webkit-box-shadow: 21px 0px 25px -21px rgba(179,179,179,1);
@@ -54,29 +53,38 @@
         overflow-x: hidden;
         transition: 0.5s;
 
-        .side-nav-links{
+        .nav-profile{
 
+            height: 15%;
+            margin: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+
+
+            .username{
+                padding: 5px;
+                
+            }
+        }
+
+        .side-nav-links{
             list-style: none;
             padding: 0;
 
             li{
-                background-color: rgba(255, 255, 255, 0.5);
                 height: 50px;
-                text-align: center;
-                margin: 10px 0;
+                margin: 10px;
                 transition: 0.5s;
                 line-height: 50px;
 
-                &:hover{
-                    background-color: #1b515d;
-                    color:white;
+                a{
+                    display: block;
+                    color: #417970;
+                    text-decoration: none;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
                 }
             }
 
-            a{
-                color: #417970;
-                text-decoration: none;
-            }
+
         }
 
     }
