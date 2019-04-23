@@ -1,4 +1,4 @@
-.endtrip-page{
+.summary-page{
     .summary-trip-name{
         width: 100%;
         text-align: center;
@@ -16,7 +16,6 @@
             font-size: 1.0em;
             font-weight: bold;
             margin: 10px;
-            text-transform: capitalize;
         }
     }
 
@@ -78,6 +77,35 @@
 
         button:hover {
             background-color: #ea7d52;
+        }
+    }
+}
+
+.summary-fail-page {
+    .summary-fail-title {
+        width: 100%;
+        text-align: center;
+        p{
+            font-size: 1.8em;
+            margin: 10px;
+            font-weight: bold;
+        }
+    }
+    .summary-fail-image {
+        width: 100%;
+
+        img {
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+    .summary-fail-text {
+        width: 100%;
+        text-align: center;
+        p{
+            font-size: 1.2em;
+            margin: 10px;
         }
     }
 }
