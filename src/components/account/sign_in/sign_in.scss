@@ -1,0 +1,64 @@
+.sign-in-page{
+    .sign-in-form{
+        height: 100%;
+        width: 96%;
+        transition: 0.5s;
+        overflow-y: hidden;
+        background-color: #b2dbd5;
+        border-radius: 15px;
+        margin: 10px;
+
+        -webkit-box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
+        -moz-box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
+        box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
+
+        .sign-in-title{
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2em;
+            color:#2b616d;
+            background-color:rgba(255, 255, 255,0.5);
+            width: 40%;
+            border-radius: 100%;
+            margin: 5px auto;
+        }
+
+        .signin-input{
+            width: 100%;
+            padding: 15px;
+            box-sizing: border-box;
+    
+            input{
+                width: 100%;
+                outline: none;
+                border: 1px solid transparent;
+                background-color: inherit;
+                border-bottom: 1px solid #94c9c1;
+            }
+    
+        }
+
+        .signup-btn, 
+
+        .signin-btn{
+            margin: auto;
+            width: 50%;
+
+
+            .signup-btn, button{
+                display: inline-block;
+                margin: 5px;
+                background-color: #fa8d62;
+                color: white;
+            }
+
+            .signup-btn{
+                cursor: pointer;
+                background-color: #2b616d;
+            }
+
+        }
+    }
+
+    
+}

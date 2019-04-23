@@ -4,7 +4,7 @@ import './home.scss';
 
 class Home extends Component {
     toSignInPage= ()=>{
-        this.props.history.push("/signin")
+        this.props.history.push("/account/signin")
     }
     checkSignIn(){
         // after sign in page finish
