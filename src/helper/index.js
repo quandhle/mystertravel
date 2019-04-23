@@ -34,3 +34,12 @@ export function formatDate(datetime){
     month = monthName[month];
     return `${day} ${month} ${date[1]}, ${date[2]}`;
 }
+
+export function loadScript(url){
+    const index = window.document.getElementsByTagName("script")[0];
+    const script = window.document.createElement("script");
+    script.src = url;
+    script.async = true;
+    script.defer = true;
+    index.parentNode.insertBefore(script, index);
+}

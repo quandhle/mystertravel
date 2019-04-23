@@ -7,6 +7,7 @@ import './map.scss';
 import keys from './../../../api_keys';
 import SearchBar from './search_bar';
 import MapPopUp from './map_popup';
+import {loadScript} from "../../helper";
 
 class Map extends Component {
     constructor(props) {
@@ -243,15 +244,6 @@ class Map extends Component {
             </main>
         );
     }
-}
-
-function loadScript(url){
-    const index = window.document.getElementsByTagName("script")[0];
-    const script = window.document.createElement("script");
-    script.src = url;
-    script.async = true;
-    script.defer = true;
-    index.parentNode.insertBefore(script, index);
 }
 
 export default connect()(Map);

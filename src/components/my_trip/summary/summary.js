@@ -3,8 +3,9 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 
 import './summary.scss';
-import {formatMoney} from './../../../helper/index';
+import {formatMoney} from './../../../helper';
 import {clearTripId} from "../../../actions";
+import {loadScript} from "./../../../helper";
 
 import summaryimg from '../../../assets/images/summary.jpg';
 import thinkingEmoji from '../../../assets/images/thinking-emoji.png';
@@ -28,6 +29,18 @@ class EndTrip extends Component{
 
     componentDidMount() {
         this.getSummaryData();
+        
+        loadScript('https://connect.facebook.net/en_US/sdk.js');
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId            : '2052844328350812',
+                autoLogAppEvents : true,
+                xfbml            : true,
+                version          : 'v3.2'
+            });
+        };
+
+        loadScript('https://platform.twitter.com/widgets.js');
     }
 
     async getSummaryData() {
@@ -59,10 +72,29 @@ class EndTrip extends Component{
         }
     }
 
+    fbButton = (url) => {
+        FB.ui({
+            method: 'share',
+            display: 'popup',
+            href: url,
+        }, function(response){});
+    }
+
+    twitterButton = (url) => {
+        return encodeURIComponent(`I went on a trip recently! Check it out on MysterTravel!\n${url}`);
+    }
+
+    mailButton(url) {
+        return `mailto: ?subject=${'I went on a trip!'}&body=${
+            encodeURIComponent(`I went on a trip recently! Check it out on MysterTravel!\n${url}`)
+        }`;
+    }
+
     render(){
         const {tripName, totalSpent, lastNote} = this.state;
         const trips_id = this.paramTripsId ? this.paramTripsId : this.props.trips_id.trips_id;
         const paramTripsId = this.paramTripsId;
+        const summaryURL = `http://www.mystertravel.com/trip/${trips_id}`;
 
         if (trips_id > 0 && tripName) {
             return(
@@ -79,9 +111,19 @@ class EndTrip extends Component{
                             <p>{lastNote}</p>
                         </div>
                         <div className="share-btns col-12">
-                            <div className="facebook"><i className="fab fa-facebook-square"></i></div>
-                            <div className="twitter"><i className="fab fa-twitter-square"></i></div>
-                            <div className="gmail"><i className="fas fa-envelope-square"></i></div>
+                            <div className="facebook" id='facebook-div'>
+                                <a onClick={() => {this.fbButton(summaryURL)}}><i className="fab fa-facebook-square"></i></a>
+                            </div>
+                            <div className="twitter">
+                                <a href={`https://twitter.com/intent/tweet?text=${this.twitterButton(summaryURL)}`}>
+                                    <i className="fab fa-twitter-square"></i>
+                                </a>
+                            </div>
+                            <div className="gmail">
+                                <a href={this.mailButton(summaryURL)}>
+                                    <i className="fas fa-envelope-square"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     {!paramTripsId &&
