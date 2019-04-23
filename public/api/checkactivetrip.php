@@ -2,17 +2,17 @@
 
 require_once('config.php');
 
-if (!empty($_SESSION['user_data'])) {
-    $users_id = $_SESSION['user_data']['id'];
-} else {
-    $users_id = $_GET['users_id'];
-}
+// if (!empty($_SESSION['user_data'])) {
+//     $token = $_SESSION['user_data']['token'];
+// } else {
+//     $token = $_GET['token'];
+// }
 
-if(empty($users_id)){
-    throw new Exception('Please provide users_id (int) with your request');
-}
+// if(empty($users_id)){
+//     throw new Exception('Please provide users_id (int) with your request');
+// }
 
-$query = "SELECT `end`,
+$query = "SELECT `id`, `end`
     FROM `trips`
     WHERE `users_id` = ?
     ORDER BY `start` DESC
@@ -20,8 +20,8 @@ $query = "SELECT `end`,
 ";
 
 $statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param( $statement, 'd', $users_id, $trips_id);
-mysqli_stmt_execute( $statement);
+mysqli_stmt_bind_param($statement, 'd', $users_id);
+mysqli_stmt_execute($statement);
 
 $result = mysqli_stmt_get_result($statement);
 
@@ -30,21 +30,23 @@ if(!$result){
 }
 
 if(mysqli_num_rows($result) === 0){
-    throw new Exception('Unable to find trips from this user');
+    $output['trips_id'] = null;
 }
 
 $row = mysqli_fetch_assoc($result);
 
-if(empty($row['end'])){
-    $output['success'] = true;
-    $output['trip_status'] = 'active';
-    print(json_encode($output));
-    exit();
+if (empty($row['end'])) {
+    //$output['success'] = true;
+    $output['trips_id'] = $row['id'];
+    // print(json_encode($output));
+    // exit();
+} else {
+    $output['trips_id'] = null;
 }
 
 //trip has an end date, trip is inactive
-$output['success'] = true;
+//$output['success'] = true;
 
-print(json_encode($output));
+//print(json_encode($output));
 
 ?>
