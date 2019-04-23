@@ -31,6 +31,11 @@
         background-color: #b2dbd5;
         border-radius: 15px;
         margin: 10px;
+
+        input{
+            margin: 10px;
+            width: 60%;
+        }
     }
     
     .notes-input{
@@ -46,10 +51,11 @@
             word-wrap: break-word;
         }
 
+
     }
     
     .add-notes{
-        margin: 5px;
+        margin: 10px;
         position: relative;
         float: right;
         background-color: #fa8d62;
