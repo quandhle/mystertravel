@@ -6,20 +6,23 @@ import {change} from 'redux-form';
 import './map.scss';
 import keys from './../../../api_keys';
 import SearchBar from './search_bar';
+import MapPopUp from './map_popup';
 
 class Map extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            lat: 41.8719,   // Rome
-            lng: 12.5674,
+            lat: 1,  
+            lng: 1,
             pins: [],
             name: null,
-            map: null
+            map: null,
+            modal: false
         }
 
         this.addPin = this.addPin.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
     }
 
     componentDidMount() {
@@ -49,7 +52,7 @@ class Map extends Component {
             streetViewControl: false,
             fullscreenControl: false,
             center: {lat: this.state.lat, lng: this.state.lng},
-            zoom: 10,
+            zoom: 2,
             minZoom: 2,
         });
 
@@ -95,7 +98,7 @@ class Map extends Component {
             location = place.geometry.location;
 
             this.state.map.setCenter(location);
-            this.state.map.setZoom(12);
+            this.state.map.setZoom(14);
         } else {
             const service = new google.maps.places.PlacesService(this.state.map);
             service.findPlaceFromQuery({
@@ -105,7 +108,7 @@ class Map extends Component {
             }, (results, status) => {
                 if (status === google.maps.places.PlacesServiceStatus.OK) {
                     this.state.map.setCenter(results[0].geometry.location);
-                    this.state.map.setZoom(12);
+                    this.state.map.setZoom(14);
                 }
             });
 
@@ -119,6 +122,7 @@ class Map extends Component {
             lng: location.lng(),
             name: place.name
         })
+        setTimeout(this.toggleModal, 2000);
     }
 
     async showPins() {
@@ -141,7 +145,7 @@ class Map extends Component {
                     map: this.state.map
                 });
 
-                const content = ('<h4 id="infoWindow">' + item.name + '</h4><p>' + item.description + '</p>');
+                const content = ('<h5 id="infoWindow">' + item.name + '</h5><p>' + item.description + '</p>');
 
                 const infowindow = new google.maps.InfoWindow({
                     content: content
@@ -152,7 +156,7 @@ class Map extends Component {
                 })
 
                 pin.setMap(this.state.map);
-                
+
                 return pin;
             });
             this.setState({
@@ -167,14 +171,19 @@ class Map extends Component {
             const coordObject = {lat: coords.latitude, lng: coords.longitude};
             this.setState(coordObject);
             this.state.map.setCenter(coordObject);
-
+            this.state.map.setZoom(14);
             const geocoder = new google.maps.Geocoder;
             geocoder.geocode({'location': coordObject}, (results, status) => {
+                console.log(results)
                 if (status === 'OK') {
                     if (results[0]) {
                         this.props.dispatch(change("search-bar-form", `places`,
                             results.length > 3 ?
                                 results[results.length - 4].formatted_address : results[0].formatted_address));
+                        
+                        this.setState({
+                            name: results[0].formatted_address.split(" ")[0]
+                        })
                     }
                 }
             });
@@ -187,14 +196,15 @@ class Map extends Component {
         document.getElementById("places").focus();
     }
 
-    addPin() {
+    addPin(value) {
+        this.toggleModal();
         const {lat, lng, name} = this.state;
 
         const resp = axios.post('/api/addmappin.php', {
             trips_id: 1,
             latitude: parseFloat(lat),
             longitude: parseFloat(lng),
-            description: 'This is Irvine.',
+            description: value['pin-description'],
             name: name
         }).then((resp) => {
             const marker = new window.google.maps.Marker({
@@ -208,24 +218,30 @@ class Map extends Component {
             this.setState({
                 pins: [...this.state.pins, marker]
             })
+
+            this.showPins();
         })
-
-        this.showPins();
     }
-
+    toggleModal(){
+        this.setState({
+            modal: !this.state.modal
+        })   
+    }
     render() {
+        const {modal} = this.state
         return (
             <main>
                 <div className="search-bar-holder">
                     <SearchBar handleClear={this.handleClear}/>
                 </div>
                 <div id="map" className='map'/>
-                    <button className='btn map-btn btn-lg' onClick={this.addPin}>
-                        Add Pin <i className="fas fa-map-marker-alt"/>
-                    </button>
+                <button className='btn map-btn btn-lg' onClick={this.addPin}>
+                    Add Pin <i className="fas fa-map-marker-alt"/>
+                </button>
                 <button onClick={this.getCurrentLocation} className='btn geo-btn btn-lg'>
                     <i className="fas fa-location-arrow"/>
                 </button>
+                {this.state.modal && <MapPopUp modal={modal} close={this.toggleModal} addpin={this.addPin}/>}
             </main>
         );
     }
@@ -234,7 +250,6 @@ class Map extends Component {
 function loadScript(url){
     const index = window.document.getElementsByTagName("script")[0];
     const script = window.document.createElement("script");
-
     script.src = url;
     script.async = true;
     script.defer = true;
