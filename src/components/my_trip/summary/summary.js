@@ -21,6 +21,7 @@ class EndTrip extends Component{
     }
 
     async getSummaryData() {
+        debugger;
         const {trips_id} = this.props.trips_id;
         const response = await axios.get(`/api/getendtripsummary.php?trips_id=${trips_id}`);
 
@@ -37,7 +38,7 @@ class EndTrip extends Component{
 
     render(){
         const {tripName, totalSpent, region, lastNote} = this.state;
-        const {trips_id} = this.props;
+        const {trips_id} = this.props.trips_id;
 
         if (trips_id > 0) {
             return(
