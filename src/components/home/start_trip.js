@@ -23,6 +23,7 @@ class StartTrip extends Component {
             this.props.history.push('/map');
         } else {
             console.error('can not start trip');
+            console.error(resp);
         }
         
     }
