@@ -18,3 +18,10 @@ export function passTripId(id){
         trips_id: id
     }
 }
+
+export function clearTripId(){
+    return{
+        type: types.CLEAR_TRIP_ID,
+        trips_id: null
+    }
+}

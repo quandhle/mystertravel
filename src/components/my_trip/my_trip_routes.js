@@ -4,7 +4,7 @@ import {Route, Switch} from 'react-router-dom';
 import MyTrip from './';
 import Budget from './budget';
 import Notes from './notes';
-import SummaryRoutes from './summary/summary_routes';
+import Summary from './summary';
 import NotFound from './../404';
 
 export default props => {
@@ -16,7 +16,7 @@ export default props => {
                 <Route exact path={`${match.path}/`} component={MyTrip}/>
                 <Route path={`${match.path}/budget`} component={Budget}/>
                 <Route path={`${match.path}/notes`} component={Notes}/>
-                <Route path={`${match.path}/summary`} component={SummaryRoutes}/>
+                <Route path={`${match.path}/summary`} component={Summary}/>
                 <Route component={NotFound}/>
             </Switch>
         </div>
