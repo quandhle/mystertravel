@@ -7,9 +7,12 @@ const DEFAULT_STATE = {
 export default function tripReducer(state = DEFAULT_STATE, action){
     switch(action.type){
         case types.GET_TRIP_ID:
-        console.log("Trip reducer:", action.trips_id);
-        return {...state, trips_id: action.trips_id}
+            console.log("Trip reducer:", action.trips_id);
+            return {
+                ...state,
+                trips_id: action.trips_id
+            };
         default:
-        return state
+            return state
     }
 }
