@@ -5,7 +5,9 @@ export function signIn(user){
     return{
         type: types.SIGN_IN,
         username: user.username,
-        token: user.token
+        token: user.token,
+        trips_id: user.trips_id,
+        users_id: user.users_id
     }
 }
 

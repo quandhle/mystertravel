@@ -14,8 +14,7 @@ class StartTrip extends Component {
     }
     async nameTrip(value){
         const resp = await axios.post('/api/starttrip.php', {
-            trips_name: value.tripname,
-            region: 'usa'
+            trips_name: value.tripname
         })
         const {success, trips_id} = resp.data
         if(success){

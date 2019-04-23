@@ -22,9 +22,15 @@ class SignIn extends Component{
             password
         })
 
+        const {signIn, history} = this.props;
+
         if(resp.data.success){
-           this.props.signIn(resp.data);
-           this.history.push("/map");
+            signIn(resp.data);
+            if(resp.data.trips_id){
+                history.push('/map');
+            } else {
+                history.push('/');
+            }
         } else {
             this.setState({
                 message: resp.data.error
