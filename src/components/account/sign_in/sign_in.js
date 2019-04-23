@@ -3,7 +3,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {signIn} from '../../../actions';
 import SignInForm from './signin_form';
-
+import './sign_in.scss';
 
 class SignIn extends Component{
     constructor(props){

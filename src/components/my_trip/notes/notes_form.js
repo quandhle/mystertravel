@@ -13,6 +13,15 @@ const NotesInput = props =>{
         ) 
 }
 
+function validate({notes}){
+    const errors = {};
+    if(!notes){
+        errors.notes = 'Your note is empty';
+    }
+    return errors;
+}
+
 export default reduxForm({
-    form: 'notes-form'
+    form: 'notes-form',
+    validate
 })(NotesInput);

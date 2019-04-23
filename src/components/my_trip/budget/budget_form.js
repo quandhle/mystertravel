@@ -15,6 +15,21 @@ const BudgetForm = props => {
         )
 }
 
+function validate({description, price, category}){
+    const errors = {};
+    if(!description){
+        errors.description = 'Please enter description';
+    }
+    if(!price){
+        errors.price = 'Please enter amount'; 
+    }
+    if(!category){
+        errors.category = 'Please enter category'; 
+    }
+    return errors;
+}
+
 export default reduxForm({
-    form: 'budget-form'
+    form: 'budget-form',
+    validate
 })(BudgetForm);
