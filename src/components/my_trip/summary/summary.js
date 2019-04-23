@@ -59,6 +59,23 @@ class EndTrip extends Component{
         }
     }
 
+    fbButton = () => {
+        const trips_id = this.paramTripsId ? this.paramTripsId : this.props.trips_id.trips_id;
+        console.log(`${window.location.origin}/trip/${trips_id}`);
+    }
+
+    twitterButton = () => {
+
+    }
+
+    mailButton() {
+        const trips_id = this.paramTripsId ? this.paramTripsId : this.props.trips_id.trips_id;
+
+        return `mailto: ?subject=${'I went on a trip!'}&body=${
+            `I went on a trip recently! Check it out on MysterTravel!%0D%0A${window.location.origin}/trip/${trips_id}`
+        }`;
+    }
+
     render(){
         const {tripName, totalSpent, lastNote} = this.state;
         const trips_id = this.paramTripsId ? this.paramTripsId : this.props.trips_id.trips_id;
@@ -79,9 +96,13 @@ class EndTrip extends Component{
                             <p>{lastNote}</p>
                         </div>
                         <div className="share-btns col-12">
-                            <div className="facebook"><i className="fab fa-facebook-square"></i></div>
+                            <div className="facebook">
+                                <a onClick={this.fbButton}><i className="fab fa-facebook-square"></i></a>
+                            </div>
                             <div className="twitter"><i className="fab fa-twitter-square"></i></div>
-                            <div className="gmail"><i className="fas fa-envelope-square"></i></div>
+                            <div className="gmail">
+                                <a href={this.mailButton()}><i className="fas fa-envelope-square"></i></a>
+                            </div>
                         </div>
                     </div>
                     {!paramTripsId &&
