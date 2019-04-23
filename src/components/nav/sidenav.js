@@ -106,6 +106,7 @@ class SideNav extends Component{
         )
     }
     render(){
+
         const {style:{body, background}, toggle} =this.props
         const links = this.renderLinks();
         return(
