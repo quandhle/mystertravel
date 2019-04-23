@@ -11,7 +11,7 @@ export default props => {
     const {match} = props;
 
     return (
-        <div className='test'>
+        <div className='my-trip-page'>
             <Switch>
                 <Route exact path={`${match.path}/`} component={MyTrip}/>
                 <Route path={`${match.path}/budget`} component={Budget}/>

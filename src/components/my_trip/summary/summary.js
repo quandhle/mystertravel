@@ -10,20 +10,30 @@ import summaryimg from '../../../assets/images/summary.jpg';
 import thinkingEmoji from '../../../assets/images/thinking-emoji.png';
 
 class EndTrip extends Component{
-    state = {
-        tripName: '',
-        totalSpent: 0,
-        lastNote: ''
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            tripName: '',
+            totalSpent: 0,
+            lastNote: '',
+        };
+
+        this.paramTripsId = null;
+        const {params} = this.props.match;
+        if (params && params.trips_id) {
+            this.paramTripsId = params.trips_id;
+        }
+    }
 
     componentDidMount() {
         this.getSummaryData();
     }
 
     async getSummaryData() {
-        const {trips_id} = this.props.trips_id;
-        const response = await axios.get(`/api/getendtripsummary.php?trips_id=${trips_id}`);
+        const trips_id = this.paramTripsId ? this.paramTripsId : this.props.trips_id.trips_id;
 
+        const response = await axios.get(`/api/getendtripsummary.php?trips_id=${trips_id}`);
         if (response.data.success) {
             const {trips_name, total_budget, last_entry} = response.data.data;
             this.setState({
@@ -51,9 +61,10 @@ class EndTrip extends Component{
 
     render(){
         const {tripName, totalSpent, lastNote} = this.state;
-        const {trips_id} = this.props.trips_id;
+        const trips_id = this.paramTripsId ? this.paramTripsId : this.props.trips_id.trips_id;
+        const paramTripsId = this.paramTripsId;
 
-        if (trips_id > 0) {
+        if (trips_id > 0 && tripName) {
             return(
                 <div className="summary-page">
                     <div className="summary-trip-name">
@@ -73,22 +84,24 @@ class EndTrip extends Component{
                             <div className="gmail"><i className="fas fa-envelope-square"></i></div>
                         </div>
                     </div>
-                    <div className="summary-end-trip-link">
-                        <button onClick={this.endTrip} className="summary-end-trip-link-btn btn">End Trip</button>
-                    </div>
+                    {!paramTripsId &&
+                        <div className="summary-end-trip-link">
+                            <button onClick={this.endTrip} className="summary-end-trip-link-btn btn">End Trip</button>
+                        </div>
+                    }
                 </div>
             )
         } else {
             return (
                 <div className="summary-fail-page">
                     <div className="summary-fail-title">
-                        <p>Dude, where's your trip?</p>
+                        <p>Yo, where's your trip?</p>
                     </div>
                     <div className="summary-fail-image">
                         <img src={thinkingEmoji} alt="temp"/>
                     </div>
                     <div className="summary-fail-text">
-                        <p>It looks like you haven't done anything on this trip yet! Venture forth! (and log it!)</p>
+                        <p>This trip doesn't exist! Venture forth! (and log it!)</p>
                     </div>
                 </div>
             )
