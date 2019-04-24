@@ -23,11 +23,13 @@ class Notes extends Component {
     }
     async handleInput(value) {
         console.log(value);
+        const {trips_id} = this.props.trips_id;
+        const {notes, imageUpload: image} = value;
 
         const data = new FormData();
-        data.append('trips_id', this.props.trips_id);
-        data.append('entry', value.notes);
-        data.append('image', value.imageUpload);
+        data.append('trips_id', trips_id);
+        data.append('entry', notes);
+        data.append('image', image);
 
         const resp = await axios.post('/api/addnoteitem.php', data, {
             headers: {
