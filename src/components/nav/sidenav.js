@@ -52,10 +52,6 @@ class SideNav extends Component{
                     text: 'Home'
                 },
                 {
-                    to: '/aboutus',
-                    text: 'About Us'
-                },
-                {
                     to: '/mytrip',
                     text: 'Current Trip'
                 },
@@ -74,10 +70,7 @@ class SideNav extends Component{
                     to: '/',
                     text: 'Home'
                 },
-                {
-                    to: '/aboutus',
-                    text: 'About Us'
-                },
+
                 {
                     to: '/account/signin',
                     text: 'Sign In'
@@ -125,6 +118,9 @@ class SideNav extends Component{
         <div className="side-nav-box" onClick={toggle} style={background}>
             <div className="side-nav" style={body}>
                 {links}
+                <ul className="aboutus-link">
+                    <li><Link to="/aboutus" >About the Team</Link></li>
+                </ul>
             </div>
         </div>
         )
