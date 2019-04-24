@@ -54,6 +54,10 @@ class EndTrip extends Component{
                 totalSpent: total_budget,
                 lastNote: last_entry
             });
+
+            console.log('resp is: ', response);
+        } else {
+            console.log('resp is: ', response);
         }
     }
 
