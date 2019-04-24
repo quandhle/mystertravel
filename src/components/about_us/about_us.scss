@@ -1,75 +1,154 @@
 .about-container {
-
-    .person-img {
-        width: 100%;
-        border-radius: 50%;
-    }
+    top: 0;
+    height: 90vh;
 
     .about-person {
+        margin: auto;
+        margin-top: 10%;
+        margin-bottom: 10%;
+        width: 90%;
         font-size: 1.2em;
-        margin: 5px;
-        // border-radius: 15px;
-
         transition: 0.5s;
-        -webkit-box-shadow: 0px 0px 15px -5px rgba(213,224,223,1);
-        -moz-box-shadow: 0px 0px 15px -5px rgba(213,224,223,1);
-        box-shadow: 0px 0px 15px -5px rgba(213,224,223,1);
+        // -webkit-box-shadow: 0px 0px 15px -5px rgba(213,224,223,1);
+        // -moz-box-shadow: 0px 0px 15px -5px rgba(213,224,223,1);
+        // box-shadow: 0px 0px 15px -5px rgba(213,224,223,1);
+        color: black;
 
-        // &:nth-child(odd){
-        //     background-color:  #2b616d;
-        // }
-        
-        // &:nth-child(even){
-        //     background-color: #3b717e;
-        // }
+        .about-top {
+            position: relative;
 
-        // &:hover{
-        //     background-color: #1b515d;
-        // }
-        .about-top{
-            background-color:  #2b616d;
-            border-radius: 15px 15px 0 0;
-            padding: 10px 15px;
-
-            .about-img, .about-name{
+            .about-img, .about-name {
                 display: inline-block;
             }
-            .about-img{
+            .about-img {
                 width: 30%;
+                
+                img {
+                    width: 100%;
+                }
             }
-            .about-name{
-                width:70%;
-                padding: 15px;
-                color: white;
+            .about-name {
+                position: absolute;
+                width: 70%;
+                left: 30%;
             }
         }
 
-        .about-story{
-            background-color:  #2b616d;
+        .about-story {
             height: 1.5em; 
             overflow-y: hidden;
             transition: height 1s;
-            color: rgb(253, 243, 243); 
 
-            &:hover{ //needto change to js
+            &:hover {
                 height: 200px;
                 transition: height 0.5s;
             }
         }
 
-        .about-contact{
-            background-color:  #2b616d;
-            border-radius: 0 0 15px 15px;
+        .about-contact {
             padding: 10px 15px;
-
             text-align: right;
             font-size: 2rem;
-            a{
-                color: white;
+
+            a {
+                color: black;
                 text-decoration: none;
                 padding: 5px;
             }
-
         }
+    }
+
+    .first {
+        background-image: url('https://tr-images.condecdn.net/image/qJVQbNDYxzO/crop/2040/f/si-chang-thailand-conde-nast-traveller-19feb18-alamy.jpg');
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 7px;
+        font-size: 3em;
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-position-x: 70%;
+        background-position-y: bottom;
+        background-size: cover;
+        overflow-y: auto;
+        height: 100%;
+    }
+
+    .bg1::after, .bg2::after, .bg2 {
+        background-image: url('https://gpscvbcms.s3.amazonaws.com/article-galleries/10010/joshua-tree.jpg');
+    }
+
+    .bg2 {
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-position-y: 0;
+        background-size: cover;
+        overflow-y: auto;
+        height: 100vh;
+
+        div {
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            height: 10%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, .6);
+        }
+    }
+
+    .section {
+        position: relative;
+        height: 100vh;
+
+        .aboutUs {
+            background-color: white;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 5%;
+            width: 100%;
+        }
+
+        .footer {
+            width: 100%;
+            bottom: 0;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 10%;
+
+            a {
+                text-decoration: none;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                color: white;
+            }
+        }
+    }
+}
+
+@media (min-width: 900px) {
+    .about-container .about-person {
+        width: 40%;
+    }
+
+    .about-container {
+        .about-person {
+            margin: 20px auto 20px auto;
+        }
+    }
+
+    .aboutUs {
+        padding: 50px 0 50px 0;
+        flex-wrap: wrap;
+        height: 100%;
+        display: flex;
+        justify-content: space-evenly;
     }
 }
