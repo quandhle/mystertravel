@@ -26,7 +26,7 @@ try {
     die("Error: " . $e->getMessage());
 }
 
-$keyName = 'notes-images/' . basename($_FILES["fileToUpload"]['name']);
+$keyName = 'notes-images/trips_id=' . $trips_id . '/' . basename($_FILES["fileToUpload"]['name']);
 $pathInS3 = 'https://s3.us-west-1.amazonaws.com/' . $bucketName . '/' . $keyName;
 
 try {
