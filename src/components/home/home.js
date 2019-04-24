@@ -25,7 +25,7 @@ class Home extends Component {
         const signInCheck = this.checkSignIn();
         return (
             <div className="home-page">
-                <section className="first parallax">
+                <section className="first">
                     <h4 className='title-blurb1'>Travel smarter</h4>
                     <h4 className='title-blurb2'>Plan faster</h4>
                     <UserStart history={this.props.history} signIn={user.auth}/>
@@ -37,12 +37,13 @@ class Home extends Component {
                 <section className="currentTrip section">Keep track of your travels</section>
                 <section className="bg bg3 section"></section>
                 <section className="postTrip section">Share your travels</section>
-                <section className="bg bg4 section"></section>
-                <section className="contact section">
-                    <ul>
-                        <li><a href="https://github.com/learning-fuze/c219_travelagenda">GitHub</a></li>
-                        <li><a href="/aboutus">About Us</a></li>
-                    </ul>
+                <section className="bg bg4 section">
+                    <section className="contact section">
+                        <ul>
+                            <li><a href="https://github.com/learning-fuze/c219_travelagenda">GitHub</a></li>
+                            <li><a href="/aboutus">About Us</a></li>
+                        </ul>
+                    </section>
                 </section>
             </div>
         )
