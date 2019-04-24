@@ -35,6 +35,7 @@ while($row = mysqli_fetch_assoc($result)){
     $date = date("m/d/Y H:i:s", strtotime($row['entry_date']));
     $data[] = [
         'note_id' => $row['id'],
+        'image' => $row['image'],
         'entry' => $row['entry'],
         'date' => $date
     ];

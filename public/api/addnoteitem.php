@@ -15,6 +15,7 @@ if(empty($entry)){
 }
 if(isset($_FILES['image']['name'])){
     require_once('upload/upload.php');
+    require_once('upload/get.php');
 }
 
 $query = "INSERT INTO `notes` SET
@@ -39,7 +40,7 @@ $note_id = mysqli_insert_id($conn);
 
 if(isset($_FILES['image']['name'])){
     $image_query = "UPDATE `notes`
-        SET `image` = '$keyName'
+        SET `image` = '$url'
         WHERE `id` = $note_id
     ";
 
