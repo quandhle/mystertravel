@@ -2,11 +2,9 @@
 
 require_once('config.php');
 
-$json_input = file_get_contents("php://input");
-$input = json_decode($json_input, true);
-
-$trips_id = intval($input['trips_id']);
-$entry = $input['entry'];
+$trips_id = intval($_POST['trips_id']);
+$entry = $_POST['entry'];
+$image = $_FILES;
 
 if(empty($trips_id)){
     throw new Exception('Please provide trips_id (int) with your request');
@@ -15,7 +13,7 @@ if(empty($trips_id)){
 if(empty($entry)){
     throw new Exception('Please enter a diary entry (str) with your request');
 }
-if(is_uploaded_file($_FILES['fileToUpload']['tmp_name'])){
+if(isset($_FILES['image']['name'])){
     require_once('upload/upload.php');
 }
 
@@ -39,15 +37,15 @@ if(mysqli_affected_rows($conn) !== 1){
 
 $note_id = mysqli_insert_id($conn);
 
-if(is_uploaded_file($_FILES['fileToUpload']['tmp_name'])){
+if(isset($_FILES['image']['name'])){
     $image_query = "UPDATE `notes`
-        SET `image` = $keyName
+        SET `image` = '$keyName'
         WHERE `id` = $note_id
     ";
 
     $result = mysqli_query($conn, $image_query);
 }
-
+$output = [];
 $output['success'] = true;
 $output['note_id'] = $note_id;
 
