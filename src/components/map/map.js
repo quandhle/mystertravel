@@ -125,6 +125,7 @@ class Map extends Component {
     }
 
     async showPins() {
+
         const trips_id = this.props.trips_id;
 
         const resp = await axios.get(`/api/getmappin.php?trips_id=${trips_id}`);
@@ -200,7 +201,7 @@ class Map extends Component {
         const {lat, lng, name} = this.state;
 
         const resp = axios.post('/api/addmappin.php', {
-            trips_id: 1,
+            trips_id: this.props.trips_id,
             latitude: parseFloat(lat),
             longitude: parseFloat(lng),
             description: value['pin-description'],
