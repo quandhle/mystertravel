@@ -20,6 +20,7 @@ class Notes extends Component {
         this.deleteItem = this.deleteItem.bind(this);
     }
     async handleInput(value) {
+        console.log(value);
         const {trips_id} = this.props.trips_id;
         const resp = await axios.post('/api/addnoteitem.php', {
             trips_id,
