@@ -14,11 +14,10 @@ class SignIn extends Component{
     async handleSignUp (values){
         const {email, password} = values
         const resp = await axios.post('', {
+            nickname,
             email,
             password
         })
-
-
     }
     render(){
         return(
