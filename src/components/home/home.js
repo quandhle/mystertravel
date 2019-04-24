@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Guest from './guest';
+import UserStart from './user_start';
 import './home.scss';
 
 class Home extends Component {
@@ -27,7 +27,7 @@ class Home extends Component {
             <div className="home-page">
                 <h4 className='title-blurb1'>Travel smarter</h4>
                 <h4 className='title-blurb2'>Plan faster</h4>
-                <Guest history={this.props.history} signIn={user.auth}/>
+                <UserStart history={this.props.history} signIn={user.auth}/>
                 {signInCheck}
             </div>
         )
