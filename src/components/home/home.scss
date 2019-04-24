@@ -166,6 +166,10 @@
         padding: 0;
         margin: 0;
     }
+
+    .chevron {
+        scroll-behavior: smooth;
+    }
 }
 
 @media (min-width: 900px){

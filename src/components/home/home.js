@@ -30,9 +30,9 @@ class Home extends Component {
                     <h4 className='title-blurb2'>Plan faster</h4>
                     <UserStart history={this.props.history} signIn={user.auth}/>
                     {signInCheck}
-                    <i className="fas fa-chevron-down scroll"></i>
+                    <a href="#preTrip" className="chevron"><i className="fas fa-chevron-down scroll"></i></a>
                 </section>
-                <section className="preTrip section">Plan before you go</section>
+                <a name="preTrip" className="chevron"><section className="preTrip section">Plan before you go</section></a>
                 <section className="bg bg2 section"></section>
                 <section className="currentTrip section">Keep track of your travels</section>
                 <section className="bg bg3 section"></section>
