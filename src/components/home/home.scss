@@ -1,10 +1,11 @@
 .home-page {
     height: 90vh;   
-    background-image: url('../../assets/images/homepage-background.jpg');
+    background-image: url('https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-image.travelandleisure.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F1600x1000%2Fpublic%2F1496699939%2Fhot-air-balloons-festival-cappadocia-turkey-HOTAIR0605.jpg%3Fitok%3DWZ9CVr-K&q=85');
     background-repeat: no-repeat;
     background-attachment: fixed; 
+    background-position: center;
     background-size: cover;
-
+    overflow-y: auto;
 
     .desktop-home-page{
         display: none;
@@ -88,28 +89,65 @@
         }
     }
 
-    .preTrip, .currentTrip, .postTrip {
-        position: absolute;
-        height: 50vh;
-        width: 100%;
-    }
-
     .preTrip {
-        background: hotpink;
-        top: 100%;
+        color: black;
+        background-color: white;
     }
 
     .currentTrip {
-        background: limegreen;
-        top: 150%;
+        background-color: white;
+        color: black;
     }
 
     .postTrip {
-        background: lavender;
-        top: 200%;
+        background-color: white;
+    }
+
+    section > footer {
+        height: 10vh;
+        background-color: black;
+    }
+
+    .first {
+        position: relative;
+        height: 90vh;
+    }
+
+    .section {
+        position: relative;
+        height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .contact {
+        height: 10vh;
+        background-color: black;
+        color: white;
+    }
+
+    .parallax::after {
+        position: absolute;
+        z-index: -1;
+    }
+
+    .bg1::after, .bg2::after, .bg3::after, .bg2, .bg3 {
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-position: center;
+        background-size: cover;
+        overflow-y: auto;
+    }
+
+    .bg1::after, .bg2::after, .bg2 {
+        background-image: url('https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_809,f_auto/w_80,x_15,y_15,g_south_west,l_klook_water/activities/n2t3cwgfhrnxlnd77rhb/HalongBayDayTour.jpg');
+    }
+
+    .bg3 {
+        background-image: url('https://lonelyplanetimages.imgix.net/mastheads/GettyImages-126140612_super%20.jpg?sharp=10&vib=20&w=1200');
     }
 }
-
 
 @media (min-width: 900px){
     .home-page{
