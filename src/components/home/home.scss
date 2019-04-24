@@ -1,6 +1,6 @@
 .home-page {
     height: 90vh;   
-    background-image: url('https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-image.travelandleisure.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F1600x1000%2Fpublic%2F1496699939%2Fhot-air-balloons-festival-cappadocia-turkey-HOTAIR0605.jpg%3Fitok%3DWZ9CVr-K&q=85');
+    background-image: url('../../assets/images/homepage-background2.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed; 
     background-position: center;
@@ -59,24 +59,27 @@
         -webkit-box-shadow: 0px 0px 34px -2px rgba(168,168,168,1);
         -moz-box-shadow: 0px 0px 34px -2px rgba(168,168,168,1);
         box-shadow: 0px 0px 34px -2px rgba(168,168,168,1);
-        height: 70%;
+        height: 100%;
+        overflow-y: hidden;
         
         .homepage-modal-header{
             padding-top: 15px;
         }
 
-        .start-input{
-            margin: 10px;
 
+        .start-input{
+        margin: 10px;
             &>input{
               border: 1px solid transparent;
               outline: none;
               background-color:rgba(255, 255, 255, 0.5);
               width: 85%;
               border-radius: 5px;
+              color:#2b616d;
             }
-            
+        
         }
+
 
         .start-trip-btn{
             color: white;
