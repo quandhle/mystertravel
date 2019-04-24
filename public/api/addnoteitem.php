@@ -15,6 +15,9 @@ if(empty($trips_id)){
 if(empty($entry)){
     throw new Exception('Please enter a diary entry (str) with your request');
 }
+if(isset($_FILES['fileToUpload'])){
+    require_once('upload/upload.php');
+}
 
 $query = "INSERT INTO `notes` SET
     `trips_id` = ?,
@@ -35,6 +38,15 @@ if(mysqli_affected_rows($conn) !== 1){
 }
 
 $note_id = mysqli_insert_id($conn);
+
+if(isset($_FILES['fileToUpload'])) {
+    $image_query = "UPDATE `notes`
+        SET `image` = $keyName
+        WHERE `id` = $note_id
+    ";
+
+    $result = mysqli_query($conn, $image_query);
+}
 
 $output['success'] = true;
 $output['note_id'] = $note_id;

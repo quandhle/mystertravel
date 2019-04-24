@@ -1,12 +1,16 @@
 <?php
 
 require('../vendor/autoload.php');
+require('key.php');
 
-$accessKey = 'AKIAUND4NIQBQXYU4U6X';
-$secret = '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';
+$accessKey = $aws_acess_key_id;
+$secret = $aws_secret_access_key;
 
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
+
+
+//query database first to get keyname
 
 $bucket = 'myster-travel-images';
 $keyname = 'about-us/kylie.jpg';
