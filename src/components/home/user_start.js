@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import StartTrip from './start_trip';
 
 
-class Guest extends Component {
+class UserStart extends Component {
     constructor(props){
         super(props);
 
@@ -42,4 +42,4 @@ class Guest extends Component {
     }
 }
 
-export default Guest;
+export default UserStart;
