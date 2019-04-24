@@ -40,8 +40,8 @@ class Home extends Component {
                 <section className="bg bg4 section"></section>
                 <section className="contact section">
                     <ul>
-                        <li>GitHub</li>
-                        <li>About Us</li>
+                        <li><a href="https://github.com/learning-fuze/c219_travelagenda">GitHub</a></li>
+                        <li><a href="/aboutus">About Us</a></li>
                     </ul>
                 </section>
             </div>
