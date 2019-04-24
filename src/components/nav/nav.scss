@@ -66,7 +66,7 @@
             }
         }
 
-        .side-nav-links{
+        .side-nav-links, .aboutus-link{
             list-style: none;
             padding: 0;
 
@@ -86,6 +86,12 @@
 
 
         }
+
+        .aboutus-link{
+            position: relative;
+            top:30%
+        }
+
 
     }
 }
