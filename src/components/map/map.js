@@ -125,7 +125,7 @@ class Map extends Component {
     }
 
     async showPins() {
-        const trips_id = 1;
+        const trips_id = this.props.trips_id;
 
         const resp = await axios.get(`/api/getmappin.php?trips_id=${trips_id}`);
         let pinData = null;
@@ -246,4 +246,10 @@ class Map extends Component {
     }
 }
 
-export default connect()(Map);
+function mapStateToProps(state){
+    return{
+        trips_id: state.trips_id.trips_id
+    }
+}
+
+export default connect(mapStateToProps)(Map);
