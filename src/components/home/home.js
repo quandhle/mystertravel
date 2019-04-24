@@ -25,10 +25,25 @@ class Home extends Component {
         const signInCheck = this.checkSignIn();
         return (
             <div className="home-page">
-                <h4 className='title-blurb1'>Travel smarter</h4>
-                <h4 className='title-blurb2'>Plan faster</h4>
-                <UserStart history={this.props.history} signIn={user.auth}/>
-                {signInCheck}
+                <section className="first parallax">
+                    <h4 className='title-blurb1'>Travel smarter</h4>
+                    <h4 className='title-blurb2'>Plan faster</h4>
+                    <UserStart history={this.props.history} signIn={user.auth}/>
+                    {signInCheck}
+                    <i className="fas fa-chevron-down scroll"></i>
+                </section>
+                <section className="preTrip section">Plan before you go</section>
+                <section className="bg bg2 section"></section>
+                <section className="currentTrip section">Keep track of your travels</section>
+                <section className="bg bg3 section"></section>
+                <section className="postTrip section">Share your travels</section>
+                <section className="bg bg4 section"></section>
+                <section className="contact section">
+                    <ul>
+                        <li>GitHub</li>
+                        <li>About Us</li>
+                    </ul>
+                </section>
             </div>
         )
     }

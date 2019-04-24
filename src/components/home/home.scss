@@ -1,13 +1,19 @@
 .home-page {
     height: 90vh;   
-    background-image: url('../../assets/images/homepage-background.jpg');
+    background-image: url('../../assets/images/homepage-background2.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed; 
+    background-position: center;
     background-size: cover;
+    overflow-y: auto;
 
 
     .desktop-home-page{
         display: none;
+    }
+
+    .first, .section, .home-page-btn {
+        position: relative;
     }
 
     .title-blurb1, .title-blurb2 {
@@ -30,7 +36,6 @@
     }
 
     .home-page-btn {
-        position: relative;
         top: 65%;
         left: 10%;
         width: 80%;
@@ -58,24 +63,27 @@
         -webkit-box-shadow: 0px 0px 34px -2px rgba(168,168,168,1);
         -moz-box-shadow: 0px 0px 34px -2px rgba(168,168,168,1);
         box-shadow: 0px 0px 34px -2px rgba(168,168,168,1);
-        height: 70%;
+        height: 100%;
+        overflow-y: hidden;
         
         .homepage-modal-header{
             padding-top: 15px;
         }
 
-        .start-input{
-            margin: 10px;
 
+        .start-input{
+        margin: 10px;
             &>input{
               border: 1px solid transparent;
               outline: none;
               background-color:rgba(255, 255, 255, 0.5);
               width: 85%;
               border-radius: 5px;
+              color:#2b616d;
             }
-            
+        
         }
+
 
         .start-trip-btn{
             color: white;
@@ -88,28 +96,77 @@
         }
     }
 
-    .preTrip, .currentTrip, .postTrip {
-        position: absolute;
-        height: 50vh;
-        width: 100%;
-    }
-
     .preTrip {
-        background: hotpink;
-        top: 100%;
+        color: black;
+        background-color: white;
     }
 
     .currentTrip {
-        background: limegreen;
-        top: 150%;
+        background-color: white;
+        color: black;
     }
 
     .postTrip {
-        background: lavender;
-        top: 200%;
+        background-color: white;
+    }
+
+    section > footer {
+        height: 10vh;
+        background-color: black;
+    }
+
+    .first {
+        height: 90vh;
+    }
+
+    .section {
+        height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .contact {
+        height: 10vh;
+        background-image: linear-gradient(rgba(19, 19, 21, 1), black);
+        color: white;
+    }
+
+    .bg1::after, .bg2::after, .bg2 {
+        background-image: url('https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_809,f_auto/w_80,x_15,y_15,g_south_west,l_klook_water/activities/n2t3cwgfhrnxlnd77rhb/HalongBayDayTour.jpg');
+    }
+
+    .bg3 {
+        background-image: url('https://lonelyplanetimages.imgix.net/mastheads/GettyImages-126140612_super%20.jpg?sharp=10&vib=20&w=1200');
+    }
+
+    .bg4 {
+        background-image: url('https://static1.squarespace.com/static/56e1232c9f726647eea4a12a/t/5b53d07cf950b714419fd6e9/1532219542774/Pura+Lempuyang+Luhur+Temple+Bali?format=1500w');
+        background-position-x: center;
+        background-position-y: bottom;
+        height: 80vh;
+    }
+
+    .scroll {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        color: white;
+        transform: translate(-50%, -50%);
+        font-size: 150%;
+    }
+
+    section > ul {
+        display: flex;
+        flex-wrap: wrap;
+        list-style-type: none;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 60%;
+        padding: 0;
+        margin: 0;
     }
 }
-
 
 @media (min-width: 900px){
     .home-page{
@@ -117,5 +174,12 @@
             display: block;
         }
     }
+}
 
+.home-page, .bg1::after, .bg2::after, .bg3::after, .bg2, .bg3, .bg4 {
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-position: center;
+    background-size: cover;
+    overflow-y: auto;
 }

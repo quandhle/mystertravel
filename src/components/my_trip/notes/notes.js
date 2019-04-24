@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+
 import NotesForm from './notes_form';
 import NoteItem from './note_item';
 import './notes.scss';
@@ -14,7 +15,8 @@ class Notes extends Component {
                 height: 0
             },
             note: [],
-        }
+        };
+
         this.toggleInput = this.toggleInput.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
@@ -22,15 +24,25 @@ class Notes extends Component {
     async handleInput(value) {
         console.log(value);
         const {trips_id} = this.props.trips_id;
-        const resp = await axios.post('/api/addnoteitem.php', {
-            trips_id,
-            entry: value.notes
+        const {notes, imageUpload: image} = value;
+
+        const data = new FormData();
+        data.append('trips_id', trips_id);
+        data.append('entry', notes);
+        data.append('image', image);
+
+        const resp = await axios.post('/api/addnoteitem.php', data, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
         });
         if (resp.data.success) {
+            console.log(resp);
             value.notes = ''
             this.getNoteList();
             this.toggleInput();
         } else {
+            console.log(resp);
             console.log('Can not add')
         }
     }
