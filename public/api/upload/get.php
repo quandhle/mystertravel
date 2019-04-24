@@ -1,7 +1,7 @@
 <?php
 
-require('../vendor/autoload.php');
-require('key.php');
+require_once(__DIR__ . '/../vendor/autoload.php');
+require_once('key.php');
 
 $accessKey = $aws_acess_key_id;
 $secret = $aws_secret_access_key;
