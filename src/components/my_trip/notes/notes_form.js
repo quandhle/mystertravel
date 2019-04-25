@@ -6,7 +6,6 @@ import FileInput from '../../general/fileinput';
 
 const NotesInput = props =>{
     const {notes, handleSubmit, style} = props;
-    const backup = `<input type="file" name="fileToUpload" id="fileToUpload" />`;
 
     return (
         <form onSubmit={handleSubmit(notes)} style={style} className="note-input-form">

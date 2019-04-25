@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
 import { updateNote} from '../../../actions';
 
+import axios from 'axios';
+
 import Textarea from '../../general/textarea';
 import Modal from '../../general/modal';
 
@@ -14,31 +16,43 @@ class UpdateNote extends Component{
         this.updatedb = this.updatedb.bind(this);
     }
     async updatedb(value){
-        console.log('update',value)       
+        console.log('update', this.props)  
+        const {trips_id, note, display, close} = this.props
+        const resp = await axios.post('/api/updatenote.php', {
+            id: note.note_id,
+            description: value.entry, 
+            trips_id:1
+        }); //trips_id
+
+        if(resp.data.success){
+            display();
+        }
+        
+        close();
     }
     render(){
         const {modal, close, handleSubmit} = this.props;
         return(
             <Modal open={modal} childrenStyle="update-modal">
                 <span onClick={close} className="close-popup"><i className="fas fa-times-circle"></i></span>
-                <div className="map-modal-header">Do you want to add a pin? </div>
+                <div className="map-modal-header">Edit note?</div>
                 <form onSubmit={handleSubmit(this.updatedb)}>
                 <Field id="entry" name="entry" label="Enter Note" component={Textarea} classes="notes-input" />
                 </form>
-                <button id="update" className="" onClick={handleSubmit(this.updatedb)} >Update</button>
+                <button id="update" className="updatebutton" onClick={handleSubmit(this.updatedb)} >Update</button>
             </Modal>  
         )
     }
 }
 
 function mapStateToProps(state, props){
-    console.log('Props:', props);
+    // console.log('Props:', props);
     const { modal, note } = props;
     return {
         initialValues: {
             entry: modal ? note.entry : ''
         },
-        trips_id: state.trips_id,
+        trips_id: state.trips_id.trips_id,
     }
 }
 

@@ -105,7 +105,7 @@
 
             .btn{
                 position: relative;
-                left: 50%;
+                right:0;
                 color: #b2dbd5;
                 transition: 0.2s;
 
@@ -145,7 +145,7 @@
             
         }
 
-        .modal-pin-btn{
+        .updatebutton{
             color: white;
             background-color: #fa8d62;
             width: 60%;
@@ -155,12 +155,6 @@
             }
         }
 
-        .cancel-add-btn{
-            color: white;
-            background-color: #70a39c;
-            width: 60%;
-            margin: 5px 0;
-        }
     }
 }
 
