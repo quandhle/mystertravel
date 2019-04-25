@@ -18,7 +18,7 @@ class Notes extends Component {
             },
             note: []
         };
-
+        this.getNoteList = this.getNoteList.bind(this);
         this.toggleInput = this.toggleInput.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
@@ -95,7 +95,7 @@ class Notes extends Component {
         if(note.length > 0){
             noteList = note.map(note => { //need to change index to id
                 return (
-                    <NoteItem key={note.note_id} note={note} deleteItem={this.deleteItem} />
+                    <NoteItem key={note.note_id} note={note} deleteItem={this.deleteItem} display={this.getNoteList}/>
                 );
             });
         } else {
