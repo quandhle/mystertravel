@@ -28,10 +28,12 @@ if (mysqli_num_rows($result) === 0) {
 }
 
 while ($row = mysqli_fetch_assoc($result)) {
+    $latitude = intval($row['latitude']) / 10000000;
+    $longitude = intval($row['longitude'])/ 10000000;
     $data[] = [
         'pin_id' => $row['id'],
-        'lat' => $row['latitude'],
-        'lng' => $row['longitude'],
+        'lat' => $latitude,
+        'lng' => $longitude,
         'description' => $row['description'],
         'name' => $row['name']
     ];
