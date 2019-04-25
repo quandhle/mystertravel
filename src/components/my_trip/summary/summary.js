@@ -62,6 +62,7 @@ class Summary extends Component{
         const {trips_id} = this.state;
         const response = await axios.get(`/api/getendtripsummary.php?trips_id=${trips_id}`);
 
+        console.log(response.data);
         if (response.data.success) {
             const {trips_name, total_budget, last_entry} = response.data.data;
             this.setState({
@@ -125,23 +126,13 @@ class Summary extends Component{
 
     render(){
         const {trips_id, tripName, totalSpent, lastNote, privatePage, pinData} = this.state;
+        console.log(this.state);
         const summaryURL = `http://devtravelfuze.quandhle.com/trip/${trips_id}`;
 
         return(
             <div className="summary-page">
                 <div className="summary-trip-name"><p>{`${tripName}`}</p></div>
                 <div className="total-spend"><p>{`Total spent in this trip: ${formatMoney(totalSpent)}`}</p></div>
-                <div className="share-btns col-12">
-                    <a onClick={() => {this.fbButton(summaryURL)}}>
-                        <i className="fab fa-facebook-square"/>
-                    </a>
-                    <a href={this.twitterButton(summaryURL)}>
-                        <i className="fab fa-twitter-square"/>
-                    </a>
-                    <a href={this.mailButton(summaryURL)}>
-                        <i className="fas fa-envelope-square"/>
-                    </a>
-                </div>
                 <Timeline/>
                 <div className="last-entry">
                     <div className="entry-content">
@@ -154,6 +145,17 @@ class Summary extends Component{
                         <button onClick={this.endTrip} className="summary-end-trip-link-btn btn">End Trip</button>
                     </div>
                 }
+                <div className="share-btns col-12">
+                    <a onClick={() => {this.fbButton(summaryURL)}}>
+                        <i className="fab fa-facebook-square"/>
+                    </a>
+                    <a href={this.twitterButton(summaryURL)}>
+                        <i className="fab fa-twitter-square"/>
+                    </a>
+                    <a href={this.mailButton(summaryURL)}>
+                        <i className="fas fa-envelope-square"/>
+                    </a>
+                </div>
             </div>
         )
     }

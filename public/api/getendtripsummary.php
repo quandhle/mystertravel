@@ -4,7 +4,7 @@ require_once('config.php');
 
 $trips_id = $_GET['trips_id'];
 
-$summary_query = "SELECT t.`trips_name`, t.`region`,
+$summary_query = "SELECT t.`trips_name`,
     SUM(b.`price`) AS 'total_budget',
         (SELECT `entry`
         FROM `notes`
@@ -40,7 +40,6 @@ $row = mysqli_fetch_assoc($summary_result);
 $output['success'] = true;
 $output['data'] = [
     'trips_name' => $row['trips_name'],
-    'region' => $row['region'],
     'total_budget' => $row['total_budget'],
     'last_entry' => $row['last_entry']
 ];

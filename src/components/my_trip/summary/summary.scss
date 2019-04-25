@@ -42,31 +42,14 @@
         }
     }
 
-    .share-btns{
-        display: flex;
-        justify-content: center;
-        align-content: center;
-
-        &>* {
-            margin: 0 10px;
-            font-size: 3em;
-            color: #2b616d;
-            vertical-align: center;
-        }
-
-        &:hover{
-            color: #417681;
-        }
-    }
-
     .timeline {
         position: relative;
-        margin: 0 0 30px;
+        margin: 20px 0 30px;
 
         .timeline-title {
             font-size: 1.5em;
             font-weight: bold;
-            margin-left: 50px;
+            margin: 8px 0 8px 50px;
         }
 
         &::after {
@@ -76,7 +59,7 @@
             width: 6px;
             top: 0;
             bottom: 0;
-            left: 30px;
+            left: 25px;
             margin-left: -3px;
         }
 
@@ -89,7 +72,7 @@
                 content: " ";
                 height: 0;
                 position: absolute;
-                top: 22px;
+                top: 21px;
                 width: 0;
                 z-index: 1;
 
@@ -109,11 +92,11 @@
                 top: 22px;
                 border-radius: 50%;
                 z-index: 1;
-                left: 17px;
+                left: 12px;
             }
 
             .timeline-item-content {
-                margin: 10px;
+                margin: 10px 15px 10px 10px;
                 padding: 10px 15px 2px;
                 color: white;
                 border-radius: 20px;
@@ -154,6 +137,23 @@
         }
     }
 
+    .share-btns{
+        display: flex;
+        justify-content: center;
+        align-content: center;
+
+        &>* {
+            margin: 0 10px;
+            font-size: 3em;
+            color: #2b616d;
+            vertical-align: center;
+        }
+
+        &:hover{
+            color: #417681;
+        }
+    }
+
     .summary-end-trip-link {
         width: 100%;
         margin: 28px;
@@ -161,9 +161,8 @@
         button {
             height: 60px;
             width: 90%;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
+
+
             background-color: #fa8d62;
             color: white;
             border-radius: 15px;
