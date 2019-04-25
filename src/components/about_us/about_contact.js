@@ -1,10 +1,10 @@
 import React, {Fragment} from 'react';
-import AOS from 'aos';
+
 
 
 export default props =>{
     const {email, linkedin, portfolio, git, name, image, quote, role} = props.person;
-    AOS.init();
+   
 
     return(
         <Fragment>
