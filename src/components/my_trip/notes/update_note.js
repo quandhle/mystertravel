@@ -39,7 +39,7 @@ class UpdateNote extends Component{
                 <form onSubmit={handleSubmit(this.updatedb)}>
                 <Field id="entry" name="entry" label="Enter Note" component={Textarea} classes="notes-input" />
                 </form>
-                <button id="update" className="updatebutton" onClick={handleSubmit(this.updatedb)} >Update</button>
+                <button className="btn updatebutton" onClick={handleSubmit(this.updatedb)} >Update</button>
             </Modal>  
         )
     }
