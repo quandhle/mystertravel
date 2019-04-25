@@ -38,23 +38,23 @@
                 text-align: center;
             }
         }
+    }
 
-        .share-btns{
-            display: flex;
-            justify-content: center;
-            align-content: flex-end;
+    .share-btns{
+        display: flex;
+        justify-content: center;
+        align-content: flex-end;
 
-            &>* {
-                width: 50px;
-                height: 50px;
-                margin: 5px;
-                font-size: 3em;
-                color: #2b616d;
-            }
+        &>* {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            font-size: 3em;
+            color: #2b616d;
+        }
 
-            &:hover{
-                color: #417681;
-            }
+        &:hover{
+            color: #417681;
         }
     }
 
