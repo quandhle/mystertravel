@@ -55,12 +55,14 @@ if (mysqli_num_rows($pins_result) === 0) {
     while ($pins_row = mysqli_fetch_assoc($pins_result)) {
         $latitude = intval($pins_row['latitude']) / 10000000;
         $longitude = intval($pins_row['longitude']) / 10000000;
+        $date = date("m/d/Y H:i:s", strtotime($pins_row['added']));
         $pins[] = [
             'pin_id' => $pins_row['id'],
             'lat' => $latitude,
             'lng' => $longitude,
             'description' => $pins_row['description'],
-            'name' => $pins_row['name']
+            'name' => $pins_row['name'],
+            'date' => $date
         ];
     }
     $output['pins'] = $pins;
