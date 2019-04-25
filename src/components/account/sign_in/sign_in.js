@@ -16,7 +16,7 @@ class SignIn extends Component{
         this.handleSignIn = this.handleSignIn.bind(this);
     }
     async handleSignIn (values){
-        const {email, password} = values
+        const {email, password} = values;
         const resp = await axios.post('/api/login.php', {
             email,
             password
@@ -26,6 +26,7 @@ class SignIn extends Component{
         const {success, trips_id} = resp.data
         if(success){
             signIn(resp.data);
+            console.log(resp.data);
             if(trips_id){
                 this.props.passTripId(trips_id);
                 history.push('/map');
@@ -33,6 +34,7 @@ class SignIn extends Component{
                 history.push('/');
             }
         } else {
+            console.log(resp.data);
             this.setState({
                 message: resp.data.error
             })
@@ -42,8 +44,10 @@ class SignIn extends Component{
     render(){
         return(
             <div className="sign-in-page">
-                <SignInForm signIn={this.handleSignIn}/>
+                <div className="sign-in">
                 <div className="message">{this.state.message}</div>
+                <SignInForm signIn={this.handleSignIn}/>
+                </div>
             </div>
         )
     }
