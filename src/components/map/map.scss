@@ -1,14 +1,18 @@
 main {
+    width: 100vw;
+    height: 100vh; 
+
     .search-bar-holder {
         background-color: transparent;
         height: 36px;
         position: relative;
+        top: 15%;
 
         .search-bar-form {
             height: 100%;
             width: 100%;
             position: absolute;
-            top: 20%;
+            // top: 20%;
 
             .search-bar-field {
                 height: 100%;
