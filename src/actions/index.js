@@ -29,3 +29,11 @@ export function clearTripId(){
         trips_id: null
     }
 }
+
+export function updateNote(data){
+
+    return{
+        type: types.LOAD_DATA,
+        data: data
+    }
+}
