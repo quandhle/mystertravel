@@ -121,7 +121,7 @@ class Map extends Component {
             lng: location.lng(),
             name: place.name
         })
-        setTimeout(this.toggleModal, 2000);
+        setTimeout(this.toggleModal, 500);
     }
 
     async showPins() {

@@ -64,7 +64,7 @@ class AboutUs extends Component {
                 <section className="first bg bg1"><div>About Us</div></section>
                 <section className="bg section parallax aboutUs">
                     {aboutUs}
-                    <div className="footer"><a href="/">Home</a></div>
+                    <div className="footer"></div>
                 </section>
             </div>
         )

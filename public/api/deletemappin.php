@@ -8,6 +8,8 @@ $input = json_decode($json_input, true);
 $trips_id = $input['trips_id'];
 $latitude = $input['latitude'] * 10000000;
 $longitude = $input['longitude'] * 10000000;
+print($longitude);
+exit();
 
 if (empty($trips_id)) {
     throw new Exception('Please provide trips_id (int) with your request');
