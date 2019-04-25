@@ -6,7 +6,9 @@ import './summary.scss';
 import {formatMoney} from './../../../helper';
 import {clearTripId} from "../../../actions";
 import {loadScript} from "./../../../helper";
-import api_keys from '../../../../api_keys';
+import keys from '../../../../api_keys';
+import SummaryMap from './detached_map';
+import Timeline from './timeline';
 
 import summaryimg from '../../../assets/images/summary.jpg';
 import thinkingEmoji from '../../../assets/images/thinking-emoji.png';
@@ -20,7 +22,9 @@ class Summary extends Component{
             totalSpent: 0,
             lastNote: '',
             privatePage: null,
-            trips_id: null
+            trips_id: null,
+            map: null,
+            pinData: null
         };
     }
 
@@ -40,12 +44,11 @@ class Summary extends Component{
             privatePage,
             trips_id
         }, this.getSummaryData);
-
         
         loadScript('https://connect.facebook.net/en_US/sdk.js');
         window.fbAsyncInit = function() {
             FB.init({
-                appId            : api_keys.facebook,
+                appId            : keys.facebook,
                 autoLogAppEvents : true,
                 xfbml            : true,
                 version          : 'v3.2'
@@ -69,6 +72,25 @@ class Summary extends Component{
         }
     }
 
+    showMap() {
+        //pins
+        //center
+    }
+
+    async showPins() {
+        const {trips_id} = this.state;
+        const resp = await axios.get(`/api/getmappin.php?trips_id=${trips_id}`);
+
+        let pinData = null;
+        if (resp.data.success) {
+            pinData = resp.data.data;
+        }
+
+        if(pinData) {
+            this.setState({pinData});
+        }
+    }
+
     endTrip = async () => {
         const {trips_id} = this.state;
         const response = await axios.put('/api/endcurrenttrip.php', {trips_id});
@@ -89,7 +111,7 @@ class Summary extends Component{
         });
     }
 
-    twitterButton = (url) => {
+    twitterButton(url) {
         return `https://twitter.com/intent/tweet?text=${
             encodeURIComponent(`I went on a trip recently! Check it out on MysterTravel!\n${url}`)
         }`;
@@ -102,19 +124,13 @@ class Summary extends Component{
     }
 
     render(){
-        const {trips_id, tripName, totalSpent, lastNote, privatePage} = this.state;
-        const summaryURL = `http://www.mystertravel.com/trip/${trips_id}`;
+        const {trips_id, tripName, totalSpent, lastNote, privatePage, pinData} = this.state;
+        const summaryURL = `http://devtravelfuze.quandhle.com/trip/${trips_id}`;
 
         return(
             <div className="summary-page">
                 <div className="summary-trip-name"><p>{`${tripName}`}</p></div>
                 <div className="total-spend"><p>{`Total spent in this trip: ${formatMoney(totalSpent)}`}</p></div>
-                <div className="last-entry">
-                    <div className="entry-content">
-                        <img src={summaryimg} alt="temp"/>
-                        <p>{lastNote}</p>
-                    </div>
-                </div>
                 <div className="share-btns col-12">
                     <a onClick={() => {this.fbButton(summaryURL)}}>
                         <i className="fab fa-facebook-square"/>
@@ -125,6 +141,13 @@ class Summary extends Component{
                     <a href={this.mailButton(summaryURL)}>
                         <i className="fas fa-envelope-square"/>
                     </a>
+                </div>
+                <Timeline/>
+                <div className="last-entry">
+                    <div className="entry-content">
+                        <img src={summaryimg} alt="temp"/>
+                        <p>{lastNote}</p>
+                    </div>
                 </div>
                 {privatePage &&
                     <div className="summary-end-trip-link">
