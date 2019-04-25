@@ -2,6 +2,7 @@
     .summary-trip-name{
         width: 100%;
         text-align: center;
+
         p{
             font-size: 2em;
             margin: 10px;
@@ -12,6 +13,7 @@
     .summary-region{
         width: 100%;
         text-align: center;
+
         p{
             font-size: 1.0em;
             font-weight: bold;
@@ -22,6 +24,7 @@
     .total-spend{
         width: 100%;
         text-align: center;
+
         p{
             font-size: 1.2em;
             font-weight: bold;
@@ -130,6 +133,7 @@
             img{
                 width: 100%;
             }
+
             p {
                 margin: 10px 10px;
                 text-align: center;
@@ -161,8 +165,6 @@
         button {
             height: 60px;
             width: 90%;
-
-
             background-color: #fa8d62;
             color: white;
             border-radius: 15px;
@@ -198,6 +200,7 @@
     .summary-fail-text {
         width: 100%;
         text-align: center;
+
         p{
             font-size: 1.2em;
             margin: 10px;

@@ -11,7 +11,6 @@ import SummaryMap from './detached_map';
 import Timeline from './timeline';
 
 import summaryimg from '../../../assets/images/summary.jpg';
-import thinkingEmoji from '../../../assets/images/thinking-emoji.png';
 
 class Summary extends Component{
     constructor(props) {
@@ -20,11 +19,11 @@ class Summary extends Component{
         this.state = {
             tripName: '',
             totalSpent: 0,
-            lastNote: '',
             privatePage: null,
             trips_id: null,
             map: null,
-            pinData: null
+            pinData: null,
+            notes: null
         };
     }
 
@@ -64,31 +63,14 @@ class Summary extends Component{
 
         console.log(response.data);
         if (response.data.success) {
-            const {trips_name, total_budget, last_entry} = response.data.data;
+            const {summary: {trips_name, total_budget}, pins, notes} = response.data;
+
             this.setState({
                 tripName: trips_name,
                 totalSpent: total_budget,
-                lastNote: last_entry
+                pinData: pins,
+                notes
             });
-        }
-    }
-
-    showMap() {
-        //pins
-        //center
-    }
-
-    async showPins() {
-        const {trips_id} = this.state;
-        const resp = await axios.get(`/api/getmappin.php?trips_id=${trips_id}`);
-
-        let pinData = null;
-        if (resp.data.success) {
-            pinData = resp.data.data;
-        }
-
-        if(pinData) {
-            this.setState({pinData});
         }
     }
 
@@ -125,7 +107,7 @@ class Summary extends Component{
     }
 
     render(){
-        const {trips_id, tripName, totalSpent, lastNote, privatePage, pinData} = this.state;
+        const {trips_id, tripName, totalSpent, privatePage, pinData, notes} = this.state;
         console.log(this.state);
         const summaryURL = `http://devtravelfuze.quandhle.com/trip/${trips_id}`;
 
@@ -133,11 +115,10 @@ class Summary extends Component{
             <div className="summary-page">
                 <div className="summary-trip-name"><p>{`${tripName}`}</p></div>
                 <div className="total-spend"><p>{`Total spent in this trip: ${formatMoney(totalSpent)}`}</p></div>
-                <Timeline/>
+                <Timeline pinData={pinData} notesData={notes}/>
                 <div className="last-entry">
                     <div className="entry-content">
                         <img src={summaryimg} alt="temp"/>
-                        <p>{lastNote}</p>
                     </div>
                 </div>
                 {privatePage &&
