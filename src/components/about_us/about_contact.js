@@ -1,10 +1,14 @@
 import React, {Fragment} from 'react';
+import AOS from 'aos';
+
 
 export default props =>{
-    const {email, linkedin, portfolio, git, name, image, quote, role} = props.person
+    const {email, linkedin, portfolio, git, name, image, quote, role} = props.person;
+    AOS.init();
+
     return(
         <Fragment>
-            <div className="about-top">
+            <div className="about-top" data-aos="fade-in">
                 <div className="about-img">
                     <img src={`./dist/assets/images/about_us/${image}`} alt={`${name}`} className="person-img"/>
                 </div>

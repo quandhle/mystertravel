@@ -20,6 +20,7 @@
         "url": "https://https://github.com/Learning-Fuze/c219_travelagenda"
     },
     "dependencies": {
+        "aos": "^3.0.0-beta.6",
         "aws-sdk": "^2.438.0",
         "axios": "^0.18.0",
         "cors": "^2.8.5",
