@@ -1,6 +1,6 @@
 .about-container {
     top: 0;
-    height: 90vh;
+    height: 100vh;
 
 
     .about-person {
@@ -99,29 +99,25 @@
         background: transparent;
 
         .aboutUs {
-            
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             padding: 5%;
             width: 100%;
         }
+    }
 
-        .footer {
-            width: 100%;
-            bottom: 0;
-            background-color: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 10%;
+    .footer {
+        width: 100%;
+        bottom: 0;
+        background-color: rgba(164, 216, 208, 1);
+        height: 10%;
 
-            a {
-                text-decoration: none;
-                text-transform: uppercase;
-                letter-spacing: 3px;
-                color: white;
-            }
+        a {
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: white;
         }
     }
 }

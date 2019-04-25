@@ -15,7 +15,7 @@ class AboutUs extends Component {
             git: "jen-icl",
             image:"jen.jpg",
             quote: "Gotta double check my variable names.",
-            role: "Front End Developer"
+            role: "Back End Developer"
         },
         {
             name:"Kylie Chao",
@@ -45,7 +45,7 @@ class AboutUs extends Component {
             git: "WestleyPoon",
             image:"west.jpg",
             quote: "When am I not fired?",
-            role: "Back End Developer"
+            role: "Front End Developer"
         },
         ]
 
@@ -64,7 +64,6 @@ class AboutUs extends Component {
                 <section className="first bg bg1"><div>About Us</div></section>
                 <section className="bg section parallax aboutUs">
                     {aboutUs}
-                    <div className="footer"></div>
                 </section>
             </div>
         )
