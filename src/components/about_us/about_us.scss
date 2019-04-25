@@ -2,17 +2,15 @@
     top: 0;
     height: 90vh;
 
+
     .about-person {
-        margin: auto;
-        margin-top: 10%;
-        margin-bottom: 10%;
-        width: 90%;
+        margin: 2px 0;
+        width: 100%;
+        padding: 5px;
         font-size: 1.2em;
         transition: 0.5s;
-        // -webkit-box-shadow: 0px 0px 15px -5px rgba(213,224,223,1);
-        // -moz-box-shadow: 0px 0px 15px -5px rgba(213,224,223,1);
-        // box-shadow: 0px 0px 15px -5px rgba(213,224,223,1);
-        color: black;
+        color: rgb(255, 255, 255);
+        background-color: rgba(164, 216, 208, 1);
 
         .about-top {
             position: relative;
@@ -25,33 +23,27 @@
                 
                 img {
                     width: 100%;
+                    border-radius: 50%;
+                    border: 2px solid white;
+                    -webkit-box-shadow: 0px 0px 15px -5px rgba(213,224,223,1);
+                    -moz-box-shadow: 0px 0px 15px -5px rgba(213,224,223,1);
+                    box-shadow: 0px 0px 15px -5px rgba(213,224,223,1);
                 }
             }
             .about-name {
                 position: absolute;
                 width: 70%;
                 left: 30%;
+                padding: 5px;
             }
         }
-
-        .about-story {
-            height: 1.5em; 
-            overflow-y: hidden;
-            transition: height 1s;
-
-            &:hover {
-                height: 200px;
-                transition: height 0.5s;
-            }
-        }
-
         .about-contact {
             padding: 10px 15px;
             text-align: right;
             font-size: 2rem;
 
             a {
-                color: black;
+                color: rgb(255, 255, 255);
                 text-decoration: none;
                 padding: 5px;
             }
@@ -104,9 +96,10 @@
     .section {
         position: relative;
         height: 100vh;
+        background: transparent;
 
         .aboutUs {
-            background-color: white;
+            
             display: flex;
             flex-wrap: wrap;
             justify-content: center;

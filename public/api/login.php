@@ -74,9 +74,7 @@ $_SESSION['user_data'] = [
 require_once('checkactivetrip.php');
 
 $output['success'] = true;
-$output['users_id'] = $users_id;
 $output['username'] = $data['full_name'];
-$output['token'] = $token;
 
 print(json_encode($output));
 

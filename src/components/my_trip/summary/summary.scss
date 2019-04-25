@@ -3,7 +3,7 @@
         width: 100%;
         text-align: center;
         p{
-            font-size: 1.8em;
+            font-size: 2em;
             margin: 10px;
             font-weight: bold;
         }
@@ -25,9 +25,123 @@
         p{
             font-size: 1.2em;
             font-weight: bold;
-            margin: 0 0 16px 0;
+            margin: 0;
         }
     }
+
+    .summary-map-holder {
+        height: 40vh;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        z-index: 2;
+
+        .summary-map {
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    .share-btns{
+        display: flex;
+        justify-content: center;
+        align-content: center;
+
+        &>* {
+            margin: 0 10px;
+            font-size: 3em;
+            color: #2b616d;
+            vertical-align: center;
+        }
+
+        &:hover{
+            color: #417681;
+        }
+    }
+
+    .timeline {
+        position: relative;
+        margin: 0 0 30px;
+
+        .timeline-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-left: 50px;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            background-color: #94c8c0;
+            width: 6px;
+            top: 0;
+            bottom: 0;
+            left: 30px;
+            margin-left: -3px;
+        }
+
+        .timeline-item {
+            width: 100%;
+            padding-left: 50px;
+            position: relative;
+
+            &::before {
+                content: " ";
+                height: 0;
+                position: absolute;
+                top: 22px;
+                width: 0;
+                z-index: 1;
+
+                left: 32px;
+                border: medium solid white;
+                border-width: 14px 14px 14px ;
+                border-color: transparent #2b616d transparent transparent;
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
+                width: 25px;
+                height: 25px;
+                background-color: #fa8d62;
+                border: 4px solid #fa8d62;
+                top: 22px;
+                border-radius: 50%;
+                z-index: 1;
+                left: 17px;
+            }
+
+            .timeline-item-content {
+                margin: 10px;
+                padding: 10px 15px 2px;
+                color: white;
+                border-radius: 20px;
+                background-color: #2b616d;
+
+                .timeline-item-name, .timeline-item-date {
+                    display: inline-block;
+                    width: 50%;
+                    font-size: 1.2em;
+                    font-weight: bold;
+                    margin-bottom: 8px;
+                }
+
+                .timeline-item-name {
+                    text-align: left;
+                }
+
+                .timeline-item-date {
+                    text-align: right;
+                }
+
+                .timeline-item-text {
+
+                }
+            }
+        }
+    }
+
     .last-entry{
         .entry-content{
             img{
@@ -36,24 +150,6 @@
             p {
                 margin: 10px 10px;
                 text-align: center;
-            }
-        }
-
-        .share-btns{
-            display: flex;
-            justify-content: center;
-            align-content: flex-end;
-
-            &>* {
-                width: 50px;
-                height: 50px;
-                margin: 5px;
-                font-size: 3em;
-                color: #2b616d;
-            }
-
-            &:hover{
-                color: #417681;
             }
         }
     }

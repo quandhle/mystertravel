@@ -50,6 +50,7 @@ class Notes extends Component {
         const { trips_id } = this.props.trips_id;
         const resp = await axios.get(`/api/getnotelist.php?trips_id=${trips_id}`);
         if (resp.data.success) {
+            console.log(resp.data)
             this.setState({
                 note: resp.data.notes
             });
@@ -73,7 +74,7 @@ class Notes extends Component {
         const { height } = this.state.showInput;
         if (!height) {
             this.setState(
-                {showInput: {height: '160px'}}
+                {showInput: {height: '180px'}}
             )
         } else {
             this.setState(
