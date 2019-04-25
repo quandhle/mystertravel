@@ -14,10 +14,6 @@ export default props =>{
                     <div>Role: {role}</div>
                 </div>  
             </div>
-            <div className="about-story">
-                <div className="story-title">Developer Story <i className="fas fa-chevron-down"></i></div>
-                <div className="story">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci dolore cumque, voluptatibus debitis quas repellat nihil laborum facilis sunt tempore expedita alias nobis eligendi iusto obcaecati error consequatur quia nemo.</div>
-            </div>
             <div className="about-contact">
                 <a href={`mailto:${email}`}><i className="fas fa-envelope-square" target="_blank"></i></a>    
                 <a href={`https://www.linkedin.com/in/${linkedin}`} target="_blank"><i className="fab fa-linkedin"></i></a>
