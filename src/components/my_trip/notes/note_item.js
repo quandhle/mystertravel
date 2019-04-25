@@ -2,11 +2,12 @@ import React from 'react';
 import { formatDate } from '../../../helper';
 
 export default props =>{
-    const {note_id, entry, date} = props.note
+    const {note_id, entry, date, image} = props.note
     return(
     <div key={note_id} className="notes">
         <p>{formatDate(date)}</p>
         <p>{entry}</p>
+        {image? <div className="note-img"><img src={image} alt=""/></div>: null}
         <button className="btn" onClick={() => { props.deleteItem(props.note) }}><i className="far fa-trash-alt"></i></button>
     </div>
     )
