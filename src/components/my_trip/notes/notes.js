@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import NotesForm from './notes_form';
 import NoteItem from './note_item';
+
 import './notes.scss';
 
 class Notes extends Component {
@@ -14,12 +15,13 @@ class Notes extends Component {
             showInput: {
                 height: 0
             },
-            note: [],
+            note: []
         };
 
         this.toggleInput = this.toggleInput.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
+
     }
     async handleInput(value) {
         console.log(value);
@@ -27,7 +29,7 @@ class Notes extends Component {
         const {notes, imageUpload: image} = value;
 
         const data = new FormData();
-        data.append('trips_id', trips_id);
+        data.append('trips_id', 1);//trips_id
         data.append('entry', notes);
         data.append('image', image);
 
@@ -47,8 +49,8 @@ class Notes extends Component {
         }
     }
     async getNoteList() {
-        const { trips_id } = this.props.trips_id;
-        const resp = await axios.get(`/api/getnotelist.php?trips_id=${trips_id}`);
+        const { trips_id } = this.props.trips_id;  //${trips_id}
+        const resp = await axios.get(`/api/getnotelist.php?trips_id=1`);
         if (resp.data.success) {
             console.log(resp.data)
             this.setState({
@@ -70,6 +72,7 @@ class Notes extends Component {
             console.error('Unable to delete entry');
         }
     }
+
     toggleInput() {
         const { height } = this.state.showInput;
         if (!height) {
@@ -91,7 +94,7 @@ class Notes extends Component {
         if(note.length > 0){
             noteList = note.map(note => { //need to change index to id
                 return (
-                    <NoteItem key={note.note_id} note={note} deleteItem={this.deleteItem}/>
+                    <NoteItem key={note.note_id} note={note} deleteItem={this.deleteItem} />
                 );
             });
         } else {
@@ -112,7 +115,7 @@ class Notes extends Component {
 
 function mapStateToProps(state){
     return{
-        trips_id: state.trips_id
+        trips_id: state.trips_id,
     }
 }
 

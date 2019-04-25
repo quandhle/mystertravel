@@ -102,7 +102,7 @@
 
             .btn{
                 position: relative;
-                left: 90%;
+                left: 50%;
                 color: #b2dbd5;
                 transition: 0.2s;
 
@@ -111,7 +111,54 @@
                  }
             }
         }
-    } 
+    }
+    
+    .update-modal{
+        background-color: #a4d8d0;
+        border-radius: 15px;
+        text-align: center;
+        font-size: 1em;
+        color: white;
+        -webkit-box-shadow: 0px 0px 34px -2px rgba(168,168,168,1);
+        -moz-box-shadow: 0px 0px 34px -2px rgba(168,168,168,1);
+        box-shadow: 0px 0px 34px -2px rgba(168,168,168,1);
+        height: 100%;
+        overflow-y: hidden;
+        .map-modal-header{
+            padding-top: 15px;
+        }
+
+        .description-input{
+            margin: 10px;
+
+            &>input{
+              border: 1px solid transparent;
+              outline: none;
+              background-color:rgba(255, 255, 255, 0.5);
+              width: 60%;
+              border-radius: 5px;
+              color:#2b616d;
+            }
+            
+        }
+
+        .modal-pin-btn{
+            color: white;
+            background-color: #fa8d62;
+            width: 60%;
+
+            &:hover{
+                background-color: #e26a3b;
+            }
+        }
+
+        .cancel-add-btn{
+            color: white;
+            background-color: #70a39c;
+            width: 60%;
+            margin: 5px 0;
+        }
+    }
 }
 
 
