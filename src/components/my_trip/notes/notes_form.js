@@ -11,8 +11,8 @@ const NotesInput = props =>{
     return (
         <form onSubmit={handleSubmit(notes)} style={style} className="note-input-form">
             <Field id="notes" name="notes" label="Enter Note" component={Textarea} classes="notes-input" />
-            <div>
-                <Field id='imageUpload' class='imageUpload' name='imageUpload' component={FileInput}/>
+            <div className="chooseFile">
+                <Field id='imageUpload' class='imageUpload' name='imageUpload' component={FileInput} className="fileName"/>
                 <button className="btn add-notes">Add</button>
             </div>
         </form>
