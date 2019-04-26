@@ -20,14 +20,10 @@ class Map extends Component {
             name: null,
             map: null,
             modal: false
-        };
+        }
 
         this.addPin = this.addPin.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
-        this.initMap = this.initMap.bind(this);
-        this.searchCountry = this.searchCountry.bind(this);
-        this.getCurrentLocation = this.getCurrentLocation.bind(this);
-        this.handleClear = this.handleClear.bind(this);
     }
 
     componentDidMount() {
@@ -43,10 +39,10 @@ class Map extends Component {
         window.initMap = this.initMap;
     }
 
-    initMap() {
+    initMap = () => {
         const searchBarInput = document.getElementById("places");
         this.autoComplete = new window.google.maps.places.Autocomplete(searchBarInput);
-        this.autoComplete.setFields(['name', 'geometry']);
+        this.autoComplete.setFields(['address_component', 'geometry', 'name']);
 
         this.autoComplete.addListener('place_changed', this.searchCountry);
 
@@ -63,50 +59,74 @@ class Map extends Component {
         this.showPins();
     }
 
-    searchCountry() {
+    parseAddressComponents (address_components) {
+
+        let zipCodeOffset = 0;
+        if (address_components[address_components.length - 1].types[0] === 'postal_code') {
+            zipCodeOffset++;
+        }
+
+        if (address_components[address_components.length - 1 - zipCodeOffset].short_name === 'US') {
+            switch(address_components.length) {
+
+                case 3 + zipCodeOffset:
+                case 2 + zipCodeOffset:
+                    return `${address_components[address_components.length - 2 - zipCodeOffset].long_name}, United States`;
+
+                case 1 + zipCodeOffset:
+                    return 'United States';
+
+                default:
+                    return `${address_components[0].short_name}, ${address_components[address_components.length - 2 - zipCodeOffset].short_name}`;
+            }
+
+        } else {
+            return address_components.map((item) => {
+                return item.long_name;
+            }).join(', ');
+        }
+    }
+
+    searchCountry = () => {
         const place = this.autoComplete.getPlace();
 
-        if (place.name) {
-            this.props.dispatch(change("search-bar-form", `places`, place.name));
+        let address, location;
 
-            const {location: {lat, lng}} = place.geometry;
+        if (place.address_components) {
+            address = this.parseAddressComponents(place.address_components);
+            location = place.geometry.location;
+
             this.state.map.setCenter(location);
             this.state.map.setZoom(14);
-
-            this.setState({
-                lat: lat(),
-                lng: lng(),
-                name: place.name
-            });
         } else {
             const service = new google.maps.places.PlacesService(this.state.map);
-
             service.findPlaceFromQuery({
                     query: place.name,
                     fields: ['geometry', 'name']
 
             }, (results, status) => {
                 if (status === google.maps.places.PlacesServiceStatus.OK) {
-                    this.props.dispatch(change("search-bar-form", `places`, results[0].name));
-
                     this.state.map.setCenter(results[0].geometry.location);
                     this.state.map.setZoom(14);
-
-                    this.setState({
-                        lat: results[0].geometry.location.lat(),
-                        lng: results[0].geometry.location.lng(),
-                        name: results[0].name
-                    })
                 }
             });
+
+            address = place.name;
         }
 
+        this.props.dispatch(change("search-bar-form", `places`, address));
+
+        this.setState({
+            lat: location.lat(),
+            lng: location.lng(),
+            name: place.name
+        })
         setTimeout(this.toggleModal, 500);
     }
 
     async showPins() {
-        const {trips_id} = this.props;
-        const {map} = this.state;
+
+        const trips_id = this.props.trips_id;
 
         const resp = await axios.get(`/api/getmappin.php?trips_id=${trips_id}`);
         let pinData = null;
@@ -122,54 +142,55 @@ class Map extends Component {
                         lat: item.lat,
                         lng: item.lng
                     },
-                    map: map
+                    map: this.state.map
                 });
 
-                const content = `<h6 id="infoWindow">${item.description}</h6>`;
+                const content = ('<h6 id="infoWindow">' + item.description + '</h6>');
 
                 const infowindow = new google.maps.InfoWindow({
                     content: content
-                });
+                })
 
                 pin.addListener('click', function() {
                     infowindow.open(map, pin);
-                });
+                })
 
-                pin.setMap(map);
+                pin.setMap(this.state.map);
 
                 return pin;
             });
             this.setState({
-                pins: pins
+                pins: pins,
             });
         }
     }
 
-    getCurrentLocation() {
+    getCurrentLocation = () => {
         navigator.geolocation.getCurrentPosition(position => {
             const {coords} = position;
             const coordObject = {lat: coords.latitude, lng: coords.longitude};
             this.setState(coordObject);
-
             this.state.map.setCenter(coordObject);
             this.state.map.setZoom(14);
-
             const geocoder = new google.maps.Geocoder;
             geocoder.geocode({'location': coordObject}, (results, status) => {
-                if (status === 'OK' && results[0]) {
-                    this.props.dispatch(change("search-bar-form", `places`,
-                        results.length > 3 ?
-                            results[results.length - 4].formatted_address : results[0].formatted_address));
-
-                    this.setState({
-                        name: results[0].formatted_address.split(" ")[0]
-                    })
+                console.log(results)
+                if (status === 'OK') {
+                    if (results[0]) {
+                        this.props.dispatch(change("search-bar-form", `places`,
+                            results.length > 3 ?
+                                results[results.length - 4].formatted_address : results[0].formatted_address));
+                        
+                        this.setState({
+                            name: results[0].formatted_address.split(" ")[0]
+                        })
+                    }
                 }
             });
         });
     }
 
-    handleClear(event) {
+    handleClear = event => {
         event.preventDefault();
         this.props.dispatch(change("search-bar-form", `places`, ''));
         document.getElementById("places").focus();
@@ -196,20 +217,18 @@ class Map extends Component {
 
             this.setState({
                 pins: [...this.state.pins, marker]
-            });
+            })
 
             this.showPins();
         })
     }
-
     toggleModal(){
         this.setState({
             modal: !this.state.modal
-        });
+        })   
     }
-
     render() {
-        const {modal} = this.state;
+        const {modal} = this.state
         return (
             <main>
                 <div className="search-bar-holder">
@@ -222,7 +241,7 @@ class Map extends Component {
                 <button onClick={this.getCurrentLocation} className='btn geo-btn btn-lg'>
                     <i className="fas fa-location-arrow"/>
                 </button>
-                {modal && <MapPopUp modal={modal} close={this.toggleModal} addpin={this.addPin}/>}
+                {this.state.modal && <MapPopUp modal={modal} close={this.toggleModal} addpin={this.addPin}/>}
             </main>
         );
     }
