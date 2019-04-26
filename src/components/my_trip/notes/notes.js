@@ -39,7 +39,9 @@ class Notes extends Component {
         });
         if (resp.data.success) {
             console.log(resp);
-            value.notes = ''
+            value.notes = '';
+            value.imageUpload = null;
+            document.getElementById('notes-file-input').value = null;
             this.getNoteList();
             this.toggleInput();
         } else {

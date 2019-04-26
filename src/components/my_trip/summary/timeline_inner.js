@@ -12,11 +12,10 @@ export default class extends Component {
     };
 
     componentDidUpdate(prevProps) {
-        const {items} = this.props;
+        const {items, setImage} = this.props;
         if ((items !== prevProps.items) && items) {
-            const {items} = this.props;
             const innerItems = items.map((item, index) => {
-                return <TimelineItem key={index} item={item}/>;
+                return <TimelineItem key={index} setImage={setImage} item={item}/>;
             }, 0);
             this.setState({
                 innerItems

@@ -7,8 +7,9 @@ import {formatMoney} from './../../../helper';
 import {clearTripId} from "../../../actions";
 import {loadScript} from "./../../../helper";
 import keys from '../../../../api_keys';
-import SummaryMap from './detached_map';
 import Timeline from './timeline';
+import MapModal from './mapmodal';
+import ImageModal from './imagemodal';
 
 import summaryimg from '../../../assets/images/summary.jpg';
 
@@ -21,8 +22,14 @@ class Summary extends Component{
             tripName: '',
             totalSpent: 0,
             privatePage: null,
+
             pinData: null,
-            notes: null
+            notes: null,
+
+            imageModal: false,
+            image: null,
+            mapModal: false,
+            pin: null
         };
     }
 
@@ -105,8 +112,28 @@ class Summary extends Component{
         }`;
     }
 
+    setImage = image => {
+        this.setState({
+            image: image,
+            imageModal: true
+        })
+    }
+
+    toggleMapModal = (pin) => {
+        console.log(this.state.mapModal);
+        this.setState({
+            mapModal: !this.state.mapModal
+        });
+    }
+
+    toggleImageModal = (image) => {
+        this.setState({
+            imageModal: !this.state.imageModal
+        });
+    }
+
     render(){
-        const {trips_id, tripName, totalSpent, privatePage, pinData, notes} = this.state;
+        const {trips_id, tripName, totalSpent, privatePage, pinData, notes, mapModal, imageModal, image} = this.state;
         console.log(this.state);
         const summaryURL = `http://devtravelfuze.quandhle.com/trip/${trips_id}`;
 
@@ -114,7 +141,7 @@ class Summary extends Component{
             <div className="summary-page">
                 <div className="summary-trip-name"><p>{`${tripName}`}</p></div>
                 <div className="total-spend"><p>{`Total spent in this trip: ${formatMoney(totalSpent)}`}</p></div>
-                <Timeline pinData={pinData} notesData={notes}/>
+                <Timeline pinData={pinData} notesData={notes} setImage={this.setImage}/>
                 <div className="last-entry">
                     <div className="entry-content">
                         <img src={summaryimg} alt="temp"/>
@@ -136,6 +163,8 @@ class Summary extends Component{
                         <i className="fas fa-envelope-square"/>
                     </a>
                 </div>
+                <MapModal modal={mapModal} onClick={this.toggleMapModal}/>
+                <ImageModal img={image} modal={imageModal} onClick={this.toggleImageModal}/>
             </div>
         )
     }
