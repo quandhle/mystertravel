@@ -106,7 +106,7 @@ class Summary extends Component{
         }`;
     }
 
-    render(){
+    render() {
         const {trips_id, tripName, totalSpent, privatePage, pinData, notes} = this.state;
         console.log(this.state);
         const summaryURL = `http://devtravelfuze.quandhle.com/trip/${trips_id}`;

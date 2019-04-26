@@ -28,6 +28,9 @@ class Budget extends Component{
             price: parseFloat(value.price * 100),
             category: value.category
         });
+
+        console.log(resp);
+
         if(resp.data.success){
             value.description = '';
             value.price = '';
