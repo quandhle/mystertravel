@@ -219,8 +219,6 @@ class Map extends Component {
                 pins: [...this.state.pins, marker]
             })
 
-            console.log(resp);
-
             this.showPins();
         })
     }
