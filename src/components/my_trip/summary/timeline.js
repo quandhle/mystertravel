@@ -5,7 +5,7 @@ import TimelineInner from './timeline_inner';
 
 export default class Timeline extends Component {
     render() {
-        const {pinData, notesData} = this.props;
+        const {pinData, notesData, setImage} = this.props;
         let timelineItems;
 
         if (pinData && notesData) {
@@ -21,9 +21,9 @@ export default class Timeline extends Component {
         return (
             <div className="timeline">
                 <p className="timeline-title">Trip Timeline</p>
-                <TimelineItem item={firstItem}/>
-                <TimelineInner items={timelineItems}/>
-                <TimelineItem item={lastItem}/>
+                <TimelineItem item={firstItem} setImage={setImage}/>
+                <TimelineInner items={timelineItems} setImage={setImage}/>
+                <TimelineItem item={lastItem} setImage={setImage}/>
             </div>
         );
     }
