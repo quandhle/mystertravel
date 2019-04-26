@@ -4,17 +4,17 @@ require_once('config.php');
 
 $trips_id = $_GET['trips_id'];
 
-$summary_query = "SELECT t.`trips_name`,
-    SUM(b.`price`) AS 'total_budget'
-    FROM `trips` AS t
-    JOIN `budget` AS b
-        ON t.`id` = b.`trips_id`
-    WHERE t.`id` = ?
-    GROUP BY t.`id`
+$summary_query = "SELECT `trips_name`,
+    (SELECT SUM(`price`)
+    FROM `budget`
+    WHERE `trips_id` = ?
+    ) AS 'total_budget'
+    FROM `trips`
+    WHERE `id` = ?
 ";
 
 $summary_statement = mysqli_prepare($conn, $summary_query);
-mysqli_stmt_bind_param($summary_statement, 'd', $trips_id);
+mysqli_stmt_bind_param($summary_statement, 'dd', $trips_id, $trips_id);
 mysqli_stmt_execute($summary_statement);
 
 $summary_result = mysqli_stmt_get_result($summary_statement);
