@@ -1,33 +1,32 @@
-.summary-page{
-    background-color: transparent;
 
-    .summary-trip-name{
+.summary-page {
+    .summary-trip-name {
         width: 100%;
         text-align: center;
 
-        p{
+        p {
             font-size: 2em;
             margin: 10px;
             font-weight: bold;
         }
     }
 
-    .summary-region{
+    .summary-region {
         width: 100%;
         text-align: center;
 
-        p{
+        p {
             font-size: 1.0em;
             font-weight: bold;
             margin: 10px;
         }
     }
 
-    .total-spend{
+    .total-spend {
         width: 100%;
         text-align: center;
 
-        p{
+        p {
             font-size: 1.2em;
             font-weight: bold;
             margin: 0;
@@ -64,7 +63,7 @@
             width: 6px;
             top: 0;
             bottom: 0;
-            left: 20px;
+            left: 25px;
             margin-left: -3px;
         }
 
@@ -81,7 +80,7 @@
                 width: 0;
                 z-index: 1;
 
-                left: 24px;
+                left: 32px;
                 border: medium solid white;
                 border-width: 14px 14px 14px ;
                 border-color: transparent #2b616d transparent transparent;
@@ -97,30 +96,30 @@
                 top: 22px;
                 border-radius: 50%;
                 z-index: 1;
-                left: 8px;
+                left: 12px;
             }
 
             .timeline-item-content {
-                margin: 10px 10px 10px 2px;
-                padding: 12px 12px 2px;
+                margin: 10px 15px 10px 10px;
+                padding: 10px 15px 2px;
                 color: white;
                 border-radius: 20px;
                 background-color: #2b616d;
 
                 .timeline-item-name, .timeline-item-date {
                     display: inline-block;
+                    width: 50%;
+                    font-size: 1.2em;
                     font-weight: bold;
                     margin-bottom: 8px;
                 }
 
                 .timeline-item-name {
                     text-align: left;
-                    width: 50%;
                 }
 
                 .timeline-item-date {
                     text-align: right;
-                    width: 50%;
                 }
 
                 .timeline-item-text {
@@ -130,9 +129,9 @@
         }
     }
 
-    .last-entry{
-        .entry-content{
-            img{
+    .last-entry {
+        .entry-content {
+            img {
                 width: 100%;
             }
 
@@ -143,7 +142,7 @@
         }
     }
 
-    .share-btns{
+    .share-btns {
         display: flex;
         justify-content: center;
         align-content: center;
@@ -155,7 +154,7 @@
             vertical-align: center;
         }
 
-        &:hover{
+        &:hover {
             color: #417681;
         }
     }
@@ -178,34 +177,34 @@
             background-color: #ea7d52;
         }
     }
+}
 
-    .popup-container{
-        position: fixed;
-        top:0;
-        left:0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.3);
-        z-index: 1000;
-        transition: 0.5s;
+.popup-container{
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: 0.5s;
 
-        .popup-content{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%;
+    .popup-content{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
 
-            .popup-children{
+        .popup-children{
+            width: 100%;
+
+            img {
                 width: 100%;
+            }
 
-                img {
-                    width: 100%;
-                }
-
-                .map {
-                    height: 90vh;
-                }
+            .map {
+                height: 90vh;
             }
         }
     }
@@ -220,23 +219,23 @@
             margin: 10px;
             font-weight: bold;
         }
-    }
-    .summary-fail-image {
-        width: 100%;
+        .summary-fail-image {
+            width: 100%;
 
-        img {
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
+            img {
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+            }
         }
-    }
-    .summary-fail-text {
-        width: 100%;
-        text-align: center;
+        .summary-fail-text {
+            width: 100%;
+            text-align: center;
 
-        p{
-            font-size: 1.2em;
-            margin: 10px;
+            p{
+                font-size: 1.2em;
+                margin: 10px;
+            }
         }
     }
 }
