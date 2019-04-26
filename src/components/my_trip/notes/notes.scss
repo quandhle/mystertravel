@@ -217,34 +217,39 @@
             color: white;
             background-color: #fa8d62;
             width: 60%;
+        }
 
-            main {
-                height: 100%;
-                width: 75%;
-                left: 25%;
-                position: relative;
+        main {
+            height: 100%;
+            width: 75%;
+            left: 25%;
+            position: relative;
 
-                .search-bar-holder {
-                    width: 90%;
-                    transform: translate(-50%, -50%);
-                    left: 50%;
-                    top: 7%;
-                    margin: 0;
-                    z-index: 1;
-                }
+            .search-bar-holder {
+                width: 90%;
+                transform: translate(-50%, -50%);
+                left: 50%;
+                top: 7%;
+                margin: 0;
+                z-index: 1;
+            }
 
-                .map {
-                    top: 0;
-                    width: 100%;
-                }
-            
-                .map-btn {
-                    height: 5%;
-                    z-index: 1;
-                    position: absolute;
-                    bottom: 5%;
-                    padding: 0 15px 0 15px;
-                }
+            .map {
+                top: 0;
+                width: 100%;
+            }
+        
+            .map-btn {
+                height: 5%;
+                z-index: 1;
+                position: absolute;
+                bottom: 5%;
+                padding: 0 15px 0 15px;
+            }
+
+            .geo-btn {
+                position: absolute;
+                left: 10%;
             }
         }
     }
