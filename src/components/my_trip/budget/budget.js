@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import BudgetForm from './budget_form';
 import BudgetItem from './budget_item';
 import './budget.scss';
-import Map from '../../map/map';
+
 
 class Budget extends Component{
     constructor(props) {
@@ -85,19 +85,15 @@ class Budget extends Component{
             });
         } else {
             budgetList = <div className="budget">Add expenses to record your trip <i className="far fa-laugh-wink"></i> </div>
-        }
-
-        return (
+        }     
+       return(
             <div className="budget-page">
-                <div className="budget-section">
-                    <div className="budget-input-toggle" onClick={this.toggleInput}>Add Budget Item <i className="fas fa-angle-double-down"></i>
-                    </div>
-                    <BudgetForm budget={this.handleInput} style={showInput}/>
-                    <div className="budget-box">
-                        {budgetList}
-                    </div>
+                <div className="budget-input-toggle" onClick={this.toggleInput}>Add Budget Item <i className="fas fa-angle-double-down"></i>
                 </div>
-                <Map/>
+                <BudgetForm budget={this.handleInput} style={showInput}/>
+                <div className="budget-box">
+                    {budgetList}
+                </div>
             </div>
         )
     }

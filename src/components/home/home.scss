@@ -30,18 +30,6 @@
         }
     }
 
-    .first {
-        .popup-container {
-            .popup-content {
-                width: 80%;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
-                height: 20%;
-            }
-        }
-    }
-
     .home-modal {
         background-color: #a4d8d0;
         border-radius: 15px;
@@ -193,32 +181,18 @@
     }
 }
 
+@media (min-width: 900px){
+    .home-page{
+        .desktop-home-page{
+            display: block;
+        }
+    }
+}
+
 .home-page, .bg1::after, .bg2::after, .bg3::after, .bg2, .bg3, .bg4 {
     background-repeat: no-repeat;
     background-attachment: fixed; 
     background-position: center;
     background-size: cover;
     overflow-y: auto;
-}
-
-@media (min-width: 900px) {
-    .home-page {
-        .first {
-            .home-page-btn {
-                transform: translateX(-50%);
-                left: 50%;
-                width: 30%;
-            }
-
-            .popup-container {
-                .popup-content {
-                    width: 30%;
-                    left: 50%;
-                    top: 50%;
-                    transform: translate(-50%, -50%);
-                    height: 20%;
-                }
-            }
-        }
-    }
 }
