@@ -48,10 +48,6 @@ class SideNav extends Component{
         if(trips_id){
             return[
                 {
-                    to: '/',
-                    text: 'Home'
-                },
-                {
                     to: '/mytrip',
                     text: 'Current Trip'
                 },
