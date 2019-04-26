@@ -1,5 +1,7 @@
 
 .notes-page{
+    width: 100%;
+    height: 90%;
 
     .notes-input-toggle{
         cursor: pointer;
@@ -10,7 +12,7 @@
         text-align: right;
         color: white;
         padding: 10px 15px;
-        
+
 
         .fa-angle-double-down:hover{
             position: relative;
@@ -37,7 +39,7 @@
             width: 60%;
         }
     }
-    
+
     .notes-input{
         padding: 0 15px;
         box-sizing: border-box;
@@ -54,7 +56,7 @@
 
 
     }
-    
+
     .add-notes{
         margin: 10px;
         position: relative;
@@ -66,7 +68,7 @@
 
     .notes-box{
         color: white;
-        
+
         .notes{
             font-size: 1.2em;
             margin: 5px;
@@ -78,11 +80,51 @@
             &:nth-child(odd){
                 background-color:  #2b616d;
             }
-            
-            &:nth-child(even){
-                background-color: #3b717e;
+
+            .notes {
+                font-size: 1.2em;
+                margin: 5px;
+                border-radius: 15px;
+                padding: 10px 15px;
+                transition: 0.5s;
+                word-wrap: break-word;
+
+                &:nth-child(odd) {
+                    background-color:  #2b616d;
+                }
+
+                &:nth-child(even) {
+                    background-color: #3b717e;
+                }
+
+                &:hover, &:active {
+                    background-color: #1b515d;
+                }
+
+                p:first-child {
+                    font-size: 0.8em;
+                    text-align: right;
+                }
+
+                .note-img {
+                    width: 100%;
+
+                    img {
+                        width: 100%;
+                    }
+                }
+
+                .btn{
+                    position: relative;
+                    color: #b2dbd5;
+                    transition: 0.2s;
+
+                    &:hover, &:active{
+                        transform: rotate(180deg);
+                    }
+                }
             }
-            
+
             &:hover, &:active{
                 background-color: #1b515d;
             }
@@ -96,7 +138,7 @@
                 width: 100%;
 
                 img{
-                    width: 100%; 
+                    width: 100%;
                 }
             }
 
@@ -107,12 +149,12 @@
                 transition: 0.2s;
 
                 &:hover, &:active{
-                    transform: rotate(180deg); 
+                    transform: rotate(180deg);
                  }
             }
         }
     }
-    
+
     .update-modal{
         background-color: #a4d8d0;
         border-radius: 15px;
@@ -137,7 +179,7 @@
               border-radius: 5px;
               color:#2b616d;
             }
-            
+
         }
 
         .updatebutton{
@@ -149,9 +191,94 @@
                 background-color: #e26a3b;
             }
         }
-
     }
 }
 
+@media (min-width: 1025px) {
+    .notes-page {
+        width: 100%;
 
+        .notes-form {
+            width: 40%;
+            height: 100%;
+            overflow-y: scroll;
+        }
 
+        .notes-box {
+            .notes {
+                .popup-container {
+                    .popup-content {
+                        left: 15%;
+
+                        .popup-children {
+                            width: 75%;
+
+                            form {
+                                height: 50%;
+
+                                div {
+                                    height: 100%;
+
+                                    textarea {
+                                        height: 100%;
+                                        margin: 0;
+                                    }
+                                }
+                            }
+
+                            .updatebutton {
+                                width: 100px;
+                                background-color: black;
+                                margin: 10px 0 0 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        main {
+            height: 90vh;
+            width: 60%;
+            left: 40%;
+            position: absolute;
+            top: 10vh;
+
+            .search-bar-holder {
+                width: 90%;
+                transform: translate(-50%, -50%);
+                left: 50%;
+                top: 5%;
+                margin: 0;
+                z-index: 1;
+            }
+
+            .map {
+                top: 0;
+                width: 100%;
+            }
+
+            .map-btn {
+                height: 5%;
+                z-index: 1;
+                position: absolute;
+                bottom: 5%;
+                padding: 0 15px 0 15px;
+            }
+
+            .geo-btn {
+                position: absolute;
+            }
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .my-trip-page {
+        .notes-page {
+            main {
+                display: none;
+            }
+        }
+    }
+}

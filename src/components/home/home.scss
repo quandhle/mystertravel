@@ -1,12 +1,12 @@
 .home-page {
-    height: 90vh;   
+    height: 90vh;
     background-image: url('../../assets/images/homepage-background2.jpg');
 
     .desktop-home-page {
         display: none;
     }
 
-    .first, .section, .home-page-btn {
+    .section, .home-page-btn {
         position: relative;
     }
 
@@ -14,7 +14,7 @@
         top: 65%;
         left: 10%;
         width: 80%;
-        
+
         .btn {
             margin: 15px 0;
             width: 100%;
@@ -30,6 +30,20 @@
         }
     }
 
+    .first {
+        .popup-container {
+            height: 100%;
+
+            .popup-content {
+                width: 80%;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                height: 20%;
+            }
+        }
+    }
+
     .home-modal {
         background-color: #a4d8d0;
         border-radius: 15px;
@@ -41,7 +55,7 @@
         box-shadow: 0px 0px 34px -2px rgba(168,168,168,1);
         height: 100%;
         overflow-y: hidden;
-        
+
         .homepage-modal-header{
             padding-top: 15px;
         }
@@ -57,7 +71,7 @@
                 border-radius: 5px;
                 color:#2b616d;
             }
-        
+
         }
 
         .start-trip-btn{
@@ -135,13 +149,13 @@
             text-align: center;
             font-family: 'Dancing Script', cursive;
         }
-    
+
         .title-blurb1, .title-blurb2 {
             transform: translateX(-50%);
             position: absolute;
             left: 50%;
         }
-    
+
         .title-blurb2 {
             top: 27%;
         }
@@ -191,7 +205,7 @@
 
 .home-page, .bg1::after, .bg2::after, .bg3::after, .bg2, .bg3, .bg4 {
     background-repeat: no-repeat;
-    background-attachment: fixed; 
+    background-attachment: fixed;
     background-position: center;
     background-size: cover;
     overflow-y: auto;
