@@ -5,7 +5,7 @@ export function formatMoney(pennies){
         return '-';
     }
     const dollars = (pennies/100).toFixed(2);
-    return `$ ${dollars}`;
+    return dollars;
 }
 
 export function formatEntries(text){

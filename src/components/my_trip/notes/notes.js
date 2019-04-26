@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-
 import NotesForm from './notes_form';
 import NoteItem from './note_item';
 
@@ -29,7 +28,7 @@ class Notes extends Component {
         const {notes, imageUpload: image} = value;
 
         const data = new FormData();
-        data.append('trips_id', 1);//trips_id
+        data.append('trips_id', trips_id);
         data.append('entry', notes);
         data.append('image', image);
 
@@ -49,8 +48,8 @@ class Notes extends Component {
         }
     }
     async getNoteList() {
-        const { trips_id } = this.props.trips_id;  //${trips_id}
-        const resp = await axios.get(`/api/getnotelist.php?trips_id=1`);
+        const { trips_id } = this.props.trips_id;  
+        const resp = await axios.get(`/api/getnotelist.php?trips_id=${trips_id}`);
         if (resp.data.success) {
             console.log(resp.data)
             this.setState({
