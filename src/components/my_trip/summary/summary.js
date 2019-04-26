@@ -136,6 +136,7 @@ class Summary extends Component{
                         <i className="fas fa-envelope-square"/>
                     </a>
                 </div>
+
             </div>
         )
     }

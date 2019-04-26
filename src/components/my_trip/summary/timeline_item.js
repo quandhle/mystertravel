@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {formatDate} from "../../../helper";
+import {formatDatetime} from "../../../helper";
 
 export default class extends Component {
     state = {
@@ -34,8 +34,8 @@ export default class extends Component {
             return (
                 <div className="timeline-item">
                     <div className="timeline-item-content">
-                        <p className="timeline-item-name">{item.name ? item.name : null}</p>
-                        <p className="timeline-item-date">{formatDate(item.date)}</p>
+                        <p className="timeline-item-name">{item.name ? item.name : <i className="far fa-comment-alt"/>}</p>
+                        <p className="timeline-item-date">{formatDatetime(item.date)}</p>
                         <p className="timeline-item-text">{isNote ? item.entry : item.description}</p>
                     </div>
                 </div>
