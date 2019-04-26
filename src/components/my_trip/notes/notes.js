@@ -103,15 +103,15 @@ class Notes extends Component {
         }
         return (
             <div className="notes-page">
-            <div className="notes-form">
-                <div className="notes-input-toggle" onClick={this.toggleInput}>
-                    Add Note <i className="fas fa-angle-double-down"></i>
+                <div className="notes-form">
+                    <div className="notes-input-toggle" onClick={this.toggleInput}>
+                        Add Note <i className="fas fa-angle-double-down"></i>
+                    </div>
+                    <NotesForm notes={this.handleInput} style={showInput} />
+                    <div className="notes-box">
+                        {noteList}
+                    </div>
                 </div>
-                <NotesForm notes={this.handleInput} style={showInput} />
-                <div className="notes-box">
-                    {noteList}
-                </div>
-            </div>
                 <Map/>
             </div>
         )

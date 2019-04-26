@@ -202,27 +202,22 @@
     }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1025px) {
     .notes-page {
-        width: 100vw;
-        height: 90vh;
-        bottom: 0;
+        width: 100%;
+        top: 10%;
+        position: relative;
 
         .notes-form {
-            width: 25%;
             position: absolute;
-        }
-
-        .updatebutton {
-            color: white;
-            background-color: #fa8d62;
-            width: 60%;
+            width: 40%;
+            height: 100%;
         }
 
         main {
             height: 100%;
-            width: 75%;
-            left: 25%;
+            width: 60%;
+            left: 40%;
             position: relative;
 
             .search-bar-holder {
@@ -238,7 +233,7 @@
                 top: 0;
                 width: 100%;
             }
-        
+
             .map-btn {
                 height: 5%;
                 z-index: 1;
@@ -249,13 +244,12 @@
 
             .geo-btn {
                 position: absolute;
-                left: 10%;
             }
         }
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
     .notes-page {
         main {
             display: none;
