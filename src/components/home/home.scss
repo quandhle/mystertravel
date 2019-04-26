@@ -6,7 +6,7 @@
         display: none;
     }
 
-    .first, .section, .home-page-btn {
+    .section, .home-page-btn {
         position: relative;
     }
 
@@ -32,6 +32,8 @@
 
     .first {
         .popup-container {
+            height: 100%;
+            
             .popup-content {
                 width: 80%;
                 left: 50%;
