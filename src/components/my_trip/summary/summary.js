@@ -17,11 +17,10 @@ class Summary extends Component{
         super(props);
 
         this.state = {
+            trips_id: null,
             tripName: '',
             totalSpent: 0,
             privatePage: null,
-            trips_id: null,
-            map: null,
             pinData: null,
             notes: null
         };
