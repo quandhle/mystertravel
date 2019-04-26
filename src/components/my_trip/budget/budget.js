@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import BudgetForm from './budget_form';
 import BudgetItem from './budget_item';
 import './budget.scss';
-import Map from '../../map/map';
+
 
 class Budget extends Component{
     constructor(props) {
@@ -19,9 +19,10 @@ class Budget extends Component{
         this.toggleInput = this.toggleInput.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.deleteBudgetItem = this.deleteBudgetItem.bind(this);
+        this.getBudgetList = this.getBudgetList.bind(this);
     }
     async handleInput(value) {
-        const {trips_id} = this.props.trips_id;
+        const {trips_id} = this.props.trips_id; 
         const resp = await axios.post('/api/addbudgetitem.php', {
             trips_id,
             description: value.description,
@@ -51,7 +52,7 @@ class Budget extends Component{
         }
     }
     async getBudgetList() {
-        const {trips_id} = this.props.trips_id;
+        const {trips_id} = this.props.trips_id; 
         const resp = await axios.get(`/api/getbudgetlist.php?trips_id=${trips_id}`);
         if (resp.data.success) {
             this.setState({
@@ -81,23 +82,19 @@ class Budget extends Component{
         let budgetList = null;
         if(budget.length > 0){
             budgetList = budget.map(budgetItem => {
-                return <BudgetItem key={budgetItem.budget_id} budgetItem={budgetItem} deleteBudgetItem={this.deleteBudgetItem}/>
+                return <BudgetItem key={budgetItem.budget_id} budgetItem={budgetItem} deleteBudgetItem={this.deleteBudgetItem} display={this.getBudgetList}/>
             });
         } else {
             budgetList = <div className="budget">Add expenses to record your trip <i className="far fa-laugh-wink"></i> </div>
-        }
-
-        return (
+        }     
+       return(
             <div className="budget-page">
-                <div className="budget-section">
-                    <div className="budget-input-toggle" onClick={this.toggleInput}>Add Budget Item <i className="fas fa-angle-double-down"></i>
-                    </div>
-                    <BudgetForm budget={this.handleInput} style={showInput}/>
-                    <div className="budget-box">
-                        {budgetList}
-                    </div>
+                <div className="budget-input-toggle" onClick={this.toggleInput}>Add Budget Item <i className="fas fa-angle-double-down"></i>
                 </div>
-                <Map/>
+                <BudgetForm budget={this.handleInput} style={showInput}/>
+                <div className="budget-box">
+                    {budgetList}
+                </div>
             </div>
         )
     }

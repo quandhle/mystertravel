@@ -5,7 +5,7 @@ export function formatMoney(pennies){
         return '-';
     }
     const dollars = (pennies/100).toFixed(2);
-    return `$ ${dollars}`;
+    return dollars;
 }
 
 export function formatEntries(text){
@@ -33,6 +33,20 @@ export function formatDate(datetime){
     ];
     month = monthName[month];
     return `${day} ${month} ${date[1]}, ${date[2]}`;
+}
+
+export function formatDatetime(datetime){
+    const dt = new Date(datetime);
+
+    return `${dt.toLocaleDateString('en-US', {
+        weekday: 'short',
+        month: 'numeric',
+        day: 'numeric'
+    })} ${dt.toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: false
+    })}`;
 }
 
 export function loadScript(url){

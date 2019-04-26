@@ -1,259 +1,157 @@
+
 .notes-page{
-    position: absolute;
-    width: 100%;
-    height: 90%;
-    bottom: 0;
 
-    .notes-form {
-        .notes-input-toggle {
-            cursor: pointer;
-            font-size: 1.2em;
-            background-color: #fa8d62;
-            width: 100%;
-            height: 50px;
-            text-align: right;
-            color: white;
-            padding: 10px 15px;
-            
-
-            .fa-angle-double-down:hover {
-                position: relative;
-                top: 5px;
-            }
-        }
-
-        .note-input-form, .notes {
-            -webkit-box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
-            -moz-box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
-            box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
-        }
-
-        .note-input-form {
-            transition: 0.5s;
-            overflow-y: hidden;
-            background-color: #b2dbd5;
-            border-radius: 15px;
-            margin: 10px;
-
-            input{
-                margin: 10px;
-                width: 60%;
-            }
-
-            .chooseFile {
-                div {
-                    input {
-                        width: 100%;
-                        margin: 0 0 0 10px;
-                    }
-                }
-
-                .add-notes {
-                    margin: 0 10px 0 0;
-                }
-            }
-        }
+    .notes-input-toggle{
+        cursor: pointer;
+        font-size: 1.2em;
+        background-color: #fa8d62;
+        width: 100%;
+        height: 50px;
+        text-align: right;
+        color: white;
+        padding: 10px 15px;
         
-        .notes-input {
-            padding: 0 15px;
-            box-sizing: border-box;
 
-            textarea {
-                outline: none;
-                border: 1px solid transparent;
-                background-color: #c4e4df;
-                border-radius: 15px;
-                padding: 5px;
-                word-wrap: break-word;
-                color:#2b616d;
-            }
-        }
-        
-        .add-notes {
-            margin: 10px;
+        .fa-angle-double-down:hover{
             position: relative;
-            float: right;
-            background-color: #fa8d62;
-            border: none;
-            color:white;
+            top: 5px;
         }
+    }
 
-        .notes-box {
-            color: white;
-            
-            .notes {
-                font-size: 1.2em;
-                margin: 5px;
-                border-radius: 15px;
-                padding: 10px 15px;
-                transition: 0.5s;
-                word-wrap: break-word;
+    .note-input-form, .notes{
+        -webkit-box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
+        -moz-box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
+        box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
+    }
 
-                &:nth-child(odd) {
-                    background-color:  #2b616d;
-                }
-                
-                &:nth-child(even) {
-                    background-color: #3b717e;
-                }
-                
-                &:hover, &:active {
-                    background-color: #1b515d;
-                }
+    .note-input-form{
+        height: 0;
+        transition: 0.5s;
+        overflow-y: hidden;
+        background-color: #b2dbd5;
+        border-radius: 15px;
+        margin: 10px;
 
-                p:first-child {
-                    font-size: 0.8em;
-                    text-align: right;
-                }
-
-                .note-img {
-                    width: 100%;
-
-                    img {
-                        width: 100%; 
-                    }
-                }
-
-                .btn{
-                    position: relative;
-                    left: 50%;
-                    color: #b2dbd5;
-                    transition: 0.2s;
-
-                    &:hover, &:active{
-                        transform: rotate(180deg); 
-                    }
-                }
-            }
+        input{
+            margin: 10px;
+            width: 60%;
         }
-        
-        .update-modal {
-            background-color: #a4d8d0;
+    }
+    
+    .notes-input{
+        padding: 0 15px;
+        box-sizing: border-box;
+
+        textarea{
+            outline: none;
+            border: 1px solid transparent;
+            background-color: #c4e4df;
             border-radius: 15px;
-            text-align: center;
-            font-size: 1em;
-            color: white;
-            -webkit-box-shadow: 0px 0px 34px -2px rgba(168,168,168,1);
-            -moz-box-shadow: 0px 0px 34px -2px rgba(168,168,168,1);
-            box-shadow: 0px 0px 34px -2px rgba(168,168,168,1);
-            height: 100%;
-            overflow-y: hidden;
-          
-            .map-modal-header {
-                padding-top: 15px;
+            padding: 5px;
+            word-wrap: break-word;
+            color:#2b616d;
+        }
+
+
+    }
+    
+    .add-notes{
+        margin: 10px;
+        position: relative;
+        float: right;
+        background-color: #fa8d62;
+        border: none;
+        color:white;
+    }
+
+    .notes-box{
+        color: white;
+        
+        .notes{
+            font-size: 1.2em;
+            margin: 5px;
+            border-radius: 15px;
+            padding: 10px 15px;
+            transition: 0.5s;
+            word-wrap: break-word;
+
+            &:nth-child(odd){
+                background-color:  #2b616d;
+            }
+            
+            &:nth-child(even){
+                background-color: #3b717e;
+            }
+            
+            &:hover, &:active{
+                background-color: #1b515d;
             }
 
-            .description-input {
-                margin: 10px;
+            p:first-child{
+                font-size: 0.8em;
+                text-align: right;
+            }
 
-                &>input {
-                    border: 1px solid transparent;
-                    outline: none;
-                    background-color:rgba(255, 255, 255, 0.5);
-                    width: 60%;
-                    border-radius: 5px;
-                    color:#2b616d;
+            .note-img{
+                width: 100%;
+
+                img{
+                    width: 100%; 
                 }
-                
             }
 
-            .modal-pin-btn {
-                color: white;
-                background-color: #fa8d62;
-                width: 60%;
+            .btn{
+                position: relative;
+                right:0;
+                color: #b2dbd5;
+                transition: 0.2s;
 
-                &:hover {
-                    background-color: #e26a3b;
-                }
-            }
-
-          .btn {
-              position: relative;
-              right:0;
-              color: #b2dbd5;
-              transition: 0.2s;
-
-              &:hover, &:active {
-                  transform: rotate(180deg); 
-               }
+                &:hover, &:active{
+                    transform: rotate(180deg); 
+                 }
             }
         }
     }
     
-    .update-modal {
+    .update-modal{
         background-color: #a4d8d0;
         border-radius: 15px;
         text-align: center;
         font-size: 1em;
         color: white;
+
         height: 100%;
         overflow-y: hidden;
-      
-        .map-modal-header {
+        .map-modal-header{
             padding-top: 15px;
         }
-        
-        .cancel-add-btn {
-            color: white;
-            background-color: #70a39c;
-            width: 60%;
-            margin: 5px 0;
-        }
-    }
-}
 
-@media (min-width: 900px) {
-    .notes-page {
-        width: 100vw;
-        height: 90vh;
-        bottom: 0;
+        .description-input{
+            margin: 10px;
 
-        .notes-form {
-            width: 25%;
-            position: absolute;
+            &>input{
+              border: 1px solid transparent;
+              outline: none;
+              background-color:rgba(255, 255, 255, 0.5);
+              width: 60%;
+              border-radius: 5px;
+              color:#2b616d;
+            }
+            
         }
 
-        .updatebutton {
+        .updatebutton{
             color: white;
             background-color: #fa8d62;
             width: 60%;
 
-            main {
-                height: 100%;
-                width: 75%;
-                left: 25%;
-                position: relative;
-
-                .search-bar-holder {
-                    width: 90%;
-                    transform: translate(-50%, -50%);
-                    left: 50%;
-                    top: 7%;
-                    margin: 0;
-                    z-index: 1;
-                }
-
-                .map {
-                    top: 0;
-                    width: 100%;
-                }
-            
-                .map-btn {
-                    height: 5%;
-                    z-index: 1;
-                    position: absolute;
-                    bottom: 5%;
-                    padding: 0 15px 0 15px;
-                }
+            &:hover{
+                background-color: #e26a3b;
             }
         }
+
     }
 }
 
-@media (max-width: 900px) {
-    .notes-page {
-        main {
-            display: none;
-        }
-    }
-}
+
+

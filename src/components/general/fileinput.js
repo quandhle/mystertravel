@@ -8,7 +8,7 @@ export default class FileInput extends Component {
     render() {
         return(
             <div>
-                <input type='file' accept='.jpg, .png, .jpeg' onChange={this.onChange}/>
+                <input id='notes-file-input' type='file' accept='.jpg, .png, .jpeg' onChange={this.onChange}/>
             </div>
         )
     }

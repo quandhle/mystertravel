@@ -21,8 +21,8 @@ class UpdateNote extends Component{
         const resp = await axios.post('/api/updatenote.php', {
             id: note.note_id,
             description: value.entry, 
-            trips_id:1
-        }); //trips_id
+            trips_id
+        });
 
         if(resp.data.success){
             display();

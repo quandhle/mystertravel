@@ -12,12 +12,19 @@ class SignIn extends Component{
         this.handleSignUp = this.handleSignUp.bind(this);
     }
     async handleSignUp (values){
-        const {email, password} = values
-        const resp = await axios.post('', {
+        const {nickname, email, password} = values
+        const resp = await axios.post('/api/signup.php', {
             nickname,
             email,
             password
         })
+
+        if(resp.data.success){
+            this.props.signIn(resp.data);
+            this.props.history.push('/')
+        } else {
+            console.log(resp.data.error)
+        }
     }
     render(){
         return(

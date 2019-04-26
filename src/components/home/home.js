@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import UserStart from './user_start';
 import './home.scss';
 
-class Home extends Component {toSignInPage= ()=>{
+class Home extends Component {
+    toSignInPage= ()=>{
         this.props.history.push("/account/signin")
     }
     checkSignIn(){
