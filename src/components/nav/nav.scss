@@ -3,9 +3,8 @@
     background-color: #a4d8d0;
     height: 10vh;
 
-    .navbar{
-        width: 100%;
-        height:100%;
+    .navbar {
+        height: 100%;
         font-size: 1.5em;
         font-weight: 700;
         padding: 0;
@@ -40,6 +39,7 @@
     top: 0%;
     z-index: 999;
     font-size: 1.5em;
+    z-index: 3;
 
     .side-nav{
         position: absolute;
@@ -58,10 +58,8 @@
             margin: 10px 10px 0 10px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 
-
-            .username{
+            .username {
                 padding: 5px;
-                
             }
         }
 
@@ -82,15 +80,11 @@
                     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
                 }
             }
-
-
         }
 
         .aboutus-link{
             position: relative;
             top:30%
         }
-
-
     }
 }
