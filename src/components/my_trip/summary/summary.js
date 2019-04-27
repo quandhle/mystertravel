@@ -165,7 +165,7 @@ class Summary extends Component{
                     </a>
                 </div>
                 {/*<MapModal modal={mapModal} onClick={this.toggleMapModal}/>*/}
-                <ImageModal img={image} modal={imageModal} onClick={this.toggleImageModal}/>
+                <ImageModal img={image} modal={imageModal} close={this.toggleImageModal}/>
             </div>
         )
     }

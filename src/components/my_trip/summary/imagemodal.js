@@ -3,10 +3,11 @@ import Modal from '../../general/modal';
 
 export default class ImageModal extends Component {
     render() {
-        const {modal, onClick, img} = this.props;
+        const {modal, close, img} = this.props;
         return (
-            <Modal open={modal} childrenStyle="summary-image-modal">
-                <img onClick={onClick} src={img} alt=""/>
+            <Modal open={modal} onClick={close} childrenStyle="summary-image-modal">
+                <span onClick={close} className="close-popup"><i className="fas fa-times-circle"></i></span>
+                <img onClick={close} src={img} alt=""/>
             </Modal>
         );
     }
