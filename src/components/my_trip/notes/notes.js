@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import NotesForm from './notes_form';
 import NoteItem from './note_item';
 import Map from '../../map';
-
 import './notes.scss';
 
 class Notes extends Component {
@@ -15,16 +14,20 @@ class Notes extends Component {
             showInput: {
                 height: 0
             },
-            note: []
+            note: [],
+            spinner: false
         };
+
         this.getNoteList = this.getNoteList.bind(this);
         this.toggleInput = this.toggleInput.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
-
     }
     async handleInput(value) {
-        console.log(value);
+        this.setState({
+            spinner: true
+        })
+
         const {trips_id} = this.props.trips_id;
         const {notes, imageUpload: image} = value;
 
@@ -38,15 +41,15 @@ class Notes extends Component {
                 'Content-Type': 'multipart/form-data'
             }
         });
+
         if (resp.data.success) {
-            console.log(resp);
             value.notes = '';
             value.imageUpload = null;
             document.getElementById('notes-file-input').value = null;
             this.getNoteList();
             this.toggleInput();
+            this.setState({spinner: false});
         } else {
-            console.log(resp);
             console.log('Can not add')
         }
     }
@@ -54,7 +57,6 @@ class Notes extends Component {
         const { trips_id } = this.props.trips_id;
         const resp = await axios.get(`/api/getnotelist.php?trips_id=${trips_id}`);
         if (resp.data.success) {
-            console.log(resp.data)
             this.setState({
                 note: resp.data.notes
             });
@@ -79,7 +81,7 @@ class Notes extends Component {
         const { height } = this.state.showInput;
         if (!height) {
             this.setState(
-                {showInput: {height: '180px'}}
+                {showInput: {height: '200px'}}
             )
         } else {
             this.setState(
@@ -91,10 +93,10 @@ class Notes extends Component {
         this.getNoteList();
     }
     render() {
-        const { note, showInput } = this.state;
+        const { note, showInput, spinner } = this.state;
         let noteList = null;
         if(note.length > 0){
-            noteList = note.map(note => { //need to change index to id
+            noteList = note.map(note => {
                 return (
                     <NoteItem key={note.note_id} note={note} deleteItem={this.deleteItem} display={this.getNoteList}/>
                 );
@@ -106,7 +108,8 @@ class Notes extends Component {
             <div className="notes-page">
                 <div className="notes-form">
                     <div className="notes-input-toggle" onClick={this.toggleInput}>
-                        Add Note <i className="fas fa-angle-double-down"></i>
+                        {spinner && <span className="spinner-border spinner-border-sm"></span>}
+                         Add Note <i className="fas fa-angle-double-down"></i>
                     </div>
                     <NotesForm notes={this.handleInput} style={showInput} />
                     <div className="notes-box">
