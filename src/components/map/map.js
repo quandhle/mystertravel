@@ -55,8 +55,6 @@ class Map extends Component {
             minZoom: 2,
         });
 
-        const geocoder = new google.maps.Geocoder;
-
         window.google.maps.event.addListener(map, 'click', e => {
             const lat = e.latLng.lat();
             const lng = e.latLng.lng();
@@ -159,7 +157,7 @@ class Map extends Component {
             pinData = resp.data.data;
         }
 
-        if (pinData) {
+        if (pinData.length > 0) {
             const pins = pinData.map((item) => {
                 const pin = new window.google.maps.Marker({
                     position: {
