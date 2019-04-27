@@ -14,7 +14,7 @@ class Map extends Component {
         super(props);
 
         this.state = {
-            lat: 1,  
+            lat: 1,
             lng: 1,
             pins: [],
             name: null,
@@ -55,8 +55,32 @@ class Map extends Component {
             minZoom: 2,
         });
 
+        const geocoder = new google.maps.Geocoder;
+
+        window.google.maps.event.addListener(map, 'click', e => {
+            const lat = e.latLng.lat();
+            const lng = e.latLng.lng();
+            this.handleMapClick(lat, lng);
+        });
+
         this.setState({map: map});
         this.showPins();
+    }
+
+    handleMapClick(lat, lng){
+        const geocoder = new google.maps.Geocoder;
+        geocoder.geocode({ 'location': { lat, lng } }, (results, status) => {
+            let name = 'generic name';
+            if (status === 'OK') {
+                name = results[0].formatted_address.split().slice(0, 149).join();
+            }
+            this.setState({
+                lat,
+                lng,
+                name
+            });
+            this.toggleModal();
+        });
     }
 
     parseAddressComponents (address_components) {
@@ -130,7 +154,7 @@ class Map extends Component {
 
         const resp = await axios.get(`/api/getmappin.php?trips_id=${trips_id}`);
         let pinData = null;
-         
+
         if (resp.data.success) {
             pinData = resp.data.data;
         }
@@ -162,6 +186,10 @@ class Map extends Component {
             this.setState({
                 pins: pins,
             });
+
+            const lastPin = this.state.pins[this.state.pins.length - 1];
+            this.state.map.setZoom(11)
+            this.state.map.panTo(lastPin.position)
         }
     }
 
@@ -180,7 +208,7 @@ class Map extends Component {
                         this.props.dispatch(change("search-bar-form", `places`,
                             results.length > 3 ?
                                 results[results.length - 4].formatted_address : results[0].formatted_address));
-                        
+
                         this.setState({
                             name: results[0].formatted_address.split(" ")[0]
                         })
@@ -225,7 +253,7 @@ class Map extends Component {
     toggleModal(){
         this.setState({
             modal: !this.state.modal
-        })   
+        })
     }
     render() {
         const {modal} = this.state
