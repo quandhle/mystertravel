@@ -1,15 +1,26 @@
 import types from './types';
+import axios from 'axios';
 
-export function signIn(user){
-    console.log('user:',user);
-    return{
-        type: types.SIGN_IN,
-        username: user.username,
-        trips_id: user.trips_id
+export const signIn = (user)=>async dispatch=> {
+    const resp = await axios.post('/api/login.php', {
+        email: user.email,
+        password: user.password
+    })
+    console.log('user sign in:',resp.data);
+    if(resp.data.success){
+        localStorage.setItem('signedIn', 'true');
+
+        return dispatch({
+            type: types.SIGN_IN,
+            username: resp.data.username,
+            trips_id: resp.data.trips_id
+        })
     }
+
 }
 
 export function signOut(){
+    localStorage.removeItem('signedIn');
     return {
         type:types.SIGN_OUT
     }

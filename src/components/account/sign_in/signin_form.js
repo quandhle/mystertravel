@@ -3,14 +3,15 @@ import {reduxForm, Field} from 'redux-form';
 import Input from '../../general/input';
 
 const signInForm = props =>{
-    const {signIn, handleSubmit} = props
+    console.log(props)
+    const {signIn, handleSubmit, signUp} = props
     return(
         <form onSubmit={handleSubmit(signIn)} className="sign-in-form">
             <div className="sign-in-title">Sign In</div>
             <Field id="email" name="email" label="Enter Email" component={Input} classes="signin-input"/>
             <Field id="password" name="password" label="Enter Password" component={Input} classes="signin-input" type="password"/>
             <div className="signin-btn">
-                <div className="signup-btn btn">Sign Up</div>
+                <div className="signup-btn btn" onClick={signUp}>Sign Up</div>
                 <button className="btn">Sign In</button>
             </div>
         </form>
@@ -20,7 +21,7 @@ const signInForm = props =>{
 function validate({email, password}){
     const errors = {};
     if(!email){
-        errors.email = 'Please enter your email'; //has to name email exact same thing as the name="email"
+        errors.email = 'Please enter your email';
     }
     if(!password){
         errors.password = 'Please enter your password'; 

@@ -11,7 +11,6 @@ import Timeline from './timeline';
 import MapModal from './mapmodal';
 import ImageModal from './imagemodal';
 
-import summaryimg from '../../../assets/images/summary.jpg';
 
 class Summary extends Component{
     constructor(props) {
@@ -141,12 +140,12 @@ class Summary extends Component{
 
         return(
             <div className="summary-page">
-                <div className="summary-trip-name"><p>{`${tripName}`}</p></div>
-                <div className="total-spend"><p>{`Total spent in this trip: ${formatMoney(totalSpent)}`}</p></div>
+                <div className="summary-trip-name"><p>{tripName? tripName : 'My Trip'}</p></div>
+                <div className="total-spend"><p>{`Total spent in this trip: ${totalSpent? formatMoney(totalSpent): '$0'}`}</p></div>
                 <Timeline pinData={pinData} notesData={notes} setImage={this.setImage}/>
                 <div className="last-entry">
                     <div className="entry-content">
-                        <img src={summaryimg} alt="temp"/>
+                        
                     </div>
                 </div>
                 {privatePage &&
