@@ -113,10 +113,12 @@ class Summary extends Component{
     }
 
     setImage = image => {
-        this.setState({
-            image: image,
-            imageModal: true
-        })
+        if (image) {
+            this.setState({
+                image: image,
+                imageModal: true
+            });
+        }
     }
 
     toggleMapModal = (pin) => {
@@ -163,7 +165,7 @@ class Summary extends Component{
                         <i className="fas fa-envelope-square"/>
                     </a>
                 </div>
-                <MapModal modal={mapModal} onClick={this.toggleMapModal}/>
+                {/*<MapModal modal={mapModal} onClick={this.toggleMapModal}/>*/}
                 <ImageModal img={image} modal={imageModal} onClick={this.toggleImageModal}/>
             </div>
         )
