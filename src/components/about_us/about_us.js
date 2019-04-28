@@ -61,7 +61,7 @@ class AboutUs extends Component {
 
         return (
             <div className="about-container">
-                <section className="first bg bg1"><div>About Us</div></section>
+                <section className="first bg bg1"><div>Develop Team</div></section>
                 <section className="bg section parallax aboutUs">
                     {aboutUs}
                     <div className="footer"></div>

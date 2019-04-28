@@ -11,7 +11,7 @@ class UserStart extends Component {
         };
     }
     goToTrip = () => {
-        this.props.history.push(`/mytrip`);
+        this.props.history.push('/mytrip');
     }
     toggleModal = () => {
         if(!this.state.modal){
@@ -30,7 +30,6 @@ class UserStart extends Component {
         if(signIn){
             btnmessage = 'Start A Trip'
         }
-
         return (
             <Fragment>
                 <div className="home-page-btn">

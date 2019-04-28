@@ -23,7 +23,7 @@ class SignIn extends Component{
             this.props.signIn(resp.data);
             this.props.history.push('/')
         } else {
-            console.log(resp.data.error)
+            console.error(resp.data.error);
         }
     }
     render(){

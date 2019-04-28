@@ -12,8 +12,7 @@ class UpdateBudget extends Component{
 
         this.updatedb = this.updatedb.bind(this);
     }
-    async updatedb(value){
-        console.log('update', this.props)  
+    async updatedb(value){ 
         const {trips_id, budget, display, close} = this.props
         const resp = await axios.post('/api/updatebudget.php', {
             id: budget.budget_id,
@@ -21,7 +20,7 @@ class UpdateBudget extends Component{
             price: value.price * 100,
             category: value.category,
             trips_id
-        }); //trips_id
+        }); 
 
         if(resp.data.success){
             display();
@@ -47,7 +46,7 @@ class UpdateBudget extends Component{
 }
 
 function mapStateToProps(state, props){
-    console.log('Props:', props);
+
     const { modal, budget } = props;
     return {
         initialValues: {
