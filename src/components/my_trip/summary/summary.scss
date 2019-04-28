@@ -50,6 +50,12 @@
         position: relative;
         margin: 20px 0 30px;
 
+        .toggle-timeline{
+            text-align: center;
+            font-size: 1.2em;
+            color: #2b616d;
+        }
+
         .timeline-title {
             font-size: 1.5em;
             font-weight: bold;
@@ -127,6 +133,12 @@
                 }
             }
         }
+
+        .timeline-inner{
+            max-height: 0;
+            overflow-y: hidden;
+            transition: max-height 0.7s ease-in-out;
+        }
     }
 
     .last-entry {
@@ -147,25 +159,28 @@
         justify-content: center;
         align-content: center;
 
-        &>* {
-            margin: 0 10px;
+        &>a>i {
+            margin: 10px 10px;
             font-size: 3em;
             color: #2b616d;
             vertical-align: center;
+
+            &:hover {
+                color: #417681;
+            }
         }
 
-        &:hover {
-            color: #417681;
-        }
+
     }
 
     .summary-end-trip-link {
         width: 100%;
-        margin: 28px;
 
         button {
             height: 60px;
             width: 90%;
+            position: relative;
+            left:5%;
             background-color: #fa8d62;
             color: white;
             border-radius: 15px;
