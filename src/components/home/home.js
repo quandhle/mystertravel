@@ -12,7 +12,7 @@ class Home extends Component {
 
         if(!user.auth){
             return(
-                <div className="home-page-btn">
+                <div className="home-page-btn sign-in-btn">
                     <button onClick={this.toSignInPage} className="home-start-btn btn">Sign In</button>
                 </div>
             )
@@ -23,28 +23,13 @@ class Home extends Component {
     render() {
         const{user} = this.props;
         const signInCheck = this.checkSignIn();
+
         return (
             <div className="home-page">
-                <section className="first">
-                    <h4 className='title-blurb1'>Travel smarter</h4>
-                    <h4 className='title-blurb2'>Plan faster</h4>
-                    <UserStart history={this.props.history} signIn={user.auth}/>
-                    {signInCheck}
-                    <a href="#preTrip" className="chevron"><i className="fas fa-chevron-down scroll"></i></a>
-                </section>
-                <a name="preTrip" className="chevron"><section className="preTrip section">Plan before you go</section></a>
-                <section className="bg bg2 section"></section>
-                <section className="currentTrip section">Keep track of your travels</section>
-                <section className="bg bg3 section"></section>
-                <section className="postTrip section">Share your travels</section>
-                <section className="bg bg4 section">
-                    <section className="contact section">
-                        <ul>
-                            <li><a href="https://github.com/learning-fuze/c219_travelagenda">GitHub</a></li>
-                            <li><a href="/aboutus">About Us</a></li>
-                        </ul>
-                    </section>
-                </section>
+                <h4 className='title-blurb1'>Travel smarter</h4>
+                <h4 className='title-blurb2'>Plan faster</h4>
+                <UserStart history={this.props.history} signIn={user.auth}/>
+                {signInCheck}
             </div>
         )
     }

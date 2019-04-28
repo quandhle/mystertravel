@@ -2,9 +2,7 @@ html, body{
     height: 100vh;
     margin: 0;
     padding: 0;
-    background: #b2dbd5;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to bottom right, rgb(255, 255, 255), rgb(204, 237, 238));  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(204, 237, 238)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: white;  /* fallback for old browsers */
     background-repeat: no-repeat;
     font-family: 'Nunito', sans-serif;
 }
