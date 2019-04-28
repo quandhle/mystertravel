@@ -48,7 +48,6 @@ if(isset($_FILES['image']['name'])){
 }
 $output = [];
 $output['success'] = true;
-$output['note_id'] = $note_id;
 
 print(json_encode($output));
 

@@ -52,15 +52,6 @@ if(mysqli_affected_rows($conn) !== 1){
 $pin_id = mysqli_insert_id($conn);
 
 $output['success'] = true;
-$output = [
-    'pin_id' => $pin_id,
-    'location' => [
-        'lat' => $latitude,
-        'lng' => $longitude
-    ],
-    'description' => $description,
-    'name' => $name
-];
 
 print(json_encode($output));
 

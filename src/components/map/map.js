@@ -14,7 +14,7 @@ class Map extends Component {
         super(props);
 
         this.state = {
-            lat: 1,  
+            lat: 1,
             lng: 1,
             pins: [],
             name: null,
@@ -24,6 +24,11 @@ class Map extends Component {
 
         this.addPin = this.addPin.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
+        this.initMap = this.initMap.bind(this);
+        this.searchCountry = this.searchCountry.bind(this);
+        this.getCurrentLocation = this.getCurrentLocation.bind(this);
+        this.handleClear = this.handleClear.bind(this);
+        this.handleMapClick = this.handleMapClick.bind(this);
     }
 
     componentDidMount() {
@@ -39,7 +44,7 @@ class Map extends Component {
         window.initMap = this.initMap;
     }
 
-    initMap = () => {
+    initMap() {
         const searchBarInput = document.getElementById("places");
         this.autoComplete = new window.google.maps.places.Autocomplete(searchBarInput);
         this.autoComplete.setFields(['address_component', 'geometry', 'name']);
@@ -53,10 +58,36 @@ class Map extends Component {
             center: {lat: this.state.lat, lng: this.state.lng},
             zoom: 2,
             minZoom: 2,
+            draggableCursor: 'default',
+            draggingCursor: 'move'
+        });
+
+        window.google.maps.event.addListener(map, 'click', e => {
+            const lat = e.latLng.lat();
+            const lng = e.latLng.lng();
+            this.handleMapClick(lat, lng);
         });
 
         this.setState({map: map});
         this.showPins();
+    }
+
+    handleMapClick(lat, lng){
+        const geocoder = new google.maps.Geocoder;
+        geocoder.geocode({ 'location': { lat, lng } }, (results, status) => {
+            let name = 'generic name';
+            if (status === 'OK') {
+                name = results.length > 3 ?
+                    results[results.length - 4].formatted_address : results[0].formatted_address;
+                name = name.split(',')[0];
+            }
+            this.setState({
+                lat,
+                lng,
+                name
+            });
+            this.toggleModal();
+        });
     }
 
     parseAddressComponents (address_components) {
@@ -87,9 +118,8 @@ class Map extends Component {
         }
     }
 
-    searchCountry = () => {
+    searchCountry() {
         const place = this.autoComplete.getPlace();
-
         let address, location;
 
         if (place.address_components) {
@@ -121,7 +151,7 @@ class Map extends Component {
             lng: location.lng(),
             name: place.name
         })
-        setTimeout(this.toggleModal, 500);
+        setTimeout(this.toggleModal, 1000);
     }
 
     async showPins() {
@@ -130,22 +160,25 @@ class Map extends Component {
 
         const resp = await axios.get(`/api/getmappin.php?trips_id=${trips_id}`);
         let pinData = null;
-         
+
         if (resp.data.success) {
             pinData = resp.data.data;
+        } else {
+            console.error(resp.data.error);
         }
 
-        if (pinData) {
+        if (pinData.length > 0) {
             const pins = pinData.map((item) => {
                 const pin = new window.google.maps.Marker({
                     position: {
                         lat: item.lat,
                         lng: item.lng
                     },
+                    title: item.name,
                     map: this.state.map
                 });
 
-                const content = ('<h6 id="infoWindow">' + item.description + '</h6>');
+                const content = `<h6 id="infoWindow">${item.description}</h6>`;
 
                 const infowindow = new google.maps.InfoWindow({
                     content: content
@@ -162,71 +195,78 @@ class Map extends Component {
             this.setState({
                 pins: pins,
             });
+
+            const lastPin = this.state.pins[this.state.pins.length - 1];
+            this.state.map.setZoom(11)
+            this.state.map.panTo(lastPin.position)
         }
     }
 
-    getCurrentLocation = () => {
-        navigator.geolocation.getCurrentPosition(position => {
-            const {coords} = position;
-            const coordObject = {lat: coords.latitude, lng: coords.longitude};
+    getCurrentLocation() {
+        const success = position => {
+            const { coords } = position;
+            const coordObject = { lat: coords.latitude, lng: coords.longitude };
             this.setState(coordObject);
             this.state.map.setCenter(coordObject);
             this.state.map.setZoom(14);
             const geocoder = new google.maps.Geocoder;
-            geocoder.geocode({'location': coordObject}, (results, status) => {
-                console.log(results)
+            geocoder.geocode({ 'location': coordObject }, (results, status) => {
                 if (status === 'OK') {
                     if (results[0]) {
-                        this.props.dispatch(change("search-bar-form", `places`,
-                            results.length > 3 ?
-                                results[results.length - 4].formatted_address : results[0].formatted_address));
-                        
+                        let name = results.length > 3 ?
+                            results[results.length - 4].formatted_address : results[0].formatted_address;
+                        this.props.dispatch(change("search-bar-form", `places`, name));
+                        name = name.split(',')[0];
+
                         this.setState({
-                            name: results[0].formatted_address.split(" ")[0]
-                        })
+                            name
+                        });
                     }
                 }
             });
-        });
+        }
+
+        const error = err => {
+            console.warn(`ERROR(${err.code}): ${err.message}`);
+        }
+
+        const options = {
+            enableHighAccuracy: false
+        }
+        navigator.geolocation.getCurrentPosition(success, error, options);
     }
 
-    handleClear = event => {
+    handleClear(event) {
         event.preventDefault();
         this.props.dispatch(change("search-bar-form", `places`, ''));
         document.getElementById("places").focus();
     }
 
-    addPin(value) {
+    async addPin(value) {
         this.toggleModal();
         const {lat, lng, name} = this.state;
 
-        const resp = axios.post('/api/addmappin.php', {
+        const resp = await axios.post('/api/addmappin.php', {
             trips_id: this.props.trips_id,
             latitude: parseFloat(lat),
             longitude: parseFloat(lng),
             description: value['pin-description'],
             name: name
-        }).then((resp) => {
-            const marker = new window.google.maps.Marker({
-                position: {
-                    lat: lat,
-                    lng: lng,
-                },
-                title: resp.data.name
-            });
+        });
 
-            this.setState({
-                pins: [...this.state.pins, marker]
-            })
-
+        if(resp.data.success){
             this.showPins();
-        })
+        } else {
+            console.error(resp.data.error);
+        }
     }
+
     toggleModal(){
         this.setState({
             modal: !this.state.modal
-        })   
+        })
     }
+
     render() {
         const {modal} = this.state
         return (

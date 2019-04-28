@@ -39,8 +39,6 @@ if(mysqli_affected_rows($conn) !== 1){
 $todo_id = mysqli_insert_id($conn);
 
 $output['success'] = true;
-$output['todo_id'] = $todo_id;
-
 
 print(json_encode($output));
 

@@ -49,7 +49,6 @@ if(mysqli_affected_rows($conn) !== 1){
 $budget_id = mysqli_insert_id($conn);
 
 $output['success'] = true;
-$output['budget_id'] = $budget_id;
 
 print(json_encode($output));
 
