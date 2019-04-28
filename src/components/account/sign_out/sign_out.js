@@ -9,7 +9,7 @@ class SignOut extends Component{
         try{
            const resp = await axios.post("/api/logout.php"); 
            this.props.signOut();
-           setTimeout(this.redirectToHome, 3000);
+           setTimeout(this.redirectToHome, 2000);
         } catch{
 
         }
@@ -20,7 +20,7 @@ class SignOut extends Component{
     render(){
         return(
             <div className="signout-page">
-                <h2>See you next time!</h2>
+                <h2>Ciao!</h2>
             </div>
         )
 

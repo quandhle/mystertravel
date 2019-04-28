@@ -26,7 +26,6 @@ class SignIn extends Component{
         const {signIn, history} = this.props;
         const {success, trips_id} = resp.data
         if(success){
-            console.log(resp.data);
             signIn(resp.data);
             
             if(trips_id){
@@ -36,7 +35,6 @@ class SignIn extends Component{
                 history.push('/');
             }
         } else {
-            console.log(resp.data);
             this.setState({
                 message: resp.data.error
             })

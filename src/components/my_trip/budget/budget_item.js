@@ -29,5 +29,4 @@ class BudgetItem extends Component{
 
 }
 
-
 export default BudgetItem

@@ -66,7 +66,6 @@ class Summary extends Component{
         const {trips_id} = this.state;
         const response = await axios.get(`/api/getendtripsummary.php?trips_id=${trips_id}`);
 
-        console.log(response.data);
         if (response.data.success) {
             const {summary: {trips_name, total_budget}, pins, notes} = response.data;
 
@@ -76,6 +75,8 @@ class Summary extends Component{
                 pinData: pins,
                 notes
             });
+        } else {
+            console.error(resp.data.error);
         }
     }
 
@@ -121,7 +122,6 @@ class Summary extends Component{
     }
 
     toggleMapModal = (pin) => {
-        console.log(this.state.mapModal);
         this.setState({
             mapModal: !this.state.mapModal
         });

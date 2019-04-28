@@ -50,7 +50,7 @@ class Notes extends Component {
             this.toggleInput();
             this.setState({spinner: false});
         } else {
-            console.log('Can not add')
+            console.error(resp.data.error);
         }
     }
     async getNoteList() {
@@ -73,7 +73,7 @@ class Notes extends Component {
         if (resp.data.success) {
             this.getNoteList();
         } else {
-            console.error('Unable to delete entry');
+            console.error(resp.data.error);
         }
     }
 
