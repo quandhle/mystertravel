@@ -17,10 +17,6 @@ class SideNav extends Component{
                     text: 'Current Trip'
                 },
                 {
-                    to: '/pervioustrip',
-                    text: 'Pervious Trip'
-                },
-                {
                     to: '/account/signout',
                     text: 'Sign Out'
                 }
@@ -34,10 +30,6 @@ class SideNav extends Component{
                 {
                     to: '/account/signout',
                     text: 'Sign Out'
-                },
-                {
-                    to: '/pervioustrip',
-                    text: 'Previous Trip'
                 }
             ]
         }
