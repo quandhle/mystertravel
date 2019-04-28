@@ -1,7 +1,6 @@
 import React from 'react';
 import {reduxForm, Field} from 'redux-form';
 import Input from '../../general/input';
-import Dropdown from '../../dropdown/dropdown';
 
 const BudgetForm = props => {
     const { budget, handleSubmit, style} = props;
