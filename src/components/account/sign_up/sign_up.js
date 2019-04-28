@@ -20,8 +20,7 @@ class SignIn extends Component{
         })
 
         if(resp.data.success){
-            this.props.signIn(resp.data);
-            this.props.history.push('/')
+            this.props.signIn(values);
         } else {
             console.log(resp.data.error)
         }
