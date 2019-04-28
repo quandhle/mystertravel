@@ -27,7 +27,8 @@
     }
 
     .note-input-form{
-        height: 0;
+        max-height: 0;
+
         transition: 0.5s;
         overflow-y: hidden;
         background-color: #b2dbd5;

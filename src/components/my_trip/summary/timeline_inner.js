@@ -12,6 +12,7 @@ export default class extends Component {
     };
 
     componentDidUpdate(prevProps) {
+
         const {items, setImage} = this.props;
         if ((items !== prevProps.items) && items) {
             const innerItems = items.map((item, index) => {
@@ -35,7 +36,7 @@ export default class extends Component {
     render() {
         const {innerItems, style} = this.state;
         return (
-            <div className="timeline-inner" style={style}>
+            <div className="timeline-inner" style={this.props.style}>
                 {innerItems}
             </div>
         )
