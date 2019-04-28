@@ -7,6 +7,7 @@ if (!empty($_SESSION['user_data']['username'])){
     $users_id = $_SESSION['user_data']['users_id'];
 } else {
     require_once("loginguest.php");
+    $output['username'] = 'Guest';
 }
 
 $json_input = file_get_contents("php://input");
