@@ -7,13 +7,19 @@ export const signIn = (user)=>async dispatch=> {
         password: user.password
     })
     console.log('user sign in:',resp.data);
-    if(resp.data.success){
-        localStorage.setItem('signedIn', 'true');
 
+    const {success, trips_id, username} = resp.data
+
+    if(success){
+        localStorage.setItem('signedIn', 'true');
+        if(trips_id){
+           passTripId(trips_id); 
+        }
+        
         return dispatch({
             type: types.SIGN_IN,
-            username: resp.data.username,
-            trips_id: resp.data.trips_id
+            username: username,
+            trips_id: trips_id
         })
     }
 
@@ -28,6 +34,7 @@ export function signOut(){
 
 
 export function passTripId(id){
+    console.log(id)
     return{
         type: types.GET_TRIP_ID,
         trips_id: id
