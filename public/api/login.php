@@ -53,8 +53,6 @@ $connect_query = "INSERT INTO
         `ip_address` = '{$_SERVER['REMOTE_ADDR']}'
 ";
 
-// if email alreayd exists in users_connnection, delete it
-
 $connect_result = mysqli_query($conn, $connect_query);
 
 if (!$connect_result) {
