@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {signOut} from '../../../actions';
+import {signOut, clearTripId} from '../../../actions';
 import axios from 'axios';
 import './sign_out.scss';
 
@@ -9,6 +9,7 @@ class SignOut extends Component{
         try{
            const resp = await axios.post("/api/logout.php"); 
            this.props.signOut();
+           this.props.clearTripId();
            setTimeout(this.redirectToHome, 2000);
         } catch{
 
@@ -28,5 +29,6 @@ class SignOut extends Component{
 }
 
 export default connect(null,{
-    signOut: signOut
+    signOut: signOut,
+    clearTripId: clearTripId
 })(SignOut);

@@ -8,7 +8,7 @@ const signUpForm = props =>{
         <form onSubmit={handleSubmit(signUp)} className="sign-up-form">
             <div className="sign-up-title">Sign Up</div>
             <Field id="nickname" name="nickname" label="Name to display" component={Input} classes="signup-input"/>
-            <Field id="email" name="email" label="Enter Email" component={Input} classes="signup-input"/>
+            <Field id="email" name="email" label="Enter Email" component={Input} classes="signup-input" type="email"/>
             <Field id="password" name="password" label="Enter Password" component={Input} classes="signup-input" type="password"/>
             <Field id="confirm_password" name="confirm_password" label="Confirm Password" component={Input} classes="signup-input" type="password"/>
             <div className="signup-btn">

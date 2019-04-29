@@ -4,13 +4,13 @@
 
 
     .about-person {
-        margin: 2px 0;
+        margin: 5px 0;
         width: 100%;
         padding: 5px;
         font-size: 1.2em;
         transition: 0.5s;
-        color: rgb(255, 255, 255);
-        background-color: rgba(164, 216, 208, 1);
+        color: #2b616d;
+        background-color: rgba(164, 216, 208, 0.9);
 
         .about-top {
             position: relative;
@@ -43,7 +43,7 @@
             font-size: 2rem;
 
             a {
-                color: rgb(255, 255, 255);
+                color: #2b616d;
                 text-decoration: none;
                 padding: 5px;
             }
@@ -51,7 +51,7 @@
     }
 
     .first {
-        background-image: url('https://tr-images.condecdn.net/image/qJVQbNDYxzO/crop/2040/f/si-chang-thailand-conde-nast-traveller-19feb18-alamy.jpg');
+        background-image: url('../../assets/images/aboutus.jpg');
         display: flex;
         justify-content: center;
         align-items: center;
@@ -66,37 +66,16 @@
         background-size: cover;
         overflow-y: auto;
         height: 100%;
-    }
 
-    .bg1::after, .bg2::after, .bg2 {
-        background-image: url('https://gpscvbcms.s3.amazonaws.com/article-galleries/10010/joshua-tree.jpg');
-    }
-
-    .bg2 {
-        background-repeat: no-repeat;
-        background-attachment: fixed; 
-        background-position-y: 0;
-        background-size: cover;
-        overflow-y: auto;
-        height: 100vh;
-
-        div {
-            width: 100%;
-            position: absolute;
-            bottom: 0;
-            height: 10%;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba(0, 0, 0, .6);
+        .team-title{
+            font-size: 0.8em;
         }
     }
 
     .section {
         position: relative;
         height: 100vh;
-        background: transparent;
+        background-color: transparent;
 
         .aboutUs {
             
@@ -110,7 +89,7 @@
         .footer {
             width: 100%;
             bottom: 0;
-            background-color: black;
+            background-color: rgba(164, 216, 208, 0.8);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -143,5 +122,14 @@
         height: 100%;
         display: flex;
         justify-content: space-evenly;
+    }
+
+    .about-container{
+        .first{
+            .team-title{
+                font-size: 1em;
+            }
+        }
+
     }
 }
