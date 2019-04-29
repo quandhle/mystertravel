@@ -30,7 +30,7 @@ class SignIn extends Component{
             
             if(trips_id){
                 this.props.passTripId(trips_id);
-                history.push('/map');
+                history.push('/mytrip');
             } else {
                 history.push('/');
             }
