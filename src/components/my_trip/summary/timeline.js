@@ -13,7 +13,7 @@ export default class Timeline extends Component {
         if(!this.state.expandTimeline['maxHeight']){
             this.setState({
                 expandTimeline: {
-                    'maxHeight': '4000'
+                    'maxHeight': '4000px'
                 }
             })
         } else {
