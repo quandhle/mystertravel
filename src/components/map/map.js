@@ -91,7 +91,6 @@ class Map extends Component {
     }
 
     parseAddressComponents (address_components) {
-
         let zipCodeOffset = 0;
         if (address_components[address_components.length - 1].types[0] === 'postal_code') {
             zipCodeOffset++;
@@ -123,7 +122,7 @@ class Map extends Component {
         let address, location;
 
         if (place.address_components) {
-            address = this.parseAddressComponents(place.address_components);
+            address = place.name;
             location = place.geometry.location;
 
             this.state.map.setCenter(location);
