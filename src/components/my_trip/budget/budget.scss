@@ -49,6 +49,9 @@
             color:#2b616d;
         }
 
+        #price:before{
+            content: '$';
+        }
     }
 
     .add-budget{
