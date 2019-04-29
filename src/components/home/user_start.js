@@ -32,7 +32,7 @@ class UserStart extends Component {
         }
         return (
             <Fragment>
-                <div className="home-page-btn">
+                <div className="home-page-btn btn guest-btn">
                     <button onClick={this.toggleModal} className="home-start-btn btn">{btnmessage}</button>
                 </div>
                 {this.state.modal && <StartTrip modal={this.state.modal} close={this.toggleModal} history={this.props.history}/>}

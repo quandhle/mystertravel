@@ -1,19 +1,23 @@
 main {
+    height: 90vh;
+
     .search-bar-holder {
         background-color: transparent;
         height: 36px;
+        top: 6%;
         position: relative;
+        left: 50%;
+        width: 97%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
 
         .search-bar-form {
             height: 100%;
             width: 100%;
-            position: absolute;
-            top: 10%;
 
             .search-bar-field {
                 height: 100%;
                 background-color: inherit;
-                position: relative;
 
                 input {
                     height: 100%;

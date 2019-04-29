@@ -1,19 +1,44 @@
 .home-page {
     height: 90vh;
     background-image: url('../../assets/images/homepage-background2.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
 
-    .desktop-home-page {
-        display: none;
+    h4, div.home-page-btn {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        color: white;
+        width: 80%;
+        text-align: center;
     }
 
-    .section, .home-page-btn {
-        position: relative;
+    h4 {
+        font-family: 'Dancing Script', cursive;
+        font-size: 2.5em;
+    }
+
+    .title-blurb1 {
+        top: 20%;
+    }
+
+    .title-blurb2 {
+        top: 25%;
+    }
+
+    .guest-btn {
+        bottom: 22%;
+    }
+
+    .sign-in-btn {
+        bottom: 10%;
     }
 
     .home-page-btn {
-        top: 65%;
-        left: 10%;
         width: 80%;
+        padding: 0;
 
         .btn {
             margin: 15px 0;
@@ -21,31 +46,32 @@
             height: 70px;
             font-size: 1.5em;
             color: white;
-            background-color: rgba(164, 216, 208, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background-image: linear-gradient(rgba(164, 216, 208, .7), rgba(164, 216, 208, .7));
             border-radius: 5px;
 
             &:hover, &:active {
-                background-color: rgba(164, 216, 208, 1);
+                background-color: rgba(164, 216, 208, .7);
             }
         }
     }
 
-    .first {
-        .popup-container {
-            height: 100%;
+    .popup-container {
+        top: 0;
+        height: 100%;
 
-            .popup-content {
-                width: 80%;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
-                height: 20%;
-            }
+        .popup-content {
+            width: 80%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            height: 20%;
         }
     }
 
     .home-modal {
-        background-color: #a4d8d0;
+        background-image: linear-gradient(rgba(164, 216, 208, .7), rgba(164, 216, 208, .7));
         border-radius: 15px;
         text-align: center;
         font-size: 1.5em;
@@ -56,157 +82,38 @@
         height: 100%;
         overflow-y: hidden;
 
-        .homepage-modal-header{
+        .homepage-modal-header {
             padding-top: 15px;
         }
 
-
-        .start-input{
+        .start-input {
             margin: 10px;
+
                 &>input {
                 border: 1px solid transparent;
                 outline: none;
-                background-color:rgba(255, 255, 255, 0.5);
+                background-color:rgba(255, 255, 255, 0.8);
                 width: 85%;
                 border-radius: 5px;
                 color:#2b616d;
             }
-
         }
 
-        .start-trip-btn{
+        .start-trip-btn {
             color: white;
-            background-color: #fa8d62;
+            background-image: linear-gradient(rgba(250, 141, 98, .9), rgba(250, 141, 98, .9));
             width: 60%;
+            margin: 0 0 10px 0;
 
-            &:hover{
-                background-color: #e26a3b;
+            &:hover {
+                background-color: #E26A3B;
             }
         }
     }
+}
 
-    .preTrip {
-        color: black;
-        background-color: white;
-    }
-
-    .currentTrip {
-        background-color: white;
-        color: black;
-    }
-
-    .postTrip {
-        background-color: white;
-    }
-
-    section > footer {
-        height: 10vh;
-        background-color: black;
-    }
-
-    .first {
-        height: 90vh;
-    }
-
-    .section {
-        height: 50vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .contact {
-        position: absolute;
-        width: 100%;
-        bottom: 0;
-        height: 10vh;
-        background-image: linear-gradient(rgba(19, 19, 21, 1), black);
-        color: white;
-    }
-
-    .bg1::after, .bg2::after, .bg2 {
-        background-image: url('https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_809,f_auto/w_80,x_15,y_15,g_south_west,l_klook_water/activities/n2t3cwgfhrnxlnd77rhb/HalongBayDayTour.jpg');
-    }
-
-    .bg3 {
-        background-image: url('https://lonelyplanetimages.imgix.net/mastheads/GettyImages-126140612_super%20.jpg?sharp=10&vib=20&w=1200');
-    }
-
-    .bg4 {
-        background-image: url('https://static1.squarespace.com/static/56e1232c9f726647eea4a12a/t/5b53d07cf950b714419fd6e9/1532219542774/Pura+Lempuyang+Luhur+Temple+Bali?format=1500w');
-        background-position-x: center;
-        background-position-y: bottom;
-        height: 90vh;
-    }
-
-    section {
-
-        .title-blurb1, .title-blurb2 {
-            width: 100%;
-            top: 20%;
-            color: white;
-            font-size: 3.5rem;
-            text-align: center;
-            font-family: 'Dancing Script', cursive;
-        }
-
-        .title-blurb1, .title-blurb2 {
-            transform: translateX(-50%);
-            position: absolute;
-            left: 50%;
-        }
-
-        .title-blurb2 {
-            top: 27%;
-        }
-
-        .scroll {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            color: white;
-            transform: translate(-50%, -50%);
-            font-size: 150%;
-        }
-
-        ul {
-            display: flex;
-            flex-wrap: wrap;
-            list-style-type: none;
-            justify-content: space-evenly;
-            align-items: center;
-            width: 60%;
-            padding: 0;
-            margin: 0;
-
-            li {
-                a {
-                    text-decoration: none;
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
-                    color: white;
-                }
-            }
-        }
-    }
-
-    .chevron {
-        scroll-behavior: smooth;
+@media (min-width: 900px) {
+    .home-page {
     }
 }
 
-@media (min-width: 900px){
-    .home-page{
-        .desktop-home-page{
-            display: block;
-        }
-    }
-}
-
-.home-page, .bg1::after, .bg2::after, .bg3::after, .bg2, .bg3, .bg4 {
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
-    overflow-y: auto;
-}
