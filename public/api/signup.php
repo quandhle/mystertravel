@@ -21,6 +21,9 @@ if (empty($password)) {
     throw new Exception('Please enter a password');
 }
 
+$hashedPassword = sha1($password);
+unset($password);
+
 $check_query = "SELECT * FROM `users` WHERE `email` = ?";
 
 $statement = mysqli_prepare($conn, $check_query);
@@ -32,9 +35,6 @@ $row = mysqli_fetch_assoc($result);
 if ($row) {
     throw new Exception('User already exists.');
 } else {
-    $hashedPassword = sha1($password);
-    unset($password);
-
     $query = "INSERT INTO `users` SET
         `full_name` = ?,
         `email` = ?,
