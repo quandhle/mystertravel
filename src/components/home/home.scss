@@ -14,7 +14,6 @@
         width: 80%;
         text-align: center;
     }
-
     h4 {
         font-family: 'Dancing Script', cursive;
         font-size: 2.5em;
@@ -25,15 +24,15 @@
     }
 
     .title-blurb2 {
-        top: 25%;
+        top: 30%;
     }
 
     .guest-btn {
-        bottom: 22%;
+        bottom: 100px;
     }
 
     .sign-in-btn {
-        bottom: 10%;
+        bottom: 10px;
     }
 
     .home-page-btn {
@@ -57,21 +56,10 @@
         }
     }
 
-    .popup-container {
-        top: 0;
-        height: 100%;
 
-        .popup-content {
-            width: 80%;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            height: 20%;
-        }
-    }
 
     .home-modal {
-        background-image: linear-gradient(rgba(164, 216, 208, .7), rgba(164, 216, 208, .7));
+        background-image: linear-gradient(rgba(164, 216, 208, .8), rgba(164, 216, 208, .8));
         border-radius: 15px;
         text-align: center;
         font-size: 1.5em;
@@ -79,24 +67,43 @@
         -webkit-box-shadow: 0px 0px 34px -2px rgba(168,168,168,1);
         -moz-box-shadow: 0px 0px 34px -2px rgba(168,168,168,1);
         box-shadow: 0px 0px 34px -2px rgba(168,168,168,1);
-        height: 100%;
+        // height: 100%;
         overflow-y: hidden;
 
         .homepage-modal-header {
             padding-top: 15px;
         }
 
+        .popup-container {
+            top: 0;
+            height: 100%;
+    
+            .popup-content {
+                width: 80%;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
         .start-input {
             margin: 10px;
 
-                &>input {
-                border: 1px solid transparent;
-                outline: none;
-                background-color:rgba(255, 255, 255, 0.8);
-                width: 85%;
-                border-radius: 5px;
-                color:#2b616d;
+            &>input {
+            border: 1px solid transparent;
+            outline: none;
+            background-color:rgba(255, 255, 255, 0.8);
+            width: 85%;
+            border-radius: 5px;
+            color:#2b616d;
+
+                &::placeholder{
+                    color: #2b616d;
+                    font-size: 0.7em;
+                }
             }
+
+
         }
 
         .start-trip-btn {

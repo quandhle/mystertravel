@@ -103,6 +103,7 @@
 
             .budget-delete{
                 width: 10%;
+            }
                 .btn{
                     color: #b2dbd5;
                     transition: 0.2s;
@@ -112,6 +113,35 @@
                     }
                 }
 
+            
+        }
+
+        .update-modal{
+            background-color: rgba(164, 216, 208, .9);
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1em;
+            color: white;
+            overflow-y: hidden;
+            .map-modal-header{
+                padding-top: 15px;
+            }
+
+            form{
+                background-color: rgba(255, 255, 255, 0.7);
+                margin: 10px;
+                border-radius: 5px;
+            }
+
+            .updatebutton{
+                color: white;
+                background-color: #fa8d62;
+                width: 60%;
+                margin: 10px 0;
+    
+                &:hover{
+                    background-color: #e26a3b;
+                }
             }
         }
     }

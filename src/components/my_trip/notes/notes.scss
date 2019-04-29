@@ -48,8 +48,8 @@
         textarea{
             outline: none;
             border: 1px solid transparent;
-            background-color: #c4e4df;
-            border-radius: 15px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 5px;
             padding: 5px;
             word-wrap: break-word;
             color:#2b616d;
@@ -100,7 +100,7 @@
                     width: 100%;
                 }
             }
-            .btn{
+            .note-icon{
                 position: relative;
                 color: #b2dbd5;
                 transition: 0.2s;
@@ -113,36 +113,20 @@
     }
 
     .update-modal{
-        background-color: #a4d8d0;
+        background-color: rgba(164, 216, 208, .9);
         border-radius: 15px;
         text-align: center;
         font-size: 1em;
         color: white;
-
-        height: 100%;
         overflow-y: hidden;
         .map-modal-header{
             padding-top: 15px;
         }
-
-        .description-input{
-            margin: 10px;
-
-            &>input{
-              border: 1px solid transparent;
-              outline: none;
-              background-color:rgba(255, 255, 255, 0.5);
-              width: 60%;
-              border-radius: 5px;
-              color:#2b616d;
-            }
-
-        }
-
         .updatebutton{
             color: white;
             background-color: #fa8d62;
             width: 60%;
+            margin: 10px 0;
 
             &:hover{
                 background-color: #e26a3b;

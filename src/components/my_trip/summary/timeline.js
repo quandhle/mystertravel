@@ -6,20 +6,20 @@ import TimelineInner from './timeline_inner';
 export default class Timeline extends Component {
     state = {
         expandTimeline: {
-            'max-height': 0
+            'maxHeight': 0
         }
     }
     toggleTimeline = ()=>{
-        if(!this.state.expandTimeline['max-height']){
+        if(!this.state.expandTimeline['maxHeight']){
             this.setState({
                 expandTimeline: {
-                    'max-height': '10000px'
+                    'maxHeight': '4000px'
                 }
             })
         } else {
             this.setState({
                 expandTimeline: {
-                    'max-height': 0
+                    'maxHeight': 0
                 }
             })
         }
@@ -28,7 +28,7 @@ export default class Timeline extends Component {
     expandIcon(timelineItems){
         let icon = (<div className="toggle-timeline" onClick={this.toggleTimeline}>Show More <i className="fas fa-chevron-down"></i></div>)
         if(timelineItems && timelineItems.length > 2){
-            if(this.state.expandTimeline['max-height'] != 0) {
+            if(this.state.expandTimeline['maxHeight'] != 0) {
                 icon = (<div className="toggle-timeline" onClick={this.toggleTimeline}>Show Less <i className="fas fa-chevron-up"></i></div>)
             }
             return  icon;

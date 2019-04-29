@@ -18,8 +18,8 @@ class NoteItem extends Component{
             <p>{formatDate(date)}</p>
             <p>{entry}</p>
             {image? <div className="note-img"><img src={image} alt=""/></div>: null}
-            <div className="btn" onClick={() => { this.toggleModal()} }><i className="fas  fa-edit"></i></div>
-            <div className="btn" onClick={() => { deleteItem(note) }}><i className="far  fa-trash-alt"></i></div>
+            <div className="btn note-icon" onClick={() => { this.toggleModal()} }><i className="fas  fa-edit"></i></div>
+            <div className="btn note-icon" onClick={() => { deleteItem(note) }}><i className="far  fa-trash-alt"></i></div>
             <UpdateNote modal={this.state.modal} note={note} close={this.toggleModal} display={display}/>
         </div>
         )
