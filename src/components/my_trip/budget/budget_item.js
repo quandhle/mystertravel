@@ -18,9 +18,9 @@ class BudgetItem extends Component{
                 <div className="budget-descrip">{formatEntries(budgetItem.description)}</div>
                 <div className="budget-amount">$ {formatMoney(budgetItem.price)}</div>
                 <div className="budget-item">{formatEntries(budgetItem.category)}</div>
-                <div className="btn" onClick={() => { this.toggleModal()} }><i className="fas  fa-edit"></i></div>
+                <div className="btn budget-icon" onClick={() => { this.toggleModal()} }><i className="fas  fa-edit"></i></div>
                 <div className="budget-delete">
-                    <button className="btn" onClick={() => { deleteBudgetItem(budgetItem) }}><i className="far fa-trash-alt"></i></button>
+                    <button className="btn budget-icon" onClick={() => { deleteBudgetItem(budgetItem) }}><i className="far fa-trash-alt"></i></button>
                 </div>
                 <UpdateBudget modal={this.state.modal} budget={budgetItem} close={this.toggleModal} display={display}/>
             </div>
