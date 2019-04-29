@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import BudgetForm from './budget_form';
 import BudgetItem from './budget_item';
 import './budget.scss';
+import Map from '../../map';  
 
 
 class Budget extends Component{
@@ -96,14 +97,17 @@ class Budget extends Component{
         }     
        return(
             <div className="budget-page">
-                <div className="budget-input-toggle" onClick={this.toggleInput}>
-                {spinner && <span className="spinner-border spinner-border-sm"></span>}
-                 Add Budget Item <i className="fas fa-angle-double-down"></i>
+                <div className="budget-section">
+                    <div className="budget-input-toggle" onClick={this.toggleInput}>
+                    {spinner && <span className="spinner-border spinner-border-sm"></span>}
+                    Add Budget Item <i className="fas fa-angle-double-down"></i>
+                    </div>
+                    <BudgetForm budget={this.handleInput} style={showInput}/>
+                    <div className="budget-box">
+                        {budgetList}
+                    </div>
                 </div>
-                <BudgetForm budget={this.handleInput} style={showInput}/>
-                <div className="budget-box">
-                    {budgetList}
-                </div>
+                <Map/>
             </div>
         )
     }

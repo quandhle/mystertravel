@@ -11,6 +11,8 @@
         transform: translate(-50%, -50%);
         left: 50%;
         color: white;
+        width: 80%;
+        text-align: center;
     }
 
     h4 {
@@ -27,11 +29,11 @@
     }
 
     .guest-btn {
-        top: 70%;
+        bottom: 22%;
     }
 
     .sign-in-btn {
-        top: 82%;
+        bottom: 10%;
     }
 
     .home-page-btn {
@@ -46,7 +48,7 @@
             color: white;
             text-transform: uppercase;
             letter-spacing: 1px;
-            background-image: linear-gradient(rgba(225, 225, 225, .6), rgba(225, 225, 225, .6));
+            background-image: linear-gradient(rgba(164, 216, 208, .7), rgba(164, 216, 208, .7));
             border-radius: 5px;
 
             &:hover, &:active {
@@ -69,7 +71,7 @@
     }
 
     .home-modal {
-        background-image: linear-gradient(rgba(225, 225, 225, .9), rgba(225, 225, 225, .9));
+        background-image: linear-gradient(rgba(164, 216, 208, .7), rgba(164, 216, 208, .7));
         border-radius: 15px;
         text-align: center;
         font-size: 1.5em;
