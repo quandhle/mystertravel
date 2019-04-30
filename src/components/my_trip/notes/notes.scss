@@ -1,9 +1,9 @@
 
-.notes-page{
+.notes-page {
     width: 100%;
     height: 90vh;
 
-    .notes-input-toggle{
+    .notes-input-toggle {
         cursor: pointer;
         font-size: 1.2em;
         background-color: #fa8d62;
@@ -13,50 +13,47 @@
         color: white;
         padding: 10px 15px;
 
-        .spinner-border{
+        .spinner-border {
             margin: 5px;
         }
-        .fa-angle-double-down:hover{
+        
+        .fa-angle-double-down:hover {
             position: relative;
             top: 5px;
         }
     }
 
-    .note-input-form, .notes{
+    .note-input-form, .notes {
         -webkit-box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
         -moz-box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
         box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
     }
 
-    .note-input-form{
+    .note-input-form {
         height: 0;
-
         transition: 0.5s;
         overflow-y: hidden;
         background-color: #b2dbd5;
         border-radius: 15px;
         margin: 10px;
 
-        .image-inputbox{
-            
-            &>div{
+        .image-inputbox {
+            &>div {
                 display: inline;
             }
 
-            input{
+            input {
                 margin: 10px;
                 width: 50%;
             }
         }
-
-
     }
 
-    .notes-input{
+    .notes-input {
         padding: 0 15px;
         box-sizing: border-box;
 
-        textarea{
+        textarea {
             outline: none;
             border: 1px solid transparent;
             background-color: rgba(255, 255, 255, 0.7);
@@ -65,11 +62,9 @@
             word-wrap: break-word;
             color:#2b616d;
         }
-
-
     }
 
-    .add-notes{
+    .add-notes {
         margin: 10px;
         position: relative;
         float: right;
@@ -78,10 +73,10 @@
         color:white;
     }
 
-    .notes-box{
+    .notes-box {
         color: white;
 
-        .notes{
+        .notes {
             font-size: 1.2em;
             margin: 5px;
             border-radius: 15px;
@@ -89,27 +84,31 @@
             transition: 0.5s;
             word-wrap: break-word;
 
-            &:nth-child(odd){
+            &:nth-child(odd) {
                 background-color:  #2b616d;
             }
 
             &:nth-child(even) {
                 background-color: #3b717e;
             }
+            
             &:hover, &:active {
                 background-color: #1b515d;
             }
+            
             p:first-child {
                 font-size: 0.8em;
                 text-align: right;
             }
+            
             .note-img {
                 width: 100%;
                 img {
                     width: 100%;
                 }
             }
-            .note-icon{
+            
+            .note-icon {
                 position: relative;
                 color: #b2dbd5;
                 transition: 0.2s;
@@ -117,34 +116,35 @@
                     transform: rotate(180deg);
                 }
             }
-            
         }
     }
 
-    .update-modal{
+    .update-modal {
         background-color: rgba(164, 216, 208, .9);
         border-radius: 15px;
         text-align: center;
         font-size: 1em;
         color: white;
         overflow-y: hidden;
-        .map-modal-header{
+        
+        .map-modal-header {
             padding-top: 15px;
         }
 
-        form{
-            p{
+        form {
+            p {
                 text-align: left;
                 font-size: 0.8em
             }
         }
-        .updatebutton{
+        
+        .updatebutton {
             color: white;
             background-color: #fa8d62;
             width: 60%;
             margin: 10px 0;
 
-            &:hover{
+            &:hover {
                 background-color: #e26a3b;
             }
         }
