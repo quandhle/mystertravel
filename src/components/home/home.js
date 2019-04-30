@@ -26,8 +26,9 @@ class Home extends Component {
 
         return (
             <div className="home-page">
-                <div className="home-title"><h4 className='title-blurb1'>Travel smarter</h4></div>
-                <div className="home-title"><h4 className='title-blurb2'>Plan faster</h4></div>
+                <div className="home-title"><h4 className='title-blurb1'>Start A Journey</h4></div>
+                <div className="home-title"><h4 className='title-blurb3'>&</h4></div>
+                <div className="home-title"><h4 className='title-blurb2'>Share Memories</h4></div>
                 <UserStart history={this.props.history} signIn={user.auth}/>
                 {signInCheck}
             </div>

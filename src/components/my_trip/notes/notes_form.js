@@ -8,8 +8,8 @@ const NotesInput = props =>{
 
     return (
         <form onSubmit={handleSubmit(notes)} style={style} className="note-input-form">
-            <Field id="notes" name="notes" label="Today I experienced...." component={Textarea} classes="notes-input"/>
-            <div>
+            <Field id="notes" name="notes" label="i.e. Today I experienced...." component={Textarea} classes="notes-input"/>
+            <div className="image-inputbox">
                 <Field id='imageUpload' class='imageUpload' name='imageUpload' component={FileInput}/>
                 <button className="btn add-notes">Add <i className="fas fa-check"></i></button>
             </div>

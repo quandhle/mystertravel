@@ -22,17 +22,18 @@ class MyTrip extends Component{
     render(){
         return(
             <div className="my-trip">
+                <div className="mytrip-greeting">My Trip Log</div>
                 <div className="budget-link">
-                    <button className="budget-link-btn btn" onClick={this.goToBudget}>Budget</button>
+                    <button className="budget-link-btn btn" onClick={this.goToBudget}>Record Expenses</button>
                 </div>
                 <div className="notes-link">
-                    <button className="notes-link-btn btn" onClick={this.goToNotes}>Notes</button>
+                    <button className="notes-link-btn btn" onClick={this.goToNotes}>Write Notes</button>
                 </div>
                 <div className="map-link">
-                    <button className="map-link-btn btn" onClick={this.goToMap}>View Map</button>
+                    <button className="map-link-btn btn" onClick={this.goToMap}>Pin on Map</button>
                 </div>
                 <div className="end-trip-link">
-                    <button className="end-trip-link-btn btn"  onClick={this.goToSummary}>Trip Summary</button>
+                    <button className="end-trip-link-btn btn"  onClick={this.goToSummary}>Trip Summary & End</button>
                 </div>
             </div>
         )
