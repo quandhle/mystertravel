@@ -9,13 +9,14 @@ import Textarea from '../../general/textarea';
 import Modal from '../../general/modal';
 
 
-class UpdateNote extends Component{
-    constructor(props){
+class UpdateNote extends Component {
+    constructor(props) {
         super(props)
 
         this.updatedb = this.updatedb.bind(this);
     }
-    async updatedb(value){
+    
+    async updatedb(value) {
         console.log('update', this.props)  
         const {trips_id, note, display, close} = this.props
         const resp = await axios.post('/api/updatenote.php', {
@@ -24,15 +25,16 @@ class UpdateNote extends Component{
             trips_id
         });
 
-        if(resp.data.success){
+        if(resp.data.success) {
             display();
         }
         
         close();
     }
-    render(){
+    
+    render() {
         const {modal, close, handleSubmit} = this.props;
-        return(
+        return (
             <Modal open={modal} childrenStyle="update-modal">
                 <span onClick={close} className="close-popup"><i className="fas fa-times-circle"></i></span>
                 <div className="map-modal-header">Edit note?</div>
@@ -45,9 +47,9 @@ class UpdateNote extends Component{
     }
 }
 
-function mapStateToProps(state, props){
-    // console.log('Props:', props);
+function mapStateToProps(state, props) {
     const { modal, note } = props;
+    
     return {
         initialValues: {
             entry: modal ? note.entry : ''
@@ -56,8 +58,9 @@ function mapStateToProps(state, props){
     }
 }
 
-function validate({entry}){
+function validate({entry}) {
     const errors = {};
+    
     if(!entry){
         errors.entry = 'Update notes can not be empty';
     }
