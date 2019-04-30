@@ -2,16 +2,18 @@ import React, {Component} from 'react';
 import {formatMoney, formatEntries} from '../../../helper';
 import UpdateBudget from './update_budget';
 
-class BudgetItem extends Component{
-    state ={
+class BudgetItem extends Component {
+    state = {
         modal: false
     }
-    toggleModal= ()=>{
+
+    toggleModal = () => {
         this.setState({
             modal: !this.state.modal
         })   
     }
-    render(){
+    
+    render() {
         const {budgetItem, deleteBudgetItem, display} = this.props;
         return(
             <div key={budgetItem.budget_id} className="budget">
@@ -26,7 +28,6 @@ class BudgetItem extends Component{
             </div>
         )
     }
-
 }
 
 export default BudgetItem
