@@ -56,9 +56,18 @@ function mapStateToProps(state, props){
     }
 }
 
+function validate({entry}){
+    const errors = {};
+    if(!entry){
+        errors.entry = 'Update notes can not be empty';
+    }
+    return errors;
+}
+
 UpdateNote = reduxForm({
     form: 'initializeFromState',
-    enableReinitialize: true
+    enableReinitialize: true,
+    validate
   })(UpdateNote)
   
   

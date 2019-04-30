@@ -95,12 +95,18 @@
 
             .budget-descrip{
                 font-weight: 500;
-                width: 75%;
+                width: 65%;
+                word-break: break-word;
             }
 
             .budget-amount{
-                width: 25%;
+                width: 35%;
                 text-align: right;
+                vertical-align: top;
+
+                div{
+                    display: inline;
+                }
             }
             .budget-item{
                 color: #b2dbd5;
@@ -137,6 +143,11 @@
                 background-color: rgba(255, 255, 255, 0.7);
                 margin: 10px;
                 border-radius: 5px;
+
+                p{
+                    text-align: left;
+                    font-size: 0.8em
+                }
             }
 
             .updatebutton{

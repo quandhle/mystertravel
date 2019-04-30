@@ -27,7 +27,7 @@ class SignIn extends Component{
         const {success, trips_id} = resp.data
         if(success){
             signIn(resp.data);
-            
+            console.log(resp.data)
             if(trips_id){
                 this.props.passTripId(trips_id);
                 history.push('/mytrip');

@@ -93,8 +93,6 @@
                 background-color:  #2b616d;
             }
 
-
-
             &:nth-child(even) {
                 background-color: #3b717e;
             }
@@ -132,6 +130,13 @@
         overflow-y: hidden;
         .map-modal-header{
             padding-top: 15px;
+        }
+
+        form{
+            p{
+                text-align: left;
+                font-size: 0.8em
+            }
         }
         .updatebutton{
             color: white;

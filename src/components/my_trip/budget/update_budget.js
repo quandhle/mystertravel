@@ -58,9 +58,24 @@ function mapStateToProps(state, props){
     }
 }
 
+function validate({description, price, category}){
+    const errors = {};
+    if(!description){
+        errors.description = 'Please enter description';
+    }
+    if(!price){
+        errors.price = 'Please enter a number'; 
+    }
+    if(!category){
+        errors.category = 'Please enter category'; 
+    }
+    return errors;
+}
+
 UpdateBudget = reduxForm({
     form: 'initializeFromState-budget',
-    enableReinitialize: true
+    enableReinitialize: true,
+    validate
   })(UpdateBudget)
   
   

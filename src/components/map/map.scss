@@ -104,6 +104,13 @@ main {
             padding-top: 15px;
         }
 
+        form{
+            .error-input{
+                font-size: 0.7em;
+                color: rgb(151, 3, 3);
+            }
+        }
+
         .description-input{
             margin: 10px;
 

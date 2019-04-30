@@ -62,7 +62,7 @@
 
 
     .home-modal {
-        background-image: linear-gradient(rgba(164, 216, 208, .8), rgba(164, 216, 208, .8));
+        background-image: linear-gradient(rgba(164, 216, 208, .9), rgba(164, 216, 208, .8));
         border-radius: 15px;
         text-align: center;
         font-size: 1.5em;
@@ -75,6 +75,12 @@
 
         .homepage-modal-header {
             padding-top: 15px;
+        }
+        form{
+            p{
+                font-size: 0.7em;
+                color: rgb(151, 3, 3);
+            }
         }
 
         .popup-container {

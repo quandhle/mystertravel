@@ -2,6 +2,7 @@ import React from 'react';
 import './general.scss';
 
 export default props =>{
+    console.log(props.meta)
     const {id, name, classes = "", type = "text", label, col="col-12", input, meta:{error, touched}, autoFocus = false} = props
 
     return (

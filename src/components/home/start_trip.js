@@ -42,6 +42,15 @@ class StartTrip extends Component {
     }
 }
 
+function validate({tripname}){
+    const errors = {};
+    if(!tripname){
+        errors.tripname = 'Please name your trip';
+    }
+    return errors;
+}
+
 export default reduxForm({
-    form: 'start-new-trip'
+    form: 'start-new-trip',
+    validate
 })(connect(null,{passTripId:passTripId})(StartTrip));

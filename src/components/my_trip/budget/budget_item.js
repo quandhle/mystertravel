@@ -16,7 +16,7 @@ class BudgetItem extends Component{
         return(
             <div key={budgetItem.budget_id} className="budget">
                 <div className="budget-descrip">{formatEntries(budgetItem.description)}</div>
-                <div className="budget-amount">$ {formatMoney(budgetItem.price)}</div>
+                <div className="budget-amount"><div>$ {formatMoney(budgetItem.price)}</div></div>
                 <div className="budget-item">{formatEntries(budgetItem.category)}</div>
                 <div className="btn budget-icon" onClick={() => { this.toggleModal()} }><i className="fas  fa-edit"></i></div>
                 <div className="budget-delete">
