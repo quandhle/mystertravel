@@ -5,7 +5,7 @@ import {signIn, passTripId} from '../../../actions';
 import SignInForm from './signin_form';
 import './sign_in.scss';
 
-class SignIn extends Component{
+class SignIn extends Component {
     constructor(props) {
         super(props);
 
@@ -25,7 +25,7 @@ class SignIn extends Component{
 
         const {signIn, history} = this.props;
         const {success, trips_id} = resp.data
-        if(success){
+        if(success) {
             signIn(resp.data);
             console.log(resp.data)
             if(trips_id){
