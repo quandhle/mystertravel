@@ -6,10 +6,10 @@ import Modal from '../general/modal';
 import Input from '../general/input';
 
 class MapPopUp extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        
     }
+    
     render() {
         const {handleSubmit, modal, close, addpin} = this.props
         return (
@@ -26,7 +26,7 @@ class MapPopUp extends Component {
     }
 }
 
-function validate({pin_description}){
+function validate({pin_description}) {
     const errors = {};
     if(!pin_description){
         errors.pin_description = 'Write something for this pin';
@@ -39,6 +39,3 @@ export default reduxForm({
     form: 'pin_description',
     validate
 })(MapPopUp);
-
-{/* <span onClick={close} className="close-popup"><i className="fas fa-times-circle"></i></span>
-<div className="map-modal-header">Do you want to add a pin? </div> */}
