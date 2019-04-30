@@ -58,7 +58,7 @@ class Map extends Component {
             center: {lat: this.state.lat, lng: this.state.lng},
             zoom: 2,
             minZoom: 2,
-            draggableCursor: 'default',
+            draggableCursor: 'url(/dist/assets/images/marker.png), auto' ,
             draggingCursor: 'move'
         });
 
@@ -162,43 +162,45 @@ class Map extends Component {
 
         if (resp.data.success) {
             pinData = resp.data.data;
+
+            if (pinData.length > 0) {
+                const pins = pinData.map((item) => {
+                    const pin = new window.google.maps.Marker({
+                        position: {
+                            lat: item.lat,
+                            lng: item.lng
+                        },
+                        title: item.name,
+                        map: this.state.map
+                    });
+    
+                    const content = `<h6 id="infoWindow">${item.description}</h6>`;
+    
+                    const infowindow = new google.maps.InfoWindow({
+                        content: content
+                    })
+    
+                    pin.addListener('click', function() {
+                        infowindow.open(map, pin);
+                    })
+    
+                    pin.setMap(this.state.map);
+    
+                    return pin;
+                });
+                this.setState({
+                    pins: pins,
+                });
+    
+                const lastPin = this.state.pins[this.state.pins.length - 1];
+                this.state.map.setZoom(11)
+                this.state.map.panTo(lastPin.position)
+            }
+
         } else {
             console.error(resp.data.error);
         }
 
-        if (pinData.length > 0) {
-            const pins = pinData.map((item) => {
-                const pin = new window.google.maps.Marker({
-                    position: {
-                        lat: item.lat,
-                        lng: item.lng
-                    },
-                    title: item.name,
-                    map: this.state.map
-                });
-
-                const content = `<h6 id="infoWindow">${item.description}</h6>`;
-
-                const infowindow = new google.maps.InfoWindow({
-                    content: content
-                })
-
-                pin.addListener('click', function() {
-                    infowindow.open(map, pin);
-                })
-
-                pin.setMap(this.state.map);
-
-                return pin;
-            });
-            this.setState({
-                pins: pins,
-            });
-
-            const lastPin = this.state.pins[this.state.pins.length - 1];
-            this.state.map.setZoom(11)
-            this.state.map.panTo(lastPin.position)
-        }
     }
 
     getCurrentLocation() {
@@ -272,11 +274,12 @@ class Map extends Component {
             <main>
                 <div className="search-bar-holder">
                     <SearchBar handleClear={this.handleClear}/>
+                    {/* <div>Click on the map to pin or type in a location</div> */}
                 </div>
                 <div id="map" className='map'/>
-                <button className='btn map-btn btn-lg' onClick={this.addPin}>
+                {/* <button className='btn map-btn btn-lg' onClick={this.addPin}>
                     Add Pin <i className="fas fa-map-marker-alt"/>
-                </button>
+                </button> */}
                 <button onClick={this.getCurrentLocation} className='btn geo-btn btn-lg'>
                     <i className="fas fa-location-arrow"/>
                 </button>
