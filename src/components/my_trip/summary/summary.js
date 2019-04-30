@@ -155,7 +155,7 @@ class Summary extends Component{
         const {trips_id, tripName, totalSpent, privatePage, pinData, notes, mapModal, imageModal, image} = this.state;
         console.log(this.state);
         const summaryURL = `http://devtravelfuze.quandhle.com/trip/${trips_id}`;
-        const endButton = this.buttonDisplay()
+        // const endButton = this.buttonDisplay()
         return(
             <div className="summary-page">
                 <div className="summary-trip-name"><p>{tripName? tripName : 'My Trip'}</p></div>
@@ -166,12 +166,12 @@ class Summary extends Component{
 
                     </div>
                 </div>
-                {/* {privatePage &&
+                {privatePage &&
                     <div className="summary-end-trip-link">
                         <button onClick={this.endTrip} className="summary-end-trip-link-btn btn">End Trip</button>
                     </div>
-                } */}
-                {endButton}
+                }
+                {/* {endButton} */}
                 <div className="share-btns col-12">
                     <a onClick={() => {this.fbButton(summaryURL)}}>
                         <i className="fab fa-facebook-square"/>
