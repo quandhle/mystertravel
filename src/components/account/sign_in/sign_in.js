@@ -6,7 +6,7 @@ import SignInForm from './signin_form';
 import './sign_in.scss';
 
 class SignIn extends Component{
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -15,8 +15,8 @@ class SignIn extends Component{
 
         this.handleSignIn = this.handleSignIn.bind(this);
     }
-    async handleSignIn (values){
-     
+    
+    async handleSignIn(values) {
         const {email, password} = values;
         const resp = await axios.post('/api/login.php', {
             email,
@@ -41,10 +41,12 @@ class SignIn extends Component{
         }
 
     }
-    handleSignUp= ()=>{
+    
+    handleSignUp = () => {
         this.props.history.push('/account/signup')
     }
-    render(){
+    
+    render() {
         return(
             <div className="sign-in-page">
                 <div className="sign-in">
