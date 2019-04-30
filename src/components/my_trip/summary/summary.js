@@ -48,7 +48,7 @@ class Summary extends Component{
             privatePage,
             trips_id
         }, this.getSummaryData);
-        
+
         loadScript('https://connect.facebook.net/en_US/sdk.js');
         window.fbAsyncInit = function() {
             FB.init({
@@ -141,11 +141,11 @@ class Summary extends Component{
         return(
             <div className="summary-page">
                 <div className="summary-trip-name"><p>{tripName? tripName : 'My Trip'}</p></div>
-                <div className="total-spend"><p>{`Total spent in this trip: ${totalSpent? formatMoney(totalSpent): '$0'}`}</p></div>
+                <div className="total-spend"><p>{`Total spent on this trip $${totalSpent? formatMoney(totalSpent): '$0'}`}</p></div>
                 <Timeline pinData={pinData} notesData={notes} setImage={this.setImage}/>
                 <div className="last-entry">
                     <div className="entry-content">
-                        
+
                     </div>
                 </div>
                 {privatePage &&

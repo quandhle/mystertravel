@@ -115,17 +115,29 @@
                 .timeline-item-name, .timeline-item-date {
                     display: inline-block;
                     width: 50%;
-                    font-size: 1.2em;
                     font-weight: bold;
                     margin-bottom: 8px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
 
                 .timeline-item-name {
                     text-align: left;
+                    font-size: 1em;
+
+                    .fa-images {
+                        color: #fa8d62;
+                    }
+
+                    .fa-images:hover, .fa-images:active {
+                        font-size: 1.5em;
+                    }
                 }
 
                 .timeline-item-date {
                     text-align: right;
+                    font-size: 0.9em;
                 }
 
                 .timeline-item-text {
@@ -192,9 +204,8 @@
             background-color: #ea7d52;
         }
     }
-}
 
-.popup-container{
+    .popup-container{
     position: fixed;
     top:0;
     left:0;
@@ -211,11 +222,24 @@
         transform: translate(-50%, -50%);
         width: 90%;
 
-        .popup-children{
-            width: 100%;
 
-            img {
-                width: 100%;
+        .summary-image-modal{
+            width: 100%;
+            background-color: rgba(164, 216, 208, 0.95);
+            border-radius: 15px;
+
+            .close-popup {
+                color: white;
+                padding-top: 2px;
+            }
+
+            .image-box {
+                padding: 15px;
+
+                img {
+                    width: 100%;
+                    // border-radius: 15px;
+                }
             }
 
             .map {
@@ -223,7 +247,11 @@
             }
         }
     }
+    }
+
 }
+
+
 
 .summary-fail-page {
     .summary-fail-title {

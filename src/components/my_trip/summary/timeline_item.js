@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
 
-import {formatDatetime} from "../../../helper";
+import {formatDate} from "../../../helper";
 
 export default class extends Component {
     state = {
@@ -34,10 +34,10 @@ export default class extends Component {
             return (
                 <div className="timeline-item">
                     <div onClick={() => {setImage(item.image)}} className="timeline-item-content">
-                        <p className="timeline-item-name">{item.name ? item.name :
-                            (item.image ? <i className="fas fa-images"/> : <i className="far fa-comment-alt"/>)}
+                        <p className="timeline-item-name">{item.name ? <span><i className="fas fa-map-marker-alt"></i> {item.name}</span> :
+                            (item.image ? <i className="fas fa-images" /> : <i className="fas fa-comment"></i>)}
                         </p>
-                        <p className="timeline-item-date">{formatDatetime(item.date)}</p>
+                        <p className="timeline-item-date">{formatDate(item.date)}</p>
                         <p className="timeline-item-text">{isNote ? item.entry : item.description}</p>
                     </div>
                 </div>
