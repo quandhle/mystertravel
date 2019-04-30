@@ -8,16 +8,18 @@ import Input from '../general/input';
 
 
 class StartTrip extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.nameTrip = this.nameTrip.bind(this);
     }
-    async nameTrip(value){
+    
+    async nameTrip(value) {
         const resp = await axios.post('/api/starttrip.php', {
             trips_name: value.tripname
         })
         const {success, trips_id} = resp.data
-        if(success){
+        
+        if(success) {
             this.props.passTripId(trips_id);
             this.props.close();
             this.props.history.push('/mytrip');
@@ -25,8 +27,8 @@ class StartTrip extends Component {
             console.error('can not start trip');
             console.error(resp);
         }
-        
     }
+    
     render() {
         const {handleSubmit, modal, close} = this.props
         return (
@@ -42,7 +44,7 @@ class StartTrip extends Component {
     }
 }
 
-function validate({tripname}){
+function validate({tripname}) {
     const errors = {};
     if(!tripname){
         errors.tripname = 'Please name your trip';
