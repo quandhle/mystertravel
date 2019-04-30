@@ -7,7 +7,7 @@ export default props =>{
     return (
         <div className={`input-box ${classes} ${col}`}>
             <textarea id={id} {...input} name={name} placeholder={label}/>
-            <p className="error-input">{touched && error}</p>  
+            <p className="error-input">{touched && error ? error : <span>&nbsp;</span>}</p>  
         </div>
     )
 }

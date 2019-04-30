@@ -48,8 +48,7 @@ class SignIn extends Component{
         return(
             <div className="sign-in-page">
                 <div className="sign-in">
-                <div className="message">{this.state.message}</div>
-                <SignInForm signIn={this.handleSignIn} signUp={this.handleSignUp}/>
+                <SignInForm signIn={this.handleSignIn} signUp={this.handleSignUp} message={this.state.message}/>
                 </div>
             </div>
         )

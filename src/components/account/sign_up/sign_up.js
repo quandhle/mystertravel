@@ -8,7 +8,9 @@ import './sign_up.scss';
 class SignIn extends Component{
     constructor(props){
         super(props);
-
+        this.state = {
+            message: ''
+        }
         this.handleSignUp = this.handleSignUp.bind(this);
     }
     async handleSignUp (values){
@@ -23,13 +25,16 @@ class SignIn extends Component{
             this.props.signIn(resp.data);
             this.props.history.push('/')
         } else {
-            console.error(resp.data.error);
+            this.setState({
+                message: resp.data.error
+            })
         }
     }
     render(){
+
         return(
             <div className="sign-up-page">
-                <SignUpForm signUp={this.handleSignUp}/>
+                <SignUpForm signUp={this.handleSignUp} message={this.state.message}/>
             </div>
         )
     }

@@ -37,10 +37,19 @@
         border-radius: 15px;
         margin: 10px;
 
-        input{
-            margin: 10px;
-            width: 60%;
+        .image-inputbox{
+            
+            &>div{
+                display: inline;
+            }
+
+            input{
+                margin: 10px;
+                width: 50%;
+            }
         }
+
+
     }
 
     .notes-input{
