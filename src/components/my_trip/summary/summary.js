@@ -12,7 +12,7 @@ import MapModal from './mapmodal';
 import ImageModal from './imagemodal';
 
 
-class Summary extends Component{
+class Summary extends Component {
     constructor(props) {
         super(props);
 
@@ -120,6 +120,24 @@ class Summary extends Component{
             });
         }
     }
+    
+    buttonDisplay = () => {
+         if (!this.props.auth && this.state.privatePage){
+            return (
+                <div className="summary-end-trip-link">
+                        <button onClick={()=>this.props.history.push('/account/signup')} className="summary-end-trip-link-btn btn">Sign Up to Save the Trip</button>
+                </div>
+            )
+        } else if (this.state.privatePage) {
+            return (
+                <div className="summary-end-trip-link">
+                        <button onClick={this.endTrip} className="summary-end-trip-link-btn btn">End Trip</button>
+                </div>
+            )
+        } else {
+            return null;
+        }
+    }
 
     toggleMapModal = (pin) => {
         this.setState({
@@ -133,15 +151,14 @@ class Summary extends Component{
         });
     }
 
-    render(){
+    render() {
         const {trips_id, tripName, totalSpent, privatePage, pinData, notes, mapModal, imageModal, image} = this.state;
         console.log(this.state);
         const summaryURL = `http://devtravelfuze.quandhle.com/trip/${trips_id}`;
-
         return(
             <div className="summary-page">
                 <div className="summary-trip-name"><p>{tripName? tripName : 'My Trip'}</p></div>
-                <div className="total-spend"><p>{`Total spent on this trip $${totalSpent? formatMoney(totalSpent): '$0'}`}</p></div>
+                <div className="total-spend"><p>{`Total spent on this trip $${totalSpent? formatMoney(totalSpent): ' 0'}`}</p></div>
                 <Timeline pinData={pinData} notesData={notes} setImage={this.setImage}/>
                 <div className="last-entry">
                     <div className="entry-content">
@@ -153,6 +170,7 @@ class Summary extends Component{
                         <button onClick={this.endTrip} className="summary-end-trip-link-btn btn">End Trip</button>
                     </div>
                 }
+                {/* {endButton} */}
                 <div className="share-btns col-12">
                     <a onClick={() => {this.fbButton(summaryURL)}}>
                         <i className="fab fa-facebook-square"/>
@@ -173,7 +191,8 @@ class Summary extends Component{
 
 function mapStateToProps(state) {
     return {
-        trips_id: state.trips_id
+        trips_id: state.trips_id,
+        auth: state.user.auth
     };
 }
 

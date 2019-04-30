@@ -2,21 +2,23 @@ import React, {Component} from 'react';
 import {formatMoney, formatEntries} from '../../../helper';
 import UpdateBudget from './update_budget';
 
-class BudgetItem extends Component{
-    state ={
+class BudgetItem extends Component {
+    state = {
         modal: false
     }
-    toggleModal= ()=>{
+
+    toggleModal = () => {
         this.setState({
             modal: !this.state.modal
         })   
     }
-    render(){
+    
+    render() {
         const {budgetItem, deleteBudgetItem, display} = this.props;
         return(
             <div key={budgetItem.budget_id} className="budget">
                 <div className="budget-descrip">{formatEntries(budgetItem.description)}</div>
-                <div className="budget-amount">$ {formatMoney(budgetItem.price)}</div>
+                <div className="budget-amount"><div>$ {formatMoney(budgetItem.price)}</div></div>
                 <div className="budget-item">{formatEntries(budgetItem.category)}</div>
                 <div className="btn budget-icon" onClick={() => { this.toggleModal()} }><i className="fas  fa-edit"></i></div>
                 <div className="budget-delete">
@@ -26,7 +28,6 @@ class BudgetItem extends Component{
             </div>
         )
     }
-
 }
 
 export default BudgetItem
