@@ -12,7 +12,7 @@ import MapModal from './mapmodal';
 import ImageModal from './imagemodal';
 
 
-class Summary extends Component{
+class Summary extends Component {
     constructor(props) {
         super(props);
 
@@ -120,16 +120,16 @@ class Summary extends Component{
             });
         }
     }
-    buttonDisplay= ()=>{
-
+    
+    buttonDisplay = () => {
          if (!this.props.auth && this.state.privatePage){
-            return(
+            return (
                 <div className="summary-end-trip-link">
                         <button onClick={()=>this.props.history.push('/account/signup')} className="summary-end-trip-link-btn btn">Sign Up to Save the Trip</button>
                 </div>
             )
         } else if (this.state.privatePage) {
-            return(
+            return (
                 <div className="summary-end-trip-link">
                         <button onClick={this.endTrip} className="summary-end-trip-link-btn btn">End Trip</button>
                 </div>
@@ -151,11 +151,10 @@ class Summary extends Component{
         });
     }
 
-    render(){
+    render() {
         const {trips_id, tripName, totalSpent, privatePage, pinData, notes, mapModal, imageModal, image} = this.state;
         console.log(this.state);
         const summaryURL = `http://devtravelfuze.quandhle.com/trip/${trips_id}`;
-        // const endButton = this.buttonDisplay()
         return(
             <div className="summary-page">
                 <div className="summary-trip-name"><p>{tripName? tripName : 'My Trip'}</p></div>
