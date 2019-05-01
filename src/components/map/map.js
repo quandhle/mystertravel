@@ -251,7 +251,7 @@ class Map extends Component {
             trips_id: this.props.trips_id,
             latitude: parseFloat(lat),
             longitude: parseFloat(lng),
-            description: value['pin-description'],
+            description: value['pin_description'],
             name: name
         });
 
