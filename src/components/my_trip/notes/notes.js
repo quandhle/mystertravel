@@ -5,6 +5,7 @@ import NotesForm from './notes_form';
 import NoteItem from './note_item';
 import Map from '../../map';
 import './notes.scss';
+import SpinnerModal from '../../general/spinnerModal';
 
 class Notes extends Component {
     constructor(props) {
@@ -49,7 +50,9 @@ class Notes extends Component {
             document.getElementById('notes-file-input').value = null;
             this.getNoteList();
             this.toggleInput();
-            this.setState({spinner: false});
+            setTimeout(() => {
+                this.setState({spinner: false});
+            }, 350);
         } else {
             console.error(resp.data.error);
         }
@@ -112,12 +115,12 @@ class Notes extends Component {
         } else {
             noteList = <div className="notes">Add notes to record your trip <i className="far fa-laugh-wink"></i></div>
         }
-            
+
         return (
             <div className="notes-page">
+                <SpinnerModal open={spinner}/>
                 <div className="notes-form">
                     <div className="notes-input-toggle" onClick={this.toggleInput}>
-                        {spinner && <span className="spinner-border spinner-border-sm"></span>}
                          Add Note <i className="fas fa-angle-double-down"></i>
                     </div>
                     <NotesForm notes={this.handleInput} style={showInput} />

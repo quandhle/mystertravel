@@ -45,3 +45,25 @@
         }
     }
 }
+
+.spinner-modal {
+    position: absolute;
+    top: 25%;
+
+    div {
+        .spinner-border {
+            color: mintcream;
+            width: 8rem;
+            height: 8rem;
+            border: .5em solid currentColor;
+            border-bottom-color: transparent;
+            animation: spinner-border 1s ease-in-out infinite;
+        }
+    }
+
+    .loading-text {
+        color: mintcream;
+        margin-top: 5%;
+        font-size: 2em;
+    }
+}
