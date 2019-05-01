@@ -18,13 +18,13 @@ const BudgetForm = props => {
 function validate({description, price, category}){
     const errors = {};
     if(!description){
-        errors.description = 'Please enter description';
+        errors.description = 'Please enter a description';
     }
     if(!price){
-        errors.price = 'Please enter a number'; 
+        errors.price = 'Please enter a number';
     }
     if(!category){
-        errors.category = 'Please enter category'; 
+        errors.category = 'Please enter a category';
     }
     return errors;
 }

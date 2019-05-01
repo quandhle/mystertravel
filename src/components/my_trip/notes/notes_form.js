@@ -21,7 +21,7 @@ const NotesInput = props =>{
 function validate({notes}){
     const errors = {};
     if(!notes){
-        errors.notes = 'Write some notes or give your photo a title';
+        errors.notes = 'Write a note or give your photo a title';
     }
     return errors;
 }

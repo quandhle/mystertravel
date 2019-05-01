@@ -12,8 +12,8 @@ class UpdateBudget extends Component {
 
         this.updatedb = this.updatedb.bind(this);
     }
-    
-    async updatedb(value) { 
+
+    async updatedb(value) {
         const {trips_id, budget, display, close} = this.props
         const resp = await axios.post('/api/updatebudget.php', {
             id: budget.budget_id,
@@ -21,15 +21,15 @@ class UpdateBudget extends Component {
             price: value.price * 100,
             category: value.category,
             trips_id
-        }); 
+        });
 
         if(resp.data.success) {
             display();
         }
-        
+
         close();
     }
-    
+
     render() {
         const {modal, close, handleSubmit} = this.props;
         return (
@@ -42,14 +42,14 @@ class UpdateBudget extends Component {
                     <Field id="category" name="category" label="Category" component={Input} classes="budget-input"/>
                 </form>
                 <button className="btn updatebutton" onClick={handleSubmit(this.updatedb)} >Update</button>
-            </Modal>  
+            </Modal>
         )
     }
 }
 
 function mapStateToProps(state, props) {
     const { modal, budget } = props;
-    
+
     return {
         initialValues: {
             description: modal ? budget.description : '',
@@ -62,18 +62,18 @@ function mapStateToProps(state, props) {
 
 function validate({description, price, category}) {
     const errors = {};
-    
+
     if(!description) {
-        errors.description = 'Please enter description';
+        errors.description = 'Please enter a description';
     }
-    
+
     if(!price) {
-        errors.price = 'Please enter a number'; 
+        errors.price = 'Please enter a number';
     }
     if(!category) {
-        errors.category = 'Please enter category'; 
+        errors.category = 'Please enter a category';
     }
-    
+
     return errors;
 }
 
@@ -82,7 +82,7 @@ UpdateBudget = reduxForm({
     enableReinitialize: true,
     validate
   })(UpdateBudget)
-  
+
 UpdateBudget = connect( mapStateToProps)(UpdateBudget)
-  
+
 export default UpdateBudget;
