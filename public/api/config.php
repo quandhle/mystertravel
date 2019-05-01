@@ -9,7 +9,7 @@ handleCors();
 
 require_once('mysqlconnect.php');
 
-$ouput = [
+$output = [
     'success' => false
 ];
 
