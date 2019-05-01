@@ -2,13 +2,11 @@
     "success": true,
     "data": [
         {
-            "city": "Naples",
-            "country": "Italy",
+            "name": "Naples",
             "longitude": 14.3056,
             "latitude": 40.8533,
-            "name": "Naples Apr 2019",
-            "pin_description": "Pin for Naples, Italy",
-            "trips_id": 1
+            "description": "Pin for Naples, Italy",
+            "pin_id": 1
         }
     ]
 }
