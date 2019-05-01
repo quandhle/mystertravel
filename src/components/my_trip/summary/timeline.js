@@ -52,7 +52,7 @@ export default class Timeline extends Component {
 
         return (
             <div className="timeline">
-                <p className="timeline-title">Trip Timeline</p>
+                <p className="timeline-title">Trip Timeline <i className="fas fa-plane"></i></p>
                 <TimelineItem item={firstItem} setImage={setImage}/>
                 <TimelineInner items={timelineItems} setImage={setImage} style={this.state.expandTimeline}/>
                 {expandIcon}
