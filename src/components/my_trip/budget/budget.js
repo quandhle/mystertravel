@@ -29,7 +29,7 @@ class Budget extends Component{
             spinner: true
         })
 
-        const {trips_id} = this.props.trips_id; 
+        const {trips_id} = this.props.trips_id;
         const resp = await axios.post('/api/addbudgetitem.php', {
             trips_id,
             description: value.description,
@@ -63,7 +63,7 @@ class Budget extends Component{
         }
     }
     async getBudgetList() {
-        const {trips_id} = this.props.trips_id; 
+        const {trips_id} = this.props.trips_id;
         const resp = await axios.get(`/api/getbudgetlist.php?trips_id=${trips_id}`);
         if (resp.data.success) {
             this.setState({
@@ -97,13 +97,12 @@ class Budget extends Component{
             });
         } else {
             budgetList = <div className="budget">Add expenses to record your trip <i className="far fa-laugh-wink"></i> </div>
-        }     
+        }
        return(
             <div className="budget-page">
                 <SpinnerModal open={spinner}/>
                 <div className="budget-section">
                     <div className="budget-input-toggle" onClick={this.toggleInput}>
-                    {spinner && <span className="spinner-border spinner-border-sm"></span>}
                     Add Budget Item <i className="fas fa-angle-double-down"></i>
                     </div>
                     <BudgetForm budget={this.handleInput} style={showInput}/>

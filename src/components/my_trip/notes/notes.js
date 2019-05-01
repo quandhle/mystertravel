@@ -24,7 +24,7 @@ class Notes extends Component {
         this.handleInput = this.handleInput.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
     }
-    
+
     async handleInput(value) {
         this.setState({
             spinner: true
@@ -57,11 +57,11 @@ class Notes extends Component {
             console.error(resp.data.error);
         }
     }
-    
+
     async getNoteList() {
         const { trips_id } = this.props.trips_id;
         const resp = await axios.get(`/api/getnotelist.php?trips_id=${trips_id}`);
-        
+
         if (resp.data.success) {
             this.setState({
                 note: resp.data.notes
@@ -70,14 +70,14 @@ class Notes extends Component {
             console.error(resp.data.error)
         }
     }
-    
+
     async deleteItem(note){
         const {trips_id} = this.props.trips_id;
         const resp = await axios.put('/api/deletenoteitem.php',{
             trips_id,
             note_id: note.note_id
         })
-        
+
         if (resp.data.success) {
             this.getNoteList();
         } else {
@@ -97,15 +97,15 @@ class Notes extends Component {
             )
         }
     }
-    
+
     componentDidMount() {
         this.getNoteList();
     }
-    
+
     render() {
         const { note, showInput, spinner } = this.state;
         let noteList = null;
-        
+
         if(note.length > 0){
             noteList = note.map(note => {
                 return (
