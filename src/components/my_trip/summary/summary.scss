@@ -3,11 +3,13 @@
     .summary-trip-name {
         width: 100%;
         text-align: center;
-
+        color: #235661;
+        font-family: 'Dancing Script', cursive;
         p {
-            font-size: 2em;
+            font-size: 2.2em;
             margin: 10px;
             font-weight: bold;
+            text-transform: capitalize;
         }
     }
 
@@ -24,12 +26,19 @@
 
     .total-spend {
         width: 100%;
-        text-align: center;
+        margin: 0;
 
-        p {
+        div {
+            color:#468391;
+            position: relative;
+            left: 5%;
+            width: 90%;
             font-size: 1.2em;
             font-weight: bold;
             margin: 0;
+            text-align: center;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(164, 216, 208, 0.7);
         }
     }
 
@@ -57,9 +66,10 @@
         }
 
         .timeline-title {
-            font-size: 1.5em;
+            font-size: 1.2em;
             font-weight: bold;
             margin: 8px 0 8px 50px;
+            color: #2b616d;
         }
 
         &::after {
@@ -120,6 +130,7 @@
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
+                    
                 }
 
                 .timeline-item-name {
@@ -141,7 +152,8 @@
                 }
 
                 .timeline-item-text {
-
+                    text-transform: capitalize;
+                    word-wrap: break-word;
                 }
             }
         }
@@ -174,7 +186,7 @@
         &>a>i {
             margin: 10px 10px;
             font-size: 3em;
-            color: #2b616d;
+            color: #7eb9b0;
             vertical-align: center;
 
             &:hover {
@@ -198,6 +210,7 @@
             border-radius: 15px;
             transition: 0.5s;
             font-size: 1.5em;
+            font-weight: bold;
         }
 
         button:hover {

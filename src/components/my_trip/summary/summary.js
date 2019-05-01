@@ -153,12 +153,11 @@ class Summary extends Component {
 
     render() {
         const {trips_id, tripName, totalSpent, privatePage, pinData, notes, mapModal, imageModal, image} = this.state;
-        console.log(this.state);
         const summaryURL = `http://devtravelfuze.quandhle.com/trip/${trips_id}`;
         return(
             <div className="summary-page">
                 <div className="summary-trip-name"><p>{tripName? tripName : 'My Trip'}</p></div>
-                <div className="total-spend"><p>{`Total spent on this trip $${totalSpent? formatMoney(totalSpent): ' 0'}`}</p></div>
+                <div className="total-spend"><div>{`Total spent on this trip $${totalSpent? formatMoney(totalSpent): ' 0'}`}</div></div>
                 <Timeline pinData={pinData} notesData={notes} setImage={this.setImage}/>
                 <div className="last-entry">
                     <div className="entry-content">
@@ -172,15 +171,15 @@ class Summary extends Component {
                 }
                 {/* {endButton} */}
                 <div className="share-btns col-12">
-                    <a onClick={() => {this.fbButton(summaryURL)}}>
-                        <i className="fab fa-facebook-square"/>
-                    </a>
-                    <a href={this.twitterButton(summaryURL)}>
-                        <i className="fab fa-twitter-square"/>
-                    </a>
-                    <a href={this.mailButton(summaryURL)}>
-                        <i className="fas fa-envelope-square"/>
-                    </a>
+                        <a onClick={() => {this.fbButton(summaryURL)}}>
+                            <i className="fab fa-facebook-square"/>
+                        </a>
+                        <a href={this.twitterButton(summaryURL)}>
+                            <i className="fab fa-twitter-square"/>
+                        </a>
+                        <a href={this.mailButton(summaryURL)}>
+                            <i className="fas fa-envelope-square"/>
+                        </a>
                 </div>
                 {/*<MapModal modal={mapModal} onClick={this.toggleMapModal}/>*/}
                 <ImageModal img={image} modal={imageModal} close={this.toggleImageModal}/>
