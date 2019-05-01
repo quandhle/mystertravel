@@ -12,8 +12,6 @@ class Dropdown extends Component {
     showMenu() {
         event.preventDefault();
 
-        console.log('show menu clicked')
-
         return (
             <div className="options">
                 <button>Food</button>

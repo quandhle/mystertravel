@@ -9,17 +9,17 @@
         color: white;
         padding-right: 15px;
         padding: 10px 15px;
-        
+
         .fa-angle-double-down:hover {
             position: relative;
             top: 5px;
         }
-        
+
         .spinner-border {
             margin: 5px;
         }
     }
-    
+
     .budget-input-form {
         height: 0;
         width: 96%;
@@ -108,7 +108,7 @@
                     display: inline;
                 }
             }
-            
+
             .budget-item {
                 color: #b2dbd5;
                 width:90%;
@@ -134,7 +134,7 @@
             font-size: 1em;
             color: white;
             overflow-y: hidden;
-            
+
             .map-modal-header {
                 padding-top: 15px;
             }
@@ -155,7 +155,7 @@
                 background-color: #fa8d62;
                 width: 60%;
                 margin: 10px 0;
-    
+
                 &:hover {
                     background-color: #e26a3b;
                 }

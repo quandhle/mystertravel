@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import BudgetForm from './budget_form';
 import BudgetItem from './budget_item';
 import './budget.scss';
-import Map from '../../map';  
+import Map from '../../map';
 
 
 class Budget extends Component{
@@ -28,7 +28,7 @@ class Budget extends Component{
             spinner: true
         })
 
-        const {trips_id} = this.props.trips_id; 
+        const {trips_id} = this.props.trips_id;
         const resp = await axios.post('/api/addbudgetitem.php', {
             trips_id,
             description: value.description,
@@ -60,7 +60,7 @@ class Budget extends Component{
         }
     }
     async getBudgetList() {
-        const {trips_id} = this.props.trips_id; 
+        const {trips_id} = this.props.trips_id;
         const resp = await axios.get(`/api/getbudgetlist.php?trips_id=${trips_id}`);
         if (resp.data.success) {
             this.setState({
@@ -94,7 +94,7 @@ class Budget extends Component{
             });
         } else {
             budgetList = <div className="budget">Add expenses to record your trip <i className="far fa-laugh-wink"></i> </div>
-        }     
+        }
        return(
             <div className="budget-page">
                 <div className="budget-section">

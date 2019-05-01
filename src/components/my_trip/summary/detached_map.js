@@ -63,7 +63,6 @@ export default class SummaryMap extends Component {
     }
 
     render() {
-        console.log(this.props);
         return (
             <div className="summary-map-holder">
                 <div id="summary-map" className='summary-map' style={this.state.style}/>

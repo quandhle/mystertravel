@@ -17,7 +17,6 @@ class UpdateNote extends Component {
     }
 
     async updatedb(value) {
-        console.log('update', this.props)
         const {trips_id, note, display, close} = this.props
         const resp = await axios.post('/api/updatenote.php', {
             id: note.note_id,
