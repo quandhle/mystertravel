@@ -22,16 +22,16 @@ const signUpForm = props =>{
 function validate({nickname, email, password, confirm_password}){
     const errors = {};
     if(!nickname){
-        errors.nickname = 'Please enter your name'; 
+        errors.nickname = 'Please enter your name';
     }
     if(!email){
-        errors.email = 'Please enter your email'; 
+        errors.email = 'Please enter your email';
     }
     if(!password){
-        errors.password = 'Please enter your password'; 
+        errors.password = 'Please enter your password';
     }
     if(password != confirm_password || !confirm_password){
-        errors.confirm_password = 'Password is not match'; 
+        errors.confirm_password = 'Password does not match';
     }
     return errors;
 }

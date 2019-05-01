@@ -8,6 +8,7 @@ import Map from '../../map';
 import SpinnerModal from "../../general/spinnerModal";
 
 
+
 class Budget extends Component{
     constructor(props) {
         super(props)

@@ -3,7 +3,6 @@ import {reduxForm, Field} from 'redux-form';
 import Input from '../../general/input';
 
 const signInForm = props =>{
-    console.log(props)
     const {signIn, handleSubmit, signUp, message} = props
     return(
         <form onSubmit={handleSubmit(signIn)} className="sign-in-form">
@@ -25,7 +24,7 @@ function validate({email, password}){
         errors.email = 'Please enter your email';
     }
     if(!password){
-        errors.password = 'Please enter your password'; 
+        errors.password = 'Please enter your password';
     }
     return errors;
 }

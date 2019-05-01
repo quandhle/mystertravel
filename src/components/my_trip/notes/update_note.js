@@ -15,23 +15,22 @@ class UpdateNote extends Component {
 
         this.updatedb = this.updatedb.bind(this);
     }
-    
+
     async updatedb(value) {
-        console.log('update', this.props)  
         const {trips_id, note, display, close} = this.props
         const resp = await axios.post('/api/updatenote.php', {
             id: note.note_id,
-            description: value.entry, 
+            description: value.entry,
             trips_id
         });
 
         if(resp.data.success) {
             display();
         }
-        
+
         close();
     }
-    
+
     render() {
         const {modal, close, handleSubmit} = this.props;
         return (
@@ -42,14 +41,14 @@ class UpdateNote extends Component {
                 <Field id="entry" name="entry" label="Enter Note" component={Textarea} classes="notes-input" />
                 </form>
                 <button className="btn updatebutton" onClick={handleSubmit(this.updatedb)} >Update</button>
-            </Modal>  
+            </Modal>
         )
     }
 }
 
 function mapStateToProps(state, props) {
     const { modal, note } = props;
-    
+
     return {
         initialValues: {
             entry: modal ? note.entry : ''
@@ -60,9 +59,9 @@ function mapStateToProps(state, props) {
 
 function validate({entry}) {
     const errors = {};
-    
+
     if(!entry){
-        errors.entry = 'Update notes can not be empty';
+        errors.entry = 'Please enter a note entry';
     }
     return errors;
 }
@@ -72,8 +71,8 @@ UpdateNote = reduxForm({
     enableReinitialize: true,
     validate
   })(UpdateNote)
-  
-  
+
+
 UpdateNote = connect( mapStateToProps)(UpdateNote)
-  
+
 export default UpdateNote

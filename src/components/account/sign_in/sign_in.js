@@ -15,7 +15,7 @@ class SignIn extends Component {
 
         this.handleSignIn = this.handleSignIn.bind(this);
     }
-    
+
     async handleSignIn(values) {
         const {email, password} = values;
         const resp = await axios.post('/api/login.php', {
@@ -27,7 +27,6 @@ class SignIn extends Component {
         const {success, trips_id} = resp.data
         if(success) {
             signIn(resp.data);
-            console.log(resp.data)
             if(trips_id){
                 this.props.passTripId(trips_id);
                 history.push('/mytrip');
@@ -41,11 +40,11 @@ class SignIn extends Component {
         }
 
     }
-    
+
     handleSignUp = () => {
         this.props.history.push('/account/signup')
     }
-    
+
     render() {
         return(
             <div className="sign-in-page">

@@ -17,7 +17,7 @@ export default function auth(WarpComponent, requireAuth=true, to = '/' ){
                 } else {
                     this.props.history.push(to)
                 }
-            } 
+            }
         }
         render(){
             return <WarpComponent {...this.props} />
@@ -25,7 +25,6 @@ export default function auth(WarpComponent, requireAuth=true, to = '/' ){
     }
 
     function mapStateToProps(state){
-        console.log('map:',state.user)
         return {
             auth: state.user.auth,
             trips_id: state.user.trips_id
