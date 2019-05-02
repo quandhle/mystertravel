@@ -49,16 +49,6 @@ class Summary extends Component {
             trips_id
         }, this.getSummaryData);
 
-        loadScript('https://connect.facebook.net/en_US/sdk.js');
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId            : keys.facebook,
-                autoLogAppEvents : true,
-                xfbml            : true,
-                version          : 'v3.2'
-            });
-        };
-
         loadScript('https://platform.twitter.com/widgets.js');
     }
 
