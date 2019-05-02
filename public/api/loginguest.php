@@ -39,7 +39,8 @@ if (mysqli_affected_rows($conn) !== 1) {
 
 $_SESSION['user_data'] = [
     'users_id' => $users_id,
-    'token' => $token
+    'token' => $token,
+    'is_guest' => true
 ];
 
 ?>

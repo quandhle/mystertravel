@@ -2,15 +2,15 @@
 
 require_once('config.php');
 
-$token = $_SESSION['user_data']['token'];
-
-if (empty($token)) {
+if (empty($_SESSION['user_data']['token'])) {
     $output['success'] = true;
-    $output['message'] = "You weren't logged in.";
+    $output['login'] = false;
 
     print(json_encode($output));
     exit();
 }
+
+$token = $_SESSION['user_data']['token'];
 
 $query = "DELETE FROM
         `user_connections`
@@ -24,7 +24,11 @@ if (!$result) {
 }
 
 if (mysqli_affected_rows($conn) !== 1) {
-    throw new Exception('Invalid username or password.');
+    $output['success'] = true;
+    $output['login'] = false;
+
+    print(json_encode($output));
+    exit();
 }
 
 unset($_SESSION['user_data']);

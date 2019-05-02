@@ -8,5 +8,4 @@ $output = [
 
 session_start();
 print_r($_SESSION);
-
-print(json_encode($output));
+// print(json_encode($output));
