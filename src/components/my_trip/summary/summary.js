@@ -153,7 +153,7 @@ class Summary extends Component {
 
     render() {
         const {trips_id, tripName, totalSpent, privatePage, pinData, notes, mapModal, imageModal, image} = this.state;
-        const summaryURL = `http://devtravelfuze.quandhle.com/trip/${trips_id}`;
+        const summaryURL = `https://www.mystertravel.com/trip/${trips_id}`;
         return(
             <div className="summary-page">
                 <div className="summary-trip-name"><p>{tripName? tripName : 'My Trip'}</p></div>

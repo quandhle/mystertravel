@@ -201,7 +201,8 @@ class Map extends Component {
     }
 
     parseGeolocation(components) {
-        let locality, administrative_area_level_1, administrative_area_level_2, country, component;
+        console.log(components);
+        let neighborhood, locality, aal1, aal2, aal3, country, component;
 
         for (let index = components.length - 1; index >= 0; index--) {
             component = components[index];
@@ -211,20 +212,31 @@ class Map extends Component {
                     country = component.short_name === 'US' ? null : component.long_name;
                     break;
                 case 'administrative_area_level_1':
-                    administrative_area_level_1 = country === 'US' ? component.short_name : component.long_name;
+                    aal1 = country === 'US' ? component.short_name : component.long_name;
                     break;
                 case 'administrative_area_level_2':
-                    administrative_area_level_2 = component.short_name;
+                    aal2 = component.short_name;
+                    break;
+                case 'administrative_area_level_3':
+                    aal3 = component.short_name;
                     break;
                 case 'locality':
                     locality = component.long_name;
+                    break;
+                case 'neighborhood':
+                    neighborhood = component.long_name;
+                    break;
             }
         }
 
-        locality = locality ? locality :
-            (administrative_area_level_2 ? administrative_area_level_2 : null);
+        locality = neighborhood ? neighborhood :
+            (locality ? locality :
+                (aal3 ? aal3 :
+                    (aal2 ? aal2 :null)));
 
-        return [locality, administrative_area_level_1, country].filter(Boolean).join(", ");
+        aal1 = locality ? null : aal1;
+
+        return [locality, aal1, country].filter(Boolean).join(", ");
     }
 
     handleClear(event) {
