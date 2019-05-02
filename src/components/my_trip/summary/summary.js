@@ -49,16 +49,6 @@ class Summary extends Component {
             trips_id
         }, this.getSummaryData);
 
-        loadScript('https://connect.facebook.net/en_US/sdk.js');
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId            : keys.facebook,
-                autoLogAppEvents : true,
-                xfbml            : true,
-                version          : 'v3.2'
-            });
-        };
-
         loadScript('https://platform.twitter.com/widgets.js');
     }
 
@@ -92,12 +82,9 @@ class Summary extends Component {
     }
 
     fbButton = (url) => {
-        FB.ui({
-            method: 'share',
-            display: 'popup',
-            href: url,
-            quote: `I went on a trip recently! Check it out on MysterTravel!\n${url}`
-        });
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=I went on a trip recently! Check it out on MysterTravel!`,
+            "pop",
+            "width=600, height=400, scrollbars=no");
     }
 
     twitterButton(url) {
@@ -153,7 +140,7 @@ class Summary extends Component {
 
     render() {
         const {trips_id, tripName, totalSpent, privatePage, pinData, notes, mapModal, imageModal, image} = this.state;
-        const summaryURL = `http://devtravelfuze.quandhle.com/trip/${trips_id}`;
+        const summaryURL = `https://www.mystertravel.com/trip/${trips_id}`;
         return(
             <div className="summary-page">
                 <div className="summary-trip-name"><p>{tripName? tripName : 'My Trip'}</p></div>
