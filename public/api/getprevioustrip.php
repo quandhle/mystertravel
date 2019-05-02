@@ -1,5 +1,4 @@
 <?php
-use function GuzzleHttp\json_encode;
 
 require_once('config.php');
 ob_start();
