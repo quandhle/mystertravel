@@ -1,12 +1,12 @@
 <?php
 
-require_once("config.php");
+require_once('config.php');
 
 if (!empty($_SESSION['user_data'][''])){
     $token = $_SESSION['user_data']['token'];
     $users_id = $_SESSION['user_data']['users_id'];
 } else {
-    require_once("loginguest.php");
+    require_once('loginguest.php');
     $output['login'] = true;
     $output['is_guest'] = true;
     $output['username'] = 'Guest';

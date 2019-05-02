@@ -46,7 +46,7 @@ $token = $data['token'];
 
 if(!empty($_SESSION['user_data'])){
     $_SESSION['user_data'] = [
-        'id' => $users_id,
+        'users_id' => $users_id,
         'token' => $token
     ];
 }
