@@ -1,32 +1,12 @@
 import types from './types';
 
 export function signIn(user) {
+    localStorage.setItem('signedIn', 'true');
     return {
         type: types.SIGN_IN,
         username: user.username,
         trips_id: user.trips_id
     }
-    // const resp = await axios.post('/api/login.php', {
-    //     email: user.email,
-    //     password: user.password
-    // })
-    // console.log('user sign in:',resp.data);
-
-    // const {success, trips_id, username} = resp.data
-
-    // if(success){
-    //     localStorage.setItem('signedIn', 'true');
-    //     if(trips_id){
-    //        passTripId(trips_id); 
-    //     }
-        
-    //     return dispatch({
-    //         type: types.SIGN_IN,
-    //         username: username,
-    //         trips_id: trips_id
-    //     })
-    // }
-
 }
 
 export function signOut(){

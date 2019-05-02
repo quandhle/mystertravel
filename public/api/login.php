@@ -65,14 +65,17 @@ if (mysqli_affected_rows($conn) !== 1) {
 
 $_SESSION['user_data'] = [
     'users_id' => $data['id'],
-    'username' => $data['full_name'],
-    'token' => $token
+    'token' => $token,
+    'is_guest' => false
 ];
 
 require_once('checkactivetrip.php');
 
 $output['success'] = true;
+$output['login'] = true;
+$output['is_guest'] = false;
 $output['username'] = $data['full_name'];
+$output['token'] = $token;
 
 print(json_encode($output));
 
