@@ -20,7 +20,7 @@ class Map extends Component {
             name: null,
             map: null,
             modal: false
-        }
+        };
 
         this.addPin = this.addPin.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
@@ -58,7 +58,7 @@ class Map extends Component {
             center: {lat: this.state.lat, lng: this.state.lng},
             zoom: 2,
             minZoom: 2,
-            draggableCursor: 'url(/dist/assets/images/marker.png), auto' ,
+            draggableCursor: 'url(/dist/assets/images/marker.png), auto',
             draggingCursor: 'move'
         });
 
@@ -75,46 +75,17 @@ class Map extends Component {
     handleMapClick(lat, lng){
         const geocoder = new google.maps.Geocoder;
         geocoder.geocode({ 'location': { lat, lng } }, (results, status) => {
-            let name = 'generic name';
             if (status === 'OK') {
-                name = results.length > 3 ?
-                    results[results.length - 4].formatted_address : results[0].formatted_address;
-                name = name.split(',')[0];
+                const name = this.parseGeolocation(results[0].address_components);
+                this.props.dispatch(change("search-bar-form", `places`, name));
+                this.setState({
+                    lat,
+                    lng,
+                    name
+                });
+                this.toggleModal();
             }
-            this.setState({
-                lat,
-                lng,
-                name
-            });
-            this.toggleModal();
         });
-    }
-
-    parseAddressComponents (address_components) {
-        let zipCodeOffset = 0;
-        if (address_components[address_components.length - 1].types[0] === 'postal_code') {
-            zipCodeOffset++;
-        }
-
-        if (address_components[address_components.length - 1 - zipCodeOffset].short_name === 'US') {
-            switch(address_components.length) {
-
-                case 3 + zipCodeOffset:
-                case 2 + zipCodeOffset:
-                    return `${address_components[address_components.length - 2 - zipCodeOffset].long_name}, United States`;
-
-                case 1 + zipCodeOffset:
-                    return 'United States';
-
-                default:
-                    return `${address_components[0].short_name}, ${address_components[address_components.length - 2 - zipCodeOffset].short_name}`;
-            }
-
-        } else {
-            return address_components.map((item) => {
-                return item.long_name;
-            }).join(', ');
-        }
     }
 
     searchCountry() {
@@ -173,25 +144,25 @@ class Map extends Component {
                         title: item.name,
                         map: this.state.map
                     });
-    
+
                     const content = `<h6 id="infoWindow">${item.description}</h6>`;
-    
+
                     const infowindow = new google.maps.InfoWindow({
                         content: content
                     })
-    
+
                     pin.addListener('click', function() {
                         infowindow.open(map, pin);
                     })
-    
+
                     pin.setMap(this.state.map);
-    
+
                     return pin;
                 });
                 this.setState({
                     pins: pins,
                 });
-    
+
                 const lastPin = this.state.pins[this.state.pins.length - 1];
                 this.state.map.setZoom(11)
                 this.state.map.panTo(lastPin.position)
@@ -212,17 +183,9 @@ class Map extends Component {
             this.state.map.setZoom(14);
             const geocoder = new google.maps.Geocoder;
             geocoder.geocode({ 'location': coordObject }, (results, status) => {
-                if (status === 'OK') {
-                    if (results[0]) {
-                        let name = results.length > 3 ?
-                            results[results.length - 4].formatted_address : results[0].formatted_address;
-                        this.props.dispatch(change("search-bar-form", `places`, name));
-                        name = name.split(',')[0];
-
-                        this.setState({
-                            name
-                        });
-                    }
+                if (status === 'OK' && results[0]) {
+                    const name = this.parseGeolocation(results[0].address_components);
+                    this.props.dispatch(change("search-bar-form", `places`, name));
                 }
             });
         }
@@ -235,6 +198,45 @@ class Map extends Component {
             enableHighAccuracy: false
         }
         navigator.geolocation.getCurrentPosition(success, error, options);
+    }
+
+    parseGeolocation(components) {
+        console.log(components);
+        let neighborhood, locality, aal1, aal2, aal3, country, component;
+
+        for (let index = components.length - 1; index >= 0; index--) {
+            component = components[index];
+
+            switch (component.types[0]) {
+                case 'country':
+                    country = component.short_name === 'US' ? null : component.long_name;
+                    break;
+                case 'administrative_area_level_1':
+                    aal1 = country === 'US' ? component.short_name : component.long_name;
+                    break;
+                case 'administrative_area_level_2':
+                    aal2 = component.short_name;
+                    break;
+                case 'administrative_area_level_3':
+                    aal3 = component.short_name;
+                    break;
+                case 'locality':
+                    locality = component.long_name;
+                    break;
+                case 'neighborhood':
+                    neighborhood = component.long_name;
+                    break;
+            }
+        }
+
+        locality = neighborhood ? neighborhood :
+            (locality ? locality :
+                (aal3 ? aal3 :
+                    (aal2 ? aal2 :null)));
+
+        aal1 = locality ? null : aal1;
+
+        return [locality, aal1, country].filter(Boolean).join(", ");
     }
 
     handleClear(event) {
