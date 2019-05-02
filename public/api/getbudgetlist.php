@@ -1,8 +1,13 @@
 <?php
 
 require_once('config.php');
+ob_start();
+require_once('checkloggedin.php');
+ob_end_clean();
 
-$trips_id = $_GET['trips_id'];
+if(!empty($_SESSION['user_data']['trips_id'])){
+    $trips_id = $_SESSION['user_data']['trips_id'];
+}
 
 if (empty($trips_id)) {
     throw new Exception('Please provide trips_id (int) with your request');
