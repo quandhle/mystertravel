@@ -2,7 +2,7 @@
 
 require_once('config.php');
 
-$trips_id = intval($_POST['trips_id']);
+$trips_id = $_SESSION['user_data']['trips_id'];
 $entry = $_POST['entry'];
 $image = $_FILES;
 
