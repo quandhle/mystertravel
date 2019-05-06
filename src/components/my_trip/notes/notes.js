@@ -6,6 +6,7 @@ import NoteItem from './note_item';
 import Map from '../../map';
 import './notes.scss';
 import SpinnerModal from '../../general/spinnerModal';
+import {passTripId} from '../../../actions';
 
 class Notes extends Component {
     constructor(props) {
@@ -30,7 +31,7 @@ class Notes extends Component {
             spinner: true
         })
 
-        const {trips_id} = this.props.trips_id;
+        const {trips_id} = this.props;
         const {notes, imageUpload: image} = value;
 
         const data = new FormData();
@@ -59,12 +60,15 @@ class Notes extends Component {
     }
 
     async getNoteList() {
-        const { trips_id } = this.props.trips_id;
-        const resp = await axios.get(`/api/getnotelist.php?trips_id=${trips_id}`);
-
-        if (resp.data.success) {
+        // const { trips_id } = this.props.trips_id;?trips_id=${trips_id}
+        const resp = await axios.get(`/api/getnotelist.php`);
+        const {passTripId} = this.props;
+        const {notes, success, trips_id} = resp.data
+        console.log(resp.data)
+        if (success) {
+            passTripId(trips_id);
             this.setState({
-                note: resp.data.notes
+                note: notes
             });
         } else {
             console.error(resp.data.error)
@@ -136,8 +140,10 @@ class Notes extends Component {
 
 function mapStateToProps(state) {
     return{
-        trips_id: state.trips_id,
+        trips_id: state.user.trips_id,
     }
 }
 
-export default connect(mapStateToProps)(Notes);
+export default connect(mapStateToProps,{
+    passTripId
+})(Notes);

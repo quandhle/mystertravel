@@ -25,6 +25,7 @@ class SignIn extends Component {
 
         const {signIn, history} = this.props;
         const {success, trips_id} = resp.data
+        console.log(resp.data);
         if(success) {
             signIn(resp.data);
             if(trips_id){

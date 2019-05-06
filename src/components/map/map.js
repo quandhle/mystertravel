@@ -8,6 +8,7 @@ import keys from './../../../api_keys';
 import SearchBar from './search_bar';
 import MapPopUp from './map_popup';
 import {loadScript} from "../../helper";
+import { passTripId } from '../../actions';
 
 class Map extends Component {
     constructor(props) {
@@ -37,6 +38,7 @@ class Map extends Component {
         } else {
             this.initMap();
         }
+
     }
 
     loadMapScript() {
@@ -130,8 +132,9 @@ class Map extends Component {
 
         const resp = await axios.get(`/api/getmappin.php?trips_id=${trips_id}`);
         let pinData = null;
-
+        console.log(resp.data);
         if (resp.data.success) {
+            
             pinData = resp.data.data;
 
             if (pinData.length > 0) {
@@ -168,7 +171,7 @@ class Map extends Component {
                 this.state.map.panTo(lastPin.position)
             }
 
-        } else {
+        } else { //need to change if theres no trip
             console.error(resp.data.error);
         }
 
@@ -292,8 +295,9 @@ class Map extends Component {
 }
 
 function mapStateToProps(state){
+
     return{
-        trips_id: state.trips_id.trips_id
+        trips_id: state.user.trips_id
     }
 }
 
