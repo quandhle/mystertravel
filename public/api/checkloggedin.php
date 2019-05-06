@@ -8,7 +8,11 @@ if(!empty($_SESSION['user_data'])){
     $json_input = file_get_contents("php://input");
     $input = json_decode($json_input, true);
     if(empty($input['token'])){
-        throw new Exception('Please provide a token');
+        $output['success'] = true;
+        $output['login'] = false;
+
+        print(json_encode($output));
+        exit();
     }
     $token = $input['token'];
 }
@@ -28,20 +32,32 @@ if(!$result){
     throw new Exception(mysqli_error($conn));
 }
 
-if(mysqli_num_rows($result) !== 1){
-    throw new Exception('You are not logged in');
+if(mysqli_num_rows($result) === 0){
+    $output['success'] = true;
+    $output['login'] = false;
+
+    print(json_encode($output));
+    exit();
 }
 
 $data = mysqli_fetch_assoc($result);
+$users_id = $data['users_id'];
+$token = $data['token'];
 
 if(!empty($_SESSION['user_data'])){
     $_SESSION['user_data'] = [
-        'id' => $data['users_id'],
-        'token' => $data['token']
+        'users_id' => $users_id,
+        'token' => $token
     ];
 }
 
+require_once('checkactivetrip.php');
+
+require_once('checkuserstatus.php');
+
 $output['success'] = true;
+$output['login'] = true;
+$output['token'] = $token;
 
 print(json_encode($output));
 ?>
