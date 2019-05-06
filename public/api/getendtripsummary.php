@@ -46,7 +46,7 @@ $pins_query = "SELECT *
     WHERE `trips_id` = $trips_id
 ";
 
-$pins_result = mysqli_query($conn, $query);
+$pins_result = mysqli_query($conn, $pins_query);
 
 if (!$pins_result) {
     throw new Exception(mysqli_error($conn));
@@ -77,7 +77,7 @@ $notes_query = "SELECT *
     ORDER BY `entry_date` DESC
 ";
 
-$notes_result = mysqli_query($conn, $query);
+$notes_result = mysqli_query($conn, $notes_query);
 
 if (!$notes_result) {
     throw new Exception(mysqli_error($conn));
