@@ -1,11 +1,18 @@
 <?php
 
+ob_start(null, 0, PHP_OUTPUT_HANDLER_CLEANABLE ^ PHP_OUTPUT_HANDLER_REMOVABLE);
+require_once('checkloggedin.php');
+ob_end_clean();
+
 require_once('config.php');
+
+if (!empty($_SESSION['user_data']['trips_id'])) {
+    $trips_id = intval($_SESSION['user_data']['trips_id']);
+}
 
 $json_input = file_get_contents("php://input");
 $input = json_decode($json_input, true);
 
-$trips_id = $_SESSION['user_data']['trips_id'];
 $latitude = $input['latitude'] * 10000000;
 $longitude = $input['longitude'] * 10000000;
 

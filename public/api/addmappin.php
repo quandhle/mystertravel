@@ -1,13 +1,20 @@
 <?php
 
+ob_start(null, 0, PHP_OUTPUT_HANDLER_CLEANABLE ^ PHP_OUTPUT_HANDLER_REMOVABLE);
+require_once('checkloggedin.php');
+ob_end_clean();
+
 require_once('config.php');
+
+if (!empty($_SESSION['user_data']['trips_id'])) {
+    $trips_id = intval($_SESSION['user_data']['trips_id']);
+}
 
 $json_input = file_get_contents("php://input");
 $input = json_decode($json_input, true);
 
-$trips_id = $_SESSION['user_data']['trips_id'];
-$latitude = $input['latitude'] * 10000000;
-$longitude = $input['longitude'] * 10000000;
+$latitude = intval($input['latitude'] * 10000000);
+$longitude = intval($input['longitude'] * 10000000);
 $name = $input['name'];
 $description = $input['description'];
 
@@ -28,9 +35,9 @@ if(empty($latitude) || empty($longitude)){
 }
 
 $query = "INSERT INTO `pins` SET
-        `trips_id` = ?,
-        `latitude` = ?,
-        `longitude` = ?,
+        `trips_id` = $trips_id,
+        `latitude` = $latitude,
+        `longitude` = $longitude,
         `description` = ?,
         `name` = ?,
         `added` = NOW()
@@ -38,7 +45,7 @@ $query = "INSERT INTO `pins` SET
 
 
 $statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($statement, 'dddss', $trips_id, $latitude, $longitude, $description, $name);
+mysqli_stmt_bind_param($statement, 'ss', $description, $name);
 $result = mysqli_stmt_execute($statement);
 
 if(!$result){
@@ -48,8 +55,6 @@ if(!$result){
 if(mysqli_affected_rows($conn) !== 1){
     throw new Exception('Map pin was not added');
 }
-
-$pin_id = mysqli_insert_id($conn);
 
 $output['success'] = true;
 
