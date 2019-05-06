@@ -56,7 +56,7 @@ function mapStateToProps(state, props) {
             price: modal ? formatMoney(budget.price) : '',
             category: modal ? budget.category : '',
         },
-        trips_id: state.trips_id.trips_id,
+        trips_id: state.user.trips_id,
     }
 }
 
