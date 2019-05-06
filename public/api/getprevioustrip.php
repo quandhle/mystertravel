@@ -13,9 +13,25 @@ if (empty($users_id)) {
     throw new Exception('User does not exist.');
 }
 
-$query = "SELECT * FROM `trips` WHERE `users_id` = $users_id";
+$query = "SELECT *
+    FROM `trips`
+    WHERE `users_id` = 2
+    AND NOT `end` IS NULL
+";
 
 $result = mysqli_query($conn, $query);
+
+if(!$result){
+    throw new Exception(mysqli_error($conn));
+}
+
+if(mysqli_num_rows($result) === 0){
+    $output['success'] = true;
+    $output['data'] = null;
+
+    print(json_encode($output));
+    exit();
+}
 
 $data = [];
 while ($row = mysqli_fetch_assoc($result)) {
@@ -34,3 +50,5 @@ $output['success'] = true;
 $output['data'] = $data;
 
 print(json_encode($output));
+
+?>
