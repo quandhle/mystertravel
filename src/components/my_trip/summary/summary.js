@@ -41,7 +41,7 @@ class Summary extends Component {
             trips_id =  params.trips_id;
         } else {
             privatePage = true;
-            trips_id = this.props.trips_id.trips_id;
+            trips_id = this.props.trips_id;
         }
 
         this.setState({
@@ -53,8 +53,8 @@ class Summary extends Component {
     }
 
     async getSummaryData() {
-        const {trips_id} = this.state;
-        const response = await axios.get(`/api/getendtripsummary.php?trips_id=${trips_id}`);
+        const {trips_id} = this.state;//?trips_id=${trips_id}
+        const response = await axios.get(`/api/getendtripsummary.php`);
 
         if (response.data.success) {
             const {summary: {trips_name, total_budget}, pins, notes} = response.data;
@@ -177,7 +177,7 @@ class Summary extends Component {
 
 function mapStateToProps(state) {
     return {
-        trips_id: state.trips_id,
+        trips_id: state.user.trips_id,
         auth: state.user.auth
     };
 }

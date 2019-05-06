@@ -17,6 +17,10 @@ class SideNav extends Component{
                     text: 'Current Trip'
                 },
                 {
+                    to: '/posttrip',
+                    text: 'Previous Trips'
+                },
+                {
                     to: '/account/signout',
                     text: 'Sign Out'
                 }
@@ -26,6 +30,10 @@ class SideNav extends Component{
                 {
                     to: '/',
                     text: 'Home'
+                },
+                {
+                    to: '/posttrip',
+                    text: 'Previous Trips'
                 },
                 {
                     to: '/account/signout',
@@ -71,10 +79,11 @@ class SideNav extends Component{
         }
     }
     renderLinks(){
-        const {userAuth, userName} = this.props;
+
+        const {guest, userAuth, userName} = this.props;
         let profile = 'Hi Guest';
         let navlink = null;
-        if(userAuth){
+        if(!guest && userAuth){
             profile = `Hi ${userName}`
             navlink = this.signInUser();
         } else {
@@ -117,9 +126,10 @@ class SideNav extends Component{
 
 function mapStateToProps(state){
     return{
-        trips_id: state.trips_id.trips_id,
+        trips_id: state.user.trips_id,
         userAuth: state.user.auth,
-        userName: state.user.username
+        userName: state.user.username,
+        guest: state.user.guest
     }
 }
 

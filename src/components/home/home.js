@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import axios from 'axios';
 import UserStart from './user_start';
+import {signIn} from '../../actions';
 import './home.scss';
 
 class Home extends Component {
@@ -19,6 +21,26 @@ class Home extends Component {
         } else {
             return null;
         }
+    }
+    async checkLogin(){
+        const resp = await axios.get('/api/checkloggedin.php');
+
+        console.log(resp);
+
+        const {success, login, trips_id} = resp.data
+        const {signIn, history} = this.props
+        if(success){
+            if(login){
+                signIn(resp.data);
+
+                if(trips_id){
+                    history.push('/mytrip');
+                }
+            }
+        }
+    }
+    componentDidMount(){
+        this.checkLogin();
     }
     render() {
         const{user} = this.props;
@@ -42,4 +64,6 @@ function mapStateToProps(state){
    } 
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, {
+    signIn
+})(Home);

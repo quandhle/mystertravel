@@ -7,10 +7,7 @@ import UpdateReducer from './update_reducer';
 
 const rootReducer = combineReducers({
     form: formReducer,
-    user: userReducer,
-    trips_id: tripReducer,
-    navHeader: navReducer,
-    update: UpdateReducer 
+    user: userReducer
 });
 
 export default rootReducer;

@@ -55,4 +55,6 @@ function validate({tripname}) {
 export default reduxForm({
     form: 'start-new-trip',
     validate
-})(connect(null,{passTripId:passTripId})(StartTrip));
+})(connect(null,{
+    passTripId:passTripId
+})(StartTrip));
