@@ -5,7 +5,7 @@ require_once('config.php');
 $json_input = file_get_contents("php://input");
 $input = json_decode($json_input, true);
 
-$trips_id = intval($input['trips_id']);
+$trips_id = $_SESSION['user_data']['trips_id'];
 $task = $input['task'];
 
 if (empty($trips_id)) {

@@ -5,7 +5,7 @@ require_once('config.php');
 $json_input = file_get_contents("php://input");
 $input = json_decode($json_input, true);
 
-$trips_id = $input['trips_id'];
+$trips_id = $_SESSION['user_data']['trips_id'];
 $latitude = $input['latitude'] * 10000000;
 $longitude = $input['longitude'] * 10000000;
 
