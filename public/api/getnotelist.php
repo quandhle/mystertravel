@@ -1,15 +1,20 @@
 <?php
 
-require_once('config.php');
-ob_start();
+ob_start(null, 0, PHP_OUTPUT_HANDLER_CLEANABLE ^ PHP_OUTPUT_HANDLER_REMOVABLE);
 require_once('checkloggedin.php');
 ob_end_clean();
+
+require_once('config.php');
+
+$output = [
+    'success' => false
+];
 
 if (!empty($_SESSION['user_data']['trips_id'])) {
     $trips_id = $_SESSION['user_data']['trips_id'];
 }
 
-if(empty($trips_id)){
+if (empty($trips_id)) {
     throw new Exception('Please provide trips_id (int) with your request');
 }
 
@@ -36,6 +41,7 @@ if(mysqli_num_rows($result) === 0){
     exit();
 }
 
+$data = [];
 while($row = mysqli_fetch_assoc($result)){
     $date = date("m/d/Y H:i:s", strtotime($row['entry_date']));
     $data[] = [
