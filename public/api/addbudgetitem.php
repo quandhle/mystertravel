@@ -1,14 +1,21 @@
 <?php
 
+ob_start(null, 0, PHP_OUTPUT_HANDLER_CLEANABLE ^ PHP_OUTPUT_HANDLER_REMOVABLE);
+require_once('checkloggedin.php');
+ob_end_clean();
+
 require_once('config.php');
+
+if (!empty($_SESSION['user_data']['trips_id'])) {
+    $trips_id = intval($_SESSION['user_data']['trips_id']);
+}
 
 $json_input = file_get_contents("php://input");
 $input = json_decode($json_input, true);
 
-$trips_id = $_SESSION['user_data']['trips_id'];
 $description = $input['description'];
 $category = $input['category'];
-$price = $input['price'];
+$price = intval($input['price']);
 
 if (empty($trips_id)) {
     throw new Exception('Please provide trips_id (int) with your request');
@@ -27,15 +34,15 @@ if (empty($price)) {
 }
 
 $query = "INSERT INTO `budget` SET
-    `trips_id` = ?,
+    `trips_id` = $trips_id,
     `description` = ?,
     `category` = ?,
-    `price` = ?,
+    `price` = $price,
     `added` = NOW()
 ";
 
 $statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($statement, 'dssd', $trips_id, $description, $category, $price);
+mysqli_stmt_bind_param($statement, 'ss', $description, $category);
 $result = mysqli_stmt_execute($statement);
 
 if (!$result) {
@@ -45,8 +52,6 @@ if (!$result) {
 if(mysqli_affected_rows($conn) !== 1){
     throw new Exception('Unable to add budget entry');
 }
-
-$budget_id = mysqli_insert_id($conn);
 
 $output['success'] = true;
 

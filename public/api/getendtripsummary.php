@@ -1,13 +1,14 @@
 <?php
 
-ob_start(null, 0, PHP_OUTPUT_HANDLER_CLEANABLE ^ PHP_OUTPUT_HANDLER_REMOVABLE);
-require_once('checkloggedin.php');
-ob_end_clean();
-
 require_once('config.php');
 
 if (!empty($_SESSION['user_data']['trips_id'])) {
     $trips_id = intval($_SESSION['user_data']['trips_id']);
+} else {
+    if(empty($_GET['trips_id'])){
+        throw new Exception('Invalid Url');
+    }
+    $trips_id = intval($_GET['trips_id']);
 }
 
 if (empty($trips_id)) {
@@ -42,14 +43,10 @@ if (mysqli_num_rows($summary_result) === 0) {
 
 $pins_query = "SELECT *
     FROM `pins`
-    WHERE `trips_id` = ?
+    WHERE `trips_id` = $trips_id
 ";
 
-$statement = mysqli_prepare($conn, $pins_query);
-mysqli_stmt_bind_param($statement, 'd', $trips_id);
-mysqli_stmt_execute($statement);
-
-$pins_result = mysqli_stmt_get_result($statement);
+$pins_result = mysqli_query($conn, $query);
 
 if (!$pins_result) {
     throw new Exception(mysqli_error($conn));
@@ -76,15 +73,11 @@ if (mysqli_num_rows($pins_result) === 0) {
 
 $notes_query = "SELECT *
     FROM `notes`
-    WHERE `trips_id` = ?
+    WHERE `trips_id` = $trips_id
     ORDER BY `entry_date` DESC
 ";
 
-$statement = mysqli_prepare($conn, $notes_query);
-mysqli_stmt_bind_param($statement, 'd', $trips_id);
-mysqli_stmt_execute($statement);
-
-$notes_result = mysqli_stmt_get_result($statement);
+$notes_result = mysqli_query($conn, $query);
 
 if (!$notes_result) {
     throw new Exception(mysqli_error($conn));

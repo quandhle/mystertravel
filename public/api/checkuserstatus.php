@@ -3,14 +3,10 @@ require_once('config.php');
 
 $query = "SELECT `full_name`, `is_guest`
     FROM `users`
-    WHERE `id` = ?
+    WHERE `id` = $users_id
 ";
 
-$statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($statement, 'd', $users_id);
-mysqli_stmt_execute($statement);
-
-$result = mysqli_stmt_get_result($statement);
+$result = mysqli_query($conn, $query);
 
 if (!$result) {
     throw new Exception(mysqli_error($conn));

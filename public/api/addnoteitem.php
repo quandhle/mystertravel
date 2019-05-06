@@ -1,8 +1,18 @@
 <?php
 
+ob_start(null, 0, PHP_OUTPUT_HANDLER_CLEANABLE ^ PHP_OUTPUT_HANDLER_REMOVABLE);
+require_once('checkloggedin.php');
+ob_end_clean();
+
 require_once('config.php');
 
-$trips_id = $_SESSION['user_data']['trips_id'];
+if (!empty($_SESSION['user_data']['trips_id'])) {
+    $trips_id = intval($_SESSION['user_data']['trips_id']);
+}
+
+$json_input = file_get_contents("php://input");
+$input = json_decode($json_input, true);
+
 $entry = $_POST['entry'];
 $image = $_FILES;
 
@@ -19,13 +29,13 @@ if(isset($_FILES['image']['name'])){
 }
 
 $query = "INSERT INTO `notes` SET
-    `trips_id` = ?,
+    `trips_id` = $trips_id,
     `entry_date` = NOW(),
     `entry` = ?
 ";
 
 $statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($statement, 'ds', $trips_id, $entry);
+mysqli_stmt_bind_param($statement, 's', $entry);
 $result = mysqli_stmt_execute($statement);
 
 if(!$result){

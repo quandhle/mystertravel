@@ -2,19 +2,24 @@
 
 require_once('config.php');
 
-if(!empty($_SESSION['user_data'])){
+if(!empty($_SESSION['user_data']['token'])){
     $token = $_SESSION['user_data']['token'];
 } else {
     $json_input = file_get_contents("php://input");
     $input = json_decode($json_input, true);
-    if(empty($input['token'])){
+    if(empty($_GET['token']) && empty($input['token'])){
         $output['success'] = true;
         $output['login'] = false;
 
         print(json_encode($output));
         exit();
     }
-    $token = $input['token'];
+    if(!empty($_GET['token'])){
+        $token = $_GET['token'];
+    }
+    if(!empty($input['token'])){
+        $token = $input['token'];
+    }
 }
 
 $check_login_query = "SELECT *
@@ -44,12 +49,11 @@ $data = mysqli_fetch_assoc($result);
 $users_id = $data['users_id'];
 $token = $data['token'];
 
-if(!empty($_SESSION['user_data'])){
-    $_SESSION['user_data'] = [
-        'users_id' => $users_id,
-        'token' => $token
-    ];
-}
+$_SESSION['user_data'] = [
+    'users_id' => $users_id,
+    'token' => $token
+];
+
 
 require_once('checkactivetrip.php');
 
