@@ -4,6 +4,12 @@ ob_start(null, 0, PHP_OUTPUT_HANDLER_CLEANABLE ^ PHP_OUTPUT_HANDLER_REMOVABLE);
 require_once('checkloggedin.php');
 ob_end_clean();
 
+require_once('config.php');
+
+$output = [
+    'success' => false
+];
+
 if(!empty($_SESSION['user_data']['trips_id'])){
     $trips_id = $_SESSION['user_data']['trips_id'];
 }
@@ -14,8 +20,8 @@ if (empty($trips_id)) {
 
 $query = "SELECT *,
 	(SELECT SUM(`price`)
-        FROM `budget`
-        WHERE `trips_id` = ?)
+     FROM `budget`
+     WHERE `trips_id` = ?)
     AS 'total_budget'
     FROM `budget`
     WHERE `trips_id` = ?
@@ -40,7 +46,6 @@ if (mysqli_num_rows($result) === 0) {
 }
 
 $data = [];
-
 while ($row = mysqli_fetch_assoc($result)) {
     $data[] = [
         'budget_id' => $row['id'],
