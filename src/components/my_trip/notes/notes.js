@@ -45,7 +45,7 @@ class Notes extends Component {
                 'Content-Type': 'multipart/form-data'
             }
         });
-
+        console.log(resp.data)
         if (resp.data.success) {
             value.notes = '';
             value.imageUpload = null;
