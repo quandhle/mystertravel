@@ -2,9 +2,8 @@
 
 require_once('config.php');
 
-if (!empty($_SESSION['user_data'][''])){
-    $token = $_SESSION['user_data']['token'];
-    $users_id = $_SESSION['user_data']['users_id'];
+if (!empty($_SESSION['user_data'])){
+    $users_id = intval($_SESSION['user_data']['users_id']);
 } else {
     require_once('loginguest.php');
     $output['login'] = true;
@@ -18,14 +17,18 @@ $input = json_decode($json_input, true);
 
 $trips_name = $input['trips_name'];
 
+if(empty($trips_name)){
+    throw new Exception('Please enter a name for the trip');
+}
+
 $query = "INSERT INTO `trips` SET
-    `users_id` = ?,
+    `users_id` = $users_id,
     `trips_name` = ?,
     `start` = NOW()
 ";
 
 $statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($statement, 'ds', $users_id, $trips_name);
+mysqli_stmt_bind_param($statement, 's', $trips_name);
 $result = mysqli_stmt_execute($statement);
 
 if(!$result){

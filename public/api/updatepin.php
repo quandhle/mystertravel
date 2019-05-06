@@ -5,7 +5,7 @@ require_once('config.php');
 $json_input = file_get_contents("php://input");
 $input = json_decode($json_input, true);
 
-$trips_id = $input['trips_id'];
+$trips_id = intval($_SESSION['user_data']['trips_id']);
 $latitude = intval($input['latitude'] * 10000000);
 $longitude = intval($input['longitude'] * 10000000);
 $description = $input['description'];
@@ -25,13 +25,13 @@ if (empty($latitude) || empty($longitude)) {
 $query = "UPDATE `pins` SET
     `description` = ?,
     `updated` = NOW()
-    WHERE `latitude` = ?
-    AND `longitude` = ?
-    AND `trips_id` = ?
+    WHERE `latitude` = $latitude
+    AND `longitude` = $longitude
+    AND `trips_id` = $trips_id
 ";
 
 $statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($statement, 'sddd', $description, $latitude, $longitude, $trips_id);
+mysqli_stmt_bind_param($statement, 's', $description);
 mysqli_stmt_execute($statement);
 
 if (mysqli_affected_rows($conn) !== 1) {

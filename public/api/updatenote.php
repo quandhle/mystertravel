@@ -3,11 +3,11 @@
 require_once('config.php');
 
 $json_input = file_get_contents("php://input");
-$input = json_decode($json_input, true); 
+$input = json_decode($json_input, true);
 
-$trips_id = $input['trips_id'];
+$trips_id = intval($_SESSION['user_data']['trips_id']);
+$id = intval($input['id']);
 $description = $input['description'];
-$id = $input['id'];
 
 if (empty($trips_id)) {
     throw new Exception('Please provide trip id.');
@@ -26,12 +26,12 @@ $query = "UPDATE `notes`
         `entry` = ?,
         `updated` = NOW()
     WHERE
-        `id` = ? AND
-        `trips_id` = ?
+        `id` = $id AND
+        `trips_id` = $trips_id
 ";
 
 $statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($statement, 'sdd', $description, $id, $trips_id);
+mysqli_stmt_bind_param($statement, 's', $description);
 mysqli_stmt_execute($statement);
 
 if (mysqli_affected_rows($conn) !== 1) {
