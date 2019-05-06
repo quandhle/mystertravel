@@ -8,7 +8,7 @@ import keys from './../../../api_keys';
 import SearchBar from './search_bar';
 import MapPopUp from './map_popup';
 import {loadScript} from "../../helper";
-import { passTripId } from '../../actions';
+import { signIn } from '../../actions';
 
 class Map extends Component {
     constructor(props) {
@@ -128,12 +128,11 @@ class Map extends Component {
 
     async showPins() {
 
-        const trips_id = this.props.trips_id;
-
-        const resp = await axios.get(`/api/getmappin.php?trips_id=${trips_id}`);
+        const resp = await axios.get(`/api/getmappin.php?token=${localStorage.getItem('token')}`);
         let pinData = null;
         console.log(resp.data);
         if (resp.data.success) {
+            this.props.signIn(resp.data);
             
             pinData = resp.data.data;
 
@@ -257,7 +256,8 @@ class Map extends Component {
             latitude: parseFloat(lat),
             longitude: parseFloat(lng),
             description: value['pin_description'],
-            name: name
+            name: name,
+            token: localStorage.getItem('token')
         });
 
         if(resp.data.success){
@@ -295,10 +295,18 @@ class Map extends Component {
 }
 
 function mapStateToProps(state){
-
     return{
         trips_id: state.user.trips_id
     }
 }
 
-export default connect(mapStateToProps)(Map);
+function mapDispatchToProps(dispatch){
+    return {
+        signIn: (user) => {
+            dispatch(signIn(user));
+        },
+        dispatch
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Map);

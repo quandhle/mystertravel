@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-export default function auth(WarpComponent, requireAuth=true, to = '/' ){
+export default function (WrappedComponent, requireAuth = true, to = '/' ) {
     class Auth extends Component{
         componentDidMount(){
             this.checkAuth()
@@ -10,24 +10,19 @@ export default function auth(WarpComponent, requireAuth=true, to = '/' ){
             this.checkAuth()
         }
         checkAuth(){
-            const{trips_id, auth} = this.props;
+            const {auth} = this.props;
             if(auth !== requireAuth){
-                if(trips_id){
-                    this.props.history.push('/map')
-                } else {
-                    this.props.history.push(to)
-                }
+                this.props.history.push(to)
             }
         }
         render(){
-            return <WarpComponent {...this.props} />
+            return <WrappedComponent {...this.props} />
         }
     }
 
     function mapStateToProps(state){
         return {
-            auth: state.user.auth,
-            trips_id: state.user.trips_id
+            auth: state.user.auth
         }
     }
 

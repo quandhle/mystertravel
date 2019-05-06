@@ -6,7 +6,6 @@ import './summary.scss';
 import {formatMoney} from './../../../helper';
 import {clearTripId} from "../../../actions";
 import {loadScript} from "./../../../helper";
-import keys from '../../../../api_keys';
 import Timeline from './timeline';
 import MapModal from './mapmodal';
 import ImageModal from './imagemodal';
@@ -41,7 +40,7 @@ class Summary extends Component {
             trips_id =  params.trips_id;
         } else {
             privatePage = true;
-            trips_id = this.props.trips_id;
+            trips_id = localStorage.getItem('trips_id');
         }
 
         this.setState({
@@ -53,8 +52,8 @@ class Summary extends Component {
     }
 
     async getSummaryData() {
-        const {trips_id} = this.state;//?trips_id=${trips_id}
-        const response = await axios.get(`/api/getendtripsummary.php`);
+        const {trips_id} = this.state;
+        const response = await axios.get(`/api/getendtripsummary.php?trips_id=${trips_id}`);
 
         if (response.data.success) {
             const {summary: {trips_name, total_budget}, pins, notes} = response.data;
@@ -71,8 +70,7 @@ class Summary extends Component {
     }
 
     endTrip = async () => {
-        const {trips_id} = this.state;
-        const response = await axios.put('/api/endcurrenttrip.php', {trips_id});
+        const response = await axios.put('/api/endcurrenttrip.php', {token: localStorage.getItem('token')});
 
         if (response.data.success) {
             this.props.clearTripId();
@@ -140,7 +138,7 @@ class Summary extends Component {
 
     render() {
         const {trips_id, tripName, totalSpent, privatePage, pinData, notes, mapModal, imageModal, image} = this.state;
-        const summaryURL = `https://www.mystertravel.com/trip/${trips_id}`;
+        const summaryURL = `https://www.mystertravel.com/trip/_/_/${trips_id}`;
         return(
             <div className="summary-page">
                 <div className="summary-trip-name"><p>{tripName? tripName : 'My Trip'}</p></div>
