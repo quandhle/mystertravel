@@ -7,7 +7,7 @@ ob_end_clean();
 require_once('config.php');
 
 if (!empty($_SESSION['user_data']['trips_id'])) {
-    $trips_id = $_SESSION['user_data']['trips_id'];
+    $trips_id = intval($_SESSION['user_data']['trips_id']);
 }
 
 if (empty($trips_id)) {
