@@ -6,7 +6,7 @@ if (!empty($_SESSION['user_data']['trips_id'])) {
     $trips_id = intval($_SESSION['user_data']['trips_id']);
 } else {
     if(empty($_GET['trips_id'])){
-
+        throw new Exception('Invalid Url');
     }
     $trips_id = intval($_GET['trips_id']);
 }
