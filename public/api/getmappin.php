@@ -7,20 +7,16 @@ ob_end_clean();
 require_once('config.php');
 
 if (!empty($_SESSION['user_data']['trips_id'])) {
-    $trips_id = $_SESSION['user_data']['trips_id'];
+    $trips_id = intval($_SESSION['user_data']['trips_id']);
 }
 
 if (empty($trips_id)) {
     throw new Exception('Please provide trips_id (int) with your request');
 }
 
-$query = "SELECT * FROM `pins` WHERE `trips_id` = ?";
+$query = "SELECT * FROM `pins` WHERE `trips_id` = $trips_id";
 
-$statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($statement, 'd', $trips_id);
-mysqli_stmt_execute($statement);
-
-$result = mysqli_stmt_get_result($statement);
+$result = mysqli_query($conn, $query);
 
 if (!$result) {
     throw new Exception(mysqli_error($conn));

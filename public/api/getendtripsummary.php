@@ -7,7 +7,7 @@ ob_end_clean();
 require_once('config.php');
 
 if (!empty($_SESSION['user_data']['trips_id'])) {
-    $trips_id = $_SESSION['user_data']['trips_id'];
+    $trips_id = intval($_SESSION['user_data']['trips_id']);
 }
 
 if (empty($trips_id)) {
@@ -17,17 +17,13 @@ if (empty($trips_id)) {
 $summary_query = "SELECT `trips_name`,
     (SELECT SUM(`price`)
     FROM `budget`
-    WHERE `trips_id` = ?
+    WHERE `trips_id` = $trips_id
     ) AS 'total_budget'
     FROM `trips`
-    WHERE `id` = ?
+    WHERE `id` = $trips_id
 ";
 
-$summary_statement = mysqli_prepare($conn, $summary_query);
-mysqli_stmt_bind_param($summary_statement, 'dd', $trips_id, $trips_id);
-mysqli_stmt_execute($summary_statement);
-
-$summary_result = mysqli_stmt_get_result($summary_statement);
+$summary_result = mysqli_query($conn, $summary_query);
 
 if (!$summary_result) {
     throw new Exception(mysqli_error($conn));
