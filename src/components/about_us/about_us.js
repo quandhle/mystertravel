@@ -4,7 +4,7 @@ import AboutContact from './about_contact';
 
 class AboutUs extends Component {
     constructor(props){
-        super(props)
+        super(props);
 
         this.data =[
         {
@@ -50,6 +50,7 @@ class AboutUs extends Component {
         ]
 
     }
+
     render() {
         const aboutUs = this.data.map((person) => {
             return (
