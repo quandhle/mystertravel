@@ -1,12 +1,30 @@
 import React, {Component, Fragment} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import axios from "axios";
 
 
 class SideNav extends Component{
     constructor(props){
         super(props)
     }
+
+    componentDidMount() {
+        this.checkLogin();
+    }
+
+    async checkLogin(){
+        const resp = await axios.get(`/api/checkloggedin.php?token=${localStorage.getItem('token')}`);
+
+        const {success, login} = resp.data;
+        const {signIn} = this.props;
+        if(success) {
+            if (login) {
+                signIn(resp.data);
+            }
+        }
+    }
+
     signInUser(){
         const {trips_id} = this.props;
 

@@ -1,8 +1,35 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {signIn} from '../../actions';
 
 import './my_trip.scss';
+import axios from "axios";
 
 class MyTrip extends Component{
+    componentDidMount() {
+        this.checkLogin();
+    }
+
+    async checkLogin(){
+        const resp = await axios.get(`/api/checkloggedin.php?token=${localStorage.getItem('token')}`);
+
+        console.log(resp);
+
+        const {success, login, trips_id} = resp.data;
+        const {signIn, history} = this.props;
+        if(success){
+            if(login){
+                signIn(resp.data);
+
+                if(!trips_id){
+                    history.push('/');
+                }
+            }
+        } else {
+            history.push('/');
+        }
+    }
+
     goToBudget = () => {
         this.props.history.push(`/mytrip/budget`);
     }
@@ -40,4 +67,6 @@ class MyTrip extends Component{
     }
 }
 
-export default MyTrip;
+export default connect(null, {
+    signIn
+})(MyTrip);

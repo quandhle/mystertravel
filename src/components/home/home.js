@@ -23,7 +23,7 @@ class Home extends Component {
         }
     }
     async checkLogin(){
-        const resp = await axios.get('/api/checkloggedin.php');
+        const resp = await axios.get(`/api/checkloggedin.php?token=${localStorage.getItem('token')}`);
 
         console.log(resp);
 

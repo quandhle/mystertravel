@@ -22,7 +22,7 @@ const App = () => (
                 <Route path='/mytrip' component={MyTripRoutes}/>
                 <Route path='/aboutus' component={AboutUs}/>
                 <Route path='/account' component={Account}/>
-                <Route path='/trip/:trips_id' component={Summary}/>
+                <Route path='/trip/:date/:tripname/:trips_id' component={Summary}/>
                 <Route component={NotFound}/>
             </Switch>
         </div>

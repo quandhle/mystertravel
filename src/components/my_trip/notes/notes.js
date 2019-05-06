@@ -6,7 +6,7 @@ import NoteItem from './note_item';
 import Map from '../../map';
 import './notes.scss';
 import SpinnerModal from '../../general/spinnerModal';
-import {passTripId} from '../../../actions';
+import {signIn} from '../../../actions';
 
 class Notes extends Component {
     constructor(props) {
@@ -38,6 +38,7 @@ class Notes extends Component {
         data.append('trips_id', trips_id);
         data.append('entry', notes);
         data.append('image', image);
+        data.append('token', localStorage.getItem('token'));
 
         const resp = await axios.post('/api/addnoteitem.php', data, {
             headers: {
@@ -61,12 +62,11 @@ class Notes extends Component {
 
     async getNoteList() {
         // const { trips_id } = this.props.trips_id;?trips_id=${trips_id}
-        const resp = await axios.get(`/api/getnotelist.php`);
-        const {passTripId} = this.props;
-        const {notes, success, trips_id} = resp.data
-        console.log(resp.data)
+        const resp = await axios.get(`/api/getnotelist.php?token=${localStorage.getItem('token')}`);
+        const {signIn} = this.props;
+        const {notes, success} = resp.data
         if (success) {
-            passTripId(trips_id);
+            signIn(resp.data)
             this.setState({
                 note: notes
             });
@@ -79,7 +79,8 @@ class Notes extends Component {
         const {trips_id} = this.props.trips_id;
         const resp = await axios.put('/api/deletenoteitem.php',{
             trips_id,
-            note_id: note.note_id
+            note_id: note.note_id,
+            token: localStorage.getItem('token')
         })
 
         if (resp.data.success) {
@@ -145,5 +146,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps,{
-    passTripId
+    signIn
 })(Notes);

@@ -6,7 +6,7 @@ import BudgetItem from './budget_item';
 import './budget.scss';
 import Map from '../../map';
 import SpinnerModal from "../../general/spinnerModal";
-import {passTripId} from '../../../actions';
+import {signIn} from '../../../actions';
 
 
 
@@ -37,7 +37,8 @@ class Budget extends Component{
             trips_id,
             description: value.description,
             price: parseFloat(value.price * 100),
-            category: value.category
+            category: value.category,
+            token: localStorage.getItem('token')
         });
 
         if(resp.data.success){
@@ -58,6 +59,7 @@ class Budget extends Component{
         const resp = await axios.put('/api/deletebudgetitem.php', {
             trips_id,
             budget_id: budgetItem.budget_id,
+            token: localStorage.getItem('token')
         });
         if(resp.data.success){
             this.getBudgetList();
@@ -67,12 +69,11 @@ class Budget extends Component{
     }
     async getBudgetList() {
         // const {trips_id} = this.props.trips_id; //?trips_id=${trips_id}
-        const resp = await axios.get(`/api/getbudgetlist.php`);
-        console.log(resp.data)
-        const {passTripId} = this.props;
-        const {budget, success, trips_id} = resp.data
+        const resp = await axios.get(`/api/getbudgetlist.php?token=${localStorage.getItem('token')}`);
+        const {signIn} = this.props;
+        const {budget, success} = resp.data
         if (success) {
-            passTripId(trips_id);
+            signIn(resp.data);
             this.setState({
                 budget
             });
@@ -130,5 +131,5 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps, {
-    passTripId
+    signIn
 })(Budget);

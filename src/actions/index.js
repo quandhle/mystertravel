@@ -3,6 +3,7 @@ import types from './types';
 export function signIn(user) {
     console.log(user)
     localStorage.setItem('signedIn', 'true');
+    localStorage.setItem('trips_id', user.trips_id);
     localStorage.setItem('token', user.token);
     return {
         type: types.SIGN_IN,
@@ -14,6 +15,7 @@ export function signIn(user) {
 
 export function signOut(){
     localStorage.removeItem('signedIn');
+    localStorage.removeItem('trips_id');
     localStorage.removeItem('token');
     return {
         type:types.SIGN_OUT
