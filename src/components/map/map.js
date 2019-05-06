@@ -30,6 +30,7 @@ class Map extends Component {
         this.getCurrentLocation = this.getCurrentLocation.bind(this);
         this.handleClear = this.handleClear.bind(this);
         this.handleMapClick = this.handleMapClick.bind(this);
+        this.deletePin = this.deletePin.bind(this);
     }
 
     componentDidMount() {
@@ -126,6 +127,10 @@ class Map extends Component {
         setTimeout(this.toggleModal, 1000);
     }
 
+    deletePin() {
+        console.log('Delete pin called');
+    }
+
     async showPins() {
 
         const trips_id = this.props.trips_id;
@@ -133,6 +138,7 @@ class Map extends Component {
         const resp = await axios.get(`/api/getmappin.php?trips_id=${trips_id}`);
         let pinData = null;
         console.log(resp.data);
+
         if (resp.data.success) {
             
             pinData = resp.data.data;
@@ -148,7 +154,7 @@ class Map extends Component {
                         map: this.state.map
                     });
 
-                    const content = `<h6 id="infoWindow">${item.description}</h6>`;
+                    const content = `<h6 id="infoWindow">${item.description}</h6><br><i class="fa fa-trash" style="float: right" aria-hidden="true"></i>`;
 
                     const infowindow = new google.maps.InfoWindow({
                         content: content
