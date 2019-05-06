@@ -1,22 +1,26 @@
 <?php
-use function GuzzleHttp\json_encode;
 
-require_once('config.php');
-ob_start();
+ob_start(null, 0, PHP_OUTPUT_HANDLER_CLEANABLE ^ PHP_OUTPUT_HANDLER_REMOVABLE);
 require_once('checkloggedin.php');
 ob_end_clean();
+
+require_once('config.php');
+
+$output = [
+    'success' => false
+];
 
 if (!empty($_SESSION['user_data']['users_id'])) {
     $users_id = $_SESSION['user_data']['users_id'];
 }
 
 if (empty($users_id)) {
-    throw new Exception('User does not exist.');
+    throw new Exception('User does not exist');
 }
 
 $query = "SELECT *
     FROM `trips`
-    WHERE `users_id` = 2
+    WHERE `users_id` = $users_id
     AND NOT `end` IS NULL
 ";
 
