@@ -6,12 +6,8 @@ ob_end_clean();
 
 require_once('config.php');
 
-$output = [
-    'success' => false
-];
-
 if (!empty($_SESSION['user_data']['users_id'])) {
-    $users_id = $_SESSION['user_data']['users_id'];
+    $users_id = intval($_SESSION['user_data']['users_id']);
 }
 
 if (empty($users_id)) {
