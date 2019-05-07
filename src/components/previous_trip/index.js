@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './previous.scss';
 import axios from 'axios';
+import TripList from './trip_list';
 
 class PreviousTrips extends Component {
     constructor(props) {
@@ -13,7 +14,7 @@ class PreviousTrips extends Component {
 
     async componentDidMount() {
         const resp = await axios.get('/api/getprevioustrip.php');
-
+        console.log(resp.data)
         this.setState({
             trips: resp.data.data
         });
@@ -22,14 +23,12 @@ class PreviousTrips extends Component {
     render() {
         const {trips} = this.state;
         
-        let tripsButton = trips.map(item => {
-            return (
-                <div key={item.trips_id}>{item.trips_name}</div>
-            );
+        let tripsList = trips.map(item => {
+            return <TripList key={item.trips_id} item={item}/>;
         })
 
         return (
-            <div className="previous-page">{tripsButton}</div>
+            <div className="previous-page">{tripsList}</div>
         );
     }
 }

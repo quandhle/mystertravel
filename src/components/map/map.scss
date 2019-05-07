@@ -133,17 +133,10 @@ main {
             color: white;
             background-color: #fa8d62;
             width: 60%;
-
+            margin-bottom: 10px;
             &:hover {
                 background-color: #e26a3b;
             }
-        }
-
-        .cancel-add-btn {
-            color: white;
-            background-color: #70a39c;
-            width: 60%;
-            margin: 5px 0;
         }
     }
 }
