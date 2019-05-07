@@ -1,15 +1,12 @@
 .about-container {
-    top: 0;
     height: 90vh;
 
     .about-person {
+        background-color: rgba(164, 216, 208, 0.9);
         margin: 5px 0;
-        width: 100%;
         padding: 5px;
         font-size: 1.2em;
-        transition: 0.5s;
         color: #2b616d;
-        background-color: rgba(164, 216, 208, 0.9);
 
         .about-top {
             position: relative;
@@ -24,9 +21,6 @@
                     width: 100%;
                     border-radius: 50%;
                     border: 2px solid white;
-                    -webkit-box-shadow: 0px 0px 15px -5px rgba(213,224,223,1);
-                    -moz-box-shadow: 0px 0px 15px -5px rgba(213,224,223,1);
-                    box-shadow: 0px 0px 15px -5px rgba(213,224,223,1);
                 }
             }
             .about-name {
@@ -51,23 +45,22 @@
 
     .first {
         background-image: url('../../assets/images/aboutus.jpg');
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        text-align: center;
-        text-transform: uppercase;
-        letter-spacing: 7px;
-        font-size: 3em;
         background-repeat: no-repeat;
         background-attachment: fixed; 
         background-position-x: 70%;
         background-position-y: bottom;
         background-size: cover;
-        overflow-y: auto;
+        display: flex;
         height: 100%;
+        overflow-y: auto;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 7px;
+        font-size: 3em;
 
-        .team-title{
+        .team-title {
             font-size: 0.7em;
         }
     }
@@ -77,29 +70,11 @@
         background-color: transparent;
 
         .aboutUs {
-            
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             padding: 5%;
             width: 100%;
-        }
-
-        .footer {
-            width: 100%;
-            bottom: 0;
-            // background-color: rgba(164, 216, 208, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 10%;
-
-            a {
-                text-decoration: none;
-                text-transform: uppercase;
-                letter-spacing: 3px;
-                color: white;
-            }
         }
     }
 }
@@ -107,12 +82,7 @@
 @media (min-width: 900px) {
     .about-container .about-person {
         width: 40%;
-    }
-
-    .about-container {
-        .about-person {
-            margin: 20px auto 20px auto;
-        }
+        margin: 20px auto 20px auto;
     }
 
     .aboutUs {
@@ -123,12 +93,7 @@
         justify-content: space-evenly;
     }
 
-    .about-container{
-        .first{
-            .team-title{
-                font-size: 1em;
-            }
-        }
-
+    .about-container .first .team-title {
+        font-size: 1em;
     }
 }

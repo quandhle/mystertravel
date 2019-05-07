@@ -1,47 +1,39 @@
-.sign-up-page{
-    width:100%;
-    height: 90vh;
-    position: absolute;
-    top: 10vh;
+.sign-up-page {
     background-image: url("../../../assets/images/sign_up.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    position: absolute;
+    width:100%;
+    height: 90vh;
 
-    .message{
+
+    .message {
         color: rgb(125, 0, 0);
         text-align: center;
         font-size: 1.2em;
     }
 
     .sign-up-form{
-
-        transition: 0.5s;
-        overflow-y: hidden;
         background-color: rgba(178, 219, 213, 0.9);
+        overflow-y: hidden;
         border-radius: 15px;
         margin: 10px;
-
-
         -webkit-box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
         -moz-box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
         box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
 
-        .sign-up-title{
+        .sign-up-title {
             text-align: center;
             font-family: 'Dancing Script', cursive;
             font-size: 2em;
             color:#2b616d;
-            width: 40%;
             margin: 5px auto;
         }
 
-        .signup-input{
-            width: 100%;
+        .signup-input {
             padding: 15px;
-            box-sizing: border-box;
 
-    
-            input{
+            input {
                 width: 100%;
                 outline: none;
                 border: 1px solid transparent;
@@ -52,15 +44,12 @@
     
         }
 
-        .signup-btn{
-            margin: auto;
-            width: 100%;
+        .signup-btn {
             text-align: center;
 
-            .btn{
-                display: inline-block;
-                margin: 5px;
+            .btn {
                 background-color: #fa8d62;
+                margin: 5px;
                 color: white;
             }
 
@@ -71,7 +60,7 @@
 }
 
 @media (min-width: 1025px) {
-    .sign-up-page .sign-up-form{
+    .sign-up-page .sign-up-form {
         position: relative;
         left: 30%;
         width: 40%;

@@ -1,25 +1,20 @@
-.signout-page{
-    text-align: center;
-    width:100%;
-    height: 90vh;
-    position: absolute;
-    top: 10vh;
+.signout-page {
     background-image: url("../../../assets/images/sign_out.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    height: 90vh;
+    text-align: center;
     font-family: 'Dancing Script', cursive;
 
-    h2{
+    h2 {
         position: relative;
         top: 20%;
         color:#FFFFFF;
-        border-radius: 15px;
     }
 }
 
-@media (max-width: 420px){
-    .signout-page{
+@media (max-width: 900px){
+    .signout-page {
         background-position-x: 48%;
     }
-    
 }
