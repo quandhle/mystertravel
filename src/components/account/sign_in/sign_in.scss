@@ -1,49 +1,39 @@
-.sign-in-page{
-    width:100%;
-    height: 90vh;
-    position: absolute;
-    top: 10vh;
+.sign-in-page {
     background-image: url("../../../assets/images/sign_in.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    position: absolute;
+    width:100%;
+    height: 90vh;
+    top: 10vh;
 
-    .message{
+    .message {
         color: rgb(125, 0, 0);
         text-align: center;
         font-size: 1.2em;
     }
 
-    .sign-in{
-        position: relative;
-        top: 10%;
-    }
-
-    .sign-in-form{
-        transition: 0.5s;
-        overflow-y: hidden;
+    .sign-in-form {
         background-color: rgba(178, 219, 213, 0.9);
+        overflow-y: hidden;
         border-radius: 15px;
         margin: 10px;
-
         -webkit-box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
         -moz-box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
         box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
 
-        .sign-in-title{
+        .sign-in-title {
+            margin: 5px auto;
             text-align: center;
             font-family: 'Dancing Script', cursive;
             font-size: 2em;
             color:#2b616d;
-            width: 40%;
-            margin: 5px auto;
         }
 
-        .signin-input{
-            width: 100%;
+        .signin-input {
             padding: 15px;
-            box-sizing: border-box;
-    
-            input{
+
+            input {
                 width: 100%;
                 outline: none;
                 border: 1px solid transparent;
@@ -51,24 +41,21 @@
                 border-bottom: 1px solid #94c9c1;
                 color: #2b616d;
             }
-    
         }
 
-        .signin-btn{
-            margin: auto;
-            width: 100%;
+        .signin-btn {
             text-align: center;
 
-            .signup-btn, button{
+            .signup-btn, button {
+                background-color: #fa8d62;
                 display: inline-block;
                 margin: 5px;
-                background-color: #fa8d62;
                 color: white;
             }
 
-            .signup-btn{
-                cursor: pointer;
+            .signup-btn {
                 background-color: #2b616d;
+                cursor: pointer;
             }
 
         }
@@ -78,7 +65,7 @@
 }
 
 @media (min-width: 1025px) {
-    .sign-in-page .sign-in-form{
+    .sign-in-page .sign-in-form {
         position: relative;
         left: 30%;
         width: 40%;
