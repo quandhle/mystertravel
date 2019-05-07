@@ -153,7 +153,7 @@ class Map extends Component {
                         map: this.state.map
                     });
 
-                    const content = `<h6 id="infoWindow">${item.description}</h6><br><i class="fa fa-trash" style="float: right" aria-hidden="true"></i>`;
+                    const content = `<h6 id="infoWindow">${item.description}</h6><br><i class="fa fa-trash"></i>`;
 
                     const infowindow = new google.maps.InfoWindow({
                         content: content
