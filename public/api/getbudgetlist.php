@@ -15,9 +15,9 @@ if (empty($trips_id)) {
 }
 
 $query = "SELECT *,
-	(SELECT SUM(`price`)
-        FROM `budget`
-        WHERE `trips_id` = $trips_id)
+    (SELECT SUM(`price`)
+    FROM `budget`
+    WHERE `trips_id` = $trips_id)
     AS 'total_budget'
     FROM `budget`
     WHERE `trips_id` = $trips_id
