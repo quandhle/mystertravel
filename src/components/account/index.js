@@ -4,15 +4,14 @@ import SignIn from './sign_in';
 import SignOut from './sign_out';
 import SignUp from './sign_up';
 import NotFound from '../404';
-import auth from '../../hoc/auth';
 
 export default props => {
     const {match} = props;
     return (
         <Switch>
-            <Route path={`${match.path}/signin`} component={auth(SignIn, false, '/mytrip')} />
+            <Route path={`${match.path}/signin`} component={SignIn} />
             <Route path={`${match.path}/signout`} component={SignOut} />
-            <Route path={`${match.path}/signup`} component={auth(SignUp, false, '/mytrip')} />
+            <Route path={`${match.path}/signup`} component={SignUp} />
             <Route component={NotFound}/>
         </Switch>
     )
