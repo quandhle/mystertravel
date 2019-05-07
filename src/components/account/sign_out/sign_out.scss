@@ -1,6 +1,5 @@
 .signout-page {
     background-image: url("../../../assets/images/sign_out.jpg");
-    background-repeat: no-repeat;
     background-size: cover;
     height: 90vh;
     text-align: center;
@@ -9,11 +8,11 @@
     h2 {
         position: relative;
         top: 20%;
-        color:#FFFFFF;
+        color: #FFFFFF;
     }
 }
 
-@media (max-width: 900px){
+@media (max-width: 900px) {
     .signout-page {
         background-position-x: 48%;
     }
