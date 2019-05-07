@@ -2,6 +2,7 @@ import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 
 import Home from './home';
+import Previous from './previous_trip';
 import Nav from './nav';
 import Map from './map';
 import MyTripRoutes from './my_trip/my_trip_routes';
@@ -18,6 +19,7 @@ const App = () => (
             <Nav/>
             <Switch>
                 <Route exact path='/' component={Home}/>
+                <Route exact path='/previoustrips' component={Previous}/>
                 <Route path='/map' component={Map}/>
                 <Route path='/mytrip' component={MyTripRoutes}/>
                 <Route path='/aboutus' component={AboutUs}/>

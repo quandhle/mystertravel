@@ -18,7 +18,7 @@ class SideNav extends Component{
                     text: 'Current Trip'
                 },
                 {
-                    to: '/posttrip',
+                    to: '/previoustrips',
                     text: 'Previous Trips'
                 },
                 {
@@ -33,7 +33,7 @@ class SideNav extends Component{
                     text: 'Home'
                 },
                 {
-                    to: '/posttrip',
+                    to: '/previoustrips',
                     text: 'Previous Trips'
                 },
                 {

@@ -4,6 +4,10 @@ ob_start(null, 0, PHP_OUTPUT_HANDLER_CLEANABLE ^ PHP_OUTPUT_HANDLER_REMOVABLE);
 require_once('checkloggedin.php');
 ob_end_clean();
 
+$output = [
+    'success' => false
+];
+
 require_once('config.php');
 
 if (!empty($_SESSION['user_data']['users_id'])) {
@@ -29,7 +33,6 @@ if(!$result){
 if(mysqli_num_rows($result) === 0){
     $output['success'] = true;
     $output['data'] = null;
-
     print(json_encode($output));
     exit();
 }
