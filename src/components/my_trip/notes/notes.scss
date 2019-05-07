@@ -18,6 +18,7 @@
         }
         
         .fa-angle-double-down:hover {
+            cursor: pointer;
             position: relative;
             top: 5px;
         }
@@ -115,6 +116,7 @@
                 transition: 0.2s;
                 &:hover, &:active{
                     transform: rotate(180deg);
+                    cursor: pointer;
                 }
             }
         }
@@ -150,13 +152,16 @@
             }
         }
     }
+    main {
+        display: none;
+    }
 }
 
 @media (min-width: 1025px) {
     .notes-page {
         width: 100vw;
 
-        .note-section{
+        .note-section {
             width: 40%;
             height: 100%;
             display: inline-block;
@@ -165,12 +170,12 @@
         }
 
 
-        .popup-container .popup-content{
+        .popup-container .popup-content {
 
             .update-modal, .map-modal {
                 width: 30%;
             }
-            .map-modal{
+            .map-modal {
                 position: relative;
                 left: 58%;
             }
@@ -205,16 +210,6 @@
 
             .geo-btn {
                 left: 45%;
-            }
-        }
-    }
-}
-
-@media (max-width: 1024px) {
-    .my-trip-page {
-        .notes-page {
-            main {
-                display: none;
             }
         }
     }
