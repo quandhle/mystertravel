@@ -14,6 +14,7 @@
         padding: 10px 15px;
 
         .fa-angle-double-down:hover {
+            cursor: pointer;
             position: relative;
             top: 5px;
         }
@@ -51,10 +52,6 @@
             background-color: inherit;
             border-bottom: 1px solid #94c9c1;
             color:#2b616d;
-        }
-
-        #price:before {
-            content: '$';
         }
     }
 
@@ -120,7 +117,8 @@
                 .budget-icon {
                     color: #b2dbd5;
                     transition: 0.2s;
-
+                    cursor: pointer;
+                    
                     &:hover, &:active {
                        transform: rotate(180deg);
                     }
@@ -162,11 +160,8 @@
             }
         }
     }
-
-    @media (max-width: 1024px) {
-        main {
-            display: none;
-        }
+    main {
+        display: none;
     }
 }
 
@@ -212,12 +207,12 @@
                 left: 45%;
             }
         }
-        .popup-container .popup-content{
+        .popup-container .popup-content {
 
             .update-modal, .map-modal {
                 width: 30%;
             }
-            .map-modal{
+            .map-modal {
                 position: relative;
                 left: 58%;
             }

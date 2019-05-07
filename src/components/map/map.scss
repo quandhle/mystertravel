@@ -1,6 +1,5 @@
 main {
     height: 90vh;
-    // cursor: url('../../assets/images/marker.png') !important;
 
     .search-bar-holder {
         background-color: transparent;
@@ -150,12 +149,10 @@ main {
 }
 
 @media (min-width: 1025px){
-    .popup-container .popup-content{
+    .popup-container .popup-content .map-modal {
+        position: relative;
+        left: 35%;
+        width: 30%;
+    }
 
-        .map-modal {
-            position: relative;
-            left: 35%;
-            width: 30%;
-        }
-    } 
 }

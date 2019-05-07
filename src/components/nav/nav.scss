@@ -1,4 +1,4 @@
-.nav-box{
+.nav-box {
     color:#FFFFFF;
     background-color: #a4d8d0;
     height: 10vh;
@@ -9,18 +9,18 @@
         font-weight: 700;
         padding: 0;
 
-        .nav-menu, .nav-title{
+        .nav-menu, .nav-title {
             display: inline-block;
 
-            a{
+            a {
                 color:#FFFFFF;
                 transition: 0.5s;
-                &:hover{
+                &:hover {
                     transform: rotate(90deg);
                 }
             }
         }
-        .nav-title{
+        .nav-title {
             font-family: 'Dancing Script', cursive;
             position: absolute;
             left: 50%;
@@ -30,7 +30,7 @@
     }
 }
 
-.side-nav-box{
+.side-nav-box {
     display:block;
     background-color: rgba(255, 255, 255, 0.7);
     height: 100%;
@@ -41,7 +41,7 @@
     font-size: 1.5em;
     z-index: 3;
 
-    .side-nav{
+    .side-nav {
         position: absolute;
         top: 0;
         background-color: #a4d8d0;
@@ -53,7 +53,7 @@
         overflow-x: hidden;
         transition: 0.5s;
 
-        .nav-profile{
+        .nav-profile {
             height: 10%;
             margin: 10px 10px 0 10px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.5);
@@ -64,17 +64,17 @@
             }
         }
 
-        .side-nav-links, .aboutus-link{
+        .side-nav-links, .aboutus-link {
             list-style: none;
             padding: 0;
 
-            li{
+            li {
                 height: 50px;
                 margin: 10px;
                 transition: 0.5s;
                 line-height: 50px;
 
-                a{
+                a {
                     display: block;
                     color: #417970;
                     text-decoration: none;
@@ -83,7 +83,7 @@
             }
         }
 
-        .aboutus-link{
+        .aboutus-link {
             position: relative;
             top:30%
         }

@@ -48,7 +48,8 @@
         position: relative;
         margin: 20px 0 30px;
 
-        .toggle-timeline{
+        .toggle-timeline {
+            cursor: pointer;
             text-align: center;
             font-size: 1.2em;
             color: #2b616d;
@@ -146,7 +147,7 @@
             }
         }
 
-        .timeline-inner{
+        .timeline-inner {
             max-height: 0;
             overflow-y: hidden;
             transition: max-height 0.7s ease-in-out;
@@ -202,11 +203,12 @@
         }
 
         button:hover {
+            cursor: pointer;
             background-color: #ea7d52;
         }
     }
 
-    .popup-container{
+    .popup-container {
     position: fixed;
     top:0;
     left:0;
@@ -216,7 +218,7 @@
     z-index: 1000;
     transition: 0.5s;
 
-    .popup-content{
+    .popup-content {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -224,7 +226,7 @@
         width: 90%;
 
 
-        .summary-image-modal{
+        .summary-image-modal {
             width: 100%;
             background-color: rgba(164, 216, 208, 0.95);
             border-radius: 15px;
@@ -284,7 +286,7 @@
 
 @media (min-width: 1025px) {
     .summary-page {
-        .popup-container{
+        .popup-container {
             .popup-content .summary-image-modal {
                 width: 80%;
                 position: relative;

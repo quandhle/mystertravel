@@ -1,12 +1,12 @@
-.input-box{
+.input-box {
     padding: 0;
 
-    .error-input{
+    .error-input {
         color:#168199;
         margin: 0;
     }
 
-    textarea{
+    textarea {
         resize: none;
         height:100%;
         width:100%;
@@ -14,7 +14,7 @@
     }
 }
 
-.popup-container{
+.popup-container {
     position: absolute;
     top:0;
     left:0;
@@ -24,16 +24,16 @@
     z-index: 1000;
     transition: 0.5s;
 
-    .popup-content{
+    .popup-content {
         position: absolute;
         top: 30%;
         left: 5%;
         width: 90%;
 
-        .popup-children{
+        .popup-children {
             width: 100%;
 
-            .close-popup{
+            .close-popup {
                 float: right;
                 position: relative;
                 right: 10px;
