@@ -114,12 +114,9 @@
 
             .budget-item {
                 color: #b2dbd5;
-                width:90%;
+                width:100%;
             }
 
-            .budget-delete {
-                width: 10%;
-            }
                 .budget-icon {
                     color: #b2dbd5;
                     transition: 0.2s;
@@ -215,5 +212,15 @@
                 left: 45%;
             }
         }
+        .popup-container .popup-content{
+
+            .update-modal, .map-modal {
+                width: 30%;
+            }
+            .map-modal{
+                position: relative;
+                left: 58%;
+            }
+        } 
     }
 }

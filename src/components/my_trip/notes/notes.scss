@@ -39,7 +39,7 @@
 
         .image-inputbox {
             &>div {
-                display: inline;
+                display: inline-block;
             }
 
             input {
@@ -50,6 +50,7 @@
     }
 
     .notes-input {
+        width: 100%;
         padding: 0 15px;
         box-sizing: border-box;
 
@@ -153,52 +154,32 @@
 
 @media (min-width: 1025px) {
     .notes-page {
-        width: 100%;
+        width: 100vw;
 
-        .notes-form {
+        .note-section{
             width: 40%;
             height: 100%;
-            overflow-y: scroll;
+            display: inline-block;
+            vertical-align: top;
+            overflow-y: scroll; 
         }
 
-        .notes-box {
-            .notes {
-                .popup-container {
-                    .popup-content {
-                        left: 15%;
 
-                        .popup-children {
-                            width: 75%;
+        .popup-container .popup-content{
 
-                            form {
-                                height: 50%;
-
-                                div {
-                                    height: 100%;
-
-                                    textarea {
-                                        height: 100%;
-                                        margin: 0;
-                                    }
-                                }
-                            }
-
-                            .updatebutton {
-                                width: 100px;
-                                background-color: black;
-                                margin: 10px 0 0 0;
-                            }
-                        }
-                    }
-                }
+            .update-modal, .map-modal {
+                width: 30%;
             }
-        }
+            .map-modal{
+                position: relative;
+                left: 58%;
+            }
+        } 
+
 
         main {
             width: 60%;
-            left: 40%;
-            position: absolute;
-            top: 10vh;
+            display: inline-block;
 
             .search-bar-holder {
                 width: 90%;
@@ -210,11 +191,11 @@
             }
 
             .map {
-                top: 0;
-                width: 100%;
+                width: 60%;
             }
 
             .map-btn {
+                width: 100%;
                 height: 5%;
                 z-index: 1;
                 position: absolute;

@@ -148,3 +148,14 @@ main {
         }
     }
 }
+
+@media (min-width: 1025px){
+    .popup-container .popup-content{
+
+        .map-modal {
+            position: relative;
+            left: 35%;
+            width: 30%;
+        }
+    } 
+}

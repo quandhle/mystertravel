@@ -128,8 +128,9 @@
     }
 }
 
-@media (min-width: 900px) {
-    .home-page {
+@media (min-width: 1025px) {
+    .home-page .home-page-btn .btn{
+        width: 40%;
     }
 }
 

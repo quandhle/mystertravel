@@ -10,6 +10,7 @@ import AboutUs from './about_us';
 import NotFound from './404';
 import Account from './account';
 import Summary from './my_trip/summary';
+import auth from '../hoc/auth';
 
 import '../assets/css/app.scss';
 
@@ -20,8 +21,8 @@ const App = () => (
             <Switch>
                 <Route exact path='/' component={Home}/>
                 <Route path='/previoustrips' component={Previous}/>
-                <Route path='/map' component={Map}/>
-                <Route path='/mytrip' component={MyTripRoutes}/>
+                <Route path='/map' component={auth(Map)}/>
+                <Route path='/mytrip' component={auth(MyTripRoutes)}/>
                 <Route path='/aboutus' component={AboutUs}/>
                 <Route path='/account' component={Account}/>
                 <Route path='/trip/:date/:tripname/:trips_id' component={Summary}/>

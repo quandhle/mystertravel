@@ -49,12 +49,12 @@ class Summary extends Component {
         }, this.getSummaryData);
 
         loadScript('https://platform.twitter.com/widgets.js');
-    }
+    }s
 
     async getSummaryData() {
         const {trips_id} = this.state;
         const response = await axios.get(`/api/getendtripsummary.php?trips_id=${trips_id}`);
-
+console.log(response.data)
         if (response.data.success) {
             const {summary: {trips_name, total_budget}, pins, notes} = response.data;
 
@@ -65,7 +65,7 @@ class Summary extends Component {
                 notes
             });
         } else {
-            console.error(resp.data.error);
+            console.error(response.data.error);
         }
     }
 

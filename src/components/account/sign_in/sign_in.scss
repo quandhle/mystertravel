@@ -76,3 +76,11 @@
 
     
 }
+
+@media (min-width: 1025px) {
+    .sign-in-page .sign-in-form{
+        position: relative;
+        left: 30%;
+        width: 40%;
+    }
+}

@@ -124,13 +124,15 @@ class Notes extends Component {
         return (
             <div className="notes-page">
                 <SpinnerModal open={spinner}/>
-                <div className="notes-form">
-                    <div className="notes-input-toggle" onClick={this.toggleInput}>
-                         Add Note <i className="fas fa-angle-double-down"></i>
-                    </div>
-                    <NotesForm notes={this.handleInput} style={showInput} />
-                    <div className="notes-box">
-                        {noteList}
+                <div className="note-section">
+                    <div className="notes-form">
+                        <div className="notes-input-toggle" onClick={this.toggleInput}>
+                             Add Note <i className="fas fa-angle-double-down"></i>
+                        </div>
+                        <NotesForm notes={this.handleInput} style={showInput} />
+                        <div className="notes-box">
+                            {noteList}
+                        </div>
                     </div>
                 </div>
                 <Map/>
