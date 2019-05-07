@@ -69,3 +69,11 @@
 
     
 }
+
+@media (min-width: 1025px) {
+    .sign-up-page .sign-up-form{
+        position: relative;
+        left: 30%;
+        width: 40%;
+    }
+}
