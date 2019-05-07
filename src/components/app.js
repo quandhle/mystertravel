@@ -19,7 +19,7 @@ const App = () => (
             <Nav/>
             <Switch>
                 <Route exact path='/' component={Home}/>
-                <Route exact path='/previoustrips' component={Previous}/>
+                <Route path='/previoustrips' component={Previous}/>
                 <Route path='/map' component={Map}/>
                 <Route path='/mytrip' component={MyTripRoutes}/>
                 <Route path='/aboutus' component={AboutUs}/>
