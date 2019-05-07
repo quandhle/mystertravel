@@ -6,42 +6,44 @@ import {signIn} from '../../actions';
 import './home.scss';
 
 class Home extends Component {
-    toSignInPage= ()=>{
-        this.props.history.push("/account/signin")
+    toSignInPage = () => {
+        this.props.history.push("/account/signin");
     }
-    checkSignIn(){
+
+    checkSignIn() {
         const{user} = this.props;
 
-        if(!user.auth){
-            return(
+        if(!user.auth) {
+            return (
                 <div className="home-page-btn sign-in-btn">
                     <button onClick={this.toSignInPage} className="home-start-btn btn">Sign In</button>
                 </div>
-            )
+            );
         } else {
             return null;
         }
     }
-    async checkLogin(){
+
+    async checkLogin() {
         const resp = await axios.get(`/api/checkloggedin.php?token=${localStorage.getItem('token')}`);
+        const {success, login, trips_id} = resp.data;
+        const {signIn, history} = this.props;
 
-        console.log(resp);
-
-        const {success, login, trips_id} = resp.data
-        const {signIn, history} = this.props
-        if(success){
-            if(login){
+        if(success) {
+            if(login) {
                 signIn(resp.data);
 
-                if(trips_id){
+                if(trips_id) {
                     history.push('/mytrip');
                 }
             }
         }
     }
-    componentDidMount(){
+
+    componentDidMount() {
         this.checkLogin();
     }
+
     render() {
         const{user} = this.props;
         const signInCheck = this.checkSignIn();
@@ -54,14 +56,14 @@ class Home extends Component {
                 <UserStart history={this.props.history} signIn={user.auth}/>
                 {signInCheck}
             </div>
-        )
+        );
     }
 }
 
 function mapStateToProps(state){
-   return{
+   return {
       user: state.user 
-   } 
+   };
 }
 
 export default connect(mapStateToProps, {

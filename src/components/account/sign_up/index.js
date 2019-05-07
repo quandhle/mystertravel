@@ -8,19 +8,21 @@ import './sign_up.scss';
 class SignIn extends Component{
     constructor(props) {
         super(props);
+
         this.state = {
             message: ''
-        }
+        };
+
         this.handleSignUp = this.handleSignUp.bind(this);
     }
     
     async handleSignUp(values) {
-        const {nickname, email, password} = values
+        const {nickname, email, password} = values;
         const resp = await axios.post('/api/signup.php', {
             nickname,
             email,
             password
-        })
+        });
 
         if(resp.data.success) {
             this.props.signIn(resp.data);
@@ -28,16 +30,16 @@ class SignIn extends Component{
         } else {
             this.setState({
                 message: resp.data.error
-            })
+            });
         }
     }
-    render() {
 
-        return(
+    render() {
+        return (
             <div className="sign-up-page">
                 <SignUpForm signUp={this.handleSignUp} message={this.state.message}/>
             </div>
-        )
+        );
     }
 }
 

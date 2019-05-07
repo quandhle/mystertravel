@@ -3,19 +3,26 @@ import {formatMoney, formatEntries} from '../../../helper';
 import UpdateBudget from './update_budget';
 
 class BudgetItem extends Component {
-    state = {
-        modal: false
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            modal: false
+        };
+
+        this.toggleModal = this.toggleModal.bind(this);
     }
 
-    toggleModal = () => {
+    toggleModal() {
         this.setState({
             modal: !this.state.modal
-        })   
+        });
     }
     
     render() {
         const {budgetItem, deleteBudgetItem, display} = this.props;
-        return(
+
+        return (
             <div key={budgetItem.budget_id} className="budget">
                 <div className="budget-descrip">{formatEntries(budgetItem.description)}</div>
                 <div className="budget-amount"><div>$ {formatMoney(budgetItem.price)}</div></div>
@@ -26,8 +33,8 @@ class BudgetItem extends Component {
                 </div>
                 <UpdateBudget modal={this.state.modal} budget={budgetItem} close={this.toggleModal} display={display}/>
             </div>
-        )
+        );
     }
 }
 
-export default BudgetItem
+export default BudgetItem;

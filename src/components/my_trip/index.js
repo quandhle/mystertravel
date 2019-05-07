@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {signIn} from '../../actions';
-
 import './my_trip.scss';
 import axios from "axios";
 
@@ -13,15 +12,14 @@ class MyTrip extends Component{
     async checkLogin(){
         const resp = await axios.get(`/api/checkloggedin.php?token=${localStorage.getItem('token')}`);
 
-        console.log(resp);
-
         const {success, login, trips_id} = resp.data;
         const {signIn, history} = this.props;
-        if(success){
-            if(login){
+
+        if(success) {
+            if(login) {
                 signIn(resp.data);
 
-                if(!trips_id){
+                if(!trips_id) {
                     history.push('/');
                 }
             }
@@ -46,8 +44,8 @@ class MyTrip extends Component{
         this.props.history.push(`/mytrip/summary`);
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div className="my-trip">
                 <div className="mytrip-greeting">My Trip Log</div>
                 <div className="map-link">
@@ -63,7 +61,7 @@ class MyTrip extends Component{
                     <button className="end-trip-link-btn btn"  onClick={this.goToSummary}>Trip Summary & End</button>
                 </div>
             </div>
-        )
+        );
     }
 }
 

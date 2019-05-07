@@ -29,12 +29,13 @@ class Notes extends Component {
     async handleInput(value) {
         this.setState({
             spinner: true
-        })
+        });
 
         const {trips_id} = this.props;
         const {notes, imageUpload: image} = value;
 
         const data = new FormData();
+
         data.append('trips_id', trips_id);
         data.append('entry', notes);
         data.append('image', image);
@@ -45,8 +46,8 @@ class Notes extends Component {
                 'Content-Type': 'multipart/form-data'
             }
         });
-        console.log(resp.data)
-        if (resp.data.success) {
+
+        if(resp.data.success) {
             value.notes = '';
             value.imageUpload = null;
             document.getElementById('notes-file-input').value = null;
@@ -61,11 +62,12 @@ class Notes extends Component {
     }
 
     async getNoteList() {
-        // const { trips_id } = this.props.trips_id;?trips_id=${trips_id}
         const resp = await axios.get(`/api/getnotelist.php?token=${localStorage.getItem('token')}`);
+
         const {signIn} = this.props;
-        const {notes, success} = resp.data
-        if (success) {
+        const {notes, success} = resp.data;
+        
+        if(success) {
             signIn(resp.data)
             this.setState({
                 note: notes
@@ -75,15 +77,15 @@ class Notes extends Component {
         }
     }
 
-    async deleteItem(note){
+    async deleteItem(note) {
         const {trips_id} = this.props.trips_id;
         const resp = await axios.put('/api/deletenoteitem.php',{
             trips_id,
             note_id: note.note_id,
             token: localStorage.getItem('token')
-        })
+        });
 
-        if (resp.data.success) {
+        if(resp.data.success) {
             this.getNoteList();
         } else {
             console.error(resp.data.error);
@@ -91,15 +93,16 @@ class Notes extends Component {
     }
 
     toggleInput() {
-        const { height } = this.state.showInput;
-        if (!height) {
-            this.setState(
-                {showInput: {height: '200px'}}
-            )
+        const {height} = this.state.showInput;
+
+        if(!height) {
+            this.setState({
+                showInput: {height: '200px'}
+            });
         } else {
-            this.setState(
-                {showInput: {height: 0}}
-            )
+            this.setState({
+                showInput: {height: 0}
+            });
         }
     }
 
@@ -108,10 +111,10 @@ class Notes extends Component {
     }
 
     render() {
-        const { note, showInput, spinner } = this.state;
+        const {note, showInput, spinner} = this.state;
         let noteList = null;
 
-        if(note.length > 0){
+        if(note.length > 0) {
             noteList = note.map(note => {
                 return (
                     <NoteItem key={note.note_id} note={note} deleteItem={this.deleteItem} display={this.getNoteList}/>
@@ -137,14 +140,14 @@ class Notes extends Component {
                 </div>
                 <Map/>
             </div>
-        )
+        );
     }
 }
 
 function mapStateToProps(state) {
-    return{
+    return {
         trips_id: state.user.trips_id,
-    }
+    };
 }
 
 export default connect(mapStateToProps,{

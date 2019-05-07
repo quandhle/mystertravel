@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from './modal';
 
-export default function SpinnerModal(props) {
+const SpinnerModal = props => {
     return (
         <Modal open={props.open} childrenStyle="spinner-modal">
             <div className="text-center">
@@ -14,3 +14,5 @@ export default function SpinnerModal(props) {
         </Modal>
     );
 }
+
+export default SpinnerModal;

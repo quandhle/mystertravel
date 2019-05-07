@@ -1,13 +1,12 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
-
 import MyTrip from './';
 import Budget from './budget';
 import Notes from './notes';
 import Summary from './summary';
 import NotFound from './../404';
 
-export default props => {
+const MyTripRoutes = props => {
     const {match} = props;
 
     return (
@@ -20,6 +19,7 @@ export default props => {
                 <Route component={NotFound}/>
             </Switch>
         </div>
-
-    )
+    );
 }
+
+export default MyTripRoutes;

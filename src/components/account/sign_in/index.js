@@ -21,12 +21,12 @@ class SignIn extends Component {
         const resp = await axios.post('/api/login.php', {
             email,
             password
-        })
+        });
 
         const {signIn, history} = this.props;
         const {success, trips_id} = resp.data
-        console.log(resp.data);
-        if(success) {
+
+        if (success) {
             signIn(resp.data);
             if(trips_id){
                 this.props.passTripId(trips_id);
@@ -37,23 +37,22 @@ class SignIn extends Component {
         } else {
             this.setState({
                 message: resp.data.error
-            })
+            });
         }
-
     }
 
     handleSignUp = () => {
-        this.props.history.push('/account/signup')
+        this.props.history.push('/account/signup');
     }
 
     render() {
-        return(
+        return (
             <div className="sign-in-page">
                 <div className="sign-in">
                 <SignInForm signIn={this.handleSignIn} signUp={this.handleSignUp} message={this.state.message}/>
                 </div>
             </div>
-        )
+        );
     }
 }
 

@@ -6,18 +6,19 @@ import {passTripId} from '../../actions';
 import Modal from '../general/modal';
 import Input from '../general/input';
 
-
 class StartTrip extends Component {
     constructor(props) {
         super(props);
+
         this.nameTrip = this.nameTrip.bind(this);
     }
     
     async nameTrip(value) {
         const resp = await axios.post('/api/starttrip.php', {
             trips_name: value.tripname
-        })
-        const {success, trips_id} = resp.data
+        });
+
+        const {success, trips_id} = resp.data;
         
         if(success) {
             this.props.passTripId(trips_id);
@@ -30,7 +31,8 @@ class StartTrip extends Component {
     }
     
     render() {
-        const {handleSubmit, modal, close} = this.props
+        const {handleSubmit, modal, close} = this.props;
+
         return (
             <Modal open={modal} childrenStyle="home-modal">
                 <span onClick={close} className="close-popup"><i className="fas fa-times-circle"></i></span>
@@ -40,21 +42,22 @@ class StartTrip extends Component {
                     <div><button onClick={handleSubmit(this.nameTrip)} className="btn start-trip-btn"><i className="far fa-grin-wink"></i> Bon Voyage</button></div>
                 </form> 
             </Modal>
-        )
+        );
     }
 }
 
 function validate({tripname}) {
     const errors = {};
-    if(!tripname){
+    if(!tripname) {
         errors.tripname = 'Please name your trip';
     }
+
     return errors;
 }
 
 export default reduxForm({
     form: 'start-new-trip',
     validate
-})(connect(null,{
+})(connect(null, {
     passTripId:passTripId
 })(StartTrip));

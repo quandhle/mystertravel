@@ -1,10 +1,11 @@
 import React from 'react';
 import './general.scss';
 
-export default props =>{
-    const {open, children, childrenStyle} = props
-    if(open){
-        return(
+const Modal = props => {
+    const {open, children, childrenStyle} = props;
+
+    if(open) {
+        return (
             <div className="popup-container">
                 <div className="popup-content">
                     <div className={`popup-children ${childrenStyle}`}>
@@ -12,8 +13,10 @@ export default props =>{
                     </div> 
                 </div>
             </div>
-        )
+        );
     } else {
         return null;
     }
 }
+
+export default Modal;

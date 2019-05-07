@@ -16,22 +16,21 @@ class PreviousTrips extends Component {
 
         this.setState({
             trips: resp.data.data
-        })
+        });
     }
 
     render() {
         const {trips} = this.state;
         
         let tripsButton = trips.map(item => {
-
             return (
                 <div key={item.trips_id}>{item.trips_name}</div>
-            )
+            );
         })
 
         return (
             <div className="previous-page">{tripsButton}</div>
-        )
+        );
     }
 }
 

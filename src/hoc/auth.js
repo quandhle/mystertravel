@@ -1,30 +1,36 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-export default function (WrappedComponent, requireAuth = true, to = '/' ) {
+const Auth = (WrappedComponent, requireAuth = true, to = '/' ) => {
     class Auth extends Component{
-        componentDidMount(){
-            this.checkAuth()
+        componentDidMount() {
+            this.checkAuth();
         }
-        componentDidUpdate(){
-            this.checkAuth()
+
+        componentDidUpdate() {
+            this.checkAuth();
         }
-        checkAuth(){
+
+        checkAuth() {
             const {auth} = this.props;
-            if(auth !== requireAuth){
-                this.props.history.push(to)
+
+            if(auth !== requireAuth) {
+                this.props.history.push(to);
             }
         }
-        render(){
+
+        render() {
             return <WrappedComponent {...this.props} />
         }
     }
 
-    function mapStateToProps(state){
+    function mapStateToProps(state) {
         return {
             auth: state.user.auth
-        }
+        };
     }
 
     return connect(mapStateToProps)(Auth);
 }
+
+export default Auth;
