@@ -12,10 +12,10 @@ const Auth = (WrappedComponent, requireAuth = true, to = '/' ) => {
         }
 
         checkAuth() {
-            const {auth} = this.props;
+            const {auth, history} = this.props;
 
-            if(auth !== requireAuth) {
-                this.props.history.push(to);
+            if(auth !== requireAuth && !localStorage.getItem('signedIn')) {
+                history.push(to);
             }
         }
 
