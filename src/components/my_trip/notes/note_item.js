@@ -21,7 +21,7 @@ class NoteItem extends Component{
 
     render() {
         const {display,deleteItem, note, note: {note_id, entry, date, image}} = this.props;
-        
+
         return (
             <div key={note_id} className="notes">
                 <p>{formatDate(date)}</p>

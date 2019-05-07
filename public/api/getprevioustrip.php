@@ -39,11 +39,13 @@ if(mysqli_num_rows($result) === 0){
 
 $data = [];
 while ($row = mysqli_fetch_assoc($result)) {
+    $start = date("m/d/Y H:i:s", strtotime($row['start']));
+    $end = date("m/d/Y H:i:s", strtotime($row['end']));
     $data[] = [
         'trips_id' => $row['id'],
         'trips_name' => $row['trips_name'],
-        'start' => $row['start'],
-        'end' => $row['end'],
+        'start' => $start,
+        'end' => $end,
         'summary' => $row['summary'],
         'summary_image' => $row['summary_image'],
         'summary_date' => $row['summary_date']

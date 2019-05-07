@@ -17,13 +17,15 @@ class Notes extends Component {
                 height: 0
             },
             note: [],
-            spinner: false
+            spinner: false,
+            sortIcon: ['down', 'up']
         };
 
         this.getNoteList = this.getNoteList.bind(this);
         this.toggleInput = this.toggleInput.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
+        this.sortNote = this.sortNote.bind(this);
     }
 
     async handleInput(value) {
@@ -110,8 +112,15 @@ class Notes extends Component {
         this.getNoteList();
     }
 
+    sortNote() {
+        this.setState({
+            note: this.state.note.reverse(),
+            sortIcon: this.state.sortIcon.reverse()
+        })
+    }
+
     render() {
-        const {note, showInput, spinner} = this.state;
+        const {note, showInput, spinner, sortIcon} = this.state;
         let noteList = null;
 
         if(note.length > 0) {
@@ -133,6 +142,11 @@ class Notes extends Component {
                              Add Note <i className="fas fa-angle-double-down"></i>
                         </div>
                         <NotesForm notes={this.handleInput} style={showInput} />
+                        <div className="sort-note">
+                            <button className="sort-btn btn" onClick={this.sortNote}>
+                                <i className={`fas fa-sort-amount-${sortIcon[0]}`}></i>
+                            </button>
+                        </div>
                         <div className="notes-box">
                             {noteList}
                         </div>

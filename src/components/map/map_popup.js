@@ -19,7 +19,6 @@ class MapPopUp extends Component {
                     <Field id="pin_description" name="pin_description" label="i.e. Very nice restaurant..." component={Input} classes="description-input" col=" " autoFocus={true}/>
                     <button onClick={handleSubmit(addpin)} className="btn modal-pin-btn">Add Pin <i className="fas fa-map-marker-alt"/></button>
                 </form> 
-                <button onClick={handleSubmit(close)} className="btn cancel-add-btn">Cancel</button>
             </Modal>
         );
     }

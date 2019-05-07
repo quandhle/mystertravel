@@ -15,9 +15,9 @@ if (empty($trips_id)) {
 }
 
 $query = "SELECT *,
-	(SELECT SUM(`price`)
-     FROM `budget`
-     WHERE `trips_id` = $trips_id)
+    (SELECT SUM(`price`)
+    FROM `budget`
+    WHERE `trips_id` = $trips_id)
     AS 'total_budget'
     FROM `budget`
     WHERE `trips_id` = $trips_id
@@ -33,18 +33,24 @@ if (!$result) {
 if (mysqli_num_rows($result) === 0) {
     $output['success'] = true;
     $output['budget'] = [];
+
     print(json_encode($output));
+
     exit();
 }
 
 $data = [];
+
 while ($row = mysqli_fetch_assoc($result)) {
     $data[] = [
         'budget_id' => $row['id'],
         'description' => $row['description'],
         'category' => $row['category'],
         'price' => $row['price'],
+        'added' => $row['added'],
+        'updated' => $row['updated']
     ];
+
     $output['total_expense'] = (int)$row['total_budget'];
 }
 
