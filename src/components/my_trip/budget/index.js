@@ -8,11 +8,9 @@ import Map from '../../map';
 import SpinnerModal from "../../general/spinnerModal";
 import {signIn} from '../../../actions';
 
-
-
 class Budget extends Component{
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
             showInput: {
@@ -20,19 +18,21 @@ class Budget extends Component{
             },
             budget: [],
             spinner: false
-        }
+        };
+
         this.toggleInput = this.toggleInput.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.deleteBudgetItem = this.deleteBudgetItem.bind(this);
         this.getBudgetList = this.getBudgetList.bind(this);
     }
+
     async handleInput(value) {
         this.setState({
             spinner: true
-        })
+        });
 
         const {trips_id} = this.props;
-        console.log(trips_id)
+
         const resp = await axios.post('/api/addbudgetitem.php', {
             trips_id,
             description: value.description,
@@ -41,7 +41,7 @@ class Budget extends Component{
             token: localStorage.getItem('token')
         });
 
-        if(resp.data.success){
+        if(resp.data.success) {
             value.description = '';
             value.price = '';
             value.category = '';
@@ -54,25 +54,29 @@ class Budget extends Component{
             console.error('Unable to add entry');
         }
     }
+
     async deleteBudgetItem(budgetItem) {
         const {trips_id} = this.props.trips_id;
+
         const resp = await axios.put('/api/deletebudgetitem.php', {
             trips_id,
             budget_id: budgetItem.budget_id,
             token: localStorage.getItem('token')
         });
-        if(resp.data.success){
+
+        if(resp.data.success) {
             this.getBudgetList();
         } else {
             console.error('Unable to delete entry');
         }
     }
+    
     async getBudgetList() {
-        // const {trips_id} = this.props.trips_id; //?trips_id=${trips_id}
         const resp = await axios.get(`/api/getbudgetlist.php?token=${localStorage.getItem('token')}`);
         const {signIn} = this.props;
-        const {budget, success} = resp.data
-        if (success) {
+        const {budget, success} = resp.data;
+
+        if(success) {
             signIn(resp.data);
             this.setState({
                 budget
@@ -81,32 +85,38 @@ class Budget extends Component{
             console.error(resp.data.error);
         }
     }
-    toggleInput(){
+
+    toggleInput() {
         const {height} = this.state.showInput;
-        if(!height){
-            this.setState(
-                {showInput: {height: '300px'}}
-            )
+
+        if(!height) {
+            this.setState({
+                showInput: {height: '300px'}
+            });
         } else {
-            this.setState(
-                {showInput: {height: 0}}
-            )
+            this.setState({
+                showInput: {height: 0}
+            });
         }
     }
-    componentDidMount(){
+
+    componentDidMount() {
         this.getBudgetList();
     }
+
     render() {
         const {budget, showInput, spinner} = this.state;
         let budgetList = null;
-        if(budget.length > 0){
+
+        if(budget.length > 0) {
             budgetList = budget.map(budgetItem => {
                 return <BudgetItem key={budgetItem.budget_id} budgetItem={budgetItem} deleteBudgetItem={this.deleteBudgetItem} display={this.getBudgetList}/>
             });
         } else {
             budgetList = <div className="budget">Add expenses to record your trip <i className="far fa-laugh-wink"></i> </div>
         }
-       return(
+
+        return (
             <div className="budget-page">
                 <SpinnerModal open={spinner}/>
                 <div className="budget-section">
@@ -120,14 +130,14 @@ class Budget extends Component{
                 </div>
                 <Map/>
             </div>
-        )
+        );
     }
 }
 
-function mapStateToProps(state){
-    return{
+function mapStateToProps(state) {
+    return { 
         trips_id: state.user.trips_id
-    }
+    };
 }
 
 export default connect(mapStateToProps, {

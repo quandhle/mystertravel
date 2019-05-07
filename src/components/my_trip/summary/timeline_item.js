@@ -1,34 +1,38 @@
 import React, {Component, Fragment} from 'react';
-
 import {formatDate} from "../../../helper";
 
-export default class extends Component {
-    state = {
-        isNote: false,
-        date: null,
+class TimelineItem extends Component {
+    constructor(props) {
+        super(props);
 
-        note_id: null,
-        image: null,
-        entry: null,
-
-        pin_id: null,
-        name: null,
-        description: null,
-        lat: null,
-        lng: null
-    };
+        this.state = {
+            isNote: false,
+            date: null,
+            note_id: null,
+            image: null,
+            entry: null,
+            pin_id: null,
+            name: null,
+            description: null,
+            lat: null,
+            lng: null
+        };
+    }
 
     componentDidUpdate(prevProps) {
         const {item} = this.props;
-        if (item !== prevProps.item) {
+
+        if(item !== prevProps.item) {
             const isNote = !!item.note_id;
+
             this.setState({isNote, ...item});
         }
     }
 
     render() {
         const {item, setImage} = this.props;
-        if (item && item.hasOwnProperty('date')) {
+
+        if(item && item.hasOwnProperty('date')) {
             const isNote = !!item.note_id;
 
             return (
@@ -41,9 +45,11 @@ export default class extends Component {
                         <p className="timeline-item-text">{isNote ? item.entry : item.description}</p>
                     </div>
                 </div>
-            )
+            );
         } else {
             return null;
         }
     }
 }
+
+export default TimelineItem;

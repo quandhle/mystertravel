@@ -1,41 +1,43 @@
 import types from './types';
 
 export function signIn(user) {
-    console.log(user)
     localStorage.setItem('signedIn', 'true');
     localStorage.setItem('trips_id', user.trips_id);
     localStorage.setItem('token', user.token);
+
     return {
         type: types.SIGN_IN,
         username: user.username,
         trips_id: user.trips_id,
         guest: user.is_guest
-    }
+    };
 }
 
-export function signOut(){
+export function signOut() {
     localStorage.removeItem('signedIn');
     localStorage.removeItem('trips_id');
     localStorage.removeItem('token');
+
     return {
-        type:types.SIGN_OUT
-    }
+        type: types.SIGN_OUT
+    };
 }
 
 
-export function passTripId(id){
-    console.log('passtripid',id);
+export function passTripId(id) {
     localStorage.setItem('trips_id', id);
-    return{
+
+    return {
         type: types.GET_TRIP_ID,
         trips_id: id
-    }
+    };
 }
 
-export function clearTripId(){
+export function clearTripId() {
     localStorage.removeItem('trips_id');
-    return{
+
+    return {
         type: types.CLEAR_TRIP_ID,
         trips_id: null
-    }
+    };
 }

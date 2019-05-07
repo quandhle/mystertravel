@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-
 import './summary.scss';
 import {formatMoney} from './../../../helper';
 import {clearTripId} from "../../../actions";
@@ -9,7 +8,6 @@ import {loadScript} from "./../../../helper";
 import Timeline from './timeline';
 import MapModal from './mapmodal';
 import ImageModal from './imagemodal';
-
 
 class Summary extends Component {
     constructor(props) {
@@ -20,22 +18,22 @@ class Summary extends Component {
             tripName: '',
             totalSpent: 0,
             privatePage: null,
-
             pinData: null,
             notes: null,
-
             imageModal: false,
             image: null,
             mapModal: false,
             pin: null
         };
+
+        this.endTrip = this.endTrip.bind(this);
     }
 
     componentDidMount() {
         const {params} = this.props.match;
         let privatePage, trips_id;
 
-        if (params && params.trips_id) {
+        if(params && params.trips_id) {
             privatePage = false;
             trips_id =  params.trips_id;
         } else {
@@ -49,14 +47,14 @@ class Summary extends Component {
         }, this.getSummaryData);
 
         loadScript('https://platform.twitter.com/widgets.js');
-    }s
+    }
 
     async getSummaryData() {
         const {trips_id} = this.state;
-        const response = await axios.get(`/api/getendtripsummary.php?trips_id=${trips_id}`);
-console.log(response.data)
-        if (response.data.success) {
-            const {summary: {trips_name, total_budget}, pins, notes} = response.data;
+        const resp = await axios.get(`/api/getendtripsummary.php?trips_id=${trips_id}`);
+
+        if(resp.data.success) {
+            const {summary: {trips_name, total_budget}, pins, notes} = resp.data;
 
             this.setState({
                 tripName: trips_name,
@@ -65,24 +63,24 @@ console.log(response.data)
                 notes
             });
         } else {
-            console.error(response.data.error);
+            console.error(resp.data.error);
         }
     }
 
-    endTrip = async () => {
-        const response = await axios.put('/api/endcurrenttrip.php', {token: localStorage.getItem('token')});
+    async endTrip() {
+        const resp = await axios.put('/api/endcurrenttrip.php', {token: localStorage.getItem('token')});
 
-        if (response.data.success) {
+        if(resp.data.success) {
             this.props.clearTripId();
             this.props.history.push(`/`);
-            // for now, we push the user back to the home page
         }
     }
 
     fbButton = (url) => {
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=I went on a trip recently! Check it out on MysterTravel!`,
             "pop",
-            "width=600, height=400, scrollbars=no");
+            "width=600, height=400, scrollbars=no"
+        );
     }
 
     twitterButton(url) {
@@ -98,7 +96,7 @@ console.log(response.data)
     }
 
     setImage = image => {
-        if (image) {
+        if(image) {
             this.setState({
                 image: image,
                 imageModal: true
@@ -107,18 +105,18 @@ console.log(response.data)
     }
     
     buttonDisplay = () => {
-         if (!this.props.auth && this.state.privatePage){
+         if(!this.props.auth && this.state.privatePage) {
             return (
                 <div className="summary-end-trip-link">
                         <button onClick={()=>this.props.history.push('/account/signup')} className="summary-end-trip-link-btn btn">Sign Up to Save the Trip</button>
                 </div>
-            )
-        } else if (this.state.privatePage) {
+            );
+        } else if(this.state.privatePage) {
             return (
                 <div className="summary-end-trip-link">
                         <button onClick={this.endTrip} className="summary-end-trip-link-btn btn">End Trip</button>
                 </div>
-            )
+            );
         } else {
             return null;
         }
@@ -139,7 +137,8 @@ console.log(response.data)
     render() {
         const {trips_id, tripName, totalSpent, privatePage, pinData, notes, mapModal, imageModal, image} = this.state;
         const summaryURL = `https://www.mystertravel.com/trip/_/_/${trips_id}`;
-        return(
+
+        return (
             <div className="summary-page">
                 <div className="summary-trip-name"><p>{tripName? tripName : 'My Trip'}</p></div>
                 <div className="total-spend"><div>{`Total spent on this trip $${totalSpent? formatMoney(totalSpent): ' 0'}`}</div></div>
@@ -154,7 +153,6 @@ console.log(response.data)
                         <button onClick={this.endTrip} className="summary-end-trip-link-btn btn">End Trip</button>
                     </div>
                 }
-                {/* {endButton} */}
                 <div className="share-btns col-12">
                         <a onClick={() => {this.fbButton(summaryURL)}}>
                             <i className="fab fa-facebook-square"/>
@@ -169,7 +167,7 @@ console.log(response.data)
                 {/*<MapModal modal={mapModal} onClick={this.toggleMapModal}/>*/}
                 <ImageModal img={image} modal={imageModal} close={this.toggleImageModal}/>
             </div>
-        )
+        );
     }
 }
 

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
 import {formatMoney} from '../../../helper';
 import axios from 'axios';
@@ -8,13 +8,14 @@ import Modal from '../../general/modal';
 
 class UpdateBudget extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.updatedb = this.updatedb.bind(this);
     }
 
     async updatedb(value) {
-        const {trips_id, budget, display, close} = this.props
+        const {trips_id, budget, display, close} = this.props;
+
         const resp = await axios.post('/api/updatebudget.php', {
             id: budget.budget_id,
             description: value.description,
@@ -32,6 +33,7 @@ class UpdateBudget extends Component {
 
     render() {
         const {modal, close, handleSubmit} = this.props;
+
         return (
             <Modal open={modal} childrenStyle="update-modal">
                 <span onClick={close} className="close-popup"><i className="fas fa-times-circle"></i></span>
@@ -43,7 +45,7 @@ class UpdateBudget extends Component {
                 </form>
                 <button className="btn updatebutton" onClick={handleSubmit(this.updatedb)} >Update</button>
             </Modal>
-        )
+        );
     }
 }
 
@@ -57,7 +59,7 @@ function mapStateToProps(state, props) {
             category: modal ? budget.category : '',
         },
         trips_id: state.user.trips_id,
-    }
+    };
 }
 
 function validate({description, price, category}) {
@@ -70,6 +72,7 @@ function validate({description, price, category}) {
     if(!price) {
         errors.price = 'Please enter a number';
     }
+
     if(!category) {
         errors.category = 'Please enter a category';
     }
@@ -81,7 +84,7 @@ UpdateBudget = reduxForm({
     form: 'initializeFromState-budget',
     enableReinitialize: true,
     validate
-  })(UpdateBudget)
+  })(UpdateBudget);
 
 UpdateBudget = connect( mapStateToProps)(UpdateBudget)
 

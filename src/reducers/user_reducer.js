@@ -1,17 +1,16 @@
 import types from '../actions/types';
 
-const DEFAULT_STATE ={
+const DEFAULT_STATE = {
     auth: false,
     username: '',
     trips_id: null,
     guest: true
-}
+};
 
-
-export default function tripAuthReducer(state = DEFAULT_STATE, action){
+const TripAuthReducer = (state = DEFAULT_STATE, action) => {
     const {type, username, trips_id, guest} = action
 
-    switch(type){
+    switch(type) {
         case types.SIGN_IN:
             return {
                 ...state, 
@@ -36,3 +35,5 @@ export default function tripAuthReducer(state = DEFAULT_STATE, action){
             return state;
     }
 }
+
+export default TripAuthReducer;

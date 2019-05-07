@@ -5,8 +5,9 @@ import SignOut from './sign_out';
 import SignUp from './sign_up';
 import NotFound from '../404';
 
-export default props => {
+const Account = props => {
     const {match} = props;
+
     return (
         <Switch>
             <Route path={`${match.path}/signin`} component={SignIn} />
@@ -14,5 +15,7 @@ export default props => {
             <Route path={`${match.path}/signup`} component={SignUp} />
             <Route component={NotFound}/>
         </Switch>
-    )
+    );
 }
+
+export default Account;

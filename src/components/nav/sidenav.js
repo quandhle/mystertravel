@@ -3,15 +3,15 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {signIn} from '../../actions';
 
-class SideNav extends Component{
-    constructor(props){
-        super(props)
+class SideNav extends Component {
+    constructor(props) {
+        super(props);
     }
 
-    signInUser(){
+    signInUser() {
         const {trips_id} = this.props;
 
-        if(trips_id){
+        if(trips_id) {
             return[
                 {
                     to: '/mytrip',
@@ -25,7 +25,7 @@ class SideNav extends Component{
                     to: '/account/signout',
                     text: 'Sign Out'
                 }
-            ]
+            ];
         } else {
             return[
                 {
@@ -40,14 +40,15 @@ class SideNav extends Component{
                     to: '/account/signout',
                     text: 'Sign Out'
                 }
-            ]
+            ];
         }
     }
-    guest(){
+
+    guest() {
         const {trips_id} = this.props;
 
-        if(trips_id){
-            return[
+        if(trips_id) {
+            return [
                 {
                     to: '/mytrip',
                     text: 'Current Trip'
@@ -60,9 +61,9 @@ class SideNav extends Component{
                     to: '/account/signup',
                     text: 'Sign Up'
                 }
-            ]
+            ];
         } else {
-            return[
+            return [
                 {
                     to: '/',
                     text: 'Home'
@@ -76,23 +77,25 @@ class SideNav extends Component{
                     to: '/account/signup',
                     text: 'Sign Up'
                 }
-            ]
+            ];
         }
     }
-    renderLinks(){
 
+    renderLinks() {
         const {guest, userAuth, userName} = this.props;
         let profile = 'Hi Guest';
         let navlink = null;
-        if(!guest && userAuth){
+
+        if(!guest && userAuth) {
             profile = `Hi ${userName}`
             navlink = this.signInUser();
         } else {
             navlink = this.guest();
         }
+
         navlink = navlink.map(this.buildLink);
 
-        return(
+        return (
             <Fragment>
                 <div className="nav-profile">
                     <div className="username">{profile} <i className="fas fa-luggage-cart"></i></div>
@@ -101,27 +104,29 @@ class SideNav extends Component{
                     {navlink}
                 </ul> 
             </Fragment>
-        )
+        );
     }
-    buildLink(link){
-        return(
-            <li key={link.to}><Link to={link.to}>{link.text}</Link></li>
-        )
-    }
-    render(){
 
-        const {style:{body, background}, toggle} =this.props
+    buildLink(link) {
+        return (
+            <li key={link.to}><Link to={link.to}>{link.text}</Link></li>
+        );
+    }
+
+    render() {
+        const {style:{body, background}, toggle} =this.props;
         const links = this.renderLinks();
-        return(
-        <div className="side-nav-box" onClick={toggle} style={background}>
-            <div className="side-nav" style={body}>
-                {links}
-                <ul className="aboutus-link">
-                    <li><Link to="/aboutus" >About the Team</Link></li>
-                </ul>
+
+        return (
+            <div className="side-nav-box" onClick={toggle} style={background}>
+                <div className="side-nav" style={body}>
+                    {links}
+                    <ul className="aboutus-link">
+                        <li><Link to="/aboutus" >About the Team</Link></li>
+                    </ul>
+                </div>
             </div>
-        </div>
-        )
+        );
     }
 }
 

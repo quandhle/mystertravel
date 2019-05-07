@@ -6,7 +6,7 @@ class Upload extends Component {
 
         this.state = {
             url: '',
-        }
+        };
     }
 
     handleUploadImage(event) {
@@ -24,17 +24,17 @@ class Upload extends Component {
             resp.json().then((body) => {
                 this.setState({
                     url: `http://localhost:8888/${body.file}`
-                })
+                });
             })
         })
     }
 
-    render () {
+    render() {
         return (
             <div className="upload">
                 <h1>File Upload</h1>
             </div>
-        )
+        );
     }
 }
 

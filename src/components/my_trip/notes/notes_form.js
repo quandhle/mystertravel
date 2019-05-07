@@ -3,7 +3,7 @@ import {reduxForm, Field} from 'redux-form';
 import Textarea from '../../general/textarea';
 import FileInput from '../../general/fileinput';
 
-const NotesInput = props =>{
+const NotesInput = props => {
     const {notes, handleSubmit, style} = props;
 
     return (
@@ -14,15 +14,16 @@ const NotesInput = props =>{
                 <button className="btn add-notes">Add <i className="fas fa-check"></i></button>
             </div>
         </form>
-
-    )
+    );
 }
 
 function validate({notes}){
     const errors = {};
-    if(!notes){
+
+    if(!notes) {
         errors.notes = 'Write a note or give your photo a title';
     }
+    
     return errors;
 }
 

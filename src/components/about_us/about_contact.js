@@ -1,8 +1,9 @@
 import React, {Fragment} from 'react';
 
-export default props =>{
+const AboutContact = props => {
     const {email, linkedin, portfolio, git, name, image, quote, role} = props.person;
-    return(
+
+    return (
         <Fragment>
             <div className="about-top">
                 <div className="about-img">
@@ -21,5 +22,7 @@ export default props =>{
                 <a href={`https://www.github.com/${git}`} target="_blank"><i className="fab fa-github-square"></i></a>   
             </div>
         </Fragment>
-    )
+    );
 }
+
+export default AboutContact;

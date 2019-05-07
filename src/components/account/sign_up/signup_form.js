@@ -2,9 +2,10 @@ import React from 'react';
 import {reduxForm, Field} from 'redux-form';
 import Input from '../../general/input';
 
-const signUpForm = props =>{
-    const {signUp, handleSubmit, message} = props
-    return(
+const signUpForm = props => {
+    const {signUp, handleSubmit, message} = props;
+
+    return (
         <form onSubmit={handleSubmit(signUp)} className="sign-up-form">
             <div className="sign-up-title">Sign Up</div>
             <Field id="nickname" name="nickname" label="Name to display" component={Input} classes="signup-input"/>
@@ -16,23 +17,25 @@ const signUpForm = props =>{
                 <button className="btn">Sign Up</button>
             </div>
         </form>
-    )
+    );
 }
 
-function validate({nickname, email, password, confirm_password}){
+function validate({nickname, email, password, confirm_password}) {
     const errors = {};
-    if(!nickname){
+
+    if(!nickname) {
         errors.nickname = 'Please enter your name';
     }
-    if(!email){
+    if(!email) {
         errors.email = 'Please enter your email';
     }
-    if(!password){
+    if(!password) {
         errors.password = 'Please enter your password';
     }
-    if(password != confirm_password || !confirm_password){
+    if(password != confirm_password || !confirm_password) {
         errors.confirm_password = 'Password does not match';
     }
+    
     return errors;
 }
 

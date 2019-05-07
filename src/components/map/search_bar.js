@@ -1,10 +1,10 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
-
 import Input from './../general/input';
 
 const SearchBar = props => {
     const {handleClear} = props;
+
     return (
         <form className="search-bar-form">
             <Field id="places" name="places" label="Enter a location or click on map to pin" component={Input} classes="search-bar-field"/>

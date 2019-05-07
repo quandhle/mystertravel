@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import {reduxForm, Field} from 'redux-form';
-import {connect} from 'react-redux';
-import {passTripId} from '../../actions';
 import Modal from '../general/modal';
 import Input from '../general/input';
 
@@ -11,7 +9,8 @@ class MapPopUp extends Component {
     }
     
     render() {
-        const {handleSubmit, modal, close, addpin} = this.props
+        const {handleSubmit, modal, close, addpin} = this.props;
+
         return (
             <Modal open={modal} childrenStyle="map-modal">
                 <span onClick={close} className="close-popup"><i className="fas fa-times-circle"></i></span>
@@ -22,18 +21,18 @@ class MapPopUp extends Component {
                 </form> 
                 <button onClick={handleSubmit(close)} className="btn cancel-add-btn">Cancel</button>
             </Modal>
-        )
+        );
     }
 }
 
 function validate({pin_description}) {
     const errors = {};
-    if(!pin_description){
+    if(!pin_description) {
         errors.pin_description = 'Write something for this pin';
     }
+    
     return errors;
 }
-
 
 export default reduxForm({
     form: 'pin_description',

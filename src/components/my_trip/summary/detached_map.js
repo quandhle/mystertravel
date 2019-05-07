@@ -1,18 +1,23 @@
 import React, {Component} from 'react';
-
 import keys from '../../../../api_keys';
 import {loadScript} from "../../../helper";
 
-export default class SummaryMap extends Component {
-    state = {
-        map: null,
-        style: {
-            position: 'fixed'
-        }
+class SummaryMap extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            map: null,
+            style: {
+                position: 'fixed'
+            }
+        };
+
+        this.initSummaryMap = this.initSummaryMap.bind(this);
     }
 
     componentDidMount() {
-        if (!(window.google && window.google.maps)) {
+        if(!(window.google && window.google.maps)) {
             loadScript(`https://maps.googleapis.com/maps/api/js?key=${keys.googleMaps}&libraries=places&callback=initSummaryMap`);
             window.initSummaryMap = this.initSummaryMap;
         } else {
@@ -20,7 +25,7 @@ export default class SummaryMap extends Component {
         }
     }
 
-    initSummaryMap = () => {
+    initSummaryMap() {
         const map = new window.google.maps.Map(document.getElementById('summary-map'), {
             mapTypeControl: false,
             streetViewControl: false,
@@ -33,7 +38,7 @@ export default class SummaryMap extends Component {
     }
 
     showPins() {
-        const pins = pinData.map((item) => {
+        const pins = pinData.map(item => {
             const pin = new window.google.maps.Marker({
                 position: {
                     lat: item.lat,
@@ -57,9 +62,6 @@ export default class SummaryMap extends Component {
 
             return pin;
         });
-        // this.setState({
-        //     pins: pins,
-        // });
     }
 
     render() {
@@ -67,6 +69,8 @@ export default class SummaryMap extends Component {
             <div className="summary-map-holder">
                 <div id="summary-map" className='summary-map' style={this.state.style}/>
             </div>
-        )
+        );
     }
 }
+
+export default SummaryMap;
