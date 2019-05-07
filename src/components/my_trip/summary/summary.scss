@@ -13,17 +13,6 @@
         }
     }
 
-    .summary-region {
-        width: 100%;
-        text-align: center;
-
-        p {
-            font-size: 1.0em;
-            font-weight: bold;
-            margin: 10px;
-        }
-    }
-
     .total-spend {
         width: 100%;
         margin: 0;
@@ -130,7 +119,7 @@
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
-                    
+
                 }
 
                 .timeline-item-name {
@@ -263,8 +252,6 @@
 
 }
 
-
-
 .summary-fail-page {
     .summary-fail-title {
         width: 100%;
@@ -290,6 +277,18 @@
             p{
                 font-size: 1.2em;
                 margin: 10px;
+            }
+        }
+    }
+}
+
+@media (min-width: 1025px) {
+    .summary-page {
+        .popup-container{
+            .popup-content .summary-image-modal {
+                width: 80%;
+                position: relative;
+                left: 10%;
             }
         }
     }
