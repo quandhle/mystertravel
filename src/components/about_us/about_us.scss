@@ -1,52 +1,10 @@
 .about-container {
     height: 90vh;
 
-    .about-person {
-        background-color: rgba(164, 216, 208, 0.9);
-        margin: 5px 0;
-        padding: 5px;
-        font-size: 1.2em;
-        color: #2b616d;
-
-        .about-top {
-            position: relative;
-
-            .about-img, .about-name {
-                display: inline-block;
-            }
-            .about-img {
-                width: 30%;
-                
-                img {
-                    width: 100%;
-                    border-radius: 50%;
-                    border: 2px solid white;
-                }
-            }
-            .about-name {
-                position: absolute;
-                width: 70%;
-                left: 30%;
-                padding: 5px;
-            }
-        }
-        .about-contact {
-            padding: 10px 15px;
-            text-align: right;
-            font-size: 2rem;
-
-            a {
-                color: #2b616d;
-                text-decoration: none;
-                padding: 5px;
-            }
-        }
-    }
-
     .first {
         background-image: url('../../assets/images/aboutus.jpg');
         background-repeat: no-repeat;
-        background-attachment: fixed; 
+        background-attachment: fixed;
         background-position-x: 70%;
         background-position-y: bottom;
         background-size: cover;
@@ -62,19 +20,54 @@
 
         .team-title {
             font-size: 0.7em;
+            text-align: center;
         }
     }
 
     .section {
-        position: relative;
         background-color: transparent;
+    }
 
-        .aboutUs {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 5%;
-            width: 100%;
+    .about-person {
+        background-color: rgba(164, 216, 208, 0.9);
+        margin: 5px 0;
+        padding: 5px;
+        font-size: 1.2em;
+        color: #2b616d;
+
+        .about-top {
+            position: relative;
+
+            .about-img, .about-name {
+                display: inline-block;
+            }
+
+            .about-img {
+                width: 30%;
+                
+                img {
+                    width: 100%;
+                    border-radius: 50%;
+                    border: 2px solid white;
+                }
+            }
+
+            .about-name {
+                position: absolute;
+                padding: 5px;
+            }
+        }
+
+        .about-contact {
+            padding: 10px 15px;
+            text-align: right;
+            font-size: 2rem;
+
+            a {
+                color: #2b616d;
+                text-decoration: none;
+                padding: 5px;
+            }
         }
     }
 }
@@ -90,7 +83,6 @@
         flex-wrap: wrap;
         height: 100%;
         display: flex;
-        justify-content: space-evenly;
     }
 
     .about-container .first .team-title {
