@@ -1,4 +1,4 @@
-.budget-page{
+.budget-page {
     height: 90vh;
     width: 100%;
 
@@ -6,11 +6,9 @@
         cursor: pointer;
         font-size: 1.2em;
         background-color: #fa8d62;
-        width: 100%;
         height: 50px;
         text-align: right;
         color: white;
-        padding-right: 15px;
         padding: 10px 15px;
 
         .fa-angle-double-down:hover {
@@ -35,15 +33,13 @@
     }
 
     .budget-input-form, .budget {
-        -webkit-box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
-        -moz-box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
-        box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
+        -webkit-box-shadow: 0 0 6px 0 rgba(194, 194, 194, 1);
+        -moz-box-shadow: 0 0 6px 0 rgba(194, 194, 194, 1);
+        box-shadow: 0 0 6px 0 rgba(194, 194, 194, 1);
     }
 
     .budget-input {
-        width: 100%;
         padding: 15px;
-        box-sizing: border-box;
 
         input {
             width: 100%;
@@ -51,7 +47,7 @@
             border: 1px solid transparent;
             background-color: inherit;
             border-bottom: 1px solid #94c9c1;
-            color:#2b616d;
+            color: #2b616d;
         }
     }
 
@@ -61,7 +57,7 @@
         float: right;
         background-color: #fa8d62;
         border: none;
-        color:white;
+        color: white;
     }
 
     .budget-box {
@@ -69,12 +65,10 @@
 
         .budget {
             font-size: 1.2em;
-            box-sizing: border-box;
             padding: 10px 15px;
             margin: 5px;
             border-radius: 15px;
             transition: 0.5s;
-
             word-wrap: break-word;
 
             &:nth-child(odd) {
@@ -89,7 +83,7 @@
                 background-color: #1b515d;
             }
 
-            .budget-descrip, .budget-amount, .budget-item, .budget-delete{
+            .budget-descrip, .budget-amount, .budget-item, .budget-delete {
                 display: inline-block;
             }
 
@@ -111,7 +105,7 @@
 
             .budget-item {
                 color: #b2dbd5;
-                width:100%;
+                width: 100%;
             }
 
                 .budget-icon {
@@ -160,6 +154,7 @@
             }
         }
     }
+
     main {
         display: none;
     }
@@ -208,7 +203,6 @@
             }
         }
         .popup-container .popup-content {
-
             .update-modal, .map-modal {
                 width: 30%;
             }
