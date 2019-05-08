@@ -60,6 +60,7 @@ require_once('checkactivetrip.php');
 require_once('checkuserstatus.php');
 
 $output['success'] = true;
+$output['users_id'] = $users_id;
 $output['login'] = true;
 $output['token'] = $token;
 

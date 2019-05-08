@@ -74,6 +74,7 @@ require_once('checkactivetrip.php');
 $output['success'] = true;
 $output['login'] = true;
 $output['is_guest'] = false;
+$output['users_id'] = $data['id'];
 $output['username'] = $data['full_name'];
 $output['token'] = $token;
 

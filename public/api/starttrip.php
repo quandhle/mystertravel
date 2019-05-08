@@ -8,9 +8,11 @@ if (!empty($_SESSION['user_data'])){
     require_once('loginguest.php');
     $output['login'] = true;
     $output['is_guest'] = true;
-    $output['username'] = 'Guest';
+    $output['username'] = null;
+    $output['users_id'] = $users_id;
     $output['token'] = $token;
 }
+
 
 $json_input = file_get_contents("php://input");
 $input = json_decode($json_input, true);
