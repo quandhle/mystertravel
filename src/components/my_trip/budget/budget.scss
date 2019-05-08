@@ -155,6 +155,23 @@
         }
     }
 
+    .sort-budget {
+        .sort-btn {
+            background-color: #2b616d;
+            border-radius: 200px;
+            height: 50px;
+            width: 50px;
+            color: white;
+            margin: 4px 5px;
+            font-size: .8em;
+            transition: .3s;
+
+            i:nth-child(2) {
+                margin-left: 2px
+            }
+        }
+    }
+
     main {
         display: none;
     }
