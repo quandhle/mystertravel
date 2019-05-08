@@ -120,10 +120,15 @@
         .sort-btn {
             background-color: #2b616d;
             border-radius: 200px;
-            height: 40px;
-            width: 40px;
+            height: 50px;
+            width: 50px;
             color: white;
+            font-size: .8em;
             margin: 4px 5px;
+
+            .fa-clock{
+                margin-right: 3px;
+            }
         }
 
         .sort-btn:hover {
