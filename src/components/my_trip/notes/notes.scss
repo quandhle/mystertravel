@@ -1,4 +1,6 @@
 .notes-page {
+    height: 90vh;
+
     .notes-input-toggle {
         cursor: pointer;
         font-size: 1.2em;
@@ -7,11 +9,12 @@
         text-align: right;
         color: white;
         padding: 10px 15px;
+        margin-bottom: 10px;
 
         .spinner-border {
             margin: 5px;
         }
-        
+
         .fa-angle-double-down:hover {
             cursor: pointer;
             position: relative;
@@ -31,7 +34,7 @@
         overflow-y: hidden;
         background-color: #b2dbd5;
         border-radius: 15px;
-        margin: 10px;
+        margin: 0 10px;
 
         .image-inputbox {
             & > div {
@@ -85,22 +88,22 @@
             &:nth-child(even) {
                 background-color: #3b717e;
             }
-            
+
             &:hover, &:active {
                 background-color: #1b515d;
             }
-            
+
             p:first-child {
                 font-size: 0.8em;
                 text-align: right;
             }
-            
+
             .note-img {
                 img {
                     width: 100%;
                 }
             }
-            
+
             .note-icon {
                 color: #b2dbd5;
                 transition: 0.2s;
@@ -113,6 +116,21 @@
         }
     }
 
+    .sort-note {
+        .sort-btn {
+            background-color: #2b616d;
+            border-radius: 200px;
+            height: 40px;
+            width: 40px;
+            color: white;
+            margin: 4px 5px;
+        }
+
+        .sort-btn:hover {
+            background-color: #1b515d;
+        }
+    }
+
     .update-modal {
         background-color: rgba(164, 216, 208, .9);
         border-radius: 15px;
@@ -120,7 +138,7 @@
         font-size: 1em;
         color: white;
         overflow-y: hidden;
-        
+
         .map-modal-header {
             padding-top: 15px;
         }
@@ -131,7 +149,7 @@
                 font-size: 0.8em
             }
         }
-        
+
         .updatebutton {
             color: white;
             background-color: #fa8d62;
@@ -158,7 +176,7 @@
             height: 100%;
             display: inline-block;
             vertical-align: top;
-            overflow-y: scroll; 
+            overflow-y: scroll;
         }
 
         .popup-container .popup-content {
