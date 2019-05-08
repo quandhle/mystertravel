@@ -41,13 +41,21 @@ class PreviousTrips extends Component {
 
     render() {
         const {trips} = this.state;
-        
-        let tripsList = trips.map(item => {
-            return <TripList key={item.trips_id} item={item}/>;
-        })
+        let tripsList = null;
+
+        if(trips.length > 0){
+            tripsList = trips.map(item => {
+                return <TripList key={item.trips_id} item={item} />
+            });
+        } else {
+            tripsList = <div className="previous-trip">You have no previous trips <i className="far fa-laugh-wink"></i> </div>
+        }
 
         return (
-            <div className="previous-page">{tripsList}</div>
+            <div className="previous-page">
+                <div className="previoustrip-greeting">Previous Trips</div>
+                {tripsList}
+            </div>
         );
     }
 }

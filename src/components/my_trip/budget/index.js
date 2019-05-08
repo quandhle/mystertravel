@@ -81,7 +81,7 @@ class Budget extends Component{
             console.error('Unable to delete entry');
         }
     }
-    
+
     async getBudgetList() {
         const resp = await axios.get(`/api/getbudgetlist.php?token=${localStorage.getItem('token')}`);
         const {signIn} = this.props;
@@ -203,7 +203,7 @@ class Budget extends Component{
 }
 
 function mapStateToProps(state) {
-    return { 
+    return {
         trips_id: state.user.trips_id
     };
 }

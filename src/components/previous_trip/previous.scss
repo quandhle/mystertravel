@@ -1,5 +1,14 @@
 .previous-page {
+    .previoustrip-greeting{
+        text-align: center;
+			font-size: 2em;
+			font-weight: bold;
+			color: #2b616d;
+			padding: 15px 0;
+    }
+
     .previous-trip {
+        color: white;
         font-size: 1.2em;
         margin: 5px;
         border-radius: 15px;
@@ -14,7 +23,7 @@
         &:nth-child(even) {
             background-color: #3b717e;
         }
-        
+
         &:hover, &:active {
             background-color: #1b515d;
         }
@@ -28,7 +37,7 @@
             font-family: 'Dancing Script', cursive;
             font-size: 2em;
         }
-        
+
         a {
             color: white;
             text-decoration: none;
