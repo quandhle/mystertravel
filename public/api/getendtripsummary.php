@@ -4,24 +4,33 @@ require_once('config.php');
 
 if (!empty($_SESSION['user_data']['trips_id'])) {
     $trips_id = intval($_SESSION['user_data']['trips_id']);
+    $users_id = intval($_SESSION['user_data']['users_id']);
 } else {
     if(empty($_GET['trips_id'])){
         throw new Exception('Invalid Url');
     }
     $trips_id = intval($_GET['trips_id']);
+    $users_id = intval($_GET['users_id']);
 }
 
 if (empty($trips_id)) {
     throw new Exception('Please provide trips_id (int) with your request');
 }
 
-$summary_query = "SELECT `trips_name`,
+if (empty($users_id)) {
+    throw new Exception('Please provide users_id (int) with your request');
+}
+
+$summary_query = "SELECT t.`trips_name`,
     (SELECT SUM(`price`)
     FROM `budget`
     WHERE `trips_id` = $trips_id
     ) AS 'total_budget'
-    FROM `trips`
-    WHERE `id` = $trips_id
+    FROM `users` AS u
+    JOIN `trips` AS t
+        ON u.`id` = t.`users_id`
+    WHERE u.`id` = $users_id
+    AND t.`id` = $trips_id
 ";
 
 $summary_result = mysqli_query($conn, $summary_query);
