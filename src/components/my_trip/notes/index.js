@@ -144,7 +144,8 @@ class Notes extends Component {
                         <NotesForm notes={this.handleInput} style={showInput} />
                         <div className="sort-note">
                             <button className="sort-btn btn" onClick={this.sortNote}>
-                                <i className={`fas fa-sort-amount-${sortIcon[0]}`}></i>
+                                <i className={'fas fa-clock'}></i>
+                                <i className={`fas fa-sort-${sortIcon[0]}`}></i>
                             </button>
                         </div>
                         <div className="notes-box">

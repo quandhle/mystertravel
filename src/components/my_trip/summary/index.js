@@ -6,7 +6,7 @@ import {formatMoney} from './../../../helper';
 import {clearTripId, signIn} from "../../../actions";
 import {loadScript} from "./../../../helper";
 import Timeline from './timeline';
-import MapModal from './mapmodal';
+import Map from './summary_map';
 import ImageModal from './imagemodal';
 
 class Summary extends Component {
@@ -159,29 +159,26 @@ class Summary extends Component {
             <div className="summary-page">
                 <div className="summary-trip-name"><p>{tripName? tripName : 'My Trip'}</p></div>
                 <div className="total-spend"><div>{`Total spent on this trip $${totalSpent? formatMoney(totalSpent): ' 0'}`}</div></div>
-                <Timeline pinData={pinData} notesData={notes} setImage={this.setImage}/>
-                <div className="last-entry">
-                    <div className="entry-content">
-
+                <Map />
+                <div className="desktop-div">
+                    <Timeline pinData={pinData} notesData={notes} setImage={this.setImage}/>
+                    {privatePage && !this.props.guest &&
+                        <div className="summary-end-trip-link">
+                            <button onClick={this.endTrip} className="summary-end-trip-link-btn btn">End Trip</button>
+                        </div>
+                    }
+                    <div className="share-btns col-12">
+                            <a onClick={() => {this.fbButton(summaryURL)}}>
+                                <i className="fab fa-facebook-square"/>
+                            </a>
+                            <a href={this.twitterButton(summaryURL)}>
+                                <i className="fab fa-twitter-square"/>
+                            </a>
+                            <a href={this.mailButton(summaryURL)}>
+                                <i className="fas fa-envelope-square"/>
+                            </a>
                     </div>
                 </div>
-                {privatePage && !this.props.guest &&
-                    <div className="summary-end-trip-link">
-                        <button onClick={this.endTrip} className="summary-end-trip-link-btn btn">End Trip</button>
-                    </div>
-                }
-                <div className="share-btns col-12">
-                        <a onClick={() => {this.fbButton(summaryURL)}}>
-                            <i className="fab fa-facebook-square"/>
-                        </a>
-                        <a href={this.twitterButton(summaryURL)}>
-                            <i className="fab fa-twitter-square"/>
-                        </a>
-                        <a href={this.mailButton(summaryURL)}>
-                            <i className="fas fa-envelope-square"/>
-                        </a>
-                </div>
-                {/*<MapModal modal={mapModal} onClick={this.toggleMapModal}/>*/}
                 <ImageModal img={image} modal={imageModal} close={this.toggleImageModal}/>
             </div>
         );

@@ -184,7 +184,7 @@ class Budget extends Component{
                     <BudgetForm budget={this.handleInput} style={showInput}/>
                     <div className="sort-budget">
                         <button className="sort-btn btn" style={this.state.dateButton} onClick={this.sortBudgetByDate}>
-                            <i className={'fas fa-clock'}></i>
+                            <i className={'fas fa-clock'}> </i> 
                             <i className={`fas fa-sort-${sortByDateIcon[0]}`}></i>
                         </button>
                         <button className="sort-btn btn" style={this.state.moneyButton} onClick={this.sortBudgetByMoney}>

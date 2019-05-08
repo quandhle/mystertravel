@@ -9,7 +9,7 @@ class ImageModal extends Component {
             <Modal open={modal} onClick={close} childrenStyle="summary-image-modal">
                 <span onClick={close} className="close-popup"><i className="fas fa-times-circle"></i></span>
                 <div className="image-box">
-                    <img onClick={close} src={img} alt="" />
+                    <img onClick={close} src={img} alt={img} />
                 </div>
             </Modal>
         );
