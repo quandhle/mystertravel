@@ -48,7 +48,7 @@ class AboutUs extends Component {
                 role: "Front End Developer"
             },
         ]
-    };
+    }
 
     render() {
         const aboutUs = this.data.map( person => {
@@ -68,7 +68,7 @@ class AboutUs extends Component {
                 </section>
             </div>
         );
-    };
+    }
 }
 
 export default AboutUs;

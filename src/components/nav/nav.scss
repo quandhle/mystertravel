@@ -1,5 +1,5 @@
 .nav-box {
-    color:#FFFFFF;
+    color: #FFFFFF;
     background-color: #a4d8d0;
     height: 10vh;
 
@@ -7,19 +7,20 @@
         height: 100%;
         font-size: 1.5em;
         font-weight: 700;
-        padding: 0;
 
         .nav-menu, .nav-title {
             display: inline-block;
 
             a {
-                color:#FFFFFF;
+                color: #FFFFFF;
                 transition: 0.5s;
+
                 &:hover {
                     transform: rotate(90deg);
                 }
             }
         }
+
         .nav-title {
             font-family: 'Dancing Script', cursive;
             position: absolute;
@@ -31,25 +32,21 @@
 }
 
 .side-nav-box {
-    display:block;
     background-color: rgba(255, 255, 255, 0.7);
     height: 100%;
     width: 0;
     position: fixed;
-    top: 0%;
-    z-index: 999;
+    top: 0;
     font-size: 1.5em;
-    z-index: 3;
+    z-index: 2;
 
     .side-nav {
-        position: absolute;
-        top: 0;
         background-color: #a4d8d0;
-        -webkit-box-shadow: 21px 0px 25px -21px rgba(179,179,179,1);
-        -moz-box-shadow: 21px 0px 25px -21px rgba(179,179,179,1);
-        box-shadow: 21px 0px 25px -21px rgba(179,179,179,1);
-        height:100%;
-        width:70%;
+        -webkit-box-shadow: 21px 0 25px -21px rgba(179, 179, 179, 1);
+        -moz-box-shadow: 21px 0 25px -21px rgba(179, 179, 179, 1);
+        box-shadow: 21px 0 25px -21px rgba(179, 179, 179, 1);
+        height: 100%;
+        width: 70%;
         overflow-x: hidden;
         transition: 0.5s;
 
@@ -65,7 +62,6 @@
         }
 
         .side-nav-links, .aboutus-link {
-            list-style: none;
             padding: 0;
 
             li {
@@ -85,7 +81,7 @@
 
         .aboutus-link {
             position: relative;
-            top:30%
+            top: 30%
         }
     }
 }

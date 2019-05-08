@@ -1,7 +1,4 @@
-html, body{
-    height: 100vh;
-    margin: 0;
-    padding: 0;
+html, body {
     background: mintcream;  /* fallback for old browsers */
     background-repeat: no-repeat;
     font-family: 'Nunito', sans-serif;
@@ -9,8 +6,4 @@ html, body{
 
 .btn {
     box-shadow: none !important;
-}
-
-button{
-    font-family: 'Nunito', sans-serif;
 }
