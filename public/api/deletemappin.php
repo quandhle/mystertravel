@@ -13,26 +13,29 @@ if (!empty($_SESSION['user_data']['trips_id'])) {
 $json_input = file_get_contents("php://input");
 $input = json_decode($json_input, true);
 
-$latitude = $input['latitude'] * 10000000;
-$longitude = $input['longitude'] * 10000000;
+// $latitude = $input['latitude'] * 10000000;
+// $longitude = $input['longitude'] * 10000000;
 
-if (empty($trips_id)) {
-    throw new Exception('Please provide trips_id (int) with your request');
-}
+// if (empty($trips_id)) {
+//     throw new Exception('Please provide trips_id (int) with your request');
+// }
 
-if (empty($latitude) || empty($longitude)) {
-    throw new Exception('Please provide location with your request');
-}
+// if (empty($latitude) || empty($longitude)) {
+//     throw new Exception('Please provide location with your request');
+// }
+
+$description = $input['description'];
+
+$description = 'cfxgdz';
 
 $query = "DELETE FROM `pins` WHERE
-    `trips_id` = ? AND
-    `latitude` = ? AND
-    `longitude` = ?
+    `description` = ? AND
+    `trips_id` = $trips_id
     LIMIT 1
 ";
 
 $statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($statement, 'ddd', $trips_id, $latitude, $longitude);
+mysqli_stmt_bind_param($statement, 'd', $description);
 $result = mysqli_stmt_execute($statement);
 
 if(!$result){
