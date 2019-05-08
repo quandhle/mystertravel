@@ -32,7 +32,7 @@ if(!$result){
 
 if(mysqli_num_rows($result) === 0){
     $output['success'] = true;
-    $output['data'] = null;
+    $output['data'] = [];
     print(json_encode($output));
     exit();
 }
@@ -46,9 +46,6 @@ while ($row = mysqli_fetch_assoc($result)) {
         'trips_name' => $row['trips_name'],
         'start' => $start,
         'end' => $end,
-        'summary' => $row['summary'],
-        'summary_image' => $row['summary_image'],
-        'summary_date' => $row['summary_date']
     ];
 };
 

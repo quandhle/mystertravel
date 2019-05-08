@@ -22,23 +22,23 @@ $type = $_GET['type'];
 $order = '';
 
 switch ($_GET['type']) {
-    case 'Most expensive':
+    case 'expensive':
         $type = 'price';
         $order = 'DESC';
         break;
-    case 'Least expensive':
+    case 'cheapest':
         $type = 'price';
         $order = 'ASC';
         break;
-    case 'Newest':
+    case 'newest':
         $type = 'added';
         $order = 'DESC';
         break;
-    case 'Oldest':
+    case 'oldest':
         $type = 'added';
         $order = 'ASC';
         break;
-    case 'Category':
+    case 'category':
         $type = 'category';
         $order = 'ASC';
         break;
@@ -79,11 +79,11 @@ while ($row = mysqli_fetch_assoc($result)) {
         'added' => $row['added'],
         'updated' => $row['updated']
     ];
-    
+
     $output['total_expense'] = (int)$row['total_budget'];
 };
 
 $output['success'] = true;
 $output['budget'] = $data;
- 
+
 print(json_encode($output));
