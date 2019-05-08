@@ -3,7 +3,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import './summary.scss';
 import {formatMoney} from './../../../helper';
-import {clearTripId} from "../../../actions";
+import {clearTripId, signIn} from "../../../actions";
 import {loadScript} from "./../../../helper";
 import Timeline from './timeline';
 import MapModal from './mapmodal';
@@ -23,7 +23,8 @@ class Summary extends Component {
             imageModal: false,
             image: null,
             mapModal: false,
-            pin: null
+            pin: null,
+            userId: null
         };
 
         this.endTrip = this.endTrip.bind(this);
@@ -31,27 +32,43 @@ class Summary extends Component {
 
     componentDidMount() {
         const {params} = this.props.match;
-        let privatePage, trips_id;
+        let privatePage, trips_id, userId;
 
-        if(params && params.trips_id) {
+        if(params && params.trips_id && params.userId) {
             privatePage = false;
             trips_id =  params.trips_id;
+            userId = params.userId;
         } else {
             privatePage = true;
             trips_id = localStorage.getItem('trips_id');
+            userId = localStorage.getItem('user_id');
         }
 
         this.setState({
             privatePage,
-            trips_id
+            trips_id,
+            userId
         }, this.getSummaryData);
 
         loadScript('https://platform.twitter.com/widgets.js');
+        this.checkLogin();
+    }
+
+    async checkLogin() {
+        const resp = await axios.get(`/api/checkloggedin.php?token=${localStorage.getItem('token')}`);
+        const {success, login} = resp.data;
+        const {signIn} = this.props;
+
+        if(success) {
+            if(login) {
+                signIn(resp.data);
+            }
+        }
     }
 
     async getSummaryData() {
-        const {trips_id} = this.state;
-        const resp = await axios.get(`/api/getendtripsummary.php?trips_id=${trips_id}`);
+        const {trips_id, userId} = this.state;
+        const resp = await axios.get(`/api/getendtripsummary.php?trips_id=${trips_id}&users_id=${userId}`);
 
         if(resp.data.success) {
             const {summary: {trips_name, total_budget}, pins, notes} = resp.data;
@@ -122,21 +139,21 @@ class Summary extends Component {
         }
     }
 
-    toggleMapModal = (pin) => {
+    toggleMapModal = () => {
         this.setState({
             mapModal: !this.state.mapModal
         });
     }
 
-    toggleImageModal = (image) => {
+    toggleImageModal = () => {
         this.setState({
             imageModal: !this.state.imageModal
         });
     }
 
     render() {
-        const {trips_id, tripName, totalSpent, privatePage, pinData, notes, mapModal, imageModal, image} = this.state;
-        const summaryURL = `https://www.mystertravel.com/trip/_/_/${trips_id}`;
+        const {trips_id, tripName, totalSpent, privatePage, pinData, notes, mapModal, imageModal, image, userId} = this.state;
+        const summaryURL = `https://www.mystertravel.com/trip/${userId}/${tripName.split(" ").join("-")}/${trips_id}`;
 
         return (
             <div className="summary-page">
@@ -148,7 +165,7 @@ class Summary extends Component {
 
                     </div>
                 </div>
-                {privatePage &&
+                {privatePage && !this.props.guest &&
                     <div className="summary-end-trip-link">
                         <button onClick={this.endTrip} className="summary-end-trip-link-btn btn">End Trip</button>
                     </div>
@@ -174,10 +191,12 @@ class Summary extends Component {
 function mapStateToProps(state) {
     return {
         trips_id: state.user.trips_id,
-        auth: state.user.auth
+        auth: state.user.auth,
+        guest: state.user.guest
     };
 }
 
 export default connect(mapStateToProps, {
-    clearTripId: clearTripId
+    clearTripId,
+    signIn
 })(Summary);

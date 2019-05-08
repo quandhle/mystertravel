@@ -4,7 +4,7 @@ export function signIn(user) {
     localStorage.setItem('signedIn', 'true');
     localStorage.setItem('trips_id', user.trips_id);
     localStorage.setItem('token', user.token);
-
+    localStorage.setItem('user_id', user.users_id);
     return {
         type: types.SIGN_IN,
         username: user.username,
@@ -17,6 +17,7 @@ export function signOut() {
     localStorage.removeItem('signedIn');
     localStorage.removeItem('trips_id');
     localStorage.removeItem('token');
+    localStorage.removeItem('user_id');
 
     return {
         type: types.SIGN_OUT
