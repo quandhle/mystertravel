@@ -151,7 +151,9 @@ class Nav extends Component {
                         <h1>MysterTravel</h1>
                     </div>
                     <div className="navbar-links">
-                        {links}
+                        <ul>
+                            {links}
+                        </ul>   
                     </div>
                 </nav>
                 <SideNav style={sideNav} toggle={this.toggleSideNav} links={links} greeting={greeting}/>
