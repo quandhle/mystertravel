@@ -3,7 +3,8 @@ import {formatDate} from '../../helper';
 
 const TripList = (props) => {
     const {trips_id, trips_name, start, end } = props.item;
-    const url = `https://www.mystertravel.com/trip/1/${start.split(" ")[0]}/${trips_name.split(" ").join("-")}/${trips_id}`;
+    let userId = localStorage.getItem('user_id')
+    const url = `https://www.mystertravel.com/trip/${userId}/${trips_name.split(" ").join("-")}/${trips_id}`;
 
     return (
         <div  className="previous-trip">

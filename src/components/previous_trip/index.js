@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import './previous.scss';
 import axios from 'axios';
 import TripList from './trip_list';
+import {signIn} from '../../actions';
 
 class PreviousTrips extends Component {
     constructor(props) {
@@ -12,12 +14,29 @@ class PreviousTrips extends Component {
         }
     }
 
-    async componentDidMount() {
+    async checkLogin() {
+        const resp = await axios.get(`/api/checkloggedin.php?token=${localStorage.getItem('token')}`);
+        const {success, login} = resp.data;
+        const {signIn} = this.props;
+
+        if(success) {
+            if(login) {
+                signIn(resp.data);
+                this.getPreviousTrip();
+            }
+        }
+    }
+
+    async getPreviousTrip(){
         const resp = await axios.get('/api/getprevioustrip.php');
         console.log(resp.data)
         this.setState({
             trips: resp.data.data
         });
+    }
+
+    componentDidMount() {
+        this.checkLogin();
     }
 
     render() {
@@ -33,4 +52,6 @@ class PreviousTrips extends Component {
     }
 }
 
-export default PreviousTrips;
+ export default connect(null, {
+     signIn
+ })(PreviousTrips);

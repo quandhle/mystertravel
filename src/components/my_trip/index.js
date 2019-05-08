@@ -47,7 +47,7 @@ class MyTrip extends Component{
     render() {
         return (
             <div className="my-trip">
-                <div className="mytrip-greeting">My Trip Log</div>
+                <div className="mytrip-greeting">Current Trip Log</div>
                 <div className="map-link">
                     <button className="map-link-btn btn" onClick={this.goToMap}>Pin on Map</button>
                 </div>
