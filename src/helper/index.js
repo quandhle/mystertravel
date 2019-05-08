@@ -46,20 +46,6 @@ export function formatDate(datetime){
     return `${day} ${month} ${date[1]}, ${date[2]}`;
 }
 
-export function formatDatetime(datetime) {
-    const dt = new Date(datetime);
-
-    return `${dt.toLocaleDateString('en-US', {
-        weekday: 'short',
-        month: 'numeric',
-        day: 'numeric'
-    })} ${dt.toLocaleTimeString('en-US', {
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: false
-    })}`;
-}
-
 export function loadScript(url) {
     const index = window.document.getElementsByTagName("script")[0];
     const script = window.document.createElement("script");

@@ -86,7 +86,7 @@ main {
         .description-input {
             margin: 10px;
 
-            &>input {
+            & > input {
               border: 1px solid transparent;
               outline: none;
               background-color: rgba(255, 255, 255, 0.8);
@@ -106,6 +106,7 @@ main {
             background-color: #fa8d62;
             width: 60%;
             margin-bottom: 10px;
+
             &:hover {
                 background-color: #e26a3b;
             }
