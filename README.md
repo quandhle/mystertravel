@@ -1,5 +1,5 @@
 # <a href="https://mystertravel.com/" target="_blank">Myster Travel</a>
-> Mobile/desktop responsive app is travelers to keep an organized record of his/her travel memories
+> Mobile/desktop responsive app designed for travelers to keep an organized record of his/her travel memories
 >
 > Click on the title above to visit the live site
 
