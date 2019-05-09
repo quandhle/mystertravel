@@ -138,13 +138,12 @@ class Map extends Component {
     }
 
     async deletePin() {
-console.log('state pin id',this.state.pinId)
         const resp = await axios.post('/api/deletemappin.php', {
             pin_id: this.state.pinId
         });
-console.log('resp', resp)
+
         if(resp.data.success) {
-            this.showPins();
+            this.initMap();
         } else {
             console.error(resp.data.error);
         }
@@ -162,17 +161,19 @@ console.log('resp', resp)
     }
 
     async showPins() {
+
         const resp = await axios.get(`/api/getmappin.php?token=${localStorage.getItem('token')}`);
         let pinData = null;
 
         if(resp.data.success) {
             this.props.signIn(resp.data);
-
             pinData = resp.data.data;
-            let pins = null;
-            let infowindow = null;
+            
+            
             if(pinData.length > 0) {
-
+                let pins = null;
+                let infowindow = null;
+                
                 pins = pinData.map((item) => {
                     const pin = new window.google.maps.Marker({
                         position: {
@@ -211,11 +212,8 @@ console.log('resp', resp)
                 const lastPin = this.state.pins[this.state.pins.length - 1];
                 this.state.map.setZoom(11);
                 this.state.map.panTo(lastPin.position);
-            } else {
-                this.setState({
-                    pins: pinData
-                });
             }
+
         } else {
             console.error(resp.data.error);
         }
