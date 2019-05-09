@@ -65,8 +65,8 @@
 >
 > **NOTE:** *After bundling you can not directly run your app locally. You must run your app from the root directory of a server.*
 
-## Authors
-> - Kylie Chao (https://github.com/kylieclin)
-> - Jennifer Lai (https://github.com/jen-icl)
-> - Quan Le (https://github.com/quandhle)
-> - Westley Poon (https://github.com/WestleyPoon)
+### Authors
+> - **Kylie Chao** (https://github.com/kylieclin)
+> - **Jennifer Lai** (https://github.com/jen-icl)
+> - **Quan Le** (https://github.com/quandhle)
+> - **Westley Poon** (https://github.com/WestleyPoon)
