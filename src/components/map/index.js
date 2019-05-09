@@ -153,7 +153,6 @@ class Map extends Component {
     }
 
     getPinId(id) {
-        console.log('pin id',id)
         this.setState({
             pinId: id,
             deleteBtn: true
