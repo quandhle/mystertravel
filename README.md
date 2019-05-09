@@ -1,5 +1,5 @@
 # <a href="https://mystertravel.com/" target="_blank">Myster Travel</a>
-> This is a mobile/desktop responsive app is designed for travelers to keep an organized record of his/her travel memories
+> Mobile/desktop responsive app is travelers to keep an organized record of his/her travel memories
 >
 > Click on the title above to visit the live site
 
@@ -57,13 +57,6 @@
 > 1. Start dev server
 >    - `npm start`
 > 1. Open a browser and navigate to `localhost:3000`
-
-### Bundle For Deployment
-
-> 1. Run webpack to bundle files
->    - `npm run bundle`
->
-> **NOTE:** *After bundling you can not directly run your app locally. You must run your app from the root directory of a server.*
 
 ### Authors
 > - **Kylie Chao** (https://github.com/kylieclin)
