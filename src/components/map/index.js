@@ -20,7 +20,9 @@ class Map extends Component {
             name: null,
             map: null,
             modal: false,
-            description: null
+            pinId: null,
+            deleteBtn: false,
+            infowindow: null
         };
 
         this.addPin = this.addPin.bind(this);
@@ -31,7 +33,7 @@ class Map extends Component {
         this.handleClear = this.handleClear.bind(this);
         this.handleMapClick = this.handleMapClick.bind(this);
         this.deletePin = this.deletePin.bind(this);
-        this.thisPin = this.thisPin.bind(this);
+        this.getPinId = this.getPinId.bind(this);
     }
 
     componentDidMount() {
@@ -76,6 +78,7 @@ class Map extends Component {
     }
 
     handleMapClick(lat, lng) {
+        this.state.infowindow.close();
         const geocoder = new google.maps.Geocoder;
 
         geocoder.geocode({'location': {lat, lng}}, (results, status) => {
@@ -85,8 +88,10 @@ class Map extends Component {
                 this.setState({
                     lat,
                     lng,
-                    name
+                    name,
+                    deleteBtn: false
                 });
+                
                 this.toggleModal();
             }
         });
@@ -130,18 +135,23 @@ class Map extends Component {
     }
 
     async deletePin() {
-        // console.log(props);
 
-        console.log(this.state.description);
+        const resp = await axios.get('/api/deletemappin.php', {
+            pin_id: this.state.pinId
+        });
 
-        // const resp = await axios.get('/api/deletemappin.php');
+        if(resp.data.success) {
+            this.showPins();
+        } else {
+            console.error(resp.data.error);
+        }
 
-        // console.log(resp);
     }
 
-    thisPin(description) {
+    getPinId(id) {
         this.setState({
-            description: description
+            pinId: id,
+            deleteBtn: true
         });
     }
 
@@ -155,25 +165,27 @@ class Map extends Component {
             pinData = resp.data.data;
 
             if(pinData.length > 0) {
-
+                let infowindow;
                 const pins = pinData.map((item) => {
+                    
                     const pin = new window.google.maps.Marker({
                         position: {
                             lat: item.lat,
                             lng: item.lng
                         },
                         title: item.name,
-                        map: this.state.map
+                        map: this.state.map,
+                        pinId: item.pin_id
                     });
 
                     const content = '<h6 id="infoWindow">' + item.description + '</h6>';
 
-                    const infowindow = new google.maps.InfoWindow({
+                    infowindow = new google.maps.InfoWindow({
                         content: content
                     });
 
                     pin.addListener('click', () => {
-                        this.thisPin(item.description);
+                        this.getPinId(pin.pinId);
                     });
 
                     pin.addListener('click', function() {
@@ -186,6 +198,7 @@ class Map extends Component {
                 });
                 this.setState({
                     pins: pins,
+                    infowindow: infowindow
                 });
 
                 const lastPin = this.state.pins[this.state.pins.length - 1];
@@ -302,7 +315,7 @@ class Map extends Component {
     }
 
     render() {
-        const {modal} = this.state;
+        const {modal, deleteBtn} = this.state;
 
         return (
             <main>
@@ -313,9 +326,9 @@ class Map extends Component {
                 <button onClick={this.getCurrentLocation} className='btn geo-btn btn-lg'>
                     <i className="fas fa-location-arrow"/>
                 </button>
-                <button onClick={this.deletePin} className="btn delete-pin btn-lg">
+                {deleteBtn? <button onClick={this.deletePin} className="btn delete-pin btn-lg">
                     Delete Pin <i className="fas fa-trash" aria-hidden="true"></i>
-                </button>
+                </button>: null}
                 {this.state.modal && <MapPopUp modal={modal} close={this.toggleModal} addpin={this.addPin}/>}
             </main>
         );
