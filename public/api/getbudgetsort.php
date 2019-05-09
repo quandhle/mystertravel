@@ -42,6 +42,10 @@ switch ($_GET['type']) {
         $type = 'category';
         $order = 'ASC';
         break;
+    case 'z-a':
+        $type = 'category';
+        $order = 'DESC';
+        break;
     default:
         $type = 'added';
         $order = 'DESC';
