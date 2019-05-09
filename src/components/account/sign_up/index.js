@@ -5,7 +5,7 @@ import {signIn, passTripId} from '../../../actions';
 import SignUpForm from './signup_form';
 import './sign_up.scss';
 
-class SignIn extends Component{
+class SignIn extends Component {
     constructor(props) {
         super(props);
 

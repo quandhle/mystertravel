@@ -43,7 +43,7 @@ class PreviousTrips extends Component {
         const {trips} = this.state;
         let tripsList = null;
 
-        if(trips.length > 0){
+        if(trips.length > 0) {
             tripsList = trips.map(item => {
                 return <TripList key={item.trips_id} item={item} />
             });
