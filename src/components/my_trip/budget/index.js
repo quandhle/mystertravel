@@ -18,13 +18,12 @@ class Budget extends Component{
             },
             budget: [],
             spinner: false,
-            sortMode: 'date',
-            sortByDateIcon: ['down', 'up'],
-            dateButton: {
-                'backgroundColor': '#fa8d62'
-            },
-            sortByMoneyIcon: ['down', 'up'],
+            sortMode: 'time',
+            sortByMoneyIcon: 'down',
             moneyButton: {
+                'backgroundColor': '#2b616d'
+            },
+            categoryButton: {
                 'backgroundColor': '#2b616d'
             }
         };
@@ -33,8 +32,8 @@ class Budget extends Component{
         this.handleInput = this.handleInput.bind(this);
         this.deleteBudgetItem = this.deleteBudgetItem.bind(this);
         this.getBudgetList = this.getBudgetList.bind(this);
-        this.sortBudgetByDate = this.sortBudgetByDate.bind(this);
         this.sortBudgetByMoney = this.sortBudgetByMoney.bind(this);
+        this.sortBudgetByCategory = this.sortBudgetByCategory.bind(this);
     }
 
     async handleInput(value) {
@@ -111,51 +110,58 @@ class Budget extends Component{
         }
     }
 
-    sortBudgetByDate() {
-        const {sortMode, sortByDateIcon} = this.state;
+    async sortBudgetByMoney() {
+        const {sortMode, sortByMoneyIcon} = this.state;
+        let type, mode, swap;
 
-        switch (sortMode) {
-            case 'date':
-                this.setState({
-                    sortByDateIcon: this.state.sortByDateIcon.reverse(),
-                    budget: this.state.budget.reverse()
-                });
-                break;
-            case 'money':
-                this.setState({
-                    sortMode: 'date',
-                    dateButton: {'backgroundColor': '#fa8d62'},
-                    moneyButton: {'backgroundColor': '#2b616d'},
-                    budget: sortByDateIcon[0] === 'down' ?
-                        this.state.budget.sort((a, b) => {return a.added - b.added}) :
-                        this.state.budget.sort((a, b) => {return b.added - a.added})
-
-                });
-                break;
+        if (sortMode !== 'money') {
+            mode = 'money';
+            type = sortByMoneyIcon === 'down' ? 'expensive' : 'cheapest';
+        } else {
+            type = sortByMoneyIcon === 'down' ? 'cheapest' : 'expensive';
+            swap = true;
         }
+
+        const resp = await axios.get(`/api/getbudgetsort.php?token=${localStorage.getItem('token')}&type=${type}`);
+        const {success, budget} = resp.data;
+
+        if(success) {
+            this.setState({
+                budget,
+                sortMode: mode ? mode : sortMode,
+                sortByMoneyIcon: swap ? (sortByMoneyIcon === 'down' ? 'up' : 'down') : sortByMoneyIcon,
+                moneyButton: {
+                    'backgroundColor': '#fa8d62'
+                },
+                categoryButton: {
+                    'backgroundColor': '#2b616d'
+                }
+            });
+        } else {
+            console.error(resp.data.error);
+        }
+
     }
 
-    sortBudgetByMoney() {
-        const {sortMode, sortByMoneyIcon} = this.state;
+    async sortBudgetByCategory() {
+        const resp = await axios.get(`/api/getbudgetsort.php?token=${localStorage.getItem('token')}&type=category`);
+        const {success, budget} = resp.data;
 
-        switch (sortMode) {
-            case 'date':
-                this.setState({
-                    sortMode: 'money',
-                    dateButton: {'backgroundColor': '#2b616d'},
-                    moneyButton: {'backgroundColor': '#fa8d62'},
-                    budget: sortByMoneyIcon[0] === 'down' ?
-                        this.state.budget.sort((a, b) => {return b.price - a.price}) :
-                        this.state.budget.sort((a, b) => {return a.price - b.price})
-                });
-                break;
-            case 'money':
-                this.setState({
-                    sortByMoneyIcon: this.state.sortByMoneyIcon.reverse(),
-                    budget: this.state.budget.reverse()
-                });
-                break;
+        if(success) {
+            this.setState({
+                budget,
+                sortMode: 'category',
+                moneyButton: {
+                    'backgroundColor': '#2b616d'
+                },
+                categoryButton: {
+                    'backgroundColor': '#fa8d62'
+                }
+            });
+        } else {
+            console.error(resp.data.error);
         }
+
     }
 
     componentDidMount() {
@@ -163,7 +169,7 @@ class Budget extends Component{
     }
 
     render() {
-        const {budget, showInput, spinner, sortByMoneyIcon, sortByDateIcon} = this.state;
+        const {budget, showInput, spinner, sortByMoneyIcon} = this.state;
         let budgetList = null;
 
         if(budget.length > 0) {
@@ -183,13 +189,12 @@ class Budget extends Component{
                     </div>
                     <BudgetForm budget={this.handleInput} style={showInput}/>
                     <div className="sort-budget">
-                        <button className="sort-btn btn" style={this.state.dateButton} onClick={this.sortBudgetByDate}>
-                            <i className={'fas fa-clock'}> </i> 
-                            <i className={`fas fa-sort-${sortByDateIcon[0]}`}></i>
-                        </button>
                         <button className="sort-btn btn" style={this.state.moneyButton} onClick={this.sortBudgetByMoney}>
                             <i className={'fas fa-dollar-sign'}></i>
-                            <i className={`fas fa-sort-${sortByMoneyIcon[0]}`}></i>
+                            <i className={`fas fa-sort-${sortByMoneyIcon}`}></i>
+                        </button>
+                        <button className="sort-btn btn" style={this.state.categoryButton} onClick={this.sortBudgetByCategory}>
+                            <i className={'fas fa-sort-alpha-down'}></i>
                         </button>
                     </div>
                     <div className="budget-box">
