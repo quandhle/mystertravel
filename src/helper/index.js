@@ -1,4 +1,4 @@
-export function formatMoney(pennies){
+export function formatMoney(pennies) {
     pennies = parseInt(pennies);
 
     if(isNaN(pennies)) {
@@ -10,7 +10,7 @@ export function formatMoney(pennies){
     return dollars;
 }
 
-export function formatEntries(text){
+export function formatEntries(text) {
     let firstChar = text.charAt(0);
 
     if(typeof firstChar === 'string') {
@@ -21,7 +21,7 @@ export function formatEntries(text){
     return text;
 }
 
-export function formatDate(datetime){
+export function formatDate(datetime) {
     let date = datetime.split(' ')[0];
     let day = new Date(date);
 

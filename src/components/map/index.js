@@ -344,13 +344,13 @@ class Map extends Component {
     }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
     return {
         trips_id: state.user.trips_id
     };
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
     return {
         signIn: (user) => {
             dispatch(signIn(user));
