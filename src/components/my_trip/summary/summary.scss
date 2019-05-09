@@ -22,7 +22,6 @@
             font-weight: bold;
             text-align: center;
             padding-bottom: 5px;
-            border-bottom: 1px solid rgba(164, 216, 208, 0.7);
         }
     }
 
@@ -31,7 +30,6 @@
         margin: 20px 0 30px;
 
         .timeline-title {
-            font-size: 1.2em;
             font-weight: bold;
             margin: 8px 0 8px 50px;
             color: #2b616d;
@@ -131,19 +129,6 @@
         }
     }
 
-    .last-entry {
-        .entry-content {
-            img {
-                width: 100%;
-            }
-
-            p {
-                margin: 10px 10px;
-                text-align: center;
-            }
-        }
-    }
-
     .share-btns {
         display: flex;
         justify-content: center;
@@ -199,9 +184,6 @@
             transform: translate(-50%, -50%);
 
             .summary-image-modal {
-                background-color: rgba(164, 216, 208, 0.95);
-                border-radius: 15px;
-
                 .close-popup {
                     color: white;
                     padding-top: 2px;
@@ -209,9 +191,14 @@
 
                 .image-box {
                     padding: 15px;
-
+                    margin: auto;
                     img {
                         width: 100%;
+                        margin: auto;
+                        display: block;
+                        -webkit-box-shadow: 0 0 34px -2px rgba(168, 168, 168, 1);
+                        -moz-box-shadow: 0 0 34px -2px rgba(168, 168, 168, 1);
+                        box-shadow: 0 0 34px -2px rgba(168, 168, 168, 1);
                     }
                 }
 
@@ -220,6 +207,31 @@
                 }
             }
         }
+    }
+
+    main {
+        height: 60vh;
+        position: relative;
+        border: 2px solid rgba(164, 216, 208, 0.95);
+        margin: 5px;
+        box-sizing: border-box;
+
+        .map-title{
+            z-index: 2;
+            position: absolute;
+            font-weight: bold;
+            padding: 8px;
+            color: #2b616d;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 0 0 15px 0;
+        }
+
+        .map {
+            height: 100%;
+            top: 0;
+            position: absolute;
+        }
+
     }
 }
 
@@ -230,6 +242,46 @@
                 width: 80%;
                 position: relative;
                 left: 10%;
+                height: 80vh;
+
+                .image-box {
+                    width: 100%;
+                    height: 100%;
+
+                    img {
+                        height: 100%;
+                        width: auto;
+                    }
+                }
+
+                .close-popup {
+                    color: rgba(255, 255, 255, 0.7);
+                    padding-top: 0;
+                    font-size: 4em;
+                    transition: 1s;
+
+                    &:hover {
+                        color: rgba(255, 255, 255, 0.9);
+                        cursor: pointer;
+                    }
+                }
+
+            }
+        }
+        
+        .desktop-div {
+            width: 38%;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        main {
+            width: 60%;
+            display: inline-block;
+            height: 77vh;
+
+            .map {
+                width: 100%;
             }
         }
     }

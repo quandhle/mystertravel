@@ -19,7 +19,8 @@ class Map extends Component {
             pins: [],
             name: null,
             map: null,
-            modal: false
+            modal: false,
+            description: null
         };
 
         this.addPin = this.addPin.bind(this);
@@ -30,6 +31,7 @@ class Map extends Component {
         this.handleClear = this.handleClear.bind(this);
         this.handleMapClick = this.handleMapClick.bind(this);
         this.deletePin = this.deletePin.bind(this);
+        this.thisPin = this.thisPin.bind(this);
     }
 
     componentDidMount() {
@@ -127,7 +129,20 @@ class Map extends Component {
         setTimeout(this.toggleModal, 1000);
     }
 
-    deletePin() {
+    async deletePin() {
+        // console.log(props);
+
+        console.log(this.state.description);
+
+        // const resp = await axios.get('/api/deletemappin.php');
+
+        // console.log(resp);
+    }
+
+    thisPin(description) {
+        this.setState({
+            description: description
+        });
     }
 
     async showPins() {
@@ -140,6 +155,7 @@ class Map extends Component {
             pinData = resp.data.data;
 
             if(pinData.length > 0) {
+
                 const pins = pinData.map((item) => {
                     const pin = new window.google.maps.Marker({
                         position: {
@@ -150,10 +166,14 @@ class Map extends Component {
                         map: this.state.map
                     });
 
-                    const content = `<h6 id="infoWindow">${item.description}</h6><br><i class="fa fa-trash"></i>`;
+                    const content = '<h6 id="infoWindow">' + item.description + '</h6>';
 
                     const infowindow = new google.maps.InfoWindow({
                         content: content
+                    });
+
+                    pin.addListener('click', () => {
+                        this.thisPin(item.description);
                     });
 
                     pin.addListener('click', function() {
@@ -292,6 +312,9 @@ class Map extends Component {
                 <div id="map" className='map'/>
                 <button onClick={this.getCurrentLocation} className='btn geo-btn btn-lg'>
                     <i className="fas fa-location-arrow"/>
+                </button>
+                <button onClick={this.deletePin} className="btn delete-pin btn-lg">
+                    Delete Pin <i className="fas fa-trash" aria-hidden="true"></i>
                 </button>
                 {this.state.modal && <MapPopUp modal={modal} close={this.toggleModal} addpin={this.addPin}/>}
             </main>
