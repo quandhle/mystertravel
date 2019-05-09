@@ -10,6 +10,7 @@
 >   - Log notes and upload photos
 >   - View trip summary and timeline
 > - View previous trips
+> - Share trip details with family and friends through Facebook, Twitter, and Email
 > - Persistent user login
 
 ### Accomplishments
