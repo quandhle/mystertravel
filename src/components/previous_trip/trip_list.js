@@ -8,7 +8,7 @@ const TripList = (props) => {
 
     return (
         <div  className="previous-trip">
-        <a href={url}>
+        <a href={url} target="_blank">
         <div className="trip-date">{formatDate(start).slice(4)} to {formatDate(end).slice(4)}</div>
         <div className="trip-name">{trips_name}</div>
         </a>
