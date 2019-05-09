@@ -1,0 +1,91 @@
+.about-container {
+    height: 90vh;
+
+    .first {
+        background-image: url('../../assets/images/aboutus.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position-x: 70%;
+        background-position-y: bottom;
+        background-size: cover;
+        display: flex;
+        height: 100%;
+        overflow-y: auto;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 7px;
+        font-size: 3em;
+
+        .team-title {
+            font-size: 0.7em;
+            text-align: center;
+        }
+    }
+
+    .section {
+        background-color: transparent;
+    }
+
+    .about-person {
+        background-color: rgba(164, 216, 208, 0.9);
+        margin: 5px 0;
+        padding: 5px;
+        font-size: 1.2em;
+        color: #2b616d;
+
+        .about-top {
+            position: relative;
+
+            .about-img, .about-name {
+                display: inline-block;
+            }
+
+            .about-img {
+                width: 30%;
+                
+                img {
+                    width: 100%;
+                    border-radius: 50%;
+                    border: 2px solid white;
+                }
+            }
+
+            .about-name {
+                position: absolute;
+                padding: 5px;
+            }
+        }
+
+        .about-contact {
+            padding: 10px 15px;
+            text-align: right;
+            font-size: 2rem;
+
+            a {
+                color: #2b616d;
+                text-decoration: none;
+                padding: 5px;
+            }
+        }
+    }
+}
+
+@media (min-width: 900px) {
+    .about-container .about-person {
+        width: 40%;
+        margin: 20px auto 20px auto;
+    }
+
+    .aboutUs {
+        padding: 50px 0 50px 0;
+        flex-wrap: wrap;
+        height: 100%;
+        display: flex;
+    }
+
+    .about-container .first .team-title {
+        font-size: 1em;
+    }
+}

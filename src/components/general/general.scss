@@ -1,0 +1,63 @@
+.input-box {
+    padding: 0;
+
+    .error-input {
+        color: #168199;
+        margin: 0;
+    }
+
+    textarea {
+        resize: none;
+        height: 100%;
+        width: 100%;
+        margin: 10px 0 0 0;
+    }
+}
+
+.popup-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(31, 31, 31, 0.3);
+    z-index: 1000;
+    transition: 0.5s;
+
+    .popup-content {
+        position: absolute;
+        top: 30%;
+        left: 5%;
+        width: 90%;
+
+        .popup-children {
+            width: 100%;
+
+            .close-popup {
+                float: right;
+                position: relative;
+                right: 10px;
+                top: 2px;
+                font-size: 0.8em;
+            }
+        }
+    }
+}
+.spinner-modal {
+    div {
+        .spinner-border {
+            color: mintcream;
+            width: 8rem;
+            height: 8rem;
+            border: .5em solid currentColor;
+            border-bottom-color: transparent;
+            animation: spinner-border 1s ease-in-out infinite;
+        }
+    }
+
+    .loading-text {
+        color: mintcream;
+        margin-top: 5%;
+        font-size: 2em;
+    }
+}

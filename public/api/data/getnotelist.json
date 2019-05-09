@@ -1,0 +1,17 @@
+{
+    "success": true,
+    "data": [
+        {
+            "note_id": 1,
+            "image": "https://myster-travel-images.s3.us-west-1.amazonaws.com/image1.jpg",
+            "date": "2019-04-24 00:00:00",
+            "entry": "I went to Naples, Italy. Stayed in Ercolano. Had lots of ice cream and croissants."
+        },
+        {
+            "note_id": 2,
+            "image": "https://myster-travel-images.s3.us-west-1.amazonaws.com/image2.jpg",
+            "date": "2019-04-25 00:00:00",
+            "entry": "In Naples, all their plazas are preceded by Palazzo. Naples is right next to the beach and has a trash problem."
+        }
+    ]
+}

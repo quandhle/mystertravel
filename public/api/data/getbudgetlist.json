@@ -1,0 +1,24 @@
+{
+    "total_expense": 39230,
+    "success": true,
+    "data": [
+        {
+            "budget_id": 1,
+            "description": "Flight to Italy",
+            "category": "flight",
+            "price": 129500
+        },
+        {
+            "budget_id": 2,
+            "description": "Lasgne",
+            "category": "food",
+            "price": 77600
+        },
+        {
+            "budget_id": 3,
+            "description": "Airbnb",
+            "category": "hotel",
+            "price": 92300
+        }
+    ]
+}

@@ -1,0 +1,133 @@
+.nav-box {
+    color: #FFFFFF;
+    background-color: #a4d8d0;
+    height: 10vh;
+
+    .navbar {
+        height: 100%;
+        font-size: 1.5em;
+        font-weight: 700;
+
+        .nav-menu, .nav-title {
+            display: inline-block;
+
+            a {
+                color: #FFFFFF;
+                transition: 0.5s;
+
+                &:hover {
+                    transform: rotate(90deg);
+                }
+            }
+        }
+
+        .nav-title {
+            font-family: 'Dancing Script', cursive;
+            position: absolute;
+            left: 50%;
+            top: 55%;
+            transform: translate(-50%, -50%);
+        }
+
+        .navbar-links {
+            display: none;
+
+            ul {
+                list-style: none;
+                padding-left: 0;
+                margin: 0;
+
+                li {
+                    display: inline;
+                    margin: 0 10px;
+
+                    a {
+                        color: white;
+                        text-decoration: none;
+                        font-family: 'Nunito', sans-serif;
+                        font-weight: 400;
+
+                        &:hover{
+                            color: #417681;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+.side-nav-box {
+    background-color: rgba(255, 255, 255, 0.7);
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    font-size: 1.5em;
+    z-index: 5;
+
+    .side-nav {
+        background-color: #a4d8d0;
+        -webkit-box-shadow: 21px 0 25px -21px rgba(179, 179, 179, 1);
+        -moz-box-shadow: 21px 0 25px -21px rgba(179, 179, 179, 1);
+        box-shadow: 21px 0 25px -21px rgba(179, 179, 179, 1);
+        height: 100%;
+        width: 70%;
+        overflow-x: hidden;
+        transition: 0.5s;
+
+        .nav-profile {
+            height: 10%;
+            margin: 10px 10px 0 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+
+            .username {
+                text-transform: capitalize;
+                padding: 5px;
+            }
+        }
+
+        .side-nav-links, .aboutus-link {
+            padding: 0;
+
+            li {
+                list-style: none;
+                height: 50px;
+                margin: 10px;
+                transition: 0.5s;
+                line-height: 50px;
+
+                a {
+                    display: block;
+                    color: #417970;
+                    text-decoration: none;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+                }
+            }
+        }
+
+        .aboutus-link {
+            position: relative;
+            top: 30%
+        }
+    }
+}
+
+@media (min-width: 1024px){
+
+    .nav-box .navbar .nav-title {
+        position: static;
+        left: 0;
+        top: 0;
+        transform: none;
+    }
+
+    .nav-box .navbar .navbar-links {
+        display: block;
+    }
+
+    .nav-box .navbar .nav-menu {
+        display: none;
+    }
+}
