@@ -83,7 +83,7 @@
                 background-color: #1b515d;
             }
 
-            .budget-descrip, .budget-amount, .budget-item, .budget-delete {
+            .budget-descrip, .budget-amount, .budget-item, .budget-icons, .budget-delete, .budget-date {
                 display: inline-block;
             }
 
@@ -108,15 +108,25 @@
                 width: 100%;
             }
 
-                .budget-icon {
-                    color: #b2dbd5;
-                    transition: 0.2s;
-                    cursor: pointer;
-                    
-                    &:hover, &:active {
-                       transform: rotate(180deg);
-                    }
+            .budget-icons {
+                width: 30%;
+            }
+
+            .budget-icon {
+                color: #b2dbd5;
+                transition: 0.2s;
+                cursor: pointer;
+
+                &:hover, &:active {
+                   transform: rotate(180deg);
                 }
+            }
+
+            .budget-date {
+                color: #b2dbd5;
+                text-align: right;
+                width: 70%;
+            }
         }
 
         .update-modal {
@@ -163,11 +173,17 @@
             width: 50px;
             color: white;
             margin: 4px 5px;
-            font-size: .8em;
             transition: .3s;
+            line-height: 100%;
+            text-align: center;
+
+            i {
+                font-size: 1.3em;
+            }
 
             i:nth-child(2) {
-                margin-left: 2px
+                margin-left: 0;
+                font-size: 1em;
             }
         }
     }

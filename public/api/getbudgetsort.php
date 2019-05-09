@@ -80,7 +80,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         'description' => $row['description'],
         'category' => $row['category'],
         'price' => $row['price'],
-        'added' => $row['added'],
+        'added' => date("m/d/Y H:i:s", strtotime($row['added'])),
         'updated' => $row['updated']
     ];
 
