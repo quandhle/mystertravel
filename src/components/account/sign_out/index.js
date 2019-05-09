@@ -4,7 +4,7 @@ import {signOut, clearTripId} from '../../../actions';
 import axios from 'axios';
 import './sign_out.scss';
 
-class SignOut extends Component{
+class SignOut extends Component {
     async componentDidMount() {
         await axios.post("/api/logout.php"); 
 

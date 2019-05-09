@@ -177,7 +177,7 @@
     }
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 1024px) {
     .budget-page {
         width: 100vw;
 
@@ -217,6 +217,11 @@
     
             .geo-btn {
                 left: 45%;
+            }
+
+            .delete-pin {
+                left: 65%;
+                transform: none;
             }
         }
         .popup-container .popup-content {

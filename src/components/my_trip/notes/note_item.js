@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { formatDate } from '../../../helper';
 import UpdateNote from './update_note';
 
-class NoteItem extends Component{
+class NoteItem extends Component {
     constructor(props) {
         super(props);
 

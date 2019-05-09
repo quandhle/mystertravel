@@ -20,7 +20,9 @@ class Map extends Component {
             name: null,
             map: null,
             modal: false,
-            description: null
+            pinId: null,
+            deleteBtn: false,
+            infowindow: null
         };
 
         this.addPin = this.addPin.bind(this);
@@ -31,7 +33,7 @@ class Map extends Component {
         this.handleClear = this.handleClear.bind(this);
         this.handleMapClick = this.handleMapClick.bind(this);
         this.deletePin = this.deletePin.bind(this);
-        this.thisPin = this.thisPin.bind(this);
+        this.getPinId = this.getPinId.bind(this);
     }
 
     componentDidMount() {
@@ -76,6 +78,10 @@ class Map extends Component {
     }
 
     handleMapClick(lat, lng) {
+        if(this.state.infowindow){
+            this.state.infowindow.close();
+        }
+
         const geocoder = new google.maps.Geocoder;
 
         geocoder.geocode({'location': {lat, lng}}, (results, status) => {
@@ -85,8 +91,10 @@ class Map extends Component {
                 this.setState({
                     lat,
                     lng,
-                    name
+                    name,
+                    deleteBtn: false
                 });
+
                 this.toggleModal();
             }
         });
@@ -130,52 +138,63 @@ class Map extends Component {
     }
 
     async deletePin() {
-        // console.log(props);
+        const resp = await axios.post('/api/deletemappin.php', {
+            pin_id: this.state.pinId
+        });
 
-        console.log(this.state.description);
-
-        // const resp = await axios.get('/api/deletemappin.php');
-
-        // console.log(resp);
+        if(resp.data.success) {
+            this.initMap();
+        } else {
+            console.error(resp.data.error);
+        }
+        this.setState({
+            deleteBtn: false
+        });
     }
 
-    thisPin(description) {
+    getPinId(id) {
+        console.log('pin id',id)
         this.setState({
-            description: description
+            pinId: id,
+            deleteBtn: true
         });
 
         console.log(this.state.pins[0]);
     }
 
     async showPins() {
+
         const resp = await axios.get(`/api/getmappin.php?token=${localStorage.getItem('token')}`);
         let pinData = null;
 
         if(resp.data.success) {
             this.props.signIn(resp.data);
-            
             pinData = resp.data.data;
-
+            
+            
             if(pinData.length > 0) {
-
-                const pins = pinData.map((item) => {
+                let pins = null;
+                let infowindow = null;
+                
+                pins = pinData.map((item) => {
                     const pin = new window.google.maps.Marker({
                         position: {
                             lat: item.lat,
                             lng: item.lng
                         },
                         title: item.name,
-                        map: this.state.map
+                        map: this.state.map,
+                        pinId: item.pin_id
                     });
 
                     const content = '<h6 id="infoWindow">' + item.description + '</h6>';
 
-                    const infowindow = new google.maps.InfoWindow({
+                    infowindow = new google.maps.InfoWindow({
                         content: content
                     });
 
                     pin.addListener('click', () => {
-                        this.thisPin(item.description);
+                        this.getPinId(pin.pinId);
                     });
 
                     pin.addListener('click', function() {
@@ -186,14 +205,17 @@ class Map extends Component {
 
                     return pin;
                 });
+
                 this.setState({
                     pins: pins,
+                    infowindow: infowindow
                 });
 
                 const lastPin = this.state.pins[this.state.pins.length - 1];
                 this.state.map.setZoom(11);
                 this.state.map.panTo(lastPin.position);
             }
+
         } else {
             console.error(resp.data.error);
         }
@@ -304,7 +326,7 @@ class Map extends Component {
     }
 
     render() {
-        const {modal} = this.state;
+        const {modal, deleteBtn} = this.state;
 
         return (
             <main>
@@ -315,22 +337,22 @@ class Map extends Component {
                 <button onClick={this.getCurrentLocation} className='btn geo-btn btn-lg'>
                     <i className="fas fa-location-arrow"/>
                 </button>
-                <button onClick={this.deletePin} className="btn delete-pin btn-lg">
+                {deleteBtn? <button onClick={this.deletePin} className="btn delete-pin btn-lg">
                     Delete Pin <i className="fas fa-trash" aria-hidden="true"></i>
-                </button>
+                </button>: null}
                 {this.state.modal && <MapPopUp modal={modal} close={this.toggleModal} addpin={this.addPin}/>}
             </main>
         );
     }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
     return {
         trips_id: state.user.trips_id
     };
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
     return {
         signIn: (user) => {
             dispatch(signIn(user));

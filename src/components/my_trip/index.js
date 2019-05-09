@@ -4,7 +4,7 @@ import {signIn} from '../../actions';
 import './my_trip.scss';
 import axios from "axios";
 
-class MyTrip extends Component{
+class MyTrip extends Component {
     componentDidMount() {
         this.checkLogin();
     }
