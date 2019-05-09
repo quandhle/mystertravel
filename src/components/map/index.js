@@ -153,13 +153,10 @@ class Map extends Component {
     }
 
     getPinId(id) {
-        console.log('pin id',id)
         this.setState({
             pinId: id,
             deleteBtn: true
         });
-
-        console.log(this.state.pins[0]);
     }
 
     async showPins() {
