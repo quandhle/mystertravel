@@ -20,8 +20,8 @@
 >    - PHP
 >    - Sass
 >    - Bootstrap4
->   - Applied Google Maps API with map marker, geolocation, and Google Places autocomplete search features
->   - Implemented AWS S3 file upload and file retrieval
+>    -  Google Maps API with map marker, geolocation, and Google Places autocomplete search features
+>    - AWS S3 file upload and file retrieval
 
 ### Project Planning and Progression Management
 > - Click on the links below to view the project planning and progression tracking tools
@@ -65,8 +65,8 @@
 >
 > **NOTE:** *After bundling you can not directly run your app locally. You must run your app from the root directory of a server.*
 
-## Contributors
-> - Kylie Chao
-> - Jennifer Lai
-> - Quan Le
-> - Westley Poon
+## Authors
+> - Kylie Chao (https://github.com/kylieclin)
+> - Jennifer Lai (https://github.com/jen-icl)
+> - Quan Le (https://github.com/quandhle)
+> - Westley Poon (https://github.com/WestleyPoon)
