@@ -6,6 +6,10 @@ ob_end_clean();
 
 require_once('config.php');
 
+$output = [
+    'success' => false
+];
+
 if (!empty($_SESSION['user_data']['trips_id'])) {
     $trips_id = intval($_SESSION['user_data']['trips_id']);
 }
@@ -13,7 +17,7 @@ if (!empty($_SESSION['user_data']['trips_id'])) {
 $json_input = file_get_contents("php://input");
 $input = json_decode($json_input, true);
 
-$budget_id = $input['budget_id'];
+$budget_id = intval($input['budget_id']);
 
 if (empty($trips_id)) {
     throw new Exception('Please provide trips_id (int) with your request');
@@ -24,13 +28,11 @@ if (empty($budget_id)) {
 }
 
 $query = "DELETE FROM `budget`
-    WHERE `trips_id` = ?
-    AND `id` = ?
+    WHERE `trips_id` = $trips_id
+    AND `id` = $budget_id
 ";
 
-$statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($statement, 'dd', $trips_id, $budget_id);
-$result = mysqli_stmt_execute($statement);
+$result = mysqli_query($conn, $query);
 
 if (!$result) {
     throw new Exception(mysqli_error($conn));

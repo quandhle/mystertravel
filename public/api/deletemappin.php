@@ -6,6 +6,10 @@ ob_end_clean();
 
 require_once('config.php');
 
+$output = [
+    'success' => false
+];
+
 if (!empty($_SESSION['user_data']['trips_id'])) {
     $trips_id = intval($_SESSION['user_data']['trips_id']);
 }
@@ -13,37 +17,29 @@ if (!empty($_SESSION['user_data']['trips_id'])) {
 $json_input = file_get_contents("php://input");
 $input = json_decode($json_input, true);
 
-// $latitude = $input['latitude'] * 10000000;
-// $longitude = $input['longitude'] * 10000000;
+$pin_id = intval($input['pin_id']);
 
-// if (empty($trips_id)) {
-//     throw new Exception('Please provide trips_id (int) with your request');
-// }
+if (empty($trips_id)) {
+    throw new Exception('Please provide trips_id (int) with your request');
+}
 
-// if (empty($latitude) || empty($longitude)) {
-//     throw new Exception('Please provide location with your request');
-// }
+if (empty($pin_id)) {
+    throw new Exception('Please provide pin_id (int) with your request');
+}
 
-$description = $input['description'];
-
-$description = 'cfxgdz';
-
-$query = "DELETE FROM `pins` WHERE
-    `description` = ? AND
-    `trips_id` = $trips_id
-    LIMIT 1
+$query = "DELETE FROM `pins`
+    WHERE `trips_id` = $trips_id
+    AND `id` = $pin_id
 ";
 
-$statement = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($statement, 'd', $description);
-$result = mysqli_stmt_execute($statement);
+$result = mysqli_query($conn, $query);
 
 if(!$result){
     throw new Exception(mysqli_error($conn));
 }
 
-if(mysqli_affected_rows($conn) !== 1){
-    throw new Exception(('Unable to delete map pin'));
+if(mysqli_affected_rows($conn) === 0){
+    throw new Exception(('Unable to find and delete map pin'));
 }
 
 $output['success'] = true;
