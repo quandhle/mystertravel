@@ -143,6 +143,8 @@ class Map extends Component {
         this.setState({
             description: description
         });
+
+        console.log(this.state.pins[0]);
     }
 
     async showPins() {
