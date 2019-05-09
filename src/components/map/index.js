@@ -78,7 +78,10 @@ class Map extends Component {
     }
 
     handleMapClick(lat, lng) {
-        this.state.infowindow.close();
+        if(this.state.infowindow){
+            this.state.infowindow.close();
+        }
+
         const geocoder = new google.maps.Geocoder;
 
         geocoder.geocode({'location': {lat, lng}}, (results, status) => {
@@ -91,7 +94,7 @@ class Map extends Component {
                     name,
                     deleteBtn: false
                 });
-                
+
                 this.toggleModal();
             }
         });
@@ -135,20 +138,23 @@ class Map extends Component {
     }
 
     async deletePin() {
-
-        const resp = await axios.get('/api/deletemappin.php', {
+console.log('state pin id',this.state.pinId)
+        const resp = await axios.post('/api/deletemappin.php', {
             pin_id: this.state.pinId
         });
-
+console.log('resp', resp)
         if(resp.data.success) {
             this.showPins();
         } else {
             console.error(resp.data.error);
         }
-
+        this.setState({
+            deleteBtn: false
+        });
     }
 
     getPinId(id) {
+        console.log('pin id',id)
         this.setState({
             pinId: id,
             deleteBtn: true
@@ -161,13 +167,13 @@ class Map extends Component {
 
         if(resp.data.success) {
             this.props.signIn(resp.data);
-            
-            pinData = resp.data.data;
 
+            pinData = resp.data.data;
+            let pins = null;
+            let infowindow = null;
             if(pinData.length > 0) {
-                let infowindow;
-                const pins = pinData.map((item) => {
-                    
+
+                pins = pinData.map((item) => {
                     const pin = new window.google.maps.Marker({
                         position: {
                             lat: item.lat,
@@ -196,6 +202,7 @@ class Map extends Component {
 
                     return pin;
                 });
+
                 this.setState({
                     pins: pins,
                     infowindow: infowindow
@@ -204,6 +211,10 @@ class Map extends Component {
                 const lastPin = this.state.pins[this.state.pins.length - 1];
                 this.state.map.setZoom(11);
                 this.state.map.panTo(lastPin.position);
+            } else {
+                this.setState({
+                    pins: pinData
+                });
             }
         } else {
             console.error(resp.data.error);
