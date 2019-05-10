@@ -83,7 +83,7 @@
                 background-color: #1b515d;
             }
 
-            .budget-descrip, .budget-amount, .budget-item, .budget-delete {
+            .budget-descrip, .budget-amount, .budget-item, .budget-icons, .budget-delete, .budget-date {
                 display: inline-block;
             }
 
@@ -108,15 +108,26 @@
                 width: 100%;
             }
 
-                .budget-icon {
-                    color: #b2dbd5;
-                    transition: 0.2s;
-                    cursor: pointer;
-                    
-                    &:hover, &:active {
-                       transform: rotate(180deg);
-                    }
+            .budget-icons {
+                width: 30%;
+            }
+
+            .budget-icon {
+                color: #b2dbd5;
+                transition: 0.2s;
+                cursor: pointer;
+
+                &:hover, &:active {
+                   transform: rotate(180deg);
                 }
+            }
+
+            .budget-date {
+                color: #b2dbd5;
+                text-align: right;
+                width: 70%;
+                font-size: .8em;
+            }
         }
 
         .update-modal {
@@ -156,19 +167,44 @@
     }
 
     .sort-budget {
+        display: inline-block;
+        width: 50%;
+
         .sort-btn {
             background-color: #2b616d;
             border-radius: 200px;
             height: 50px;
-            width: 50px;
+            width: 65px;
             color: white;
             margin: 4px 5px;
-            font-size: .8em;
             transition: .3s;
+            line-height: 100%;
+            text-align: center;
+
+            i {
+                font-size: 1.3em;
+            }
+
+            .fa-sort-alpha-down, .fa-sort-alpha-up {
+                font-size: 1.5em;
+            }
 
             i:nth-child(2) {
-                margin-left: 2px
+                margin-left: 2px;
+                font-size: 1em;
             }
+        }
+    }
+
+    .sort-title {
+        display: inline-block;
+        text-align: right;
+        width: 50%;
+        vertical-align: bottom;
+
+
+        span {
+            margin: auto 10px 5px auto;
         }
     }
 
