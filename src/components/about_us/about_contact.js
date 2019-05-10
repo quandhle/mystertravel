@@ -10,10 +10,10 @@ const AboutContact = props => {
                     <img src={`./dist/assets/images/about_us/${image}`} alt={`${name}`} className="person-img"/>
                 </div>
                 <div className="about-name">
-                    <div className="person-name">Name: {name}</div>
-                    <div className="about-quote">Quote: {quote}</div>
-                    <div>Role: {role}</div>
-                </div>  
+                    <div className="person-name">{name}</div>
+                    <div>{role}</div>
+                    <div className="about-quote">"{quote}"</div>
+                </div>
             </div>
             <div className="about-contact">
                 <a href={`mailto:${email}`}><i className="fas fa-envelope-square" target="_blank"></i></a>    

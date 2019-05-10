@@ -37,6 +37,7 @@
 
         .about-top {
             position: relative;
+            padding: 15px 0 0 15px;
 
             .about-img, .about-name {
                 display: inline-block;
@@ -54,12 +55,16 @@
 
             .about-name {
                 position: absolute;
-                padding: 5px;
+                padding: 15px 15px 15px 25px;
+
+                .person-name {
+                    font-weight: 700;
+                }
             }
         }
 
         .about-contact {
-            padding: 10px 15px;
+            padding: 0 15px 10px;
             text-align: right;
             font-size: 2rem;
 

@@ -29,7 +29,6 @@ class PreviousTrips extends Component {
 
     async getPreviousTrip(){
         const resp = await axios.get('/api/getprevioustrip.php');
-        console.log(resp.data)
         this.setState({
             trips: resp.data.data
         });
