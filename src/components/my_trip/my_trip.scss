@@ -1,9 +1,7 @@
 .my-trip-page {
+
 	.my-trip {
-		position: absolute;
-		width: 100%;
-		height: 85%;
-		bottom: 0;
+		position: relative;
 
 		div {
 			button {
@@ -17,7 +15,7 @@
 			font-size: 2em;
 			font-weight: bold;
 			color: #2b616d;
-			padding: 15px 0;
+			margin: 40px 0;
 		}
 
 		.budget-link, .notes-link, .map-link {
@@ -54,7 +52,7 @@
 			left: 5%;
 			color: white;
 			border: none;
-			border-radius: 15px;
+			border-radius: 8px;
 			font-size: 1.5em;
 		}
 	}
