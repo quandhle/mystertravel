@@ -2,15 +2,14 @@
 
 require_once('config.php');
 
-if (!empty($_SESSION['user_data']['trips_id'])) {
+if (!empty($_GET['trips_id'] && $_GET['users_id'])) {
+    $trips_id = intval($_GET['trips_id']);
+    $users_id = intval($_GET['users_id']);
+} else if (!empty($_SESSION['user_data']['trips_id'])) {
     $trips_id = intval($_SESSION['user_data']['trips_id']);
     $users_id = intval($_SESSION['user_data']['users_id']);
 } else {
-    if(empty($_GET['trips_id'])){
-        throw new Exception('Invalid Url');
-    }
-    $trips_id = intval($_GET['trips_id']);
-    $users_id = intval($_GET['users_id']);
+    throw new Exception('Invalid Url');
 }
 
 if (empty($trips_id)) {

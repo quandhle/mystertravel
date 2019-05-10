@@ -32,22 +32,21 @@ class Summary extends Component {
 
     componentDidMount() {
         const {params} = this.props.match;
-        let privatePage, trips_id, userId;
+        let privatePage, trips_id, user_id;
+        console.log(params);
 
-        if(params && params.trips_id && params.userId) {
+        if(params && params.trips_id && params.user_id) {
             privatePage = false;
             trips_id =  params.trips_id;
-            userId = params.userId;
+            user_id = params.user_id;
         } else {
             privatePage = true;
-            trips_id = localStorage.getItem('trips_id');
-            userId = localStorage.getItem('user_id');
         }
 
         this.setState({
             privatePage,
             trips_id,
-            userId
+            userId: user_id
         }, this.getSummaryData);
 
         loadScript('https://platform.twitter.com/widgets.js');
@@ -67,8 +66,13 @@ class Summary extends Component {
     }
 
     async getSummaryData() {
-        const {trips_id, userId} = this.state;
-        const resp = await axios.get(`/api/getendtripsummary.php?trips_id=${trips_id}&users_id=${userId}`);
+        const {trips_id, userId, privatePage} = this.state;
+        console.log(trips_id, userId);
+        let url = `/api/getendtripsummary.php`;
+        if (!privatePage) {
+            url += `?trips_id=${trips_id}&users_id=${userId}`;
+        }
+        const resp = await axios.get(url);
 
         if(resp.data.success) {
             const {summary: {trips_name, total_budget}, pins, notes} = resp.data;

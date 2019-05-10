@@ -82,9 +82,9 @@
         transition: 0.5s;
 
         .nav-profile {
-            height: 10%;
+            height: 7%;
             margin: 10px 10px 0 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            color: #417970;
 
             .username {
                 text-transform: capitalize;
@@ -94,17 +94,18 @@
 
         .side-nav-links, .aboutus-link {
             padding: 0;
+            margin-top: 125px;
 
             li {
                 list-style: none;
                 height: 50px;
                 margin: 10px;
                 transition: 0.5s;
-                line-height: 50px;
+
 
                 a {
                     display: block;
-                    color: #417970;
+                    color: white;
                     text-decoration: none;
                     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
                 }
@@ -113,7 +114,7 @@
 
         .aboutus-link {
             position: relative;
-            top: 30%
+            bottom: 0;
         }
     }
 }
