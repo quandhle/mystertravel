@@ -152,7 +152,7 @@ class Summary extends Component {
     }
 
     render() {
-        const {trips_id, tripName, totalSpent, privatePage, pinData, notes, mapModal, imageModal, image, userId} = this.state;
+        const {trips_id, tripName, totalSpent, privatePage, pinData, notes, imageModal, image, userId} = this.state;
         const summaryURL = `https://www.mystertravel.com/trip/${userId}/${tripName.split(" ").join("-")}/${trips_id}`;
 
         return (
