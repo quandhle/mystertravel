@@ -58,7 +58,7 @@ class MyTrip extends Component {
                     <button className="notes-link-btn btn" onClick={this.goToNotes}>Write Notes</button>
                 </div>
                 <div className="end-trip-link">
-                    <button className="end-trip-link-btn btn"  onClick={this.goToSummary}>Trip Summary & End</button>
+                    <button className="end-trip-link-btn btn"  onClick={this.goToSummary}>Trip Summary</button>
                 </div>
             </div>
         );

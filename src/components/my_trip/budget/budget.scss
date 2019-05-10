@@ -27,7 +27,7 @@
         transition: 0.5s;
         overflow-y: hidden;
         background-color: #b2dbd5;
-        border-radius: 0.3rem;
+        border-radius: 10px;
     }
 
     .budget-input {
@@ -63,7 +63,7 @@
             font-size: 1.2em;
             padding: 10px 15px;
             margin: 0 5px 5px 5px;
-            border-radius: 0.3rem;
+            border-radius: 10px;
             transition: 0.5s;
             word-wrap: break-word;
 
@@ -131,7 +131,7 @@
 
         .update-modal {
             background-color: rgba(164, 216, 208, .98);
-            border-radius: 0.3rem;
+            border-radius: 10px;
             text-align: center;
             font-size: 1em;
             font-weight: bold;
@@ -144,7 +144,7 @@
 
             form {
                 margin: 10px;
-                border-radius: 0.3rem;
+                border-radius: 10px;
 
                 p {
                     text-align: left;
@@ -177,7 +177,7 @@
 
         .sort-btn {
             background-color: #2b616d;
-            border-radius: 0.3rem;
+            border-radius: 10px;
             height: 40px;
             width: 50px;
             color: white;
