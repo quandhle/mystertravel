@@ -2,7 +2,7 @@
 
 require_once('config.php');
 
-if (!empty($_GET['trips_id'] && $_GET['users_id'])) {
+if (!empty($_GET['trips_id']) && !empty($_GET['users_id'])) {
     $trips_id = intval($_GET['trips_id']);
     $users_id = intval($_GET['users_id']);
 } else if (!empty($_SESSION['user_data']['trips_id'])) {

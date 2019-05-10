@@ -139,7 +139,8 @@
     .share-btns {
         display: flex;
         justify-content: center;
-        margin-top: 10px;
+        margin-top: 12px;
+        margin-bottom: 12px;
 
         & > a > i {
             margin: 10px 10px;
@@ -246,6 +247,8 @@
 
 @media (min-width: 1024px) {
     .summary-page {
+        height: 88vh;
+
         .popup-container {
             .popup-content .summary-image-modal {
                 width: 80%;
@@ -280,7 +283,7 @@
 
         .desktop-div {
             width: 39%;
-            height: 72vh;
+            height: 80.5%;
             display: inline-block;
             vertical-align: top;
             overflow-y: scroll;
@@ -289,8 +292,8 @@
         main {
             width: calc(60% - 20px);
             display: inline-block;
-            height: 72vh;
-            margin-left: 20px;
+            height: 80%;
+            margin: 5px 5px 0 20px;
 
             .map {
                 width: 100%;

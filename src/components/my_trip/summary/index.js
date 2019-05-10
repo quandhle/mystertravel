@@ -67,7 +67,6 @@ class Summary extends Component {
 
     async getSummaryData() {
         const {trips_id, userId, privatePage} = this.state;
-        console.log(trips_id, userId);
         let url = `/api/getendtripsummary.php`;
         if (!privatePage) {
             url += `?trips_id=${trips_id}&users_id=${userId}`;
@@ -124,7 +123,7 @@ class Summary extends Component {
             });
         }
     }
-    
+
     buttonDisplay = () => {
          if(!this.props.auth && this.state.privatePage) {
             return (
@@ -161,29 +160,29 @@ class Summary extends Component {
 
         return (
             <div className="summary-page">
-                <div className="summary-trip-name"><p>{tripName? tripName : 'My Trip'}</p></div>
+                <div className="summary-trip-name"><p>{tripName ? tripName : 'My Trip'}</p></div>
                 <div className="total-spend"><div>{`Total spent on this trip $${totalSpent? formatMoney(totalSpent): ' 0'}`}</div></div>
                 <Map />
                 <div className="desktop-div">
-                    <Timeline pinData={pinData} notesData={notes} setImage={this.setImage}/>
+                    <Timeline pinData={pinData} notesData={notes} setImage={this.setImage} />
                     {privatePage && !this.props.guest &&
                         <div className="summary-end-trip-link">
                             <button onClick={this.endTrip} className="summary-end-trip-link-btn btn">End Trip</button>
                         </div>
                     }
                     <div className="share-btns col-12">
-                            <a onClick={() => {this.fbButton(summaryURL)}}>
-                                <i className="fab fa-facebook-square"/>
-                            </a>
-                            <a href={this.twitterButton(summaryURL)}>
-                                <i className="fab fa-twitter-square"/>
-                            </a>
-                            <a href={this.mailButton(summaryURL)}>
-                                <i className="fas fa-envelope-square"/>
-                            </a>
+                        <a onClick={() => {this.fbButton(summaryURL)}}>
+                            <i className="fab fa-facebook-square" />
+                        </a>
+                        <a href={this.twitterButton(summaryURL)}>
+                            <i className="fab fa-twitter-square" />
+                        </a>
+                        <a href={this.mailButton(summaryURL)}>
+                            <i className="fas fa-envelope-square" />
+                        </a>
                     </div>
                 </div>
-                <ImageModal img={image} modal={imageModal} close={this.toggleImageModal}/>
+                <ImageModal img={image} modal={imageModal} close={this.toggleImageModal} />
             </div>
         );
     }
