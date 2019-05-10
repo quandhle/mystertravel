@@ -126,6 +126,7 @@
                 color: #b2dbd5;
                 text-align: right;
                 width: 70%;
+                font-size: .8em;
             }
         }
 
@@ -166,11 +167,14 @@
     }
 
     .sort-budget {
+        display: inline-block;
+        width: 50%;
+
         .sort-btn {
             background-color: #2b616d;
             border-radius: 200px;
             height: 50px;
-            width: 50px;
+            width: 65px;
             color: white;
             margin: 4px 5px;
             transition: .3s;
@@ -181,10 +185,26 @@
                 font-size: 1.3em;
             }
 
+            .fa-sort-alpha-down, .fa-sort-alpha-up {
+                font-size: 1.5em;
+            }
+
             i:nth-child(2) {
-                margin-left: 0;
+                margin-left: 2px;
                 font-size: 1em;
             }
+        }
+    }
+
+    .sort-title {
+        display: inline-block;
+        text-align: right;
+        width: 50%;
+        vertical-align: bottom;
+
+
+        span {
+            margin: auto 10px 5px auto;
         }
     }
 

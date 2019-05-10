@@ -22,7 +22,6 @@ export function formatEntries(text) {
 }
 
 export function formatDate(datetime) {
-    console.log(datetime);
     let date = datetime.split(' ')[0];
     let day = new Date(date);
 
