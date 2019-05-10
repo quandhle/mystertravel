@@ -174,7 +174,12 @@
 
     .sort-budget {
         display: inline-block;
-        width: 50%;
+        width: 100%;
+
+        .sortbtn-box {
+            width: 60%;
+            display: inline-block;
+        }
 
         .sort-btn {
             background-color: #2b616d;
@@ -200,19 +205,22 @@
                 font-size: 1em;
             }
         }
-    }
 
-    .sort-title {
-        display: inline-block;
-        text-align: right;
-        width: 50%;
-        vertical-align: bottom;
+        .sort-title {
+            width: 40%;
+            display: inline-block;
+            text-align: right;
+            vertical-align: bottom;
 
-
-        span {
-            margin: auto 10px 5px auto;
+            span {
+                font-weight: bold;
+                color: #2b616d;
+                margin-right: 10px;
+            }
         }
     }
+
+
 
     main {
         display: none;

@@ -177,20 +177,22 @@ class Budget extends Component{
                     </div>
                     <BudgetForm budget={this.handleInput} style={showInput}/>
                     <div className="sort-budget">
-                        <button className="sort-btn btn" style={sortIconsStyle.date} onClick={() => (this.sortBudget('date'))}>
-                            <i className={'fas fa-clock'}></i>
-                            <i className={`fas fa-sort-${sortDirection.date}`}></i>
-                        </button>
-                        <button className="sort-btn btn" style={sortIconsStyle.amount} onClick={() => (this.sortBudget('amount'))}>
-                            <i className={'fas fa-dollar-sign'}></i>
-                            <i className={`fas fa-sort-${sortDirection.amount}`}></i>
-                        </button>
-                        <button className="sort-btn btn" style={sortIconsStyle.category} onClick={() => (this.sortBudget('category'))}>
-                            <i className={`fas fa-sort-alpha-${sortDirection.category}`}></i>
-                        </button>
-                    </div>
-                    <div className="sort-title">
-                        <span>Sort: {sortMode}</span>
+                        <div className="sortbtn-box">
+                            <button className="sort-btn btn" style={sortIconsStyle.date} onClick={() => (this.sortBudget('date'))}>
+                                <i className={'fas fa-clock'}></i>
+                                <i className={`fas fa-sort-${sortDirection.date}`}></i>
+                            </button>
+                            <button className="sort-btn btn" style={sortIconsStyle.amount} onClick={() => (this.sortBudget('amount'))}>
+                                <i className={'fas fa-dollar-sign'}></i>
+                                <i className={`fas fa-sort-${sortDirection.amount}`}></i>
+                            </button>
+                            <button className="sort-btn btn" style={sortIconsStyle.category} onClick={() => (this.sortBudget('category'))}>
+                                <i className={`fas fa-sort-alpha-${sortDirection.category}`}></i>
+                            </button>
+                        </div>
+                        <div className="sort-title">
+                            <span>SORT BY: {sortMode.toUpperCase()}</span>
+                        </div>
                     </div>
                     <div className="budget-box">
                         {budgetList}
