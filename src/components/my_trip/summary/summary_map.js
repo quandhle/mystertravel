@@ -47,7 +47,10 @@ class SummaryMap extends Component {
             zoom: 2,
             minZoom: 2,
             draggableCursor: 'auto',
-            draggingCursor: 'move'
+            draggingCursor: 'move',
+            restriction: {
+                latLngBounds: { north: 85, south: -85, west: -180, east: 180 },
+            }
         });
 
         this.setState({map: map});
@@ -59,7 +62,7 @@ class SummaryMap extends Component {
         let pinData = null;
 
         if(resp.data.success) {
-            
+
             pinData = resp.data.data;
 
             if(pinData.length > 0) {

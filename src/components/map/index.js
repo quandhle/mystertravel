@@ -63,7 +63,10 @@ class Map extends Component {
             zoom: 2,
             minZoom: 2,
             draggableCursor: 'url(/dist/assets/images/marker.png), auto',
-            draggingCursor: 'move'
+            draggingCursor: 'move',
+            restriction: {
+                latLngBounds: { north: 85, south: -85, west: -180, east: 180 },
+            }
         });
 
         window.google.maps.event.addListener(map, 'click', e => {
@@ -163,11 +166,11 @@ class Map extends Component {
         if(resp.data.success) {
             this.props.signIn(resp.data);
             pinData = resp.data.data;
-            
-            
+
+
             if(pinData.length > 0) {
                 let pins = null;
-                
+
                 pins = pinData.map((item) => {
                     const pin = new window.google.maps.Marker({
                         position: {
