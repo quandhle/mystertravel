@@ -89,7 +89,7 @@ class Budget extends Component{
     }
 
     async getBudgetList() {
-        const resp = await axios.get(`/api/getbudgetsort.php?token=${localStorage.getItem('token')}&type=time`);
+        const resp = await axios.get(`/api/getbudgetlist.php?token=${localStorage.getItem('token')}`);
         const {signIn} = this.props;
         const {budget, success} = resp.data;
 

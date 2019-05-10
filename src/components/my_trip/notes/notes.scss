@@ -118,21 +118,24 @@
 
     .sort-note {
         .sort-btn {
-            background-color: #2b616d;
+            background-color: #fa8d62;
             border-radius: 200px;
             height: 50px;
-            width: 50px;
+            width: 65px;
             color: white;
-            font-size: .8em;
             margin: 4px 5px;
+            transition: .3s;
+            line-height: 100%;
+            text-align: center;
 
-            .fa-clock{
-                margin-right: 3px;
+            i {
+                font-size: 1.3em;
             }
-        }
 
-        .sort-btn:hover {
-            background-color: #1b515d;
+            i:nth-child(2) {
+                margin-left: 2px;
+                font-size: 1em;
+            }
         }
     }
 

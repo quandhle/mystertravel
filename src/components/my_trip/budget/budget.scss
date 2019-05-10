@@ -10,6 +10,7 @@
         text-align: right;
         color: white;
         padding: 10px 15px;
+        margin-bottom: 10px;
 
         .fa-angle-double-down:hover {
             cursor: pointer;
@@ -29,7 +30,7 @@
         overflow-y: hidden;
         background-color: #b2dbd5;
         border-radius: 15px;
-        margin: 10px;
+        margin: 0 10px;
     }
 
     .budget-input-form, .budget {
