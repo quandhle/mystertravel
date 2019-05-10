@@ -14,7 +14,8 @@ class Budget extends Component{
 
         this.state = {
             showInput: {
-                height: 0
+                height: 0,
+                margin: 0
             },
             budget: [],
             spinner: false,
@@ -25,9 +26,9 @@ class Budget extends Component{
                 category: 'down'
             },
             sortIconsStyle: {
-                date: {'backgroundColor': '#fa8d62'},
-                amount: {'backgroundColor': '#2b616d'},
-                category: {'backgroundColor': '#2b616d'}
+                date: {'backgroundColor': '#92cbc5'},
+                amount: {'backgroundColor': '#b2dbd5'},
+                category: {'backgroundColor': '#b2dbd5'}
             },
         };
 
@@ -108,11 +109,17 @@ class Budget extends Component{
 
         if(!height) {
             this.setState({
-                showInput: {height: '300px'}
+                showInput: {
+                    height: '300px',
+                    margin: '10px'
+                }
             });
         } else {
             this.setState({
-                showInput: {height: 0}
+                showInput: {
+                    height: 0,
+                    margin: 0
+                }
             });
         }
     }
@@ -136,10 +143,10 @@ class Budget extends Component{
         if (success) {
             sortDirection[mode] = swap ? (sortDirection[mode] === 'down' ? 'up' : 'down') : sortDirection[mode];
 
-            sortIconsStyle['date'] = {'backgroundColor': '#2b616d'};
-            sortIconsStyle['amount'] = {'backgroundColor': '#2b616d'};
-            sortIconsStyle['category'] = {'backgroundColor': '#2b616d'};
-            sortIconsStyle[mode] = {'backgroundColor': '#fa8d62'};
+            sortIconsStyle['date'] = {'backgroundColor': '#b2dbd5'};
+            sortIconsStyle['amount'] = {'backgroundColor': '#b2dbd5'};
+            sortIconsStyle['category'] = {'backgroundColor': '#b2dbd5'};
+            sortIconsStyle[mode] = {'backgroundColor': '#92cbc5'};
 
             this.setState({
                 budget,
@@ -177,6 +184,9 @@ class Budget extends Component{
                     </div>
                     <BudgetForm budget={this.handleInput} style={showInput}/>
                     <div className="sort-budget">
+                        <div className="sort-title">
+                            <span>DISPLAY BY: {sortMode.toUpperCase()}</span>
+                        </div>
                         <div className="sortbtn-box">
                             <button className="sort-btn btn" style={sortIconsStyle.date} onClick={() => (this.sortBudget('date'))}>
                                 <i className={'fas fa-clock'}></i>
@@ -189,9 +199,6 @@ class Budget extends Component{
                             <button className="sort-btn btn" style={sortIconsStyle.category} onClick={() => (this.sortBudget('category'))}>
                                 <i className={`fas fa-sort-alpha-${sortDirection.category}`}></i>
                             </button>
-                        </div>
-                        <div className="sort-title">
-                            <span>SORT BY: {sortMode.toUpperCase()}</span>
                         </div>
                     </div>
                     <div className="budget-box">

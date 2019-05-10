@@ -10,47 +10,50 @@
         text-align: center;
         font-size: 1.2em;
     }
+    .sign-up {
+        margin: 10vh 10px 0 10px;
 
-    .sign-up-form {
-        background-color: rgba(178, 219, 213, 0.9);
-        overflow-y: hidden;
-        border-radius: 15px;
-        margin: 10px;
-        -webkit-box-shadow: 0 0 6px 0 rgba(194, 194, 194, 1);
-        -moz-box-shadow: 0 0 6px 0 rgba(194, 194, 194, 1);
-        box-shadow: 0 0 6px 0 rgba(194, 194, 194, 1);
-
-        .sign-up-title {
-            text-align: center;
-            font-family: 'Dancing Script', cursive;
-            font-size: 2em;
-            color: #2b616d;
-            margin: 5px auto;
-        }
-
-        .signup-input {
-            padding: 15px;
-
-            input {
-                width: 100%;
-                outline: none;
-                border: 1px solid transparent;
-                background-color: inherit;
-                border-bottom: 1px solid #94c9c1;
+        .sign-up-form {
+            background-color: rgba(178, 219, 213, 0.97);
+            overflow-y: hidden;
+            border-radius: 0.3rem;
+            margin: 10px;
+    
+            .sign-up-title {
+                text-align: center;
+                font-family: 'Dancing Script', cursive;
+                font-size: 1.5em;
                 color: #2b616d;
+                margin: 10px auto;
+                margin-bottom: 1em;
             }
-        }
+    
+            .signup-input {
+                padding: 10px 15px;
+    
+                input {
+                    width: 100%;
+                    outline: none;
+                    border: 1px solid transparent;
+                    background-color: inherit;
+                    border-bottom: 1px solid #94c9c1;
+                    color: #2b616d;
+                }
+            }
+    
+            .signup-btn {
+                text-align: center;
+                margin-bottom: 10px;
 
-        .signup-btn {
-            text-align: center;
-
-            .btn {
-                background-color: #fa8d62;
-                margin: 5px;
-                color: white;
+                .btn {
+                    background-color: #fa8d62;
+                    margin: 5px;
+                    color: white;
+                }
             }
         }
     }
+    
 }
 
 @media (min-width: 1024px) {

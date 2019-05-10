@@ -10,53 +10,57 @@
         text-align: center;
         font-size: 1.2em;
     }
+    .sign-in {
+        margin: 10vh 10px 0 10px;
 
-    .sign-in-form {
-        background-color: rgba(178, 219, 213, 0.9);
-        overflow-y: hidden;
-        border-radius: 15px;
-        margin: 10px;
-        -webkit-box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
-        -moz-box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
-        box-shadow: 0px 0px 6px 0px rgba(194,194,194,1);
-
-        .sign-in-title {
-            margin: 5px auto;
-            text-align: center;
-            font-family: 'Dancing Script', cursive;
-            font-size: 2em;
-            color: #2b616d;
-        }
-
-        .signin-input {
-            padding: 15px;
-
-            input {
-                width: 100%;
-                outline: none;
-                border: 1px solid transparent;
-                background-color: inherit;
-                border-bottom: 1px solid #94c9c1;
+        .sign-in-form {
+            background-color: rgba(178, 219, 213, 0.98);
+            overflow-y: hidden;
+            border-radius: 0.3rem;
+            margin: 10px;
+            
+            .sign-in-title {
+                margin: 10px auto;
+                margin-bottom: 1em;
+                text-align: center;
+                font-family: 'Dancing Script', cursive;
+                font-size: 1.5em;
                 color: #2b616d;
             }
+    
+            .signin-input {
+                padding: 10px 15px;
+    
+                input {
+                    width: 100%;
+                    outline: none;
+                    border: 1px solid transparent;
+                    background-color: inherit;
+                    border-bottom: 1px solid #94c9c1;
+                    color: #2b616d;
+                }
+            }
+    
+            .signin-btn {
+                text-align: center;
+                margin-bottom: 10px;
+    
+                .signup-btn, button {
+                    background-color: #fa8d62;
+                    display: inline-block;
+                    margin: 5px;
+                    color: white;
+                }
+    
+                .signup-btn {
+                    background-color: #2b616d;
+                    cursor: pointer;
+                }
+            }
         }
 
-        .signin-btn {
-            text-align: center;
-
-            .signup-btn, button {
-                background-color: #fa8d62;
-                display: inline-block;
-                margin: 5px;
-                color: white;
-            }
-
-            .signup-btn {
-                background-color: #2b616d;
-                cursor: pointer;
-            }
-        }
     }
+ 
 }
 
 @media (min-width: 1024px) {

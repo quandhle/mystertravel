@@ -5,7 +5,21 @@
     background-position: center;
     background-size: cover;
 
-    h4, div.home-page-btn {
+    .home-title {
+        text-align: center;
+        position: relative;
+        top: 55px;
+
+        h4 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.4em;
+            text-shadow: 3px 2px 3px rgba(0,0,0,0.3);
+            color: white;
+        }
+
+    }
+
+    .home-page-btn {
         position: absolute;
         transform: translate(-50%, -50%);
         left: 50%;
@@ -14,29 +28,12 @@
         text-align: center;
     }
 
-    h4 {
-        font-family: 'Dancing Script', cursive;
-        font-size: 2.5em;
-    }
-
-    .title-blurb1 {
-        top: 20%;
-    }
-
-    .title-blurb3 {
-        top: 27.5%;
-    }
-
-    .title-blurb2 {
-        top: 35%;
-    }
-
     .guest-btn {
-        bottom: 100px;
+        bottom: 90px;
     }
 
     .sign-in-btn {
-        bottom: 10px;
+        bottom: 8px;
     }
 
     .home-page-btn {
