@@ -17,7 +17,7 @@
     "license": "ISC",
     "repository": {
         "type": "git",
-        "url": "https://https://github.com/Learning-Fuze/c219_travelagenda"
+        "url": "https://github.com/Learning-Fuze/mystertravel.git"
     },
     "dependencies": {
         "aws-sdk": "^2.438.0",

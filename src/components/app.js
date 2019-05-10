@@ -24,7 +24,7 @@ const App = () => (
                 <Route path='/mytrip' component={auth(MyTripRoutes)}/>
                 <Route path='/aboutus' component={AboutUs}/>
                 <Route path='/account' component={Account}/>
-                <Route path='/trip/:user_id/:date/:tripname/:trips_id' component={Summary}/>
+                <Route path='/trip/:user_id/:tripname/:trips_id' component={Summary}/>
                 <Route component={NotFound}/>
             </Switch>
         </div>

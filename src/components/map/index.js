@@ -21,8 +21,7 @@ class Map extends Component {
             map: null,
             modal: false,
             pinId: null,
-            deleteBtn: false,
-            infowindow: null
+            deleteBtn: false
         };
 
         this.addPin = this.addPin.bind(this);
@@ -64,7 +63,10 @@ class Map extends Component {
             zoom: 2,
             minZoom: 2,
             draggableCursor: 'url(/dist/assets/images/marker.png), auto',
-            draggingCursor: 'move'
+            draggingCursor: 'move',
+            restriction: {
+                latLngBounds: { north: 85, south: -85, west: -180, east: 180 },
+            }
         });
 
         window.google.maps.event.addListener(map, 'click', e => {
@@ -78,9 +80,6 @@ class Map extends Component {
     }
 
     handleMapClick(lat, lng) {
-        if(this.state.infowindow){
-            this.state.infowindow.close();
-        }
 
         const geocoder = new google.maps.Geocoder;
 
@@ -167,12 +166,11 @@ class Map extends Component {
         if(resp.data.success) {
             this.props.signIn(resp.data);
             pinData = resp.data.data;
-            
-            
+
+
             if(pinData.length > 0) {
                 let pins = null;
-                let infowindow = null;
-                
+
                 pins = pinData.map((item) => {
                     const pin = new window.google.maps.Marker({
                         position: {
@@ -186,7 +184,7 @@ class Map extends Component {
 
                     const content = '<h6 id="infoWindow">' + item.description + '</h6>';
 
-                    infowindow = new google.maps.InfoWindow({
+                    let infowindow = new google.maps.InfoWindow({
                         content: content
                     });
 
@@ -198,14 +196,17 @@ class Map extends Component {
                         infowindow.open(map, pin);
                     });
 
+                    pin.addListener('mouseout', ()=>{
+                        infowindow.close();
+                    });
+
                     pin.setMap(this.state.map);
 
                     return pin;
                 });
 
                 this.setState({
-                    pins: pins,
-                    infowindow: infowindow
+                    pins: pins
                 });
 
                 const lastPin = this.state.pins[this.state.pins.length - 1];

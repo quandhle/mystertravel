@@ -10,6 +10,7 @@
         text-align: right;
         color: white;
         padding: 10px 15px;
+        margin-bottom: 10px;
 
         .fa-angle-double-down:hover {
             cursor: pointer;
@@ -29,7 +30,7 @@
         overflow-y: hidden;
         background-color: #b2dbd5;
         border-radius: 15px;
-        margin: 10px;
+        margin: 0 10px;
     }
 
     .budget-input-form, .budget {
@@ -63,6 +64,10 @@
     .budget-box {
         color: white;
 
+        .default-display {
+            cursor: pointer;
+        }
+
         .budget {
             font-size: 1.2em;
             padding: 10px 15px;
@@ -70,6 +75,7 @@
             border-radius: 15px;
             transition: 0.5s;
             word-wrap: break-word;
+
 
             &:nth-child(odd) {
                 background-color: #2b616d;
@@ -83,7 +89,7 @@
                 background-color: #1b515d;
             }
 
-            .budget-descrip, .budget-amount, .budget-item, .budget-delete {
+            .budget-descrip, .budget-amount, .budget-item, .budget-icons, .budget-delete, .budget-date {
                 display: inline-block;
             }
 
@@ -108,15 +114,26 @@
                 width: 100%;
             }
 
-                .budget-icon {
-                    color: #b2dbd5;
-                    transition: 0.2s;
-                    cursor: pointer;
-                    
-                    &:hover, &:active {
-                       transform: rotate(180deg);
-                    }
+            .budget-icons {
+                width: 30%;
+            }
+
+            .budget-icon {
+                color: #b2dbd5;
+                transition: 0.2s;
+                cursor: pointer;
+
+                &:hover, &:active {
+                   transform: rotate(180deg);
                 }
+            }
+
+            .budget-date {
+                color: #b2dbd5;
+                text-align: right;
+                width: 70%;
+                font-size: .8em;
+            }
         }
 
         .update-modal {
@@ -156,21 +173,54 @@
     }
 
     .sort-budget {
+        display: inline-block;
+        width: 100%;
+
+        .sortbtn-box {
+            width: 60%;
+            display: inline-block;
+        }
+
         .sort-btn {
             background-color: #2b616d;
             border-radius: 200px;
             height: 50px;
-            width: 50px;
+            width: 65px;
             color: white;
             margin: 4px 5px;
-            font-size: .8em;
             transition: .3s;
+            line-height: 100%;
+            text-align: center;
+
+            i {
+                font-size: 1.3em;
+            }
+
+            .fa-sort-alpha-down, .fa-sort-alpha-up {
+                font-size: 1.5em;
+            }
 
             i:nth-child(2) {
-                margin-left: 2px
+                margin-left: 2px;
+                font-size: 1em;
+            }
+        }
+
+        .sort-title {
+            width: 40%;
+            display: inline-block;
+            text-align: right;
+            vertical-align: bottom;
+
+            span {
+                font-weight: bold;
+                color: #2b616d;
+                margin-right: 10px;
             }
         }
     }
+
+
 
     main {
         display: none;

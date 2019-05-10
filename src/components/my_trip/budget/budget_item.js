@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {formatMoney, formatEntries} from '../../../helper';
+import {formatMoney, formatEntries, formatDate} from '../../../helper';
 import UpdateBudget from './update_budget';
 
 class BudgetItem extends Component {
@@ -27,10 +27,13 @@ class BudgetItem extends Component {
                 <div className="budget-descrip">{formatEntries(budgetItem.description)}</div>
                 <div className="budget-amount"><div>$ {formatMoney(budgetItem.price)}</div></div>
                 <div className="budget-item">{formatEntries(budgetItem.category)}</div>
-                <div className="btn budget-icon" onClick={() => { this.toggleModal()} }><i className="fas  fa-edit"></i></div>
-                <div className="budget-delete">
-                    <button className="btn budget-icon" onClick={() => { deleteBudgetItem(budgetItem) }}><i className="far fa-trash-alt"></i></button>
+                <div className="budget-icons">
+                    <div className="btn budget-icon" onClick={() => { this.toggleModal()} }><i className="fas  fa-edit"></i></div>
+                    <div className="budget-delete">
+                        <button className="btn budget-icon" onClick={() => { deleteBudgetItem(budgetItem) }}><i className="far fa-trash-alt"></i></button>
+                    </div>
                 </div>
+                <div className="budget-date">{formatDate(budgetItem.added)}</div>
                 <UpdateBudget modal={this.state.modal} budget={budgetItem} close={this.toggleModal} display={display}/>
             </div>
         );

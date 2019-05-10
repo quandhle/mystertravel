@@ -18,22 +18,29 @@ class Budget extends Component{
             },
             budget: [],
             spinner: false,
-            sortMode: 'time',
-            sortByMoneyIcon: 'down',
-            moneyButton: {
-                'backgroundColor': '#2b616d'
+            sortMode: 'date',
+            sortDirection: {
+                date: 'down',
+                amount: 'down',
+                category: 'down'
             },
-            categoryButton: {
-                'backgroundColor': '#2b616d'
-            }
+            sortIconsStyle: {
+                date: {'backgroundColor': '#fa8d62'},
+                amount: {'backgroundColor': '#2b616d'},
+                category: {'backgroundColor': '#2b616d'}
+            },
+        };
+
+        this.sortTypes = {
+            date: ['oldest', 'newest'],
+            amount: ['expensive', 'cheapest'],
+            category: ['category', 'z-a']
         };
 
         this.toggleInput = this.toggleInput.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.deleteBudgetItem = this.deleteBudgetItem.bind(this);
         this.getBudgetList = this.getBudgetList.bind(this);
-        this.sortBudgetByMoney = this.sortBudgetByMoney.bind(this);
-        this.sortBudgetByCategory = this.sortBudgetByCategory.bind(this);
     }
 
     async handleInput(value) {
@@ -110,58 +117,39 @@ class Budget extends Component{
         }
     }
 
-    async sortBudgetByMoney() {
-        const {sortMode, sortByMoneyIcon} = this.state;
-        let type, mode, swap;
+    async sortBudget(mode) {
+        const {sortMode, sortDirection, sortIconsStyle} = this.state;
+        const {sortTypes} = this;
+        let type, newMode, swap;
 
-        if (sortMode !== 'money') {
-            mode = 'money';
-            type = sortByMoneyIcon === 'down' ? 'expensive' : 'cheapest';
+        if (sortMode !== mode) {
+            newMode = mode;
+            type = sortDirection[mode] === 'down' ? sortTypes[mode][0] : sortTypes[mode][1];
         } else {
-            type = sortByMoneyIcon === 'down' ? 'cheapest' : 'expensive';
+            type = sortDirection[mode] === 'down' ? sortTypes[mode][1] : sortTypes[mode][0];
             swap = true;
         }
 
         const resp = await axios.get(`/api/getbudgetsort.php?token=${localStorage.getItem('token')}&type=${type}`);
-        const {success, budget} = resp.data;
+        const {success, budget, error} = resp.data;
 
-        if(success) {
+        if (success) {
+            sortDirection[mode] = swap ? (sortDirection[mode] === 'down' ? 'up' : 'down') : sortDirection[mode];
+
+            sortIconsStyle['date'] = {'backgroundColor': '#2b616d'};
+            sortIconsStyle['amount'] = {'backgroundColor': '#2b616d'};
+            sortIconsStyle['category'] = {'backgroundColor': '#2b616d'};
+            sortIconsStyle[mode] = {'backgroundColor': '#fa8d62'};
+
             this.setState({
                 budget,
-                sortMode: mode ? mode : sortMode,
-                sortByMoneyIcon: swap ? (sortByMoneyIcon === 'down' ? 'up' : 'down') : sortByMoneyIcon,
-                moneyButton: {
-                    'backgroundColor': '#fa8d62'
-                },
-                categoryButton: {
-                    'backgroundColor': '#2b616d'
-                }
+                sortMode: newMode ? newMode : sortMode,
+                sortDirection: sortDirection,
+                sortIconsStyle: sortIconsStyle
             });
         } else {
-            console.error(resp.data.error);
+            console.error(error);
         }
-
-    }
-
-    async sortBudgetByCategory() {
-        const resp = await axios.get(`/api/getbudgetsort.php?token=${localStorage.getItem('token')}&type=category`);
-        const {success, budget} = resp.data;
-
-        if(success) {
-            this.setState({
-                budget,
-                sortMode: 'category',
-                moneyButton: {
-                    'backgroundColor': '#2b616d'
-                },
-                categoryButton: {
-                    'backgroundColor': '#fa8d62'
-                }
-            });
-        } else {
-            console.error(resp.data.error);
-        }
-
     }
 
     componentDidMount() {
@@ -169,7 +157,7 @@ class Budget extends Component{
     }
 
     render() {
-        const {budget, showInput, spinner, sortByMoneyIcon} = this.state;
+        const {budget, showInput, spinner, sortDirection, sortIconsStyle, sortMode} = this.state;
         let budgetList = null;
 
         if(budget.length > 0) {
@@ -177,7 +165,7 @@ class Budget extends Component{
                 return <BudgetItem key={budgetItem.budget_id} budgetItem={budgetItem} deleteBudgetItem={this.deleteBudgetItem} display={this.getBudgetList}/>
             });
         } else {
-            budgetList = <div className="budget">Add expenses to record your trip <i className="far fa-laugh-wink"></i> </div>
+            budgetList = <div className="budget default-display" onClick={this.toggleInput}>Add expenses to record your trip <i className="far fa-laugh-wink"></i> </div>
         }
 
         return (
@@ -189,13 +177,22 @@ class Budget extends Component{
                     </div>
                     <BudgetForm budget={this.handleInput} style={showInput}/>
                     <div className="sort-budget">
-                        <button className="sort-btn btn" style={this.state.moneyButton} onClick={this.sortBudgetByMoney}>
-                            <i className={'fas fa-dollar-sign'}></i>
-                            <i className={`fas fa-sort-${sortByMoneyIcon}`}></i>
-                        </button>
-                        <button className="sort-btn btn" style={this.state.categoryButton} onClick={this.sortBudgetByCategory}>
-                            <i className={'fas fa-sort-alpha-down'}></i>
-                        </button>
+                        <div className="sortbtn-box">
+                            <button className="sort-btn btn" style={sortIconsStyle.date} onClick={() => (this.sortBudget('date'))}>
+                                <i className={'fas fa-clock'}></i>
+                                <i className={`fas fa-sort-${sortDirection.date}`}></i>
+                            </button>
+                            <button className="sort-btn btn" style={sortIconsStyle.amount} onClick={() => (this.sortBudget('amount'))}>
+                                <i className={'fas fa-dollar-sign'}></i>
+                                <i className={`fas fa-sort-${sortDirection.amount}`}></i>
+                            </button>
+                            <button className="sort-btn btn" style={sortIconsStyle.category} onClick={() => (this.sortBudget('category'))}>
+                                <i className={`fas fa-sort-alpha-${sortDirection.category}`}></i>
+                            </button>
+                        </div>
+                        <div className="sort-title">
+                            <span>SORT BY: {sortMode.toUpperCase()}</span>
+                        </div>
                     </div>
                     <div className="budget-box">
                         {budgetList}
