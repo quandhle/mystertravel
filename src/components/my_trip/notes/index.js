@@ -130,7 +130,7 @@ class Notes extends Component {
                 );
             });
         } else {
-            noteList = <div className="notes">Add notes to record your trip <i className="far fa-laugh-wink"></i></div>
+            noteList = <div className="notes default-display" onClick={this.toggleInput}> Add notes to record your trip <i className="far fa-laugh-wink"></i></div>
         }
 
         return (

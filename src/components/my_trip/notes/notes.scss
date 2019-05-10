@@ -73,6 +73,10 @@
     .notes-box {
         color: white;
 
+        .default-display {
+            cursor: pointer;
+        }
+
         .notes {
             font-size: 1.2em;
             margin: 5px;

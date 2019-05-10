@@ -148,7 +148,7 @@ class Nav extends Component {
                         </a>
                     </div>
                     <div className="nav-title">
-                        <h1>MysterTravel</h1>
+                        <a href="/"><h1>MysterTravel</h1></a>
                     </div>
                     <div className="navbar-links">
                         <ul>
