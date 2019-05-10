@@ -21,8 +21,7 @@ class Map extends Component {
             map: null,
             modal: false,
             pinId: null,
-            deleteBtn: false,
-            infowindow: null
+            deleteBtn: false
         };
 
         this.addPin = this.addPin.bind(this);
@@ -78,9 +77,6 @@ class Map extends Component {
     }
 
     handleMapClick(lat, lng) {
-        if(this.state.infowindow){
-            this.state.infowindow.close();
-        }
 
         const geocoder = new google.maps.Geocoder;
 
@@ -171,7 +167,6 @@ class Map extends Component {
             
             if(pinData.length > 0) {
                 let pins = null;
-                let infowindow = null;
                 
                 pins = pinData.map((item) => {
                     const pin = new window.google.maps.Marker({
@@ -186,7 +181,7 @@ class Map extends Component {
 
                     const content = '<h6 id="infoWindow">' + item.description + '</h6>';
 
-                    infowindow = new google.maps.InfoWindow({
+                    let infowindow = new google.maps.InfoWindow({
                         content: content
                     });
 
@@ -198,14 +193,17 @@ class Map extends Component {
                         infowindow.open(map, pin);
                     });
 
+                    pin.addListener('mouseout', ()=>{
+                        infowindow.close();
+                    });
+
                     pin.setMap(this.state.map);
 
                     return pin;
                 });
 
                 this.setState({
-                    pins: pins,
-                    infowindow: infowindow
+                    pins: pins
                 });
 
                 const lastPin = this.state.pins[this.state.pins.length - 1];

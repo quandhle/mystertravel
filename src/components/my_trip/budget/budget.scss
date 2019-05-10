@@ -64,6 +64,10 @@
     .budget-box {
         color: white;
 
+        .default-display {
+            cursor: pointer;
+        }
+
         .budget {
             font-size: 1.2em;
             padding: 10px 15px;
@@ -71,6 +75,7 @@
             border-radius: 15px;
             transition: 0.5s;
             word-wrap: break-word;
+
 
             &:nth-child(odd) {
                 background-color: #2b616d;
