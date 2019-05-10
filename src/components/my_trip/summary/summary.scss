@@ -268,17 +268,19 @@
 
             }
         }
-        
+
         .desktop-div {
-            width: 38%;
+            width: 39%;
+            height: 74vh;
             display: inline-block;
             vertical-align: top;
+            overflow-y: scroll;
         }
 
         main {
             width: 60%;
             display: inline-block;
-            height: 77vh;
+            height: 72vh;
 
             .map {
                 width: 100%;

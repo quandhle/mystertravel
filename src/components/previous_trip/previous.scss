@@ -45,3 +45,13 @@
 
     }
 }
+
+@media (min-width: 1024px) {
+    .previous-page {
+        .previous-trip {
+            position: relative;
+            width: 60%;
+            left: 20%;
+        }
+    }
+}
