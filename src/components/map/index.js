@@ -21,7 +21,8 @@ class Map extends Component {
             map: null,
             modal: false,
             pinId: null,
-            deleteBtn: false
+            deleteBtn: false,
+            info: null
         };
 
         this.addPin = this.addPin.bind(this);
@@ -192,12 +193,16 @@ class Map extends Component {
                         this.getPinId(pin.pinId);
                     });
 
-                    pin.addListener('click', function() {
-                        infowindow.open(map, pin);
-                    });
+                    pin.addListener('click', ()=> {
 
-                    pin.addListener('mouseout', ()=>{
-                        infowindow.close();
+                        if(this.state.info) {
+                           this.state.info.close(); 
+                        }
+                        
+                        infowindow.open(map, pin);
+                        this.setState({
+                            info: infowindow
+                        });
                     });
 
                     pin.setMap(this.state.map);
@@ -206,7 +211,7 @@ class Map extends Component {
                 });
 
                 this.setState({
-                    pins: pins
+                    pins: pins,
                 });
 
                 const lastPin = this.state.pins[this.state.pins.length - 1];
