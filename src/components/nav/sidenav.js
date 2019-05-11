@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 class SideNav extends Component {
     constructor(props) {
         super(props);
-
     }
 
     render() {
@@ -15,7 +14,7 @@ class SideNav extends Component {
             <div className="side-nav-box" onClick={toggle} style={background}>
                 <div className="side-nav" style={body}>
                     <div className="nav-profile">
-                        <div className="username">Hi, {userName? userName: 'Guest'} <i className="fas fa-luggage-cart"></i></div>
+                        <div className="username">Hi, {userName? userName.split(' ')[0]: 'Guest'} <i className="fas fa-luggage-cart"></i></div>
                     </div>
                     <ul className="side-nav-links">
                         {links}

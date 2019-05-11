@@ -6,13 +6,15 @@
 
         p {
             font-size: 2.2em;
-            margin: 10px;
+            margin: 12px;
             font-weight: bold;
             text-transform: capitalize;
         }
     }
 
     .total-spend {
+        margin-bottom: 10px;
+
         div {
             color:#468391;
             position: relative;
@@ -27,11 +29,11 @@
 
     .timeline {
         position: relative;
-        margin: 20px 0 30px;
+        margin: 0 0 30px;
 
         .timeline-title {
             font-weight: bold;
-            margin: 8px 0 8px 50px;
+            margin: 8px 0 20px 50px;
             color: #2b616d;
         }
 
@@ -88,6 +90,7 @@
                 border-radius: 20px;
                 background-color: #2b616d;
 
+
                 .timeline-item-name, .timeline-item-date {
                     display: inline-block;
                     width: 50%;
@@ -126,12 +129,18 @@
             max-height: 0;
             overflow-y: hidden;
             transition: max-height 0.7s ease-in-out;
+
+            .timeline-item-content:first-child {
+                margin-top: 0;
+            }
         }
     }
 
     .share-btns {
         display: flex;
         justify-content: center;
+        margin-top: 12px;
+        margin-bottom: 12px;
 
         & > a > i {
             margin: 10px 10px;
@@ -155,7 +164,7 @@
             left: 5%;
             background-color: #fa8d62;
             color: white;
-            border-radius: 15px;
+            border-radius: 10px;
             transition: 0.5s;
             font-size: 1.5em;
             font-weight: bold;
@@ -215,6 +224,7 @@
         border: 2px solid rgba(164, 216, 208, 0.95);
         margin: 5px;
         box-sizing: border-box;
+        margin-bottom: 20px;
 
         .map-title{
             z-index: 2;
@@ -237,6 +247,8 @@
 
 @media (min-width: 1024px) {
     .summary-page {
+        height: 88vh;
+
         .popup-container {
             .popup-content .summary-image-modal {
                 width: 80%;
@@ -271,16 +283,17 @@
 
         .desktop-div {
             width: 39%;
-            height: 74vh;
+            height: 80.5%;
             display: inline-block;
             vertical-align: top;
             overflow-y: scroll;
         }
 
         main {
-            width: 60%;
+            width: calc(60% - 20px);
             display: inline-block;
-            height: 72vh;
+            height: 80%;
+            margin: 5px 5px 0 20px;
 
             .map {
                 width: 100%;

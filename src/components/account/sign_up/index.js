@@ -37,7 +37,9 @@ class SignIn extends Component {
     render() {
         return (
             <div className="sign-up-page">
-                <SignUpForm signUp={this.handleSignUp} message={this.state.message}/>
+                <div className="sign-up">
+                    <SignUpForm signUp={this.handleSignUp} message={this.state.message}/>
+                </div>
             </div>
         );
     }

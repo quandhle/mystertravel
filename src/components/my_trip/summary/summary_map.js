@@ -33,12 +33,6 @@ class SummaryMap extends Component {
     }
 
     initMap() {
-        const searchBarInput = document.getElementById("places");
-        this.autoComplete = new window.google.maps.places.Autocomplete(searchBarInput);
-        this.autoComplete.setFields(['address_component', 'geometry', 'name']);
-
-        this.autoComplete.addListener('place_changed', this.searchCountry);
-
         const map = new window.google.maps.Map(document.getElementById('map'), {
             mapTypeControl: false,
             streetViewControl: false,

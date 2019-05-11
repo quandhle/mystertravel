@@ -32,22 +32,20 @@ class Summary extends Component {
 
     componentDidMount() {
         const {params} = this.props.match;
-        let privatePage, trips_id, userId;
+        let privatePage, trips_id, user_id;
 
-        if(params && params.trips_id && params.userId) {
+        if(params && params.trips_id && params.user_id) {
             privatePage = false;
             trips_id =  params.trips_id;
-            userId = params.userId;
+            user_id = params.user_id;
         } else {
             privatePage = true;
-            trips_id = localStorage.getItem('trips_id');
-            userId = localStorage.getItem('user_id');
         }
 
         this.setState({
             privatePage,
             trips_id,
-            userId
+            userId: user_id
         }, this.getSummaryData);
 
         loadScript('https://platform.twitter.com/widgets.js');
@@ -67,8 +65,12 @@ class Summary extends Component {
     }
 
     async getSummaryData() {
-        const {trips_id, userId} = this.state;
-        const resp = await axios.get(`/api/getendtripsummary.php?trips_id=${trips_id}&users_id=${userId}`);
+        const {trips_id, userId, privatePage} = this.state;
+        let url = `/api/getendtripsummary.php`;
+        if (!privatePage) {
+            url += `?trips_id=${trips_id}&users_id=${userId}`;
+        }
+        const resp = await axios.get(url);
 
         if(resp.data.success) {
             const {summary: {trips_name, total_budget}, pins, notes} = resp.data;
@@ -120,7 +122,7 @@ class Summary extends Component {
             });
         }
     }
-    
+
     buttonDisplay = () => {
          if(!this.props.auth && this.state.privatePage) {
             return (
@@ -157,29 +159,29 @@ class Summary extends Component {
 
         return (
             <div className="summary-page">
-                <div className="summary-trip-name"><p>{tripName? tripName : 'My Trip'}</p></div>
+                <div className="summary-trip-name"><p>{tripName ? tripName : 'My Trip'}</p></div>
                 <div className="total-spend"><div>{`Total spent on this trip $${totalSpent? formatMoney(totalSpent): ' 0'}`}</div></div>
                 <Map />
                 <div className="desktop-div">
-                    <Timeline pinData={pinData} notesData={notes} setImage={this.setImage}/>
+                    <Timeline pinData={pinData} notesData={notes} setImage={this.setImage} />
                     {privatePage && !this.props.guest &&
                         <div className="summary-end-trip-link">
                             <button onClick={this.endTrip} className="summary-end-trip-link-btn btn">End Trip</button>
                         </div>
                     }
                     <div className="share-btns col-12">
-                            <a onClick={() => {this.fbButton(summaryURL)}}>
-                                <i className="fab fa-facebook-square"/>
-                            </a>
-                            <a href={this.twitterButton(summaryURL)}>
-                                <i className="fab fa-twitter-square"/>
-                            </a>
-                            <a href={this.mailButton(summaryURL)}>
-                                <i className="fas fa-envelope-square"/>
-                            </a>
+                        <a onClick={() => {this.fbButton(summaryURL)}}>
+                            <i className="fab fa-facebook-square" />
+                        </a>
+                        <a href={this.twitterButton(summaryURL)}>
+                            <i className="fab fa-twitter-square" />
+                        </a>
+                        <a href={this.mailButton(summaryURL)}>
+                            <i className="fas fa-envelope-square" />
+                        </a>
                     </div>
                 </div>
-                <ImageModal img={image} modal={imageModal} close={this.toggleImageModal}/>
+                <ImageModal img={image} modal={imageModal} close={this.toggleImageModal} />
             </div>
         );
     }

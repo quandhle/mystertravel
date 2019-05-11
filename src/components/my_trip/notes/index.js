@@ -14,7 +14,8 @@ class Notes extends Component {
 
         this.state = {
             showInput: {
-                height: 0
+                height: 0,
+                margin: 0
             },
             note: [],
             spinner: false,
@@ -99,11 +100,17 @@ class Notes extends Component {
 
         if(!height) {
             this.setState({
-                showInput: {height: '200px'}
+                showInput: {
+                    height: '155px',
+                    margin: '10px'
+                }
             });
         } else {
             this.setState({
-                showInput: {height: 0}
+                showInput: {
+                    height: 0,
+                    margin: 0
+                }
             });
         }
     }
