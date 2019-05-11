@@ -33,7 +33,6 @@ class Summary extends Component {
     componentDidMount() {
         const {params} = this.props.match;
         let privatePage, trips_id, user_id;
-        console.log(params);
 
         if(params && params.trips_id && params.user_id) {
             privatePage = false;
