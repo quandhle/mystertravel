@@ -171,7 +171,7 @@ class Summary extends Component {
                         <a onClick={() => {this.fbButton(summaryURL)}} title="Share on Facebook">
                             <i className="fab fa-facebook-square" />
                         </a>
-                        <a href={this.twitterButton(summaryURL)} title="Twit it!">
+                        <a href={this.twitterButton(summaryURL)} title="Tweet it!">
                             <i className="fab fa-twitter-square" />
                         </a>
                         <a href={this.mailButton(summaryURL)} title="Share by email">
