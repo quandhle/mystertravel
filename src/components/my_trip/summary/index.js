@@ -32,21 +32,23 @@ class Summary extends Component {
     }
 
     componentDidMount() {
-        const {params} = this.props.match;
-        let privatePage, trips_id, users_id;
+        const {match:{params}, trips_id, users_id} = this.props;
+        let privatePage, tripsId, usersId;
 
         if(params && params.trips_id && params.user_id) {
             privatePage = false;
-            trips_id =  params.trips_id;
-            users_id = params.user_id;
+            tripsId =  params.trips_id;
+            usersId = params.user_id;
         } else {
             privatePage = true;
+            tripsId = trips_id,
+            usersId = users_id 
         }
 
         this.setState({
             privatePage,
-            trips_id,
-            users_id
+            trips_id: tripsId,
+            users_id: usersId
         }, this.getSummaryData);
 
         loadScript('https://platform.twitter.com/widgets.js');
@@ -84,6 +86,7 @@ class Summary extends Component {
             });
         } else {
             console.error(resp.data.error);
+            this.props.history.push("/404");
         }
     }
 
@@ -149,8 +152,9 @@ class Summary extends Component {
     }
 
     render() {
+        console.log(this.state)
         const {trips_id, tripName, totalSpent, privatePage, pinData, notes, imageModal, image, users_id} = this.state;
-        const summaryURL = `https://www.mystertravel.com/trip/${users_id}/${tripName.split(" ").join("-")}/${trips_id}`;
+        const summaryURL = `https://www.mystertravel.com/trip/${users_id}/${tripName? tripName.split(" ").join("-"):'tripsummary'}/${trips_id}`;
 
         return (
             <div className="summary-page">
@@ -165,14 +169,17 @@ class Summary extends Component {
                         </div>
                     }
                     <div className="share-btns col-12">
-                        <a onClick={() => {this.fbButton(summaryURL)}}>
+                        <a onClick={() => {this.fbButton(summaryURL)}} title="Share on Facebook">
                             <i className="fab fa-facebook-square" />
                         </a>
-                        <a href={this.twitterButton(summaryURL)}>
+                        <a href={this.twitterButton(summaryURL)} title="Twit it!">
                             <i className="fab fa-twitter-square" />
                         </a>
-                        <a href={this.mailButton(summaryURL)}>
+                        <a href={this.mailButton(summaryURL)} title="Share by email">
                             <i className="fas fa-envelope-square" />
+                        </a>
+                        <a href={summaryURL} target="_blank" title="Go to public share page">
+                            <i class="fas fa-share-alt-square"></i>
                         </a>
                     </div>
                 </div>
@@ -186,7 +193,8 @@ function mapStateToProps(state) {
     return {
         trips_id: state.user.trips_id,
         auth: state.user.auth,
-        guest: state.user.guest
+        guest: state.user.guest,
+        users_id: state.user.users_id
     };
 }
 
