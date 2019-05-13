@@ -5,7 +5,7 @@
 
 ### App Features
 > - Record trip details while traveling
->   - View world map and add pins to places user has visted
+>   - View world map and add pins to places user has visited
 >   - Keep track of budget expenses
 >   - Log notes and upload photos
 >   - View trip summary and timeline
