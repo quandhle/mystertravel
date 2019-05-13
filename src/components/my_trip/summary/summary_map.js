@@ -47,55 +47,63 @@ class SummaryMap extends Component {
             }
         });
 
-        this.setState({map: map});
+        this.setState({
+            map: map
+        });
         this.showPins();
     }
 
     async showPins() {
-        const resp = await axios.get(`/api/getmappin.php?token=${localStorage.getItem('token')}`);
+        const {sharePinData, privatePage} = this.props;
         let pinData = null;
 
-        if(resp.data.success) {
+        if(privatePage) {
+            const resp = await axios.get(`/api/getmappin.php?token=${localStorage.getItem('token')}`);
 
-            pinData = resp.data.data;
-
-            if(pinData.length > 0) {
-                const pins = pinData.map((item) => {
-                    const pin = new window.google.maps.Marker({
-                        position: {
-                            lat: item.lat,
-                            lng: item.lng
-                        },
-                        title: item.name,
-                        map: this.state.map
-                    });
-
-                    const content = `<h6 id="infoWindow">${item.description}</h6>`;
-
-                    const infowindow = new google.maps.InfoWindow({
-                        content: content
-                    });
-
-                    pin.addListener('click', function() {
-                        infowindow.open(map, pin);
-                    });
-
-                    pin.setMap(this.state.map);
-
-                    return pin;
-                });
-                this.setState({
-                    pins: pins,
-                });
-
-                const lastPin = this.state.pins[this.state.pins.length - 1];
-                this.state.map.setZoom(4);
-                this.state.map.panTo(lastPin.position);
+            if (resp.data.success) {
+                pinData = resp.data.data;
+            } else {
+                console.error(resp.data.error);
             }
         } else {
-            console.error(resp.data.error);
+            pinData = sharePinData;
         }
 
+        if(pinData.length > 0) {
+            const pins = pinData.map((item) => {
+                const pin = new window.google.maps.Marker({
+                    position: {
+                        lat: item.lat,
+                        lng: item.lng
+                    },
+                    title: item.name,
+                    map: this.state.map
+                });
+
+                const content = `<h6 id="infoWindow">${item.description}</h6>`;
+
+                const infowindow = new google.maps.InfoWindow({
+                    content: content
+                });
+
+                pin.addListener('click', function () {
+                    infowindow.open(map, pin);
+                });
+
+                pin.setMap(this.state.map);
+
+                return pin;
+            });
+            this.setState({
+                pins: pins,
+            });
+
+            let bounds = new google.maps.LatLngBounds();
+            for(let index = 0; index < pins.length; index++){
+                bounds.extend(pins[index].getPosition());
+            }
+            this.state.map.fitBounds(bounds);
+        }
     }
 
     render() {

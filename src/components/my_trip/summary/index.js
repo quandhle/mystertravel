@@ -17,27 +17,28 @@ class Summary extends Component {
             trips_id: null,
             tripName: '',
             totalSpent: 0,
-            privatePage: null,
-            pinData: null,
-            notes: null,
+            privatePage: true,
+            pinData: [],
+            notes: [],
             imageModal: false,
             image: null,
-            mapModal: false,
-            pin: null,
-            userId: null
+            users_id: null
         };
 
         this.endTrip = this.endTrip.bind(this);
+        this.setImage = this.setImage.bind(this);
+        this.fbButton = this.fbButton.bind(this);
+        this.toggleImageModal = this.toggleImageModal.bind(this);
     }
 
     componentDidMount() {
         const {params} = this.props.match;
-        let privatePage, trips_id, user_id;
+        let privatePage, trips_id, users_id;
 
         if(params && params.trips_id && params.user_id) {
             privatePage = false;
             trips_id =  params.trips_id;
-            user_id = params.user_id;
+            users_id = params.user_id;
         } else {
             privatePage = true;
         }
@@ -45,7 +46,7 @@ class Summary extends Component {
         this.setState({
             privatePage,
             trips_id,
-            userId: user_id
+            users_id
         }, this.getSummaryData);
 
         loadScript('https://platform.twitter.com/widgets.js');
@@ -65,10 +66,10 @@ class Summary extends Component {
     }
 
     async getSummaryData() {
-        const {trips_id, userId, privatePage} = this.state;
+        const {trips_id, users_id, privatePage} = this.state;
         let url = `/api/getendtripsummary.php`;
         if (!privatePage) {
-            url += `?trips_id=${trips_id}&users_id=${userId}`;
+            url += `?trips_id=${trips_id}&users_id=${users_id}`;
         }
         const resp = await axios.get(url);
 
@@ -95,7 +96,7 @@ class Summary extends Component {
         }
     }
 
-    fbButton = (url) => {
+    fbButton(url) {
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=I went on a trip recently! Check it out on MysterTravel!`,
             "pop",
             "width=600, height=400, scrollbars=no"
@@ -114,7 +115,7 @@ class Summary extends Component {
         }`;
     }
 
-    setImage = image => {
+    setImage(image) {
         if(image) {
             this.setState({
                 image: image,
@@ -123,7 +124,7 @@ class Summary extends Component {
         }
     }
 
-    buttonDisplay = () => {
+    buttonDisplay() {
          if(!this.props.auth && this.state.privatePage) {
             return (
                 <div className="summary-end-trip-link">
@@ -141,27 +142,21 @@ class Summary extends Component {
         }
     }
 
-    toggleMapModal = () => {
-        this.setState({
-            mapModal: !this.state.mapModal
-        });
-    }
-
-    toggleImageModal = () => {
+    toggleImageModal() {
         this.setState({
             imageModal: !this.state.imageModal
         });
     }
 
     render() {
-        const {trips_id, tripName, totalSpent, privatePage, pinData, notes, imageModal, image, userId} = this.state;
-        const summaryURL = `https://www.mystertravel.com/trip/${userId}/${tripName.split(" ").join("-")}/${trips_id}`;
+        const {trips_id, tripName, totalSpent, privatePage, pinData, notes, imageModal, image, users_id} = this.state;
+        const summaryURL = `https://www.mystertravel.com/trip/${users_id}/${tripName.split(" ").join("-")}/${trips_id}`;
 
         return (
             <div className="summary-page">
                 <div className="summary-trip-name"><p>{tripName ? tripName : 'My Trip'}</p></div>
                 <div className="total-spend"><div>{`Total spent on this trip $${totalSpent? formatMoney(totalSpent): ' 0'}`}</div></div>
-                <Map />
+                <Map sharePinData={pinData} privatePage={privatePage} />
                 <div className="desktop-div">
                     <Timeline pinData={pinData} notesData={notes} setImage={this.setImage} />
                     {privatePage && !this.props.guest &&
