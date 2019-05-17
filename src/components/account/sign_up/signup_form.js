@@ -15,7 +15,7 @@ const signUpForm = props => {
             <div className="message">{message? message: <span>&nbsp;</span>}</div>
             <div className="signup-btn">
             <div className="signin-btn btn" onClick={signIn}>Sign In</div>
-                <button className="btn">Sign Up</button>
+                <button className="signup-btn btn">Sign Up</button>
             </div>
         </form>
     );
