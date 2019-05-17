@@ -14,6 +14,7 @@ class SignIn extends Component {
         };
 
         this.handleSignUp = this.handleSignUp.bind(this);
+        this.handleSignIn = this.handleSignIn.bind(this);
     }
     
     async handleSignUp(values) {
@@ -34,11 +35,15 @@ class SignIn extends Component {
         }
     }
 
+    handleSignIn = () => {
+        this.props.history.push('/account/signin');
+    }
+
     render() {
         return (
             <div className="sign-up-page">
                 <div className="sign-up">
-                    <SignUpForm signUp={this.handleSignUp} message={this.state.message}/>
+                    <SignUpForm signUp={this.handleSignUp} message={this.state.message} signIn={this.handleSignIn}/>
                 </div>
             </div>
         );

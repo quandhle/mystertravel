@@ -47,8 +47,14 @@
 
                 .btn {
                     background-color: #fa8d62;
+                    display: inline-block;
                     margin: 5px;
                     color: white;
+                }
+
+                .signup-btn {
+                    background-color: #2b616d;
+                    cursor: pointer;
                 }
             }
         }
