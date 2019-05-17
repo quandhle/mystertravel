@@ -4,11 +4,12 @@ const DEFAULT_STATE = {
     auth: false,
     username: '',
     trips_id: null,
-    guest: true
+    guest: true,
+    users_id: null
 };
 
 const TripAuthReducer = (state = DEFAULT_STATE, action) => {
-    const {type, username, trips_id, guest} = action
+    const {type, username, trips_id, guest, users_id} = action
 
     switch(type) {
         case types.SIGN_IN:
@@ -17,7 +18,8 @@ const TripAuthReducer = (state = DEFAULT_STATE, action) => {
                 auth: true, 
                 username, 
                 trips_id,
-                guest
+                guest,
+                users_id
             };
         case types.GET_TRIP_ID:
             return {

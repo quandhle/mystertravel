@@ -25,10 +25,8 @@ $summary_query = "SELECT t.`trips_name`,
     FROM `budget`
     WHERE `trips_id` = $trips_id
     ) AS 'total_budget'
-    FROM `users` AS u
-    JOIN `trips` AS t
-        ON u.`id` = t.`users_id`
-    WHERE u.`id` = $users_id
+    FROM `trips` AS t
+    WHERE t.`users_id` = $users_id
     AND t.`id` = $trips_id
 ";
 
@@ -39,15 +37,15 @@ if (!$summary_result) {
 }
 
 if (mysqli_num_rows($summary_result) === 0) {
-    $output['summary'] = [];
-} else {
-    $summary_row = mysqli_fetch_assoc($summary_result);
-
-    $output['summary'] = [
-        'trips_name' => $summary_row['trips_name'],
-        'total_budget' => $summary_row['total_budget'],
-    ];
+    throw new Exception('Invalid trips_id or users_id');
 }
+
+$summary_row = mysqli_fetch_assoc($summary_result);
+
+$output['summary'] = [
+    'trips_name' => $summary_row['trips_name'],
+    'total_budget' => $summary_row['total_budget'],
+];
 
 $pins_query = "SELECT *
     FROM `pins`

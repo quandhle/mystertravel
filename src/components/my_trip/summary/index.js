@@ -17,35 +17,38 @@ class Summary extends Component {
             trips_id: null,
             tripName: '',
             totalSpent: 0,
-            privatePage: null,
-            pinData: null,
-            notes: null,
+            privatePage: true,
+            pinData: [],
+            notes: [],
             imageModal: false,
             image: null,
-            mapModal: false,
-            pin: null,
-            userId: null
+            users_id: null
         };
 
         this.endTrip = this.endTrip.bind(this);
+        this.setImage = this.setImage.bind(this);
+        this.fbButton = this.fbButton.bind(this);
+        this.toggleImageModal = this.toggleImageModal.bind(this);
     }
 
     componentDidMount() {
-        const {params} = this.props.match;
-        let privatePage, trips_id, user_id;
+        const {match:{params}, trips_id, users_id} = this.props;
+        let privatePage, tripsId, usersId;
 
         if(params && params.trips_id && params.user_id) {
             privatePage = false;
-            trips_id =  params.trips_id;
-            user_id = params.user_id;
+            tripsId =  params.trips_id;
+            usersId = params.user_id;
         } else {
             privatePage = true;
+            tripsId = trips_id,
+            usersId = users_id 
         }
 
         this.setState({
             privatePage,
-            trips_id,
-            userId: user_id
+            trips_id: tripsId,
+            users_id: usersId
         }, this.getSummaryData);
 
         loadScript('https://platform.twitter.com/widgets.js');
@@ -65,10 +68,10 @@ class Summary extends Component {
     }
 
     async getSummaryData() {
-        const {trips_id, userId, privatePage} = this.state;
+        const {trips_id, users_id, privatePage} = this.state;
         let url = `/api/getendtripsummary.php`;
         if (!privatePage) {
-            url += `?trips_id=${trips_id}&users_id=${userId}`;
+            url += `?trips_id=${trips_id}&users_id=${users_id}`;
         }
         const resp = await axios.get(url);
 
@@ -83,6 +86,7 @@ class Summary extends Component {
             });
         } else {
             console.error(resp.data.error);
+            this.props.history.push("/404");
         }
     }
 
@@ -95,7 +99,7 @@ class Summary extends Component {
         }
     }
 
-    fbButton = (url) => {
+    fbButton(url) {
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=I went on a trip recently! Check it out on MysterTravel!`,
             "pop",
             "width=600, height=400, scrollbars=no"
@@ -114,7 +118,7 @@ class Summary extends Component {
         }`;
     }
 
-    setImage = image => {
+    setImage(image) {
         if(image) {
             this.setState({
                 image: image,
@@ -123,7 +127,7 @@ class Summary extends Component {
         }
     }
 
-    buttonDisplay = () => {
+    buttonDisplay() {
          if(!this.props.auth && this.state.privatePage) {
             return (
                 <div className="summary-end-trip-link">
@@ -141,27 +145,21 @@ class Summary extends Component {
         }
     }
 
-    toggleMapModal = () => {
-        this.setState({
-            mapModal: !this.state.mapModal
-        });
-    }
-
-    toggleImageModal = () => {
+    toggleImageModal() {
         this.setState({
             imageModal: !this.state.imageModal
         });
     }
 
     render() {
-        const {trips_id, tripName, totalSpent, privatePage, pinData, notes, imageModal, image, userId} = this.state;
-        const summaryURL = `https://www.mystertravel.com/trip/${userId}/${tripName.split(" ").join("-")}/${trips_id}`;
+        const {trips_id, tripName, totalSpent, privatePage, pinData, notes, imageModal, image, users_id} = this.state;
+        const summaryURL = `https://www.mystertravel.com/trip/${users_id}/${tripName? tripName.split(" ").join("-"):'tripsummary'}/${trips_id}`;
 
         return (
             <div className="summary-page">
                 <div className="summary-trip-name"><p>{tripName ? tripName : 'My Trip'}</p></div>
                 <div className="total-spend"><div>{`Total spent on this trip $${totalSpent? formatMoney(totalSpent): ' 0'}`}</div></div>
-                <Map />
+                <Map sharePinData={pinData} privatePage={privatePage} />
                 <div className="desktop-div">
                     <Timeline pinData={pinData} notesData={notes} setImage={this.setImage} />
                     {privatePage && !this.props.guest &&
@@ -170,14 +168,17 @@ class Summary extends Component {
                         </div>
                     }
                     <div className="share-btns col-12">
-                        <a onClick={() => {this.fbButton(summaryURL)}}>
+                        <a onClick={() => {this.fbButton(summaryURL)}} title="Share on Facebook">
                             <i className="fab fa-facebook-square" />
                         </a>
-                        <a href={this.twitterButton(summaryURL)}>
+                        <a href={this.twitterButton(summaryURL)} title="Tweet it!">
                             <i className="fab fa-twitter-square" />
                         </a>
-                        <a href={this.mailButton(summaryURL)}>
+                        <a href={this.mailButton(summaryURL)} title="Share by email">
                             <i className="fas fa-envelope-square" />
+                        </a>
+                        <a href={summaryURL} target="_blank" title="Go to public share page">
+                            <i className="fas fa-share-alt-square"></i>
                         </a>
                     </div>
                 </div>
@@ -191,7 +192,8 @@ function mapStateToProps(state) {
     return {
         trips_id: state.user.trips_id,
         auth: state.user.auth,
-        guest: state.user.guest
+        guest: state.user.guest,
+        users_id: state.user.users_id
     };
 }
 

@@ -196,9 +196,9 @@ class Map extends Component {
                     pin.addListener('click', ()=> {
 
                         if(this.state.info) {
-                           this.state.info.close(); 
+                           this.state.info.close();
                         }
-                        
+
                         infowindow.open(map, pin);
                         this.setState({
                             info: infowindow
@@ -230,7 +230,6 @@ class Map extends Component {
             const {coords} = position;
             const coordObject = {lat: coords.latitude, lng: coords.longitude};
 
-            this.setState(coordObject);
             this.state.map.setCenter(coordObject);
             this.state.map.setZoom(14);
 
@@ -240,6 +239,12 @@ class Map extends Component {
                 if(status === 'OK' && results[0]) {
                     const name = this.parseGeolocation(results[0].address_components);
                     this.props.dispatch(change("search-bar-form", `places`, name));
+                    this.setState({
+                        lat: coordObject.lat,
+                        lng: coordObject.lng,
+                        name
+                    });
+                    this.toggleModal();
                 }
             });
         }

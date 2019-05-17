@@ -9,7 +9,8 @@ export function signIn(user) {
         type: types.SIGN_IN,
         username: user.username,
         trips_id: user.trips_id,
-        guest: user.is_guest
+        guest: user.is_guest,
+        users_id: user.users_id
     };
 }
 

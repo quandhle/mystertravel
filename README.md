@@ -24,6 +24,11 @@
 >    -  Google Maps API with map marker, geolocation, and Google Places autocomplete search features
 >    - AWS S3 file upload and file retrieval
 
+### Future Features
+> - Refine sorting of budget items, collapse items under sorting categories
+> - Enhance interaction between summary timeline and map
+> - Re-route current trip pages for better user experience
+
 ### Project Planning and Progression Management
 > - Click on the links below to view the project planning and progression tracking tools
 >    - <a href="https://www.meistertask.com/projects/d5wdruhifd/join/" target="_blank">Task management</a>
@@ -57,6 +62,10 @@
 >        - add your Google credentials
 > 1. Start dev server
 >    - `npm start`
+> 1. Use MAMP, XAMPP, or a similar program to start your local Apache and MySQL servers
+>    - Point root directory to the public folder of this project
+>    - Set Apache port to the defined port in the proxy > target property found in the package.json file
+>    - import the sql database into phpMyAdmin, or similar found in the public/api/data folder
 > 1. Open a browser and navigate to `localhost:3000`
 
 ### Authors
