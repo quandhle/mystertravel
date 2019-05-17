@@ -178,7 +178,7 @@ class Summary extends Component {
                             <i className="fas fa-envelope-square" />
                         </a>
                         <a href={summaryURL} target="_blank" title="Go to public share page">
-                            <i class="fas fa-share-alt-square"></i>
+                            <i className="fas fa-share-alt-square"></i>
                         </a>
                     </div>
                 </div>
