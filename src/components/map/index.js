@@ -240,6 +240,7 @@ class Map extends Component {
                 if(status === 'OK' && results[0]) {
                     const name = this.parseGeolocation(results[0].address_components);
                     this.props.dispatch(change("search-bar-form", `places`, name));
+                    this.toggleModal();
                 }
             });
         }
