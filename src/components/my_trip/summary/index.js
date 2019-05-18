@@ -42,7 +42,7 @@ class Summary extends Component {
         } else {
             privatePage = true;
             tripsId = trips_id,
-            usersId = users_id 
+            usersId = users_id
         }
 
         this.setState({
@@ -153,13 +153,13 @@ class Summary extends Component {
 
     render() {
         const {trips_id, tripName, totalSpent, privatePage, pinData, notes, imageModal, image, users_id} = this.state;
-        const summaryURL = `https://www.mystertravel.com/trip/${users_id}/${tripName? tripName.split(" ").join("-"):'tripsummary'}/${trips_id}`;
+        const summaryURL = `${location.origin}/trip/${users_id}/${tripName? tripName.split(" ").join("-"):'tripsummary'}/${trips_id}`;
 
         return (
             <div className="summary-page">
                 <div className="summary-trip-name"><p>{tripName ? tripName : 'My Trip'}</p></div>
                 <div className="total-spend"><div>{`Total spent on this trip $${totalSpent? formatMoney(totalSpent): ' 0'}`}</div></div>
-                <Map sharePinData={pinData} privatePage={privatePage} />
+                <Map pinData={pinData} />
                 <div className="desktop-div">
                     <Timeline pinData={pinData} notesData={notes} setImage={this.setImage} />
                     {privatePage && !this.props.guest &&
