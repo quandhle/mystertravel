@@ -33,7 +33,7 @@ class SummaryMap extends Component {
         if (pinData !== prevProps.pinData) {
             this.setState({
                 pins: pinData
-            });
+            }, this.showPins);
         }
     }
 
