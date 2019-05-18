@@ -66,7 +66,7 @@ class SummaryMap extends Component {
     async showPins() {
         const {pinData} = this.props;
 
-        if(pinData.length > 0) {
+        if(window.google && pinData.length > 0) {
             const pins = pinData.map((item) => {
                 const pin = new window.google.maps.Marker({
                     position: {
