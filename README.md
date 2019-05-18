@@ -1,6 +1,6 @@
 # Myster Travel
 <a href="https://mystertravel.com/" target="_blank">mystertravel.com</a>
-Mobile/desktop responsive app designed for travelers to keep an organized record of his/her travel memories
+<br>Mobile/desktop responsive app designed for travelers to keep an organized record of his/her travel memories
 
 ### App Features
 - Record trip details while traveling
