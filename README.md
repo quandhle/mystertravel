@@ -34,6 +34,8 @@
    - <a href="https://www.figma.com/file/Xmh37OwoBnlSgdptWpvYidkO/Myster-Travel?node-id=0%3A1" target="_blank">Wireframe planning</a>
    - <a href="https://dbdesigner.page.link/aRYkTggDqqMi98sE8" target="_blank">Database schema</a>
 
+### System Requirements
+
 ### Setup Instructions
 This repo is built with React.js with Redux and PHP. Follow the below setup instructions to get started.
 1. Fork this repo
