@@ -27,6 +27,16 @@ class SummaryMap extends Component {
         }
     }
 
+    componentDidUpdate(prevProps) {
+        const {pinData} = this.props;
+
+        if (pinData !== prevProps.pinData) {
+            this.setState({
+                pins: pinData
+            });
+        }
+    }
+
     loadMapScript() {
         loadScript(`https://maps.googleapis.com/maps/api/js?key=${keys.googleMaps}&libraries=places&callback=initMap`);
         window.initMap = this.initMap;
@@ -54,20 +64,7 @@ class SummaryMap extends Component {
     }
 
     async showPins() {
-        const {sharePinData, privatePage} = this.props;
-        let pinData = null;
-
-        if(privatePage) {
-            const resp = await axios.get(`/api/getmappin.php?token=${localStorage.getItem('token')}`);
-
-            if (resp.data.success) {
-                pinData = resp.data.data;
-            } else {
-                console.error(resp.data.error);
-            }
-        } else {
-            pinData = sharePinData;
-        }
+        const {pinData} = this.props;
 
         if(pinData.length > 0) {
             const pins = pinData.map((item) => {
@@ -93,9 +90,6 @@ class SummaryMap extends Component {
                 pin.setMap(this.state.map);
 
                 return pin;
-            });
-            this.setState({
-                pins: pins,
             });
 
             let bounds = new google.maps.LatLngBounds();

@@ -4,7 +4,7 @@ import {formatDate} from '../../helper';
 const TripList = (props) => {
     const {trips_id, trips_name, start, end } = props.item;
     let userId = localStorage.getItem('user_id')
-    const url = `https://www.mystertravel.com/trip/${userId}/${trips_name.split(" ").join("-")}/${trips_id}`;
+    const url = `${location.origin}/trip/${userId}/${trips_name.split(" ").join("-")}/${trips_id}`;
 
     return (
         <Fragment>
