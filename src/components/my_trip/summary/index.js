@@ -32,7 +32,8 @@ class Summary extends Component {
     }
 
     componentDidMount() {
-        const {match:{params}, trips_id, users_id} = this.props;
+
+        const {match:{params}} = this.props;
         let privatePage, tripsId, usersId;
 
         if(params && params.trips_id && params.user_id) {
@@ -41,8 +42,8 @@ class Summary extends Component {
             usersId = params.user_id;
         } else {
             privatePage = true;
-            tripsId = trips_id,
-            usersId = users_id
+            tripsId = localStorage.getItem('trips_id'),
+            usersId = localStorage.getItem('user_id')
         }
 
         this.setState({
