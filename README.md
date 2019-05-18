@@ -37,6 +37,7 @@
 ### System Requirements
 - PHP
 - MySQL
+- Composer
 - Node
 - Windows: XXAMP, Mac: MAMP
 
