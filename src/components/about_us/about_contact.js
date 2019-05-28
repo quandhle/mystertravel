@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 
 const AboutContact = props => {
-    const {email, linkedin, portfolio, git, name, image, quote, role} = props.person;
+    const {email, linkedin, portfolio, git, name, image, role} = props.person;
 
     return (
         <Fragment>
@@ -12,7 +12,6 @@ const AboutContact = props => {
                 <div className="about-name">
                     <div className="person-name">{name}</div>
                     <div>{role}</div>
-                    <div className="about-quote">"{quote}"</div>
                 </div>
             </div>
             <div className="about-contact">
