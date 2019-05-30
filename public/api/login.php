@@ -69,14 +69,21 @@ $_SESSION['user_data'] = [
     'is_guest' => false
 ];
 
+$data = [
+    'login' => true,
+    'is_guest' => false,
+    'user_id' => $data['id'],
+    'first_name' => $data['first_name'],
+    'last_name' => $data['last_name'],
+    'token' => $data['token']
+];
+
 require_once('checkactivetrip.php');
 
-$output['success'] = true;
-$output['login'] = true;
-$output['is_guest'] = false;
-$output['users_id'] = $data['id'];
-$output['username'] = $data['full_name'];
-$output['token'] = $token;
+$output = [
+    'success' => true,
+    'data' => $data
+];
 
 print(json_encode($output));
 
