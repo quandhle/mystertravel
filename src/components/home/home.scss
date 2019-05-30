@@ -121,3 +121,10 @@
     }
 }
 
+@media only screen 
+  and (orientation: landscape) { 
+    .home-title {
+        display: none;
+      }
+}
+
