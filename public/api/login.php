@@ -69,8 +69,6 @@ $_SESSION['user_data'] = [
     'is_guest' => false
 ];
 
-require_once('checkactivetrip.php');
-
 $output = [
     'success' => true,
     'login' => true,
@@ -79,6 +77,8 @@ $output = [
     'username' => $data['full_name'],
     'token' => $token
 ];
+
+require_once('checkactivetrip.php');
 
 print(json_encode($output));
 
