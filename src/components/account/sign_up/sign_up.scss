@@ -69,3 +69,16 @@
         width: 40%;
     }
 }
+
+@media only screen
+  and (orientation: landscape) {
+    @media (max-width: 850px) {
+        .sign-up-page {
+            height: auto;
+
+            .sign-up {
+                margin: 20px 100px;
+            }
+        }
+    }
+}

@@ -121,3 +121,15 @@
     }
 }
 
+@media only screen
+  and (orientation: landscape) {
+    @media (max-width: 850px) {
+        .home-page {
+            height: calc(100vh - 80px);
+
+            .home-title {
+                display: none;
+            }
+        }
+    }
+}
