@@ -145,6 +145,7 @@ main {
         } 
         main .map {
           top: 80px;
+          height: calc(100vh - 80px);
         }
         main .search-bar-holder {
             margin-top: 5px;
