@@ -1,7 +1,5 @@
 # Myster Travel
-<img src="https://myster-travel-images.s3-us-west-1.amazonaws.com/mystertravel1.png" width="300px" height="auto">
-<img src="https://myster-travel-images.s3-us-west-1.amazonaws.com/mystertravel2.png" width="300px" height="auto">
-<img src="https://myster-travel-images.s3-us-west-1.amazonaws.com/mystertravel3.png" width="300px" height="auto">
+<img src="https://myster-travel-images.s3-us-west-1.amazonaws.com/mystertravel1.png" width="300px" height="auto"><img src="https://myster-travel-images.s3-us-west-1.amazonaws.com/mystertravel2.png" width="300px" height="auto"><img src="https://myster-travel-images.s3-us-west-1.amazonaws.com/mystertravel3.png" width="300px" height="auto">
 <a href="https://mystertravel.com/" target="_blank">mystertravel.com</a>
 <br>Mobile/desktop responsive app designed for travelers to keep an organized record of his/her travel memories
 
