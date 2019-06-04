@@ -1,5 +1,5 @@
 .about-container {
-    height: 90vh;
+    height: calc(100vh - 70px);
 
     .first {
         background-image: url('../../assets/images/aboutus.jpg');

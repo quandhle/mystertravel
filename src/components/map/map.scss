@@ -1,5 +1,5 @@
 main {
-    height: 90vh;
+    height: calc(100vh - 70px);
 
     .search-bar-holder {
         height: 36px;
@@ -44,10 +44,10 @@ main {
     }
 
     .map {
-        height: 90vh;
+        height: calc(100vh - 70px);
         width: 100%;
         position: absolute;
-        top: 10vh;
+        top: 70px;
     }
 
     .geo-btn {
