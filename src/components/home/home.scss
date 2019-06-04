@@ -1,5 +1,5 @@
 .home-page {
-    height: 90vh;
+    height: calc(100vh - 70px);
     background-image: url('../../assets/images/homepage-background2.jpg');
     background-attachment: fixed;
     background-position: center;
@@ -118,6 +118,12 @@
         position: relative;
         left: 30%;
         width: 40%;
+    }
+}
+
+@media (orientation: landscape) {
+    .home-page .home-title {
+        display: none;
     }
 }
 

@@ -1,5 +1,5 @@
 .notes-page {
-    height: 90vh;
+    height: calc(100vh - 70px);;
 
     .notes-input-toggle {
         cursor: pointer;
@@ -185,7 +185,7 @@
             height: 100%;
             display: inline-block;
             vertical-align: top;
-            overflow-y: scroll;
+            overflow-y: auto;
         }
 
         .popup-container .popup-content {

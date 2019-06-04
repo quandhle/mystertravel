@@ -1,7 +1,7 @@
 .signout-page {
     background-image: url("../../../assets/images/sign_out.jpg");
     background-size: cover;
-    height: 90vh;
+    height: calc(100vh - 70px);
     text-align: center;
     font-family: 'Dancing Script', cursive;
 
