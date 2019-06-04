@@ -15,7 +15,7 @@ const signUpForm = props => {
             <div className="message">{message? message: <span>&nbsp;</span>}</div>
             <div className="signup-btn">
             <div className="signin-btn btn" onClick={signIn}>Sign In</div>
-                <button className="signup-btn btn">Sign Up</button>
+                <button className="btn">Sign Up</button>
             </div>
         </form>
     );
@@ -36,7 +36,7 @@ function validate({nickname, email, password, confirm_password}) {
     if(password != confirm_password || !confirm_password) {
         errors.confirm_password = 'Password does not match';
     }
-    
+
     return errors;
 }
 

@@ -14,7 +14,6 @@ class AboutUs extends Component {
                 portfolio:"jen-icl.com",
                 git: "jen-icl",
                 image:"jen.jpg",
-                quote: "Gotta double check my variable names.",
                 role: "Back End Developer"
             },
             {
@@ -24,7 +23,6 @@ class AboutUs extends Component {
                 portfolio:"kyliechao.com",
                 git: "kylieclin",
                 image:"kylie.jpg",
-                quote: "You're doing CSS!",
                 role: "Front End Developer"
             },
             {
@@ -34,7 +32,6 @@ class AboutUs extends Component {
                 portfolio:"quandhle.com",
                 git: "quandhle",
                 image:"quan.jpg",
-                quote: "You're fired!",
                 role: "Back End Developer"
             },
             {
@@ -44,7 +41,6 @@ class AboutUs extends Component {
                 portfolio:"westleypoon.com",
                 git: "WestleyPoon",
                 image:"west.jpg",
-                quote: "When am I not fired?",
                 role: "Front End Developer"
             },
         ]
