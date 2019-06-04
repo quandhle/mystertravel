@@ -3,7 +3,7 @@
 <a href="https://mystertravel.com/" target="_blank">mystertravel.com</a>
 <br>Mobile/desktop responsive app designed for travelers to keep an organized record of his/her travel memories
 
-### App Features
+## App Features
 - Record trip details while traveling
     - View world map and add pins to places user has visited
     - Keep track of budget expenses
@@ -13,7 +13,7 @@
 - Share trip details with family and friends through Facebook, Twitter, and Email
 - Persistent user login
 
-### Accomplishments
+## Accomplishments
 - Created a full scale application with front-end and back-end integration
 - Technologies used:
     - React.js
@@ -24,7 +24,7 @@
     -  Google Maps API with map marker, geolocation, and Google Places autocomplete search features
     - AWS S3 file upload and file retrieval
 
-### Future Features
+## Future Features
 - Refine sorting of budget items, collapse items under sorting categories
 - Enhance interaction between summary timeline and map
 - Re-route current trip pages for better user experience
@@ -42,7 +42,7 @@
 - Node
 - Windows: XAMPP, Mac: MAMP
 
-### Setup Instructions
+## Setup Instructions
 This repo is built with React.js with Redux and PHP. Follow the below setup instructions to get started.
 1. Fork this repo
 2. Clone your forked copy of this repo
@@ -75,7 +75,7 @@ This repo is built with React.js with Redux and PHP. Follow the below setup inst
     - import the sql database into phpMyAdmin, or similar found in the public/api/data folder
 11. Open a browser and navigate to `localhost:3000`
 
-### Authors
+## Authors
 - **Kylie Chao** (https://github.com/kylieclin)
 - **Jennifer Lai** (https://github.com/jen-icl)
 - **Quan Le** (https://github.com/quandhle)
