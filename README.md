@@ -19,6 +19,7 @@
     - React.js
     - Redux
     - PHP
+    - MySQL
     - Sass
     - Bootstrap4
     -  Google Maps API with map marker, geolocation, and Google Places autocomplete search features
